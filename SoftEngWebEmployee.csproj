@@ -162,6 +162,13 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Models\AdministratorModel.cs" />
+    <Compile Include="Models\InformationModel.cs" />
+    <Compile Include="Models\NotificationsModel.cs" />
+    <Compile Include="Models\OrdersModel.cs" />
+    <Compile Include="Models\ProductsModel.cs" />
+    <Compile Include="Models\ReportsModel.cs" />
+    <Compile Include="Models\SalesModel.cs" />
+    <Compile Include="Models\SpecificOrdersModel.cs" />
     <Compile Include="Views\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
