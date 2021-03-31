@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SoftEngWebEmployee.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace SoftEngWebEmployee.Repository
 {
     interface ILoginRepository
     {
-        Task<bool> IsLoginSuccessfull(string username, string password);
+        Task<bool> IsLoginSuccessfull(AdministratorModel adminModel);
     }
 }

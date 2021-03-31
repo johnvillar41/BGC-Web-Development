@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using SoftEngWebEmployee.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,7 @@ namespace SoftEngWebEmployee.Repository.LoginRepository
     public class LoginRepository : ILoginRepository
     {
 
-        private static LoginRepository instance = null;
-        private const string DBCONN_STRING = "server=localhost;user=admin;database=agt_db_relations;port=3306;password=admin";
+        private static LoginRepository instance = null;        
 
         public static LoginRepository GetInstance()
         {
@@ -27,16 +27,16 @@ namespace SoftEngWebEmployee.Repository.LoginRepository
 
         }
 
-        public async Task<bool> IsLoginSuccessfull(string username, string password)
+        public async Task<bool> IsLoginSuccessfull(AdministratorModel adminModel)
         {
             bool isLoginSuccessfull = false;
-            using (MySqlConnection connection = new MySqlConnection(DBCONN_STRING))
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
                 string loginString = "SELECT * FROM login_table WHERE user_username=@Username AND user_password=@Password";
                 MySqlCommand command = new MySqlCommand(loginString, connection);
-                command.Parameters.AddWithValue("@Username", username);
-                command.Parameters.AddWithValue("@Password", password);
+                command.Parameters.AddWithValue("@Username", adminModel.Username);
+                command.Parameters.AddWithValue("@Password", adminModel.User_Password);
                 MySqlDataReader reader = command.ExecuteReader();
                 if (await reader.ReadAsync())
                 {
