@@ -305,6 +305,8 @@
     <Compile Include="Models\ReportsModel.cs" />
     <Compile Include="Models\SalesModel.cs" />
     <Compile Include="Models\SpecificOrdersModel.cs" />
+    <Compile Include="Repository\AdministratorRepository\AdministratorRepository.cs" />
+    <Compile Include="Repository\AdministratorRepository\IAdministratorRepository.cs" />
     <Compile Include="Repository\DbConnString.cs" />
     <Compile Include="Repository\LoginRepository\ILoginRepository.cs" />
     <Compile Include="Repository\LoginRepository\LoginRepository.cs" />
