@@ -291,7 +291,6 @@
     <Content Include="Views\Orders.aspx" />
     <Content Include="Views\Reports.aspx" />
     <Content Include="Views\Sales.aspx" />
-    <Content Include="Views\Transactions.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
@@ -383,13 +382,6 @@
     </Compile>
     <Compile Include="Views\Sales.aspx.designer.cs">
       <DependentUpon>Sales.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Transactions.aspx.cs">
-      <DependentUpon>Transactions.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Transactions.aspx.designer.cs">
-      <DependentUpon>Transactions.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
