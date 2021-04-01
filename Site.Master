@@ -52,14 +52,14 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/Views/Inventory"><i class="fa fa-cubes" style="margin-right: 10px; width: 10px; color: black"></i>Inventory</a></li>
-                        <li><a runat="server" href="~/Views/Sales"><i class="fa fa fa-dollar" style="margin-right: 10px; width: 10px; color: black"></i>Sales</a></li>
-                        <li><a runat="server" href="~/Views/Notifications"><i class="fa fa-bell" style="margin-right: 10px; width: 10px; color: black"></i>Notifications</a></li>
-                        <li><a runat="server" href="~/Views/Information"><i class="fa fa-info" style="margin-right: 10px; width: 10px; color: black"></i>Information</a></li>
-                        <li><a runat="server" href="~/Views/Reports"><i class="fa fa-bar-chart" style="margin-right: 10px; width: 10px; color: black"></i>Reports</a></li>
-                        <li><a runat="server" href="~/Views/Administrators"><i class="fa fa-address-card-o" style="margin-right: 10px; width: 10px; color: black"></i>Administrators</a></li>                        
-                        <li><a runat="server" href="~/Views/Orders"><i class="fa fa-cart-arrow-down" style="margin-right: 10px; width: 10px; color: black"></i>Orders</a></li>
-                        <li style="margin-top: 10px"><a runat="server" href="#" class="btn btn-outline-danger"><i class="fa fa-close" style="margin-right: 10px; width: 10px; color: red"></i>Logout</a></li>
+                        <li style="text-align: right"><a runat="server" href="~/Views/Inventory">Inventory<i class="fa fa-cubes" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                        <li style="text-align: right"><a runat="server" href="~/Views/Sales">Sales<i class="fa fa fa-dollar" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                        <li style="text-align: right"><a runat="server" href="~/Views/Notifications">Notifications<i class="fa fa-bell" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                        <li style="text-align: right"><a runat="server" href="~/Views/Information">Information<i class="fa fa-info" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                        <li style="text-align: right"><a runat="server" href="~/Views/Reports">Reports<i class="fa fa-bar-chart" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                        <li style="text-align: right"><a runat="server" href="~/Views/Administrators">Administrators<i class="fa fa-address-card-o" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                        <li style="text-align: right"><a runat="server" href="~/Views/Orders">Orders<i class="fa fa-cart-arrow-down" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                        <li style="margin-top: 10px"><a runat="server" href="#" class="btn btn-outline-danger" style="float: right;">Logout<i class="fa fa-close" style="margin-left: 10px; width: 10px; color: red"></i></a></li>
                     </ul>
                 </div>
             </div>
