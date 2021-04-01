@@ -8,9 +8,9 @@
 //------------------------------------------------------------------------------
 
 
-namespace SoftEngWebEmployee
+namespace SoftEngWebEmployee.Views
 {
-    public partial class About
+    public partial class Orders
     {
     }
 }

@@ -39,27 +39,33 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar navbar-dark bg-dark fixed-top">
+        <div class="navbar navbar-dark bg-dark fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="Images/logo.png" width="35" height="35" class="d-inline-block align-top" alt="">
+                    <img src="Images/logo.PNG" width="35" height="35" class="d-inline-block align-top" alt="">
                     Agt Seedlings Supply
                 </a>
-                <div class="navbar-header">                   
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse"data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                         <span class="navbar-toggler-icon"></span>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/Views/About">About</a></li>
-                        <li><a runat="server" href="~/Views/Contact">Contact</a></li>
+                        <li><a runat="server" href="~/Views/Inventory">Inventory</a></li>
+                        <li><a runat="server" href="~/Views/Sales">Sales</a></li>
+                        <li><a runat="server" href="~/Views/Notifications">Notifications</a></li>
+                        <li><a runat="server" href="~/Views/Information">Information</a></li>
+                        <li><a runat="server" href="~/Views/Reports">Reports</a></li>
+                        <li><a runat="server" href="~/Views/Administrators">Administrators</a></li>
+                        <li><a runat="server" href="~/Views/Transactions">Transactions</a></li>
+                        <li><a runat="server" href="~/Views/Orders">Orders</a></li>
+                        <li style="margin-top: 10px"><a runat="server" href="#">Logout</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="container body-content">
+        <div class="container body-content" style="margin-top: 50px">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />

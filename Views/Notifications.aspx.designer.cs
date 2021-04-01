@@ -8,9 +8,9 @@
 //------------------------------------------------------------------------------
 
 
-namespace SoftEngWebEmployee
+namespace SoftEngWebEmployee.Views
 {
-    public partial class _Default
+    public partial class Notifications
     {
     }
 }
