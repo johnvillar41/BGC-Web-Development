@@ -11,9 +11,8 @@
     <style>
         body {
             font-family: "Lato", sans-serif;
+            background: #ffae42;
         }
-
-
 
         .main-head {
             height: 150px;
@@ -22,7 +21,7 @@
 
         .sidenav {
             height: 100%;
-            background-color: 	#FFFF00;
+            background-color: 	#242526;
             overflow-x: hidden;
             padding-top: 20px;
         }
@@ -30,6 +29,7 @@
 
         .main {
             padding: 0px 10px;
+
         }
 
         @media screen and (max-height: 450px) {
@@ -41,6 +41,7 @@
         @media screen and (max-width: 450px) {
             .login-form {
                 margin-top: 10%;
+
             }
 
             .register-form {
@@ -51,6 +52,7 @@
         @media screen and (min-width: 768px) {
             .main {
                 margin-left: 30%;
+
             }
 
             .sidenav {
@@ -63,6 +65,8 @@
 
             .login-form {
                 margin-top: 70%;
+ 
+
             }
 
             .register-form {
@@ -75,6 +79,7 @@
             margin-top: 20%;
             padding: 60px;
             color: #fff;
+
         }
 
             .login-main-text h2 {
@@ -94,7 +99,7 @@
             <div class="sidenav">                
                 <div class="login-main-text">
                     <center> <img src="/Images/logo.PNG"width="300" height="300" alt="...">
-                    <h2 style="color:black; font-family:Georgia;">  <b> AGT</b> <br>
+                    <h2 style="color:orange; font-family:Georgia;">  <b><br/> AGT</b> <br/>
                         Login Page </h2>  </center>
 
                 </div>
@@ -104,12 +109,12 @@
                     <div class="login-form">
                         <form>
                             <div class="form-group">
-                                <label>User Name</label>
-                                <input type="text" class="form-control" placeholder="User Name">
+                                <label><b>Username</b></label>
+                                <input type="text" class="form-control" placeholder="username">
                             </div>
                             <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" placeholder="Password">
+                                <label><b>Password</b></label>
+                                <input type="password" class="form-control" placeholder="password">
                             </div>
                             <button type="submit" class="btn btn-black">Login</button>
 
