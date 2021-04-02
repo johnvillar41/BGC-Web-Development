@@ -306,9 +306,7 @@
     <Compile Include="Models\SalesModel.cs" />
     <Compile Include="Models\SpecificOrdersModel.cs" />
     <Compile Include="Repository\AdministratorRepository\AdministratorRepository.cs" />
-    <Compile Include="Repository\AdministratorRepository\IAdministratorRepository.cs" />
     <Compile Include="Repository\DbConnString.cs" />
-    <Compile Include="Repository\LoginRepository\ILoginRepository.cs" />
     <Compile Include="Repository\LoginRepository\LoginRepository.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Global.asax.cs">

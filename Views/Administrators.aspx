@@ -15,9 +15,27 @@
             <div class="card" style="margin: 10px">
                 <h5 class="card-header"><%=admins.User_ID.ToString() %></h5>
                 <div class="card-body">
-                    <h5 class="card-title"><%=admins.Username.ToString()%></h5>
                     <img src="/Images/logo.PNG" class="img-thumbnail" alt="..." width="100" height="100">
-                    <p class="card-text"><%=admins.User_Password.ToString() %></p>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="username">Username</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <input readonly type="email" class="form-control" id="username" aria-describedby="emailHelp" value="<%=admins.User_Username.ToString() %>" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px">
+                        <div class="col-6">
+                            <input readonly type="email" class="form-control" id="password" aria-describedby="emailHelp" value="<%=admins.User_Password.ToString() %>" />
+                        </div>
+                    </div>
                     <a href="#" class="btn btn-danger"><i class="fa fa-exclamation-circle" style="color: black"></i>Remove</a>
                     <a href="#" class="btn btn-warning"><i class="fa fa-check-square" style="color: black"></i>Update</a>
                 </div>
@@ -38,17 +56,20 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Username</label>
                         <input type="email" class="form-control" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your data with anyone else.</div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Fullname</label>
-                        <input type="email" class="form-control" aria-describedby="emailHelp">                        
+                        <input type="email" class="form-control" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
                         <input type="password" class="form-control">
                     </div>
-                    
+                    <div class="mb-3">
+                        <label class="form-label" for="customFile">Upload Picture</label>
+                        <input type="file" class="form-control" id="customFile" />
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Submit</button>
 
                 </div>

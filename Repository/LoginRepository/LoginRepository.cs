@@ -8,7 +8,7 @@ using System.Web;
 
 namespace SoftEngWebEmployee.Repository.LoginRepository
 {
-    public class LoginRepository : ILoginRepository
+    public class LoginRepository
     {
 
         private static LoginRepository instance = null;        
