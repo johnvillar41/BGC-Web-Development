@@ -11,16 +11,23 @@ using System.Web.UI.WebControls;
 namespace SoftEngWebEmployee.Views
 {
     public partial class Orders : System.Web.UI.Page
-    {        
+    {
+        private List<OrdersModel> OrdersList = new List<OrdersModel>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            LoadOrders();
         }
 
         public List<OrdersModel> DisplayOrders()
         {
-            var listOfOrders = OrdersRepository.GetInstance().FetchAllOrders();
-            return (List<OrdersModel>)listOfOrders;
+            return OrdersList;
         }
+
+        private async void LoadOrders()
+        {
+            var listOfOrders = await OrdersRepository.GetInstance().FetchAllOrders();
+            OrdersList = (List<OrdersModel>)listOfOrders;
+        }
+        
     }
 }

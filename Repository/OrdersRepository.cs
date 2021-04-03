@@ -3,6 +3,7 @@ using SoftEngWebEmployee.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -25,16 +26,16 @@ namespace SoftEngWebEmployee.Repository
 
         }
 
-        public IEnumerable<OrdersModel> FetchAllOrders()
-        {
+        public async Task<IEnumerable<OrdersModel>> FetchAllOrders()
+        {            
             List<OrdersModel> ordersList = new List<OrdersModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
-                connection.OpenAsync();
+                await connection.OpenAsync();
                 string queryString = "SELECT * FROM customer_orders_table";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 MySqlDataReader reader = (MySqlDataReader)command.ExecuteReader();
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
                     ordersList.Add(
                             new OrdersModel()
