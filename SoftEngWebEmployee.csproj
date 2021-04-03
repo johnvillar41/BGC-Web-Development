@@ -304,9 +304,9 @@
     <Compile Include="Models\ReportsModel.cs" />
     <Compile Include="Models\SalesModel.cs" />
     <Compile Include="Models\SpecificOrdersModel.cs" />
-    <Compile Include="Repository\AdministratorRepository\AdministratorRepository.cs" />
+    <Compile Include="Repository\AdministratorRepository.cs" />
     <Compile Include="Repository\DbConnString.cs" />
-    <Compile Include="Repository\LoginRepository\LoginRepository.cs" />
+    <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
