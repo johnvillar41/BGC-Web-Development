@@ -12,7 +12,7 @@ namespace SoftEngWebEmployee.Models
         public string CustomerEmail { get; set; }
         public double OrderTotalPrice { get; set; }
         public string OrderStatus { get; set; }
-        public DateTime OrderDate { get; set; }
+        public string OrderDate { get; set; }
         public int TotalNumberOfOrders { get; set; }
     }
 }
