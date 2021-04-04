@@ -1,16 +1,41 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Administrators.aspx.cs" Inherits="SoftEngWebEmployee.Views.Administrators" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+        .bd-callout {
+            padding: 1.25rem;
+            margin-top: 1.25rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid #e9ecef;
+            border-left-width: .25rem;
+            border-radius: .25rem;
+        }
 
+        .bd-callout-warning {
+            border-left-color: #f0ad4e;
+        }
+    </style>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12" style="margin: 5px">
-                <div class="card">
-                    <button type="button" class="btn btn-primary" style="margin: 5px" data-bs-toggle="modal" data-bs-target="#AddNewUserModal">
-                        Add New User
-                    </button>
+                <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
+                    <div class="row">
+                        <div class="col-3">
+                            <h3 class="float-left">User Information</h3>
+                        </div>
+                        <div class="col-6">
+                            <!--Empty Div-->
+                        </div>
+                        <div class="col-3 ">
+                            <button type="button" class="btn btn-success float-end" style="margin: 5px;" data-bs-toggle="modal" data-bs-target="#AddNewUserModal">
+                                Add New User
+                            </button>
+                        </div>
+
+                    </div>
+
                     <div class="table-bordered table-condensed table-responsive">
-                        <table class="table">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">User ID</th>
@@ -25,7 +50,10 @@
                                 <%{ %>
                                 <tr>
                                     <td><%=admins.User_ID %></td>
-                                    <td><%=admins.User_Username %></td>
+                                    <td>
+                                        <img src="/Images/logo.PNG" width="35" height="35" class="d-inline-block align-top" alt="">
+                                        <%=admins.User_Username %>                                       
+                                    </td>
                                     <td><%=admins.User_Password %></td>
                                     <td><%=admins.User_Name %></td>
                                     <td>
@@ -35,9 +63,27 @@
                                 </tr>
                                 <%} %>
                             </tbody>
+
                         </table>
 
                     </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
 
@@ -82,5 +128,6 @@
             </div>
         </div>
     </div>
+
 
 </asp:Content>
