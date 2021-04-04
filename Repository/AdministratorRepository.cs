@@ -28,7 +28,7 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
         {
             List<AdministratorModel> mockList = new List<AdministratorModel>();            
             mockList.Add(new AdministratorModel {
-                Username = "Sample Username 1",
+                User_Name = "Sample Username 1",
                 User_ID = 101010101,
                 User_Password = "Sample Password 1",
                 User_Username = "Sample User_Username",
@@ -36,7 +36,7 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
             });
             mockList.Add(new AdministratorModel
             {
-                Username = "Sample Username 2",
+                User_Name = "Sample Username 2",
                 User_ID = 101010103,
                 User_Password = "Sample Password 2",
                 User_Username = "Sample User_Username",
@@ -44,7 +44,7 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
             });
             mockList.Add(new AdministratorModel
             {
-                Username = "Sample Username 2",
+                User_Name = "Sample Username 2",
                 User_ID = 101010102,
                 User_Password = "Sample Password 2",
                 User_Username = "Sample User_Username",

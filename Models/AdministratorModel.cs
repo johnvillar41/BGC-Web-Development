@@ -10,7 +10,7 @@ namespace SoftEngWebEmployee.Models
         public int User_ID { get; set; }
         public string User_Username { get; set; }
         public string User_Password { get; set; }
-        public string Username { get; set; }
+        public string User_Name { get; set; }
         public string User_Image { get; set; }
     }
 }
