@@ -19,7 +19,7 @@
         <div class="blog-nav d-flex flex-column flex-sm-row" style="margin-bottom: 5px">
 
             <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem; height: 298px">
                     <%if (orders.OrderStatus.Equals("Finished")) %>
                     <%{ %>
                     <span class="badge bg-success"><%=orders.OrderStatus %></span>
@@ -44,9 +44,20 @@
 
             <div class="col-lg-9 col-md-6 col-sm-12">
                 <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-6 col-sm-6">
+                            <h1>Orders</h1>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#CancelModal" >Cancel</button>
+                                <button type="button" class="btn btn-success"data-bs-toggle="modal" data-bs-target="#FinishModal">Finish</button>
+                            </div>
+                        </div>
 
-                    <h1>Orders</h1>
-                    <div class="table-bordered table-condensed table-responsive">
+                    </div>
+
+                    <div class="table-bordered table-condensed table-responsive" style="height: 200px">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -67,19 +78,53 @@
                                 </tr>
                                 <%} %>
                             </tbody>
-
                         </table>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>                                
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
-                        </nav>
+                        <%if (orders.SpecificOrdersModel.Count() == 0) %>
+                        <%{ %>
+                        <center><h1>Empty Orders</h1></center>
+                        <%} %>
                     </div>
                 </div>
             </div>
         </div>
         <%}%>
+    </div>
+
+    <!--Modal Confirmation Cancel-->
+    <div class="modal fade" id="CancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to <span style="color:red">Cancel</span> order?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal Confirmation Finish-->
+    <div class="modal fade" id="FinishModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to <span style="color:green">Finish</span> order?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 </asp:Content>
