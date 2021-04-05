@@ -57,13 +57,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <%for (int i = 0; i < 3; i++) %>
+                                <%for (int i = 0; i < orders.SpecificOrdersModel.Count(); i++) %>
                                 <%{ %>
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
+                                    <th scope="row"><%=orders.SpecificOrdersModel[i].OrdersID %></th>
+                                    <td><%=orders.SpecificOrdersModel[i].ProductID %></td>
+                                    <td><%=orders.SpecificOrdersModel[i].ProductsModel.ProductName %></td>
+                                    <td><%=orders.SpecificOrdersModel[i].ProductsModel.ProductPrice %></td>
                                 </tr>
                                 <%} %>
                             </tbody>

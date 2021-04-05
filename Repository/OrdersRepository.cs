@@ -46,7 +46,8 @@ namespace SoftEngWebEmployee.Repository
                                 OrderTotalPrice = int.Parse(reader["order_total_price"].ToString()),
                                 OrderStatus = reader["order_status"].ToString(),
                                 OrderDate = reader["order_date"].ToString(),
-                                TotalNumberOfOrders = int.Parse(reader["total_number_of_orders"].ToString())
+                                TotalNumberOfOrders = int.Parse(reader["total_number_of_orders"].ToString()),                                
+                                SpecificOrdersModel = await SpecificOrdersRepository.GetInstance().FetchSpecificOrders(int.Parse(reader["order_id"].ToString()))
                             }
                         );
                 }

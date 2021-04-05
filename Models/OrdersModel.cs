@@ -14,5 +14,6 @@ namespace SoftEngWebEmployee.Models
         public string OrderStatus { get; set; }
         public string OrderDate { get; set; }
         public int TotalNumberOfOrders { get; set; }
+        public List<SpecificOrdersModel> SpecificOrdersModel { get; set; }
     }
 }
