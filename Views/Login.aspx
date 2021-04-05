@@ -110,13 +110,14 @@
                         <form>
                             <div class="form-group">
                                 <label><b>Username</b></label>
-                                <input type="text" class="form-control" placeholder="username">
+                                <asp:TextBox ID="txtbox_username" runat="server" class="form-control" placeholder="username"></asp:TextBox>
                             </div>
                             <div class="form-group">
                                 <label><b>Password</b></label>
-                                <input type="password" class="form-control" placeholder="password">
+                                <asp:TextBox ID="txtbox_password" runat="server" class="form-control" placeholder="password"></asp:TextBox>
                             </div>
-                            <button type="submit" class="btn btn-black">Login</button>
+                           
+                            <asp:Button ID="btn_login" runat="server" Text="Login" class="btn btn-black" onclick="btn_login_Click" />
 
                         </form>
                     </div>

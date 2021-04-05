@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SoftEngWebEmployee.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,17 @@ namespace SoftEngWebEmployee.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+        }
+
+        protected void btn_login_Click(object sender, EventArgs e)
+        {
+            string username = txtbox_username.Text;
+            string password = txtbox_password.Text;
+
+            AdministratorModel administratorModel = new AdministratorModel();
+            administratorModel.User_Username = username;
+            administratorModel.User_Password = password;
 
         }
     }
