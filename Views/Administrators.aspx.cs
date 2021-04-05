@@ -11,17 +11,24 @@ using System.Web.UI.WebControls;
 namespace SoftEngWebEmployee.Views
 {
     public partial class Administrators : System.Web.UI.Page
-    {        
+    {
+        public List<AdministratorModel> Admins { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            LoadAdministrators();
         }
 
-        public IEnumerable<AdministratorModel> DisplayMockAdmins()
-        {           
-            var administrators = AdministratorRepository.GetInstance().FetchAdministrators();            
-            return administrators;           
+        public List<AdministratorModel> DisplayAdministrators()
+        {
+            return Admins;
         }
+
+        private async void LoadAdministrators()
+        {
+            var administrators = await AdministratorRepository.GetInstance().FetchAdministrators();
+            Admins = (List<AdministratorModel>)administrators;
+        }
+
 
     }
 }

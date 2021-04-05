@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Administrators.aspx.cs" Inherits="SoftEngWebEmployee.Views.Administrators" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Administrators.aspx.cs" Inherits="SoftEngWebEmployee.Views.Administrators" Async="true"  %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
@@ -46,7 +46,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <%foreach (var admins in DisplayMockAdmins())%>
+                                <%foreach (var admins in DisplayAdministrators())%>
                                 <%{ %>
                                 <tr>
                                     <td><%=admins.User_ID %></td>

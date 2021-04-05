@@ -1,4 +1,5 @@
-﻿using SoftEngWebEmployee.Models;
+﻿using MySql.Data.MySqlClient;
+using SoftEngWebEmployee.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,33 +25,31 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
         {
 
         }
-        public IEnumerable<AdministratorModel> FetchAdministrators()
+        public async Task<IEnumerable<AdministratorModel>> FetchAdministrators()
         {
-            List<AdministratorModel> mockList = new List<AdministratorModel>();            
-            mockList.Add(new AdministratorModel {
-                User_Name = "Sample Username 1",
-                User_ID = 101010101,
-                User_Password = "Sample Password 1",
-                User_Username = "Sample User_Username",
-                User_Image = "Sample IMage"
-            });
-            mockList.Add(new AdministratorModel
+            List<AdministratorModel> Admins = new List<AdministratorModel>();
+            AdministratorModel administrator;
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
-                User_Name = "Sample Username 2",
-                User_ID = 101010103,
-                User_Password = "Sample Password 2",
-                User_Username = "Sample User_Username",
-                User_Image = "Sample IMage"
-            });
-            mockList.Add(new AdministratorModel
-            {
-                User_Name = "Sample Username 2",
-                User_ID = 101010102,
-                User_Password = "Sample Password 2",
-                User_Username = "Sample User_Username",
-                User_Image = "Sample IMage"
-            });
-            return mockList;
+                await connection.OpenAsync();
+                string queryString = "SELECT * FROM login_table";
+                MySqlCommand command = new MySqlCommand(queryString,connection);
+                MySqlDataReader reader = command.ExecuteReader();
+                while(await reader.ReadAsync())
+                {
+                    Admins.Add(
+                            administrator = new AdministratorModel()
+                            {
+                                User_ID = int.Parse(reader["user_id"].ToString()),
+                                User_Username = reader["user_username"].ToString(),
+                                User_Password = reader["user_password"].ToString(),
+                                User_Name = reader["user_name"].ToString(),
+                                User_Image = reader["user_image"].ToString()
+                            }
+                        );
+                }
+            }
+            return Admins;
         }
     }
 }
