@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SoftEngWebEmployee.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SoftEngWebEmployee.SiteMaster"%>
 
 <!DOCTYPE html>
 
@@ -68,7 +68,7 @@
                         <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Administrators">Administrators<i class="fa fa-address-card-o" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
                         <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Orders">Orders<i class="fa fa-cart-arrow-down" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li style="text-align: right"; margin-top: 10px"><a runat="server" href="#" class="dropdown-item">Logout<i class="fa fa-close" style="margin-left: 10px; width: 10px; color: red"></i></a></li>
+                        <li style="text-align: right"; margin-top: 10px"><a runat="server" id="LogoutOption" href="#" class="dropdown-item">Logout<i class="fa fa-close" style="margin-left: 10px; width: 10px; color: red"></i></a></li>
                     </ul>
                 </div>
             </div>

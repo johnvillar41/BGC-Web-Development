@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="SoftEngWebEmployee.Views.Login" %>
+﻿<%@Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="SoftEngWebEmployee.Views.Login" Async="true" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 
@@ -21,7 +21,7 @@
 
         .sidenav {
             height: 100%;
-            background-color: 	#242526;
+            background-color: #242526;
             overflow-x: hidden;
             padding-top: 20px;
         }
@@ -29,7 +29,6 @@
 
         .main {
             padding: 0px 10px;
-
         }
 
         @media screen and (max-height: 450px) {
@@ -41,7 +40,6 @@
         @media screen and (max-width: 450px) {
             .login-form {
                 margin-top: 10%;
-
             }
 
             .register-form {
@@ -52,7 +50,6 @@
         @media screen and (min-width: 768px) {
             .main {
                 margin-left: 30%;
-
             }
 
             .sidenav {
@@ -65,8 +62,6 @@
 
             .login-form {
                 margin-top: 70%;
- 
-
             }
 
             .register-form {
@@ -79,7 +74,6 @@
             margin-top: 20%;
             padding: 60px;
             color: #fff;
-
         }
 
             .login-main-text h2 {
@@ -96,7 +90,7 @@
     <form id="form1" runat="server">
         <div>
 
-            <div class="sidenav">                
+            <div class="sidenav">
                 <div class="login-main-text">
                     <center> <img src="/Images/logo.PNG"width="300" height="300" alt="...">
                     <h2 style="color:orange; font-family:Georgia;">  <b><br/> AGT</b> <br/>
@@ -116,8 +110,8 @@
                                 <label><b>Password</b></label>
                                 <asp:TextBox ID="txtbox_password" runat="server" class="form-control" placeholder="password"></asp:TextBox>
                             </div>
-                           
-                            <asp:Button ID="btn_login" runat="server" Text="Login" class="btn btn-black" onclick="btn_login_Click" />
+
+                            <asp:Button ID="btn_login" runat="server" Text="Login" class="btn btn-black" OnClick="btn_login_Click" />
 
                         </form>
                     </div>
