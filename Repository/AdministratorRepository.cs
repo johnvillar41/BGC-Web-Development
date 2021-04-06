@@ -51,5 +51,31 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
             }
             return Admins;
         }
+        public async void DeleteAdministrator(int administratorID)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "DELETE FROM login_table WHERE user_id=@administratorID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@administratorID",administratorID);
+                await command.ExecuteNonQueryAsync();
+            }
+        }
+        public async void CreateNewAdministrator(AdministratorModel administrator)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "INSERT INTO login_table(user_username,user_password,user_name)" +
+                    "VALUES(@Username,@Passowrd,@name)";
+                MySqlCommand command = new MySqlCommand(queryString, connection);                
+                command.Parameters.AddWithValue("@Username", administrator.User_Username);
+                command.Parameters.AddWithValue("@Passowrd", administrator.User_Password);
+                command.Parameters.AddWithValue("@name", administrator.User_Name);
+                //command.Parameters.AddWithValue("@image", administrator.User_Image);
+                await command.ExecuteNonQueryAsync();
+            }
+        }
     }
 }

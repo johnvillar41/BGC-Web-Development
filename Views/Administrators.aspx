@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Administrators.aspx.cs" Inherits="SoftEngWebEmployee.Views.Administrators" Async="true"  %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Administrators.aspx.cs" Inherits="SoftEngWebEmployee.Views.Administrators" Async="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
@@ -100,27 +100,24 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Username</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp">
+                            <asp:TextBox ID="Username" runat="server" type="text" class="form-control" required></asp:TextBox>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Fullname</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp">
+                            <asp:TextBox ID="FullName" runat="server" type="text" class="form-control" required></asp:TextBox>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control">
+                            <asp:TextBox ID="Password" runat="server" type="password" class="form-control" required></asp:TextBox>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="customFile">Upload Picture</label>
-                            <input type="file" class="form-control" id="customFile" />
+                            <label class="form-label" for="customFile">Upload Picture</label>                            
+                            <asp:FileUpload ID="ImageUpload" type="file" runat="server" class="form-control"/>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
-
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                    <div class="modal-footer">                        
+                        <asp:Button ID="BtnSave"  type="submit" runat="server" Text="Submit" class="btn btn-primary" OnClick="BtnSave_Click"/>
                     </div>
                 </div>
             </div>
