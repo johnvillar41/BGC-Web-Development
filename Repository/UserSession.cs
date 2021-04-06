@@ -9,15 +9,14 @@ namespace SoftEngWebEmployee.Repository
     {
         private static bool isLoggedIn;
 
-        public static bool getLoginStatus()
+        public static bool GetLoginStatus()
         {
             return isLoggedIn;
         }
 
-        public static void setLoginStatus(bool loginStatus)
+        public static void SetLoginStatus(bool loginStatus)
         {
             isLoggedIn = loginStatus;
         }
-
     }
 }

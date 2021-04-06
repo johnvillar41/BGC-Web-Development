@@ -18,21 +18,18 @@ namespace SoftEngWebEmployee.Views
             string password = txtbox_password.Text;
 
             AdministratorModel administratorModel = new AdministratorModel();
-
             administratorModel.User_Username = username;
             administratorModel.User_Password = password;
 
-
-
             if (await LoginRepository.GetInstance().IsLoginSuccessfull(administratorModel) == true)
             {
-                Response.Redirect("Inventory.aspx");
-                UserSession.setLoginStatus(true);
+                Response.Redirect("Inventory.aspx",false);
+                UserSession.SetLoginStatus(true);
             }
             else
             {
                 Response.Redirect(Request.RawUrl, false);
-                UserSession.setLoginStatus(false);
+                UserSession.SetLoginStatus(false);
                 //add pop up error message
             }
 
