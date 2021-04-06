@@ -315,6 +315,7 @@
     <Compile Include="Repository\OrdersRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\SpecificOrdersRepository.cs" />
+    <Compile Include="Repository\UserSession.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

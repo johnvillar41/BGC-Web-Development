@@ -15,10 +15,33 @@ namespace SoftEngWebEmployee.Views
         protected async void btn_login_Click(object sender, EventArgs e)
         {
             string username = txtbox_username.Text;
-            string password = txtbox_password.Text;           
+            string password = txtbox_password.Text;
 
-            
+            AdministratorModel administratorModel = new AdministratorModel();
+
+            administratorModel.User_Username = username;
+            administratorModel.User_Password = password;
+
+
+
+            if (await LoginRepository.GetInstance().IsLoginSuccessfull(administratorModel) == true)
+            {
+                Response.Redirect("Inventory.aspx");
+                UserSession.setLoginStatus(true);
+            }
+            else
+            {
+                Response.Redirect(Request.RawUrl, false);
+                UserSession.setLoginStatus(false);
+                //add pop up error message
+            }
+
+
 
         }
+
+        
+
+
     }
 }
