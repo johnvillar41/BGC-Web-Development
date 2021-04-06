@@ -26,8 +26,18 @@ namespace SoftEngWebEmployee.Views
         private async void LoadOrders()
         {
             var listOfOrders = await OrdersRepository.GetInstance().FetchAllOrders();
-            OrdersList = (List<OrdersModel>)listOfOrders;
+            OrdersList = (List<OrdersModel>)listOfOrders;            
         }
-        
+
+        protected void ButtonSaveChangesCancel_Click(object sender, EventArgs e)
+        {
+            OrdersRepository.GetInstance().ChangeStatusOfOrderToCancelled(int.Parse(OrderIDCancel.Text));           
+        }
+
+        protected void ButtonSaveChangesFinish_Click(object sender, EventArgs e)
+        {
+            OrdersRepository.GetInstance().ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));           
+        }
+       
     }
 }

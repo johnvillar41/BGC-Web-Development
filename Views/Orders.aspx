@@ -14,6 +14,13 @@
         }
     </style>
     <div class="container">
+        <div class="row" style="margin: 4px">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#CancelModal">Cancel</button>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#FinishModal">Finish</button>
+            </div>
+        </div>
+
         <%foreach (var orders in DisplayOrders()) %>
         <%{%>
         <div class="blog-nav d-flex flex-column flex-sm-row" style="margin-bottom: 5px">
@@ -48,13 +55,6 @@
                         <div class="col-lg-9 col-md-6 col-sm-6">
                             <h1>Orders</h1>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#CancelModal" >Cancel</button>
-                                <button type="button" class="btn btn-success"data-bs-toggle="modal" data-bs-target="#FinishModal">Finish</button>
-                            </div>
-                        </div>
-
                     </div>
 
                     <div class="table-bordered table-condensed table-responsive" style="height: 200px">
@@ -99,11 +99,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to <span style="color:red">Cancel</span> order?
+                    <div class="input-group has-validation">
+                        <asp:TextBox ID="OrderIDCancel" CssClass="form-control" runat="server" placeholder="Enter Order Id" required></asp:TextBox>
+                    </div>
+
+                    Are you sure you want to <span style="color: red">Cancel</span> order?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <asp:Button ID="ButtonSaveChangesCancel" CssClass="btn btn-primary" runat="server" Text="Save" OnClick="ButtonSaveChangesCancel_Click" />
                 </div>
             </div>
         </div>
@@ -117,11 +121,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to <span style="color:green">Finish</span> order?
+                    <div class="input-group has-validation">
+                        <asp:TextBox ID="OrderIDFinish" CssClass="form-control" runat="server" placeholder="Enter Order Id" required></asp:TextBox>
+                    </div>
+                    Are you sure you want to <span style="color: green">Finish</span> order?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <asp:Button ID="ButtonSaveChangesFinish" CssClass="btn btn-primary" runat="server" Text="Save" OnClick="ButtonSaveChangesFinish_Click" />
                 </div>
             </div>
         </div>

@@ -62,10 +62,21 @@ namespace SoftEngWebEmployee.Repository
                 await connection.OpenAsync();
                 string queryString = "UPDATE customer_orders_table SET order_status='Cancelled' WHERE order_id=@orderID";
                 MySqlCommand command = new MySqlCommand(queryString,connection);
+                command.Parameters.AddWithValue("@orderID", orderID);
                 await command.ExecuteNonQueryAsync();                
             }
-        } 
-
+        }
+        public async void ChangeStatusOfOrderToFinished(int orderID)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "UPDATE customer_orders_table SET order_status='Finished' WHERE order_id=@orderID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@orderID", orderID);
+                await command.ExecuteNonQueryAsync();
+            }
+        }
 
     }
 }
