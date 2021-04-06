@@ -29,22 +29,16 @@ namespace SoftEngWebEmployee.Views
             OrdersList = (List<OrdersModel>)listOfOrders;
         }
 
-        protected void ButtonSaveChangesCancel_Click(object sender, EventArgs e)
+        protected void btnCancelStatus_Click(object sender, EventArgs e)
         {
-            if (OrderIDCancel.Text != null)
-            {
-                OrdersRepository.GetInstance().ChangeStatusOfOrderToCancelled(int.Parse(OrderIDCancel.Text));
-            }
+            OrdersRepository.GetInstance().ChangeStatusOfOrderToCancelled(int.Parse(OrderIDCancel.Text));
+            Response.Redirect(Request.RawUrl);
         }
 
-        protected void ButtonSaveChangesFinish_Click(object sender, EventArgs e)
+        protected void btnFinishStatus_Click(object sender, EventArgs e)
         {
-            if (OrderIDFinish.Text != null)
-            {
-                OrdersRepository.GetInstance().ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));
-            }
-
+            OrdersRepository.GetInstance().ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));
+            Response.Redirect(Request.RawUrl);
         }
-
     }
 }

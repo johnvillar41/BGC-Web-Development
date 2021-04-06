@@ -52,7 +52,7 @@ namespace SoftEngWebEmployee.Views
             };
 
             AdministratorRepository.GetInstance().CreateNewAdministrator(administrator);
-
+            Response.Redirect(Request.RawUrl);
         }
     }
 }
