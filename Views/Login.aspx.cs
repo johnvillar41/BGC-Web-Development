@@ -15,25 +15,9 @@ namespace SoftEngWebEmployee.Views
         protected async void btn_login_Click(object sender, EventArgs e)
         {
             string username = txtbox_username.Text;
-            string password = txtbox_password.Text;
+            string password = txtbox_password.Text;           
 
-            AdministratorModel administratorModel = new AdministratorModel()
-            {
-                User_Username = username,
-                User_Password = password
-            };
-
-            //bool loginResult = await LoginRepository.GetInstance().IsLoginSuccessfull(administratorModel);
-
-            //if (loginResult == false)
-            //{
-            //    Response.Redirect(Request.RawUrl, false);
-            //}
-            //else
-            //{
-            //    Response.Redirect("Inventory", false);
-            //    UserSession.IsLoggedin = true;
-            //}
+            
 
         }
     }

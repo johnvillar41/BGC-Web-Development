@@ -12,10 +12,7 @@ namespace SoftEngWebEmployee
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(UserSession.IsLoggedin == false)
-            {
-                Response.Redirect("Login.aspx");
-            }
+           
         }
     }
 }
