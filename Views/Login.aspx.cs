@@ -17,28 +17,21 @@ namespace SoftEngWebEmployee.Views
             string username = txtbox_username.Text;
             string password = txtbox_password.Text;
 
-            AdministratorModel administratorModel = new AdministratorModel();
-            administratorModel.User_Username = username;
-            administratorModel.User_Password = password;
+            AdministratorModel administratorModel = new AdministratorModel
+            {
+                User_Username = username,
+                User_Password = password
+            };
 
             if (await LoginRepository.GetInstance().IsLoginSuccessfull(administratorModel) == true)
             {
-                Response.Redirect("Inventory.aspx",false);
                 UserSession.SetLoginStatus(true);
+                Response.Redirect("Inventory.aspx",false);               
             }
             else
             {
-                Response.Redirect(Request.RawUrl, false);
-                UserSession.SetLoginStatus(false);
-                //add pop up error message
+                Response.Redirect(Request.RawUrl, false);                                
             }
-
-
-
-        }
-
-        
-
-
+        }     
     }
 }

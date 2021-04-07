@@ -17,5 +17,11 @@ namespace SoftEngWebEmployee
                 Response.Redirect("Login.aspx", false);
             }
         }
+
+        protected void LogoutButton_Click(object sender, EventArgs e)
+        {
+            UserSession.SetLoginStatus(false);
+            Response.Redirect("Login.aspx", false);
+        }
     }
 }
