@@ -52,10 +52,10 @@
                                     <td><%=admins.User_ID %></td>
                                     <td>
                                         <img src="/Images/logo.PNG" width="35" height="35" class="d-inline-block align-top" alt="">
-                                        <%=admins.User_Username %>                                       
+                                        <%=admins.Username %>                                       
                                     </td>
-                                    <td><%=admins.User_Password %></td>
-                                    <td><%=admins.User_Name %></td>
+                                    <td><%=admins.Password %></td>
+                                    <td><%=admins.Fullname %></td>
                                     <td>
                                         <button type="button" style="height: 40px; width: 100px" class="btn btn-danger">Delete</button>
                                         <button type="button" style="height: 40px; width: 100px" class="btn btn-warning">Update</button>

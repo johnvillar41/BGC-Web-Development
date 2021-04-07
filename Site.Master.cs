@@ -12,10 +12,10 @@ namespace SoftEngWebEmployee
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (UserSession.GetLoginStatus() == false)
-            {
-                Response.Redirect("Login.aspx", false);
-            }
+            //if (UserSession.GetLoginStatus() == false)
+            //{
+            //    Response.Redirect("Login.aspx", false);
+            //}
         }
 
         protected void LogoutButton_Click(object sender, EventArgs e)
