@@ -23,12 +23,18 @@
                         <div class="col-3">
                             <h3 class="float-left">User Information</h3>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <!--Empty Div-->
                         </div>
-                        <div class="col-3 ">
+                        <div class="col-5 ">
                             <button type="button" class="btn btn-success float-end" style="margin: 5px;" data-bs-toggle="modal" data-bs-target="#AddNewUserModal">
                                 Add New User
+                            </button>
+                            <button type="button" class="btn btn-danger float-end" style="margin: 5px;" data-bs-toggle="modal" data-bs-target="#DeleteUserModal">
+                                Delete User
+                            </button>
+                            <button type="button" class="btn btn-info float-end" style="margin: 5px;" data-bs-toggle="modal" data-bs-target="#UpdateUserModal">
+                                Update User
                             </button>
                         </div>
 
@@ -42,7 +48,6 @@
                                     <th scope="col">Username</th>
                                     <th scope="col">Password</th>
                                     <th scope="col">FullName</th>
-                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,10 +61,6 @@
                                     </td>
                                     <td><%=admins.Password %></td>
                                     <td><%=admins.Fullname %></td>
-                                    <td>
-                                        <button type="button" style="height: 40px; width: 100px" class="btn btn-danger">Delete</button>
-                                        <button type="button" style="height: 40px; width: 100px" class="btn btn-warning">Update</button>
-                                    </td>
                                 </tr>
                                 <%} %>
                             </tbody>
@@ -89,40 +90,103 @@
 
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="AddNewUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!--Delete Modal-->
+        <div class="modal fade" id="DeleteUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add new Administrator</h5>
+                    <div class="modal-header btn btn-danger">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                       <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">User ID</label>
+                            <asp:TextBox ID="AdministratorId_Delete" runat="server" type="text" class="form-control" required></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <asp:Button ID="BtnDelete" runat="server" Text="Delete User" CssClass="btn btn-danger" OnClick="BtnDelete_Click"  UseSubmitBehavior="false" data-dismiss="modal"/>                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Update User -->
+        <div class="modal fade" id="UpdateUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header btn btn-info">
+                        <h5 class="modal-title" id="exampleModalLabel">Update Administrator</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">User ID</label>
+                            <asp:TextBox ID="TextBox4" runat="server" type="text" class="form-control" required></asp:TextBox>
+                            <asp:Button ID="ButtonFindID" runat="server" Text="Find" />
+                        </div>
+                        <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Username</label>
-                            <asp:TextBox ID="Username" runat="server" type="text" class="form-control" required></asp:TextBox>
+                            <asp:TextBox ID="TextBox1" runat="server" type="text" disabled class="form-control" required></asp:TextBox>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Fullname</label>
-                            <asp:TextBox ID="FullName" runat="server" type="text" class="form-control" required></asp:TextBox>
+                            <asp:TextBox ID="TextBox2" runat="server" type="text" disabled class="form-control" required></asp:TextBox>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <asp:TextBox ID="Password" runat="server" type="password" class="form-control" required></asp:TextBox>
+                            <asp:TextBox ID="TextBox3" runat="server" type="password" disabled class="form-control" required></asp:TextBox>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="customFile">Upload Picture</label>                            
-                            <asp:FileUpload ID="ImageUpload" type="file" runat="server" class="form-control"/>
+                            <label class="form-label" for="customFile">Upload Picture</label>
+                            <asp:FileUpload ID="FileUpload1" type="file" runat="server" class="form-control" />
                         </div>
 
                     </div>
-                    <div class="modal-footer">                        
-                        <asp:Button ID="BtnSave"  type="submit" runat="server" Text="Submit" class="btn btn-primary" OnClick="BtnSave_Click"/>
+                    <div class="modal-footer">
+                        <asp:Button ID="Button1" type="submit" runat="server" Text="Update" class="btn btn-info" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <!-- Modal Add New User -->
+    <div class="modal fade" id="AddNewUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header btn btn-success">
+                    <h5 class="modal-title" id="exampleModalLabel">Add new Administrator</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Username</label>
+                        <asp:TextBox ID="Username" runat="server" type="text" class="form-control" required></asp:TextBox>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Fullname</label>
+                        <asp:TextBox ID="FullName" runat="server" type="text" class="form-control" required></asp:TextBox>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <asp:TextBox ID="Password" runat="server" type="password" class="form-control" required></asp:TextBox>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="customFile">Upload Picture</label>
+                        <asp:FileUpload ID="ImageUpload" type="file" runat="server" class="form-control" />
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <asp:Button ID="BtnSave" type="submit" runat="server" Text="Submit" class="btn btn-primary" OnClick="BtnSave_Click"  UseSubmitBehavior="false" data-dismiss="modal"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 </asp:Content>

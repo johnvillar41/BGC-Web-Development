@@ -31,27 +31,37 @@ namespace SoftEngWebEmployee.Views
         }
 
         protected void BtnSave_Click(object sender, EventArgs e)
-        {
+        {            
             var username = Username.Text.ToString();
             var password = Password.Text.ToString();
             var fullName = FullName.Text.ToString();
 
-            //Convert Image to String
-            Stream fs = ImageUpload.PostedFile.InputStream;
-            BinaryReader br = new System.IO.BinaryReader(fs);
-            byte[] bytes = br.ReadBytes((int)fs.Length);
-            string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
-            var imageString = base64String;
-
-            AdministratorModel administrator = new AdministratorModel() 
+            if(!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(password) && !String.IsNullOrEmpty(fullName))
             {
-                Username = username,
-                Password = password,
-                Fullname = fullName,
-                ProfilePicture = imageString
-            };
+                //Convert Image to String
+                Stream fs = ImageUpload.PostedFile.InputStream;
+                BinaryReader br = new System.IO.BinaryReader(fs);
+                byte[] bytes = br.ReadBytes((int)fs.Length);
+                string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                var imageString = base64String;
 
-            AdministratorRepository.GetInstance().CreateNewAdministrator(administrator);
+                AdministratorModel administrator = new AdministratorModel()
+                {
+                    Username = username,
+                    Password = password,
+                    Fullname = fullName,
+                    ProfilePicture = imageString
+                };
+
+                AdministratorRepository.GetInstance().CreateNewAdministrator(administrator);
+                Response.Redirect(Request.RawUrl);
+            }
+            
+        }
+
+        protected void BtnDelete_Click(object sender, EventArgs e)
+        {            
+            AdministratorRepository.GetInstance().DeleteAdministrator(int.Parse(AdministratorId_Delete.Text));
             Response.Redirect(Request.RawUrl);
         }
     }
