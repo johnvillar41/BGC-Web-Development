@@ -33,13 +33,13 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.WebControls.Button BtnDelete;
 
         /// <summary>
-        /// TextBox4 control.
+        /// AdministratorID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox4;
+        protected global::System.Web.UI.WebControls.TextBox AdministratorID;
 
         /// <summary>
         /// ButtonFindID control.
@@ -51,31 +51,40 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.WebControls.Button ButtonFindID;
 
         /// <summary>
-        /// TextBox1 control.
+        /// UpdatePanel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// TextBox2 control.
+        /// UsernameUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox UsernameUpdate;
 
         /// <summary>
-        /// TextBox3 control.
+        /// FullnameUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.TextBox FullnameUpdate;
+
+        /// <summary>
+        /// PasswordUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PasswordUpdate;
 
         /// <summary>
         /// FileUpload1 control.

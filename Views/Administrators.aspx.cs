@@ -64,5 +64,17 @@ namespace SoftEngWebEmployee.Views
             AdministratorRepository.GetInstance().DeleteAdministrator(int.Parse(AdministratorId_Delete.Text));
             Response.Redirect(Request.RawUrl);
         }
+
+        protected async void ButtonFindID_Click(object sender, EventArgs e)
+        {
+            AdministratorModel administrator = await AdministratorRepository.GetInstance().FindAdministrator(int.Parse(AdministratorID.Text));
+            if (administrator != null)
+            {
+                UsernameUpdate.Text = administrator.Username;
+                FullnameUpdate.Text = administrator.Fullname;
+                Password.Text = administrator.Password;
+            }
+            UpdatePanel1.Update();
+        }
     }
 }

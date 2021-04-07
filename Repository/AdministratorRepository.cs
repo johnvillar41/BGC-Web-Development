@@ -25,6 +25,28 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
         {
 
         }
+        public async Task<AdministratorModel> FindAdministrator(int administratorID)
+        {
+            AdministratorModel administrator = null;
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT * FROM login_table WHERE user_id=@administratorID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@administratorID", administratorID);
+                MySqlDataReader reader = command.ExecuteReader();
+                if(await reader.ReadAsync())
+                {
+                    administrator = new AdministratorModel()
+                    {                        
+                        Username = reader["user_username"].ToString(),
+                        Password = reader["user_password"].ToString(),
+                        Fullname = reader["user_name"].ToString()                        
+                    };
+                }
+            }
+            return administrator;
+        }
         public async Task<IEnumerable<AdministratorModel>> FetchAdministrators()
         {
             List<AdministratorModel> Admins = new List<AdministratorModel>();

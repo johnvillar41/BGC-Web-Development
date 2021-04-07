@@ -99,20 +99,22 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                       <div class="mb-3">
+                        <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">User ID</label>
                             <asp:TextBox ID="AdministratorId_Delete" runat="server" type="text" class="form-control" required></asp:TextBox>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <asp:Button ID="BtnDelete" runat="server" Text="Delete User" CssClass="btn btn-danger" OnClick="BtnDelete_Click"  UseSubmitBehavior="false" data-dismiss="modal"/>                       
+                        <asp:Button ID="BtnDelete" runat="server" Text="Delete User" CssClass="btn btn-danger" OnClick="BtnDelete_Click" UseSubmitBehavior="false" data-dismiss="modal" />
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Modal Update User -->
+
+
         <div class="modal fade" id="UpdateUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -123,26 +125,33 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">User ID</label>
-                            <asp:TextBox ID="TextBox4" runat="server" type="text" class="form-control" required></asp:TextBox>
-                            <asp:Button ID="ButtonFindID" runat="server" Text="Find" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Username</label>
-                            <asp:TextBox ID="TextBox1" runat="server" type="text" disabled class="form-control" required></asp:TextBox>
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Fullname</label>
-                            <asp:TextBox ID="TextBox2" runat="server" type="text" disabled class="form-control" required></asp:TextBox>
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <asp:TextBox ID="TextBox3" runat="server" type="password" disabled class="form-control" required></asp:TextBox>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="customFile">Upload Picture</label>
-                            <asp:FileUpload ID="FileUpload1" type="file" runat="server" class="form-control" />
-                        </div>
+                            <asp:TextBox ID="AdministratorID" runat="server" type="text" class="form-control" required></asp:TextBox>
+                            <asp:Button ID="ButtonFindID" type="submit" runat="server" Text="Find" CssClass="btn btn-info" OnClick="ButtonFindID_Click" UseSubmitBehavior="false" />
 
+                        </div>
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Username</label>
+                                    <asp:TextBox ID="UsernameUpdate" runat="server" type="text" disabled class="form-control" required></asp:TextBox>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Fullname</label>
+                                    <asp:TextBox ID="FullnameUpdate" runat="server" type="text" disabled class="form-control" required></asp:TextBox>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                                    <asp:TextBox ID="PasswordUpdate" runat="server" type="password" disabled class="form-control" required></asp:TextBox>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="customFile">Upload Picture</label>
+                                    <asp:FileUpload ID="FileUpload1" type="file" runat="server" class="form-control" />
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="ButtonFindID" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
                     </div>
                     <div class="modal-footer">
                         <asp:Button ID="Button1" type="submit" runat="server" Text="Update" class="btn btn-info" />
@@ -150,7 +159,12 @@
                 </div>
             </div>
         </div>
+
+
+
+
     </div>
+
 
 
     <!-- Modal Add New User -->
@@ -181,7 +195,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <asp:Button ID="BtnSave" type="submit" runat="server" Text="Submit" class="btn btn-primary" OnClick="BtnSave_Click"  UseSubmitBehavior="false" data-dismiss="modal"/>
+                    <asp:Button ID="BtnSave" type="submit" runat="server" Text="Submit" class="btn btn-primary" OnClick="BtnSave_Click" UseSubmitBehavior="false" data-dismiss="modal" />
                 </div>
             </div>
         </div>
