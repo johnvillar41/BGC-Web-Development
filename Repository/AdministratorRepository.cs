@@ -41,10 +41,10 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
                             administrator = new AdministratorModel()
                             {
                                 User_ID = int.Parse(reader["user_id"].ToString()),
-                                User_Username = reader["user_username"].ToString(),
-                                User_Password = reader["user_password"].ToString(),
-                                User_Name = reader["user_name"].ToString(),
-                                User_Image = reader["user_image"].ToString()
+                                Username = reader["user_username"].ToString(),
+                                Password = reader["user_password"].ToString(),
+                                Fullname = reader["user_name"].ToString(),
+                                ProfilePicture = reader["user_image"].ToString()
                             }
                         );
                 }
@@ -70,9 +70,9 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
                 string queryString = "INSERT INTO login_table(user_username,user_password,user_name)" +
                     "VALUES(@Username,@Passowrd,@name)";
                 MySqlCommand command = new MySqlCommand(queryString, connection);                
-                command.Parameters.AddWithValue("@Username", administrator.User_Username);
-                command.Parameters.AddWithValue("@Passowrd", administrator.User_Password);
-                command.Parameters.AddWithValue("@name", administrator.User_Name);
+                command.Parameters.AddWithValue("@Username", administrator.Username);
+                command.Parameters.AddWithValue("@Passowrd", administrator.Password);
+                command.Parameters.AddWithValue("@name", administrator.Fullname);
                 //command.Parameters.AddWithValue("@image", administrator.User_Image);
                 await command.ExecuteNonQueryAsync();
             }

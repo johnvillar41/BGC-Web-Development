@@ -8,9 +8,9 @@ namespace SoftEngWebEmployee.Models
     public class AdministratorModel
     {
         public int User_ID { get; set; }
-        public string User_Username { get; set; }
-        public string User_Password { get; set; }
-        public string User_Name { get; set; }
-        public string User_Image { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Fullname { get; set; }
+        public string ProfilePicture { get; set; }
     }
 }

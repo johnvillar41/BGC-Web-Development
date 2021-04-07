@@ -35,8 +35,8 @@ namespace SoftEngWebEmployee.Repository.LoginRepository
                 await connection.OpenAsync();
                 string loginString = "SELECT * FROM login_table WHERE user_username=@Username AND user_password=@Password";
                 MySqlCommand command = new MySqlCommand(loginString, connection);
-                command.Parameters.AddWithValue("@Username", adminModel.User_Username);
-                command.Parameters.AddWithValue("@Password", adminModel.User_Password);
+                command.Parameters.AddWithValue("@Username", adminModel.Username);
+                command.Parameters.AddWithValue("@Password", adminModel.Password);
                 MySqlDataReader reader = command.ExecuteReader();
                 if (await reader.ReadAsync())
                 {

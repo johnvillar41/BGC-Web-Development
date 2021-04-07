@@ -19,8 +19,8 @@ namespace SoftEngWebEmployee.Views
 
             AdministratorModel administratorModel = new AdministratorModel
             {
-                User_Username = username,
-                User_Password = password
+                Username = username,
+                Password = password
             };
 
             if (await LoginRepository.GetInstance().IsLoginSuccessfull(administratorModel) == true)

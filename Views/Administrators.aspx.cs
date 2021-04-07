@@ -45,10 +45,10 @@ namespace SoftEngWebEmployee.Views
 
             AdministratorModel administrator = new AdministratorModel() 
             {
-                User_Username = username,
-                User_Password = password,
-                User_Name = fullName,
-                User_Image = imageString
+                Username = username,
+                Password = password,
+                Fullname = fullName,
+                ProfilePicture = imageString
             };
 
             AdministratorRepository.GetInstance().CreateNewAdministrator(administrator);
