@@ -99,5 +99,19 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
                 await command.ExecuteNonQueryAsync();
             }
         }
+        public async void UpdateAdministrator(AdministratorModel administrator)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "UPDATE login_table SET user_username=@username,user_password=@password,user_name=@fullname WHERE user_id=@userID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@userID", administrator.User_ID);
+                command.Parameters.AddWithValue("@username", administrator.Username);
+                command.Parameters.AddWithValue("@password", administrator.Password);
+                command.Parameters.AddWithValue("@fullname", administrator.Fullname);
+                await command.ExecuteNonQueryAsync();
+            }
+        }
     }
 }

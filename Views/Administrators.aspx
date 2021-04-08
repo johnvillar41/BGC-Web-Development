@@ -126,26 +126,44 @@
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">User ID</label>
                             <asp:TextBox ID="AdministratorID" runat="server" type="text" class="form-control" required></asp:TextBox>
-                            <asp:Button ID="ButtonFindID" type="submit" runat="server" Text="Find" CssClass="btn btn-info" OnClick="ButtonFindID_Click" UseSubmitBehavior="false" />
+                            <asp:Button ID="ButtonFindID" Style="margin-top: 3px" type="submit" runat="server" Text="Find" CssClass="btn btn-info" OnClick="ButtonFindID_Click" UseSubmitBehavior="false" />
 
                         </div>
+                        <hr />
                         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Username</label>
-                                    <asp:TextBox ID="UsernameUpdate" runat="server" type="text" disabled class="form-control" required></asp:TextBox>
+                                    <%if (String.IsNullOrEmpty(UsernameUpdate.Text)) %>
+                                    <%{ %>
+                                    <asp:TextBox runat="server" type="text" disabled class="form-control" required></asp:TextBox>
+                                    <%} %>
+                                    <%else %>
+                                    <%{ %>
+                                    <asp:TextBox ID="UsernameUpdate" runat="server" type="text" class="form-control" required></asp:TextBox>
+                                    <%} %>
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Fullname</label>
-                                    <asp:TextBox ID="FullnameUpdate" runat="server" type="text" disabled class="form-control" required></asp:TextBox>
+                                    <%if (String.IsNullOrEmpty(FullnameUpdate.Text)) %>
+                                    <%{ %>
+                                    <asp:TextBox runat="server" type="text" disabled class="form-control" required></asp:TextBox>
+                                    <%} %>
+                                    <%else %>
+                                    <%{ %>
+                                    <asp:TextBox ID="FullnameUpdate" runat="server" type="text" class="form-control" required></asp:TextBox>
+                                    <%} %>
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <asp:TextBox ID="PasswordUpdate" runat="server" type="password" disabled class="form-control" required></asp:TextBox>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="customFile">Upload Picture</label>
-                                    <asp:FileUpload ID="FileUpload1" type="file" runat="server" class="form-control" />
+                                    <%if (String.IsNullOrEmpty(PasswordUpdate.Text)) %>
+                                    <%{ %>
+                                    <asp:TextBox runat="server" type="password" disabled class="form-control" required></asp:TextBox>
+                                    <%} %>
+                                    <%else %>
+                                    <%{ %>
+                                    <asp:TextBox ID="PasswordUpdate" runat="server" type="password" class="form-control" required></asp:TextBox>
+                                    <%} %>
                                 </div>
                             </ContentTemplate>
                             <Triggers>
@@ -154,17 +172,12 @@
                         </asp:UpdatePanel>
                     </div>
                     <div class="modal-footer">
-                        <asp:Button ID="Button1" type="submit" runat="server" Text="Update" class="btn btn-info" />
+                        <asp:Button ID="ButtonUpdateUser" type="submit" runat="server" Text="Update" class="btn btn-info" OnClick="ButtonUpdateUser_Click" UseSubmitBehavior="false"/>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
-
 
 
     <!-- Modal Add New User -->

@@ -36,7 +36,7 @@ namespace SoftEngWebEmployee.Views
             var password = Password.Text.ToString();
             var fullName = FullName.Text.ToString();
 
-            if(!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(password) && !String.IsNullOrEmpty(fullName))
+            if(!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) && !String.IsNullOrWhiteSpace(fullName))
             {
                 //Convert Image to String
                 Stream fs = ImageUpload.PostedFile.InputStream;
@@ -60,21 +60,45 @@ namespace SoftEngWebEmployee.Views
         }
 
         protected void BtnDelete_Click(object sender, EventArgs e)
-        {            
-            AdministratorRepository.GetInstance().DeleteAdministrator(int.Parse(AdministratorId_Delete.Text));
-            Response.Redirect(Request.RawUrl);
+        {
+            if (!String.IsNullOrWhiteSpace(AdministratorId_Delete.Text))
+            {
+                AdministratorRepository.GetInstance().DeleteAdministrator(int.Parse(AdministratorId_Delete.Text));
+                Response.Redirect(Request.RawUrl);
+            }            
         }
 
         protected async void ButtonFindID_Click(object sender, EventArgs e)
-        {
-            AdministratorModel administrator = await AdministratorRepository.GetInstance().FindAdministrator(int.Parse(AdministratorID.Text));
-            if (administrator != null)
+        {            
+            if (!String.IsNullOrWhiteSpace(AdministratorID.Text))
             {
+                AdministratorModel administrator = await AdministratorRepository.GetInstance().FindAdministrator(int.Parse(AdministratorID.Text));
                 UsernameUpdate.Text = administrator.Username;
                 FullnameUpdate.Text = administrator.Fullname;
-                Password.Text = administrator.Password;
+                PasswordUpdate.Text = administrator.Password;
             }
             UpdatePanel1.Update();
+        }
+
+        protected void ButtonUpdateUser_Click(object sender, EventArgs e)
+        {
+            var userId = AdministratorID.Text.ToString();
+            var username = UsernameUpdate.Text.ToString();
+            var password = PasswordUpdate.Text.ToString();
+            var fullName = FullnameUpdate.Text.ToString();
+
+            if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) && !String.IsNullOrWhiteSpace(fullName))
+            {
+                AdministratorModel administrator = new AdministratorModel()
+                {
+                    User_ID = int.Parse(userId),
+                    Username = username,
+                    Password = password,
+                    Fullname = fullName
+                };
+                AdministratorRepository.GetInstance().UpdateAdministrator(administrator);
+                Response.Redirect(Request.RawUrl);
+            }
         }
     }
 }
