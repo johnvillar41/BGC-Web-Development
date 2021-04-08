@@ -64,9 +64,13 @@
                                                         <%{ %>
                                                         <span class="badge bg-success"><%=orders.OrderStatus %></span>
                                                         <%} %>
-                                                        <%else %>
+                                                        <%else if(orders.OrderStatus.Equals("Cancelled"))%>
                                                         <%{ %>
                                                         <span class="badge bg-danger"><%=orders.OrderStatus %></span>
+                                                        <%} %>
+                                                        <%else%>
+                                                        <%{ %>
+                                                        <span class="badge bg-warning"><%=orders.OrderStatus %></span>
                                                         <%} %>
                                                     </div>
                                                 </div>
