@@ -21,9 +21,9 @@
                 return false;
             }
             return true;
-        }
+        }     
     </script>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row" style="margin-bottom: 5px">
             <div class="col-lg-9 col-md-7"></div>
             <div class="btn-group col-lg-3 col-md-5" role="group" aria-label="Basic example">
@@ -119,6 +119,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                             </td>
                         </tr>
                         <%}%>

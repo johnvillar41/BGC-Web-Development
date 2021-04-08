@@ -40,7 +40,7 @@
 
                     </div>
 
-                    <div class="table-bordered table-condensed table-responsive"style="height:500px">
+                    <div class="table-bordered table-condensed table-responsive" style="height: 500px">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -67,100 +67,99 @@
 
                         </table>
 
-                    </div>                    
+                    </div>
                 </div>
             </div>
 
         </div>
-
-        <!--Delete Modal-->
-        <div class="modal fade" id="DeleteUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header btn btn-danger">
-                        <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">User ID</label>
-                            <asp:TextBox ID="AdministratorId_Delete" runat="server" type="text" class="form-control" required></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <asp:Button ID="BtnDelete" runat="server" Text="Delete User" CssClass="btn btn-danger" OnClick="BtnDelete_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+    </div>
+    <!--Delete Modal-->
+    <div class="modal fade" id="DeleteUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header btn btn-danger">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">User ID</label>
+                        <asp:TextBox ID="AdministratorId_Delete" runat="server" type="text" class="form-control" required></asp:TextBox>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Modal Update User -->
-
-
-        <div class="modal fade" id="UpdateUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header btn btn-info">
-                        <h5 class="modal-title" id="exampleModalLabel">Update Administrator</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">User ID</label>
-                            <asp:TextBox ID="AdministratorID" runat="server" type="text" class="form-control" required></asp:TextBox>
-                            <asp:Button ID="ButtonFindID" Style="margin-top: 3px" type="submit" runat="server" Text="Find" CssClass="btn btn-info" OnClick="ButtonFindID_Click" UseSubmitBehavior="false" />
-
-                        </div>
-                        <hr />
-                        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                            <ContentTemplate>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Username</label>
-                                    <%if (String.IsNullOrEmpty(UsernameUpdate.Text)) %>
-                                    <%{ %>
-                                    <asp:TextBox runat="server" type="text" disabled class="form-control" required></asp:TextBox>
-                                    <%} %>
-                                    <%else %>
-                                    <%{ %>
-                                    <asp:TextBox ID="UsernameUpdate" runat="server" type="text" class="form-control" required></asp:TextBox>
-                                    <%} %>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Fullname</label>
-                                    <%if (String.IsNullOrEmpty(FullnameUpdate.Text)) %>
-                                    <%{ %>
-                                    <asp:TextBox runat="server" type="text" disabled class="form-control" required></asp:TextBox>
-                                    <%} %>
-                                    <%else %>
-                                    <%{ %>
-                                    <asp:TextBox ID="FullnameUpdate" runat="server" type="text" class="form-control" required></asp:TextBox>
-                                    <%} %>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <%if (String.IsNullOrEmpty(PasswordUpdate.Text)) %>
-                                    <%{ %>
-                                    <asp:TextBox runat="server" type="password" disabled class="form-control" required></asp:TextBox>
-                                    <%} %>
-                                    <%else %>
-                                    <%{ %>
-                                    <asp:TextBox ID="PasswordUpdate" runat="server" type="password" class="form-control" required></asp:TextBox>
-                                    <%} %>
-                                </div>
-                            </ContentTemplate>
-                            <Triggers>
-                                <asp:AsyncPostBackTrigger ControlID="ButtonFindID" EventName="Click" />
-                            </Triggers>
-                        </asp:UpdatePanel>
-                    </div>
-                    <div class="modal-footer">
-                        <asp:Button ID="ButtonUpdateUser" type="submit" runat="server" Text="Update" class="btn btn-info" OnClick="ButtonUpdateUser_Click" UseSubmitBehavior="false"/>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <asp:Button ID="BtnDelete" runat="server" Text="Delete User" CssClass="btn btn-danger" OnClick="BtnDelete_Click" UseSubmitBehavior="false" data-dismiss="modal" />
                 </div>
             </div>
         </div>
     </div>
+
+
+    <!-- Modal Update User -->
+    <div class="modal fade" id="UpdateUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header btn btn-info">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Administrator</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">User ID</label>
+                        <asp:TextBox ID="AdministratorID" runat="server" type="text" class="form-control" required></asp:TextBox>
+                        <asp:Button ID="ButtonFindID" Style="margin-top: 3px" type="submit" runat="server" Text="Find" CssClass="btn btn-info" OnClick="ButtonFindID_Click" UseSubmitBehavior="false" />
+
+                    </div>
+                    <hr />
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Username</label>
+                                <%if (String.IsNullOrEmpty(UsernameUpdate.Text)) %>
+                                <%{ %>
+                                <asp:TextBox runat="server" type="text" disabled class="form-control" required></asp:TextBox>
+                                <%} %>
+                                <%else %>
+                                <%{ %>
+                                <asp:TextBox ID="UsernameUpdate" runat="server" type="text" class="form-control" required></asp:TextBox>
+                                <%} %>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Fullname</label>
+                                <%if (String.IsNullOrEmpty(FullnameUpdate.Text)) %>
+                                <%{ %>
+                                <asp:TextBox runat="server" type="text" disabled class="form-control" required></asp:TextBox>
+                                <%} %>
+                                <%else %>
+                                <%{ %>
+                                <asp:TextBox ID="FullnameUpdate" runat="server" type="text" class="form-control" required></asp:TextBox>
+                                <%} %>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <%if (String.IsNullOrEmpty(PasswordUpdate.Text)) %>
+                                <%{ %>
+                                <asp:TextBox runat="server" type="password" disabled class="form-control" required></asp:TextBox>
+                                <%} %>
+                                <%else %>
+                                <%{ %>
+                                <asp:TextBox ID="PasswordUpdate" runat="server" type="password" class="form-control" required></asp:TextBox>
+                                <%} %>
+                            </div>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="ButtonFindID" EventName="Click" />
+                        </Triggers>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button ID="ButtonUpdateUser" type="submit" runat="server" Text="Update" class="btn btn-info" OnClick="ButtonUpdateUser_Click" UseSubmitBehavior="false" />
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- Modal Add New User -->
