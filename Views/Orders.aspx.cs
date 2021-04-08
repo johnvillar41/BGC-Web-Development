@@ -2,11 +2,6 @@
 using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SoftEngWebEmployee.Views
 {
@@ -31,14 +26,30 @@ namespace SoftEngWebEmployee.Views
 
         protected void btnCancelStatus_Click(object sender, EventArgs e)
         {
-            OrdersRepository.GetInstance().ChangeStatusOfOrderToCancelled(int.Parse(OrderIDCancel.Text));
-            Response.Redirect(Request.RawUrl);
+            if (!String.IsNullOrWhiteSpace(OrderIDCancel.Text) && IsAllAlphabetic(OrderIDCancel.Text))
+            {
+                OrdersRepository.GetInstance().ChangeStatusOfOrderToCancelled(int.Parse(OrderIDCancel.Text));
+                Response.Redirect(Request.RawUrl);
+            }            
         }
 
         protected void btnFinishStatus_Click(object sender, EventArgs e)
         {
-            OrdersRepository.GetInstance().ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));
-            Response.Redirect(Request.RawUrl);
+            if (!String.IsNullOrWhiteSpace(OrderIDFinish.Text) && IsAllAlphabetic(OrderIDCancel.Text))
+            {
+                OrdersRepository.GetInstance().ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));
+                Response.Redirect(Request.RawUrl);
+            }            
+        }
+
+        private bool IsAllAlphabetic(string value)
+        {
+            foreach (char c in value)
+            {
+                if (char.IsLetter(c))
+                    return false;
+            }
+            return true;
         }
     }
 }

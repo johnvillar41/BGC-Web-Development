@@ -13,6 +13,16 @@
             border-left-color: #f0ad4e;
         }
     </style>
+    <script type="text/javascript">     
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && charCode < 48) || charCode > 57) {
+                return false;
+            }
+            return true;
+        }
+    </script>
     <div class="container">
         <div class="row" style="margin-bottom: 5px">
             <div class="btn-group" role="group" aria-label="Basic example">
@@ -100,14 +110,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="input-group has-validation">
-                        <asp:TextBox ID="OrderIDCancel" CssClass="form-control" runat="server" placeholder="Enter Order Id" required></asp:TextBox>
+                        <asp:TextBox ID="OrderIDCancel" CssClass="form-control" runat="server" placeholder="Enter Order Id" onkeypress="return isNumber(event)" onpaste="return false;" required></asp:TextBox>
                     </div>
 
                     Are you sure you want to <span style="color: red">Cancel</span> order?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <asp:Button ID="btnCancelStatus" runat="server" CssClass="btn btn-success" Text="Confirm" onClick="btnCancelStatus_Click" UseSubmitBehavior="false" data-dismiss="modal"/>
+                    <asp:Button ID="btnCancelStatus" runat="server" CssClass="btn btn-success" Text="Confirm" OnClick="btnCancelStatus_Click" UseSubmitBehavior="false" data-dismiss="modal" />
                 </div>
             </div>
         </div>
@@ -122,7 +132,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="input-group has-validation">
-                        <asp:TextBox ID="OrderIDFinish" CssClass="form-control" runat="server" placeholder="Enter Order Id" required></asp:TextBox>
+                        <asp:TextBox ID="OrderIDFinish" CssClass="form-control" runat="server" placeholder="Enter Order Id" onkeypress="return isNumber(event)" onpaste="return false;" required></asp:TextBox>
                     </div>
                     Are you sure you want to <span style="color: green">Finish</span> order?
                 </div>
