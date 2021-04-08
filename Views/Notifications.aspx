@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Notifications.aspx.cs" Inherits="SoftEngWebEmployee.Views.Notifications" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" Async="true" CodeBehind="Notifications.aspx.cs" Inherits="SoftEngWebEmployee.Views.Notifications" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
@@ -44,41 +44,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <%for (int i = 0; i < 100; i++) %>
+                                <%foreach (var notification in DisplayNotifications()) %>
                                 <%{ %>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Added</td>
-                                    <td>Product(s) in the Inventory</td>
-                                    <td>John Doe</td>
-                                    <td>April 1, 2021</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Updated</td>
-                                    <td>Product(s) in the Inventory</td>
-                                    <td>John Doe</td>
-                                    <td>April 1, 2021</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Deleted</td>
-                                    <td>Product(s) in the Inventory</td>
-                                    <td>John Doe</td>
-                                    <td>April 1, 2021</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>Added</td>
-                                    <td>Sales</td>
-                                    <td>John Doe</td>
-                                    <td>April 1, 2021</td>
-                                </tr>
-
+                                <tr>                                    
+                                    <td><%=notification.Notifications_ID%></td>
+                                    <td><%=notification.NotificationTitle %></td>
+                                    <td><%=notification.NotificationContent %></td>
+                                    <td><%=notification.Username %></td>
+                                    <td><%=notification.NotificationDate %></td>
+                                </tr>                               
                                 <%} %>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
