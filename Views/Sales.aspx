@@ -36,15 +36,53 @@
     </div>
 
     <div>
-        <div class="card" style="width: 18rem;">
-            <div class="card-header">   
-                Featured
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
+         <div class="table-bordered table-condensed table-responsive" style="height: 600px">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Activity</th>
+                                    <th scope="col">Transaction</th>
+                                    <th scope="col">Transacted by</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for (int i = 0; i < 100; i++) %>
+                                <%{ %>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Added</td>
+                                    <td>Product(s) in the Inventory</td>
+                                    <td>John Doe</td>
+                                    <td>April 1, 2021</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Updated</td>
+                                    <td>Product(s) in the Inventory</td>
+                                    <td>John Doe</td>
+                                    <td>April 1, 2021</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Deleted</td>
+                                    <td>Product(s) in the Inventory</td>
+                                    <td>John Doe</td>
+                                    <td>April 1, 2021</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>Added</td>
+                                    <td>Sales</td>
+                                    <td>John Doe</td>
+                                    <td>April 1, 2021</td>
+                                </tr>
+                            </tbody>
+                            <%} %>
+                        </table>
+
+                    </div>
         </div>
     </div>
 
