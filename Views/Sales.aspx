@@ -30,5 +30,60 @@
     </div>
     <!-- Open first dialog -->
     <a class="btn btn-primary" data-bs-toggle="modal" href="#modal" role="button">Open #modal</a>
+    <div>
+
+
+    </div>
+
+    <div>
+         <div class="table-bordered table-condensed table-responsive" style="height: 600px">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Activity</th>
+                                    <th scope="col">Transaction</th>
+                                    <th scope="col">Transacted by</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for (int i = 0; i < 100; i++) %>
+                                <%{ %>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Added</td>
+                                    <td>Product(s) in the Inventory</td>
+                                    <td>John Doe</td>
+                                    <td>April 1, 2021</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Updated</td>
+                                    <td>Product(s) in the Inventory</td>
+                                    <td>John Doe</td>
+                                    <td>April 1, 2021</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Deleted</td>
+                                    <td>Product(s) in the Inventory</td>
+                                    <td>John Doe</td>
+                                    <td>April 1, 2021</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>Added</td>
+                                    <td>Sales</td>
+                                    <td>John Doe</td>
+                                    <td>April 1, 2021</td>
+                                </tr>
+                            </tbody>
+                            <%} %>
+                        </table>
+
+                    </div>
+        </div>
+    </div>
 
 </asp:Content>
