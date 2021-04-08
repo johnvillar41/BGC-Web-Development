@@ -63,7 +63,7 @@
                         <a href="#" class="btn btn-primary">View Details</a>
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="col-md-6 col-lg-3 col-sm-12 my-2">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
@@ -105,7 +105,7 @@
                         <a href="#" class="btn btn-primary">View Details</a>
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="col-md-6 col-lg-3 col-sm-12 my-2">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
@@ -153,7 +153,7 @@
                         <a href="#" class="btn btn-primary">View Details</a>
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="col-md-6 col-lg-3 col-sm-12 my-2">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
@@ -195,7 +195,7 @@
                         <a href="#" class="btn btn-primary">View Details</a>
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="col-md-6 col-lg-3 col-sm-12 my-2">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
