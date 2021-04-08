@@ -24,12 +24,6 @@ namespace SoftEngWebEmployee.Views
             return Admins;
         }
 
-        private async void LoadAdministrators()
-        {
-            var administrators = await AdministratorRepository.GetInstance().FetchAdministrators();
-            Admins = (List<AdministratorModel>)administrators;
-        }
-
         protected void BtnSave_Click(object sender, EventArgs e)
         {            
             var username = Username.Text.ToString();
@@ -73,9 +67,12 @@ namespace SoftEngWebEmployee.Views
             if (!String.IsNullOrWhiteSpace(AdministratorID.Text))
             {
                 AdministratorModel administrator = await AdministratorRepository.GetInstance().FindAdministrator(int.Parse(AdministratorID.Text));
-                UsernameUpdate.Text = administrator.Username;
-                FullnameUpdate.Text = administrator.Fullname;
-                PasswordUpdate.Text = administrator.Password;
+                if (administrator != null)
+                {
+                    UsernameUpdate.Text = administrator.Username;
+                    FullnameUpdate.Text = administrator.Fullname;
+                    PasswordUpdate.Text = administrator.Password;
+                }                
             }
             UpdatePanel1.Update();
         }
@@ -87,7 +84,7 @@ namespace SoftEngWebEmployee.Views
             var password = PasswordUpdate.Text.ToString();
             var fullName = FullnameUpdate.Text.ToString();
 
-            if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) && !String.IsNullOrWhiteSpace(fullName))
+            if (!String.IsNullOrWhiteSpace(username) || !String.IsNullOrWhiteSpace(password) || !String.IsNullOrWhiteSpace(fullName))
             {
                 AdministratorModel administrator = new AdministratorModel()
                 {
@@ -99,6 +96,12 @@ namespace SoftEngWebEmployee.Views
                 AdministratorRepository.GetInstance().UpdateAdministrator(administrator);
                 Response.Redirect(Request.RawUrl);
             }
+        }
+
+        private async void LoadAdministrators()
+        {
+            var administrators = await AdministratorRepository.GetInstance().FetchAdministrators();
+            Admins = (List<AdministratorModel>)administrators;
         }
     }
 }

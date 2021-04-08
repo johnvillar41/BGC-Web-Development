@@ -14,7 +14,7 @@
         }
     </style>
     <div class="container">
-        <div class="row" style="margin: 4px">
+        <div class="row" style="margin-bottom: 5px">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#CancelModal">Cancel</button>
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#FinishModal">Finish</button>
@@ -23,10 +23,10 @@
 
         <%foreach (var orders in DisplayOrders()) %>
         <%{%>
-        <div class="blog-nav d-flex flex-column flex-sm-row" style="margin-bottom: 5px">
+        <div class="row" style="margin-bottom: 5px">
 
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem; height: 298px">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card text-white bg-secondary mb-3" style="max-width: 35rem; height: 298px">
                     <%if (orders.OrderStatus.Equals("Finished")) %>
                     <%{ %>
                     <span class="badge bg-success"><%=orders.OrderStatus %></span>
@@ -49,7 +49,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-9 col-md-6 col-sm-12">
+            <div class="col-lg-8 col-md-6 col-sm-12">
                 <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
                     <div class="row">
                         <div class="col-lg-9 col-md-6 col-sm-6">
