@@ -26,6 +26,34 @@ namespace SoftEngWebEmployee.Repository
 
         }
 
+        public async Task<OrdersModel> FetchOrder(int orderId)
+        {
+            OrdersModel order = null;
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT * FROM customer_orders_table WHERE order_id=@orderID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@orderID", orderId);
+                MySqlDataReader reader = command.ExecuteReader();
+                if(await reader.ReadAsync())
+                {
+                    order = new OrdersModel()
+                    {
+                        Order_ID = int.Parse(reader["order_id"].ToString()),
+                        CustomerName = reader["customer_name"].ToString(),
+                        CustomerEmail = reader["customer_email"].ToString(),
+                        OrderTotalPrice = int.Parse(reader["order_total_price"].ToString()),
+                        OrderStatus = reader["order_status"].ToString(),
+                        OrderDate = reader["order_date"].ToString(),
+                        TotalNumberOfOrders = int.Parse(reader["total_number_of_orders"].ToString()),
+                        SpecificOrdersModel = await SpecificOrdersRepository.GetInstance().FetchSpecificOrders(int.Parse(reader["order_id"].ToString()))
+                    };
+                }
+            }
+            return order;
+        }
+
         public async Task<IEnumerable<OrdersModel>> FetchAllOrders()
         {            
             List<OrdersModel> ordersList = new List<OrdersModel>();
