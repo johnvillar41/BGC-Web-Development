@@ -45,11 +45,14 @@ namespace SoftEngWebEmployee.Views
         protected async void BtnSearch_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrWhiteSpace(OrderIdSearchTextbox.Text) && IsAllAlphabetic(OrderIdSearchTextbox.Text))
-            {
+            {               
                 var order = await OrdersRepository.GetInstance().FetchOrder(int.Parse(OrderIdSearchTextbox.Text));
-                OrdersList.Clear();
-                OrdersList.Add(order);
-                DisplayOrders();
+                if (order != null)
+                {
+                    OrdersList.Clear();
+                    OrdersList.Add(order);
+                    DisplayOrders();
+                }                
             }
         }
 

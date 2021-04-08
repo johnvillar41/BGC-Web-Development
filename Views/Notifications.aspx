@@ -74,8 +74,9 @@
                                     <td>John Doe</td>
                                     <td>April 1, 2021</td>
                                 </tr>
+
+                                <%} %>
                             </tbody>
-                            <%} %>
                         </table>
 
                     </div>
