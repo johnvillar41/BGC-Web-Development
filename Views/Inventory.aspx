@@ -53,8 +53,8 @@
     <!-- Will images have standard size? Or will this be coded to adjust image size automatically? -->
 
     <div class="container">
-        <div class="row justify-content-start">
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
+        <div class="row justify-content-start my-2">
+            <div class="col-md-6 col-lg-3">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                     <div class="card-body">
@@ -74,7 +74,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
+            <div class="col-md-6 col-lg-3 col-sm-12">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                     <div class="card-body">
@@ -84,7 +84,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
+            <div class="col-md-6 col-lg-3 col-sm-12">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                     <div class="card-body">
@@ -96,7 +96,7 @@
             </div>
         </div>
         <div class="row justify-content-start">
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
+            <div class="col-3">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                     <div class="card-body">
@@ -116,7 +116,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
+            <div class="col-3">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                     <div class="card-body">
@@ -126,7 +126,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
+            <div class="col-3">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                     <div class="card-body">
@@ -143,8 +143,8 @@
     <p class="fs-4"><b>Hydroponics</b></p>
 
     <div class="container">
-        <div class="row justify-content-start">
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
+        <div class="row justify-content-start my-2">
+            <div class="col-3">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                     <div class="card-body">
@@ -164,7 +164,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
+            <div class="col-3">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                     <div class="card-body">
@@ -174,7 +174,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
+            <div class="col-3">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                     <div class="card-body">
@@ -186,7 +186,7 @@
             </div>
         </div>
         <div class="row justify-content-start">
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
+            <div class="col-3">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                     <div class="card-body">
@@ -206,7 +206,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
+            <div class="col-3">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                     <div class="card-body">
@@ -216,7 +216,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
+            <div class="col-3">
                 <div class="card">
                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                     <div class="card-body">
