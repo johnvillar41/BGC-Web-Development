@@ -15,32 +15,32 @@
             border-left-color: #f0ad4e;
         }
     </style>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-12" style="margin: 5px">
                 <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-lg-3 col-md-3 col-sm-12">
                             <h3 class="float-left">User Information</h3>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-3">
                             <!--Empty Div-->
                         </div>
-                        <div class="col-5 ">
-                            <button type="button" class="btn btn-success float-end" style="margin: 5px;" data-bs-toggle="modal" data-bs-target="#AddNewUserModal">
+                        <div class="col-lg-5 col-md-6 col-sm-12">
+                            <button type="button" class="btn btn-success float-end" style="margin: 2px;" data-bs-toggle="modal" data-bs-target="#AddNewUserModal">
                                 Add New User
                             </button>
-                            <button type="button" class="btn btn-danger float-end" style="margin: 5px;" data-bs-toggle="modal" data-bs-target="#DeleteUserModal">
+                            <button type="button" class="btn btn-danger float-end" style="margin: 2px;" data-bs-toggle="modal" data-bs-target="#DeleteUserModal">
                                 Delete User
                             </button>
-                            <button type="button" class="btn btn-info float-end" style="margin: 5px;" data-bs-toggle="modal" data-bs-target="#UpdateUserModal">
+                            <button type="button" class="btn btn-info float-end" style="margin: 2px;" data-bs-toggle="modal" data-bs-target="#UpdateUserModal">
                                 Update User
                             </button>
                         </div>
 
                     </div>
 
-                    <div class="table-bordered table-condensed table-responsive">
+                    <div class="table-bordered table-condensed table-responsive"style="height:500px">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -67,24 +67,7 @@
 
                         </table>
 
-                    </div>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                    </div>                    
                 </div>
             </div>
 

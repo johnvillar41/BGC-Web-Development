@@ -15,5 +15,10 @@ namespace SoftEngWebEmployee.Models
         public string OrderDate { get; set; }
         public int TotalNumberOfOrders { get; set; }
         public List<SpecificOrdersModel> SpecificOrdersModel { get; set; }
+
+        public static explicit operator List<object>(OrdersModel v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
