@@ -1,4 +1,4 @@
-﻿<%@Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="SoftEngWebEmployee.Views.Login" Async="true" EnableEventValidation="false" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="SoftEngWebEmployee.Views.Login" Async="true" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 
@@ -14,21 +14,15 @@
             background: #ffae42;
         }
 
-        .main-head {
-            height: 150px;
-            background: #FFF;
-        }
-
         .sidenav {
             height: 100%;
             background-color: #242526;
             overflow-x: hidden;
-            padding-top: 20px;
+            padding-top: 10px;
         }
 
-
         .main {
-            padding: 0px 10px;
+            padding: 0px 0px;
         }
 
         @media screen and (max-height: 450px) {
@@ -39,34 +33,30 @@
 
         @media screen and (max-width: 450px) {
             .login-form {
-                margin-top: 10%;
+                margin-top: 100%;
             }
 
-            .register-form {
-                margin-top: 10%;
-            }
         }
 
         @media screen and (min-width: 768px) {
             .main {
                 margin-left: 30%;
+                margin-top: 5%;
             }
 
             .sidenav {
                 width: 30%;
                 position: fixed;
-                z-index: 1;
+                z-index: 10;
                 top: 0;
                 left: 0;
             }
 
             .login-form {
-                margin-top: 70%;
+                margin-top: 50%;
+                margin-left: 5%;
             }
 
-            .register-form {
-                margin-top: 20%;
-            }
         }
 
 
@@ -84,6 +74,13 @@
             background-color: #000 !important;
             color: #fff;
         }
+
+        img {
+            width: 70%;
+            height: auto;
+        }
+
+
     </style>
 </head>
 <body>
@@ -92,9 +89,14 @@
 
             <div class="sidenav">
                 <div class="login-main-text">
-                    <center> <img src="/Images/logo.PNG"width="300" height="300" alt="...">
-                    <h2 style="color:orange; font-family:Georgia;">  <b><br/> AGT</b> <br/>
-                        Login Page </h2>  </center>
+                    <center><img src="/Images/logo.PNG" alt="AGT Logo"></center>
+                    <h2 style="color: orange; font-family: Georgia;">
+                        <b>
+                        <br />
+                        <center>AGT Seedling Supply
+                        </b>
+                        <br />
+                        Login Page </h2></center>
 
                 </div>
             </div>
@@ -103,12 +105,12 @@
                     <div class="login-form">
                         <form>
                             <div class="form-group">
-                                <label><b>Username</b></label>
-                                <asp:TextBox ID="txtbox_username" runat="server" class="form-control" placeholder="username"></asp:TextBox>
+                                <label><b>Username</b></label><br />
+                                <asp:TextBox ID="txtbox_username" runat="server"  placeholder="username" Width="400" height="35"></asp:TextBox>
                             </div>
                             <div class="form-group">
-                                <label><b>Password</b></label>
-                                <asp:TextBox ID="txtbox_password" runat="server" class="form-control" placeholder="password"></asp:TextBox>
+                                <label><b>Password</b></label><br />
+                                <asp:TextBox ID="txtbox_password" runat="server"  placeholder="password" Width="400" height="35" ></asp:TextBox>
                             </div>
 
                             <asp:Button ID="btn_login" runat="server" Text="Login" class="btn btn-black" OnClick="btn_login_Click" />
