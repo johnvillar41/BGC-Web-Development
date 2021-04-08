@@ -1,14 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
 using SoftEngWebEmployee.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace SoftEngWebEmployee.Repository.AdministratorRepository
 {
-    
     public class AdministratorRepository
     {
         private static AdministratorRepository instance = null;

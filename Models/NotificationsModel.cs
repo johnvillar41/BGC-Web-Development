@@ -12,5 +12,11 @@ namespace SoftEngWebEmployee.Models
         public string NotificationContent { get; set; }
         public DateTime NotificationDate { get; set; }
         public string Username { get; set; }
+        public enum NotificationType
+        {
+            DeleteUser,
+            UpdateUser,
+            CreateUser,
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace SoftEngWebEmployee.Views
             {
                 OrdersRepository.GetInstance().ChangeStatusOfOrderToCancelled(int.Parse(OrderIDCancel.Text));
                 Response.Redirect(Request.RawUrl);
-            }            
+            }
         }
 
         protected void btnFinishStatus_Click(object sender, EventArgs e)
@@ -39,20 +39,20 @@ namespace SoftEngWebEmployee.Views
             {
                 OrdersRepository.GetInstance().ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));
                 Response.Redirect(Request.RawUrl);
-            }            
+            }
         }
 
         protected async void BtnSearch_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrWhiteSpace(OrderIdSearchTextbox.Text) && IsAllAlphabetic(OrderIdSearchTextbox.Text))
-            {               
+            {
                 var order = await OrdersRepository.GetInstance().FetchOrder(int.Parse(OrderIdSearchTextbox.Text));
                 if (order != null)
                 {
                     OrdersList.Clear();
                     OrdersList.Add(order);
                     DisplayOrders();
-                }                
+                }
             }
         }
 
