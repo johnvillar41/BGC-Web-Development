@@ -37,19 +37,34 @@ namespace SoftEngWebEmployee.Views
             if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) && !String.IsNullOrWhiteSpace(fullName))
             {
                 //Convert Image to String
+                AdministratorModel administrator = null;
                 Stream fs = ImageUpload.PostedFile.InputStream;
                 BinaryReader br = new System.IO.BinaryReader(fs);
                 byte[] bytes = br.ReadBytes((int)fs.Length);
                 string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
                 var imageString = base64String;
-
-                AdministratorModel administrator = new AdministratorModel()
+                if(RadioButtonPosition.SelectedValue == "E")
                 {
-                    Username = username,
-                    Password = password,
-                    Fullname = fullName,
-                    ProfilePicture = imageString
-                };
+                    administrator = new AdministratorModel()
+                    {
+                        Username = username,
+                        Password = password,
+                        Fullname = fullName,
+                        ProfilePicture = imageString,
+                        EmployeeType = EmployeeType.Employee
+                    };
+                }
+                else
+                {
+                    administrator = new AdministratorModel()
+                    {
+                        Username = username,
+                        Password = password,
+                        Fullname = fullName,
+                        ProfilePicture = imageString,
+                        EmployeeType = EmployeeType.Administrator
+                    };
+                }                
 
                 AdministratorRepository.GetInstance().CreateNewAdministrator(administrator);
                 NotificationRepository.GetInstance()
