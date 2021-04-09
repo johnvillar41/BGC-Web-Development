@@ -12,5 +12,6 @@ namespace SoftEngWebEmployee.Views
 {
     public partial class Notifications
     {
+
     }
 }
