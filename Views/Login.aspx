@@ -35,7 +35,6 @@
             .login-form {
                 margin-top: 100%;
             }
-
         }
 
         @media screen and (min-width: 768px) {
@@ -56,7 +55,6 @@
                 margin-top: 50%;
                 margin-left: 5%;
             }
-
         }
 
 
@@ -79,8 +77,6 @@
             width: 70%;
             height: auto;
         }
-
-
     </style>
 </head>
 <body>
@@ -92,34 +88,35 @@
                     <center><img src="/Images/logo.PNG" alt="AGT Logo"></center>
                     <h2 style="color: orange; font-family: Georgia;">
                         <b>
-                        <br />
-                        <center>AGT Seedling Supply
+                            <br />
+                            <center>
+                            AGT Seedling Supply
                         </b>
                         <br />
-                        Login Page </h2></center>
+                        Login Page </h2>
+                    </center>
 
                 </div>
             </div>
             <div class="main">
                 <div class="col-md-6 col-sm-12">
                     <div class="login-form">
-                        <form>
-                            <div class="form-group">
-                                <label><b>Username</b></label><br />
-                                <asp:TextBox ID="txtbox_username" runat="server"  placeholder="username" Width="400" height="35"></asp:TextBox>
-                            </div>
-                            <div class="form-group">
-                                <label><b>Password</b></label><br />
-                                <asp:TextBox ID="txtbox_password" runat="server"  placeholder="password" Width="400" height="35" ></asp:TextBox>
-                            </div>
 
-                            <asp:Button ID="btn_login" runat="server" Text="Login" class="btn btn-black" OnClick="btn_login_Click" />
+                        <div class="form-group">
+                            <label><b>Username</b></label><br />
+                            <asp:TextBox ID="txtbox_username" runat="server" placeholder="username" Width="400" Height="35"></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label><b>Password</b></label><br />
+                            <asp:TextBox ID="txtbox_password" runat="server" placeholder="password" Width="400" Height="35"></asp:TextBox>
+                        </div>
 
-                        </form>
+                        <asp:Button ID="btn_login" runat="server" Text="Login" class="btn btn-black" OnClick="btn_login_Click" />
+
+
                     </div>
                 </div>
             </div>
-
         </div>
     </form>
 </body>

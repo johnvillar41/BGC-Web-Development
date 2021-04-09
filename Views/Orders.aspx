@@ -133,6 +133,8 @@
             </ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="BtnSearch" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="btnCancelStatus" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="btnFinishStatus" EventName="Click" />
             </Triggers>
         </asp:UpdatePanel>
     </div>
