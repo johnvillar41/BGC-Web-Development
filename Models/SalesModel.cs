@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using static SoftEngWebEmployee.Models.Constants;
 
 namespace SoftEngWebEmployee.Models
 {
@@ -16,5 +14,7 @@ namespace SoftEngWebEmployee.Models
         public DateTime SalesDate { get; set; }
         public int DateMonth { get; set; }
         public string User_Username { get; set; }
+        public SalesType TypeOfSale { get; set; }
+       
     }
 }

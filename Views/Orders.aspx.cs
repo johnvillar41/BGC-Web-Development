@@ -2,6 +2,7 @@
 using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
+using static SoftEngWebEmployee.Models.Constants;
 
 namespace SoftEngWebEmployee.Views
 {
@@ -29,17 +30,25 @@ namespace SoftEngWebEmployee.Views
             if (!String.IsNullOrWhiteSpace(OrderIDCancel.Text) && IsAllAlphabetic(OrderIDCancel.Text))
             {
                 OrdersRepository.GetInstance().ChangeStatusOfOrderToCancelled(int.Parse(OrderIDCancel.Text));
+                var generatedNotification = NotificationRepository
+                    .GetInstance()
+                    .GenerateNotification(NotificationType.CancelledOrder, OrderIDCancel.Text);
+                NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);
                 Response.Redirect(Request.RawUrl);
-            }            
+            }
         }
 
         protected void btnFinishStatus_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrWhiteSpace(OrderIDFinish.Text) && IsAllAlphabetic(OrderIDCancel.Text))
+            if (!String.IsNullOrWhiteSpace(OrderIDFinish.Text) && IsAllAlphabetic(OrderIDFinish.Text))
             {
-                OrdersRepository.GetInstance().ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));
+                OrdersRepository.GetInstance().ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));                
+                var generatedNotification = NotificationRepository
+                    .GetInstance()
+                    .GenerateNotification(NotificationType.FinishedOrder, OrderIDFinish.Text);
+                NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);
                 Response.Redirect(Request.RawUrl);
-            }            
+            }
         }
 
         protected async void BtnSearch_Click(object sender, EventArgs e)
@@ -47,9 +56,12 @@ namespace SoftEngWebEmployee.Views
             if (!String.IsNullOrWhiteSpace(OrderIdSearchTextbox.Text) && IsAllAlphabetic(OrderIdSearchTextbox.Text))
             {
                 var order = await OrdersRepository.GetInstance().FetchOrder(int.Parse(OrderIdSearchTextbox.Text));
-                OrdersList.Clear();
-                OrdersList.Add(order);
-                DisplayOrders();
+                if (order != null)
+                {
+                    OrdersList.Clear();
+                    OrdersList.Add(order);
+                    DisplayOrders();
+                }
             }
         }
 

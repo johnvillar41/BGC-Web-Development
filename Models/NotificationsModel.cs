@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace SoftEngWebEmployee.Models
 {
@@ -11,6 +8,6 @@ namespace SoftEngWebEmployee.Models
         public string NotificationTitle { get; set; }
         public string NotificationContent { get; set; }
         public DateTime NotificationDate { get; set; }
-        public string Username { get; set; }
+        public string Username { get; set; }      
     }
 }

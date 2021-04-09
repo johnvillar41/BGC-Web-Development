@@ -26,12 +26,13 @@ namespace SoftEngWebEmployee.Views
             if (await LoginRepository.GetInstance().IsLoginSuccessfull(administratorModel) == true)
             {
                 UserSession.SetLoginStatus(true);
-                Response.Redirect("Inventory.aspx",false);               
+                UserSession.SetLoginUser(username);
+                Response.Redirect("~/Views/Inventory.aspx",false);               
             }
             else
             {
                 Response.Redirect(Request.RawUrl, false);                                
             }
-        }     
+        }            
     }
 }
