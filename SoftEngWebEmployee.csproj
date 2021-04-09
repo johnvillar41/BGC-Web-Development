@@ -297,6 +297,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Models\AdministratorModel.cs" />
+    <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\InformationModel.cs" />
     <Compile Include="Models\NotificationsModel.cs" />
     <Compile Include="Models\OrdersModel.cs" />

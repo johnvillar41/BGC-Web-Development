@@ -4,6 +4,7 @@ using SoftEngWebEmployee.Repository.AdministratorRepository;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using static SoftEngWebEmployee.Models.Constants;
 
 namespace SoftEngWebEmployee.Views
 {
@@ -47,7 +48,7 @@ namespace SoftEngWebEmployee.Views
                 NotificationRepository.GetInstance()
                     .InsertNewNotification(NotificationRepository
                     .GetInstance()
-                    .GenerateNotification(NotificationsModel.NotificationType.CreateUser, username));
+                    .GenerateNotification(NotificationType.CreateUser, username));                
                 Response.Redirect(Request.RawUrl);                
             }
 
@@ -61,7 +62,7 @@ namespace SoftEngWebEmployee.Views
                 NotificationRepository.GetInstance()
                    .InsertNewNotification(NotificationRepository
                    .GetInstance()
-                   .GenerateNotification(NotificationsModel.NotificationType.DeleteUser, AdministratorID.Text.ToString()));
+                   .GenerateNotification(NotificationType.DeleteUser, AdministratorID.Text.ToString()));
                 Response.Redirect(Request.RawUrl);
             }
         }
@@ -101,7 +102,7 @@ namespace SoftEngWebEmployee.Views
                 NotificationRepository.GetInstance()
                    .InsertNewNotification(NotificationRepository
                    .GetInstance()
-                   .GenerateNotification(NotificationsModel.NotificationType.UpdateUser, username));
+                   .GenerateNotification(NotificationType.UpdateUser, username));
                 Response.Redirect(Request.RawUrl);
             }
         }

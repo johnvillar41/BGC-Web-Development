@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using static SoftEngWebEmployee.Models.Constants;
 
 namespace SoftEngWebEmployee.Repository
 {
@@ -24,12 +25,12 @@ namespace SoftEngWebEmployee.Repository
 
         }
 
-        public NotificationsModel GenerateNotification(NotificationsModel.NotificationType notificationType, string itemAction)
+        public NotificationsModel GenerateNotification(NotificationType notificationType, string itemAction)
         {
             NotificationsModel newNotification = null;
             switch (notificationType)
             {
-                case NotificationsModel.NotificationType.DeleteUser:
+                case NotificationType.DeleteUser:
                     newNotification = new NotificationsModel()
                     {
                         NotificationTitle = "Deleted User",
@@ -38,7 +39,7 @@ namespace SoftEngWebEmployee.Repository
                         Username = UserSession.GetLoggedInUser()
                     };
                     break;
-                case NotificationsModel.NotificationType.CreateUser:
+                case NotificationType.CreateUser:
                     newNotification = new NotificationsModel()
                     {
                         NotificationTitle = "Created New User",
@@ -47,7 +48,7 @@ namespace SoftEngWebEmployee.Repository
                         Username = UserSession.GetLoggedInUser()
                     };
                     break;
-                case NotificationsModel.NotificationType.UpdateUser:
+                case NotificationType.UpdateUser:
                     newNotification = new NotificationsModel()
                     {
                         NotificationTitle = "Updated User",
