@@ -50,7 +50,7 @@
                                         <%if (IsAdmin()) %>
                                         <%{ %>
                                         <th scope="col">Password</th>
-                                        <%} %>                                        
+                                        <%} %>
                                         <th scope="col">FullName</th>
                                         <th scope="col">Position</th>
                                     </tr>
@@ -67,7 +67,7 @@
                                         <%if (IsAdmin()) %>
                                         <%{ %>
                                         <td><%=admins.Password %></td>
-                                        <%} %>                                        
+                                        <%} %>
                                         <td><%=admins.Fullname %></td>
                                         <td><%=admins.EmployeeType.ToString() %></td>
                                     </tr>
@@ -196,6 +196,13 @@
                         <label class="form-label" for="customFile">Upload Picture</label>
                         <asp:FileUpload ID="ImageUpload" type="file" runat="server" class="form-control" />
                     </div>
+                    <asp:RadioButtonList ID="RadioButtonPosition" runat="server">
+                        <asp:ListItem Text="Employee" Value="E" Selected="True"></asp:ListItem>
+                        <asp:ListItem Text="Administrator" Value="A"></asp:ListItem>
+                    </asp:RadioButtonList>
+                   
+                       
+                    
 
                 </div>
                 <div class="modal-footer">

@@ -26,5 +26,10 @@ namespace SoftEngWebEmployee.Views
             return NotificationsList;
         }
 
+        protected async void FindDate_Click(object sender, EventArgs e)
+        {            
+            var notifications = await NotificationRepository.GetInstance().FetchNotificationsGivenDate(DateText.Text);
+            NotificationsList = notifications;
+        }
     }
 }

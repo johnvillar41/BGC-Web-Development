@@ -124,7 +124,7 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
                 command.Parameters.AddWithValue("@Username", administrator.Username);
                 command.Parameters.AddWithValue("@Passowrd", administrator.Password);
                 command.Parameters.AddWithValue("@name", administrator.Fullname);
-                command.Parameters.AddWithValue("@position", administrator.EmployeeType);
+                command.Parameters.AddWithValue("@position", administrator.EmployeeType.ToString());
                 //command.Parameters.AddWithValue("@image", administrator.User_Image);
                 await command.ExecuteNonQueryAsync();
             }
