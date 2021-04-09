@@ -23,11 +23,19 @@
                         <div class="col-3">
                             <h3 class="float-left">Business Transactions</h3>
                         </div>
-                        <div class="col-6">
+                        <div class="col-3">
                             <!--Empty Div-->
                         </div>
-                        <div class="col-3 ">
-                            <input type="date" id="birthday" name="birthday" class="form-control">
+                        <div class="col-6 ">
+                            <div class="row">
+                                <div class="col-6">                                    
+                                    <asp:TextBox class="form-control" ID="DateText" runat="server" type="date"></asp:TextBox>
+                                </div>
+                                <div class="col-6">
+                                    <asp:Button ID="FindDate" runat="server" Text="Search" CssClass="btn btn-info form-control" OnClick="FindDate_Click"/>
+                                </div>
+                            </div>                           
+                            
                         </div>
 
                     </div>
@@ -46,13 +54,13 @@
                             <tbody>
                                 <%foreach (var notification in DisplayNotifications()) %>
                                 <%{ %>
-                                <tr>                                    
+                                <tr>
                                     <td><%=notification.Notifications_ID%></td>
                                     <td><%=notification.NotificationTitle %></td>
                                     <td><%=notification.NotificationContent %></td>
                                     <td><%=notification.Username %></td>
                                     <td><%=notification.NotificationDate %></td>
-                                </tr>                               
+                                </tr>
                                 <%} %>
                             </tbody>
                         </table>
