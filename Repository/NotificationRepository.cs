@@ -24,6 +24,32 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
+        public async Task<List<NotificationsModel>> FetchNotificationsGivenDate(string date)
+        {
+            List<NotificationsModel> notificationsList = new List<NotificationsModel>();
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT * FROM notifications_table WHERE notif_date LIKE  @date ";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@date", "%" + date + "%");
+                MySqlDataReader reader = command.ExecuteReader();
+                while (await reader.ReadAsync())
+                {
+                    NotificationsModel notifications = new NotificationsModel()
+                    {
+                        Notifications_ID = int.Parse(reader["notif_id"].ToString()),
+                        NotificationTitle = reader["notif_title"].ToString(),
+                        NotificationContent = reader["notif_content"].ToString(),
+                        NotificationDate = DateTime.Parse(reader["notif_date"].ToString()),
+                        Username = reader["user_name"].ToString()
+                    };
+                    notificationsList.Add(notifications);
+                }
+            }
+            return notificationsList;
+        }
+
 
         public NotificationsModel GenerateNotification(NotificationType notificationType, string itemAction)
         {
