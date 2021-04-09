@@ -28,46 +28,52 @@
                         </div>
                         <div class="col-6 ">
                             <div class="row">
-                                <div class="col-6">                                    
+                                <div class="col-6">
                                     <asp:TextBox class="form-control" ID="DateText" runat="server" type="date"></asp:TextBox>
                                 </div>
                                 <div class="col-6">
-                                    <asp:Button ID="FindDate" runat="server" Text="Search" CssClass="btn btn-info form-control" OnClick="FindDate_Click"/>
+                                    <asp:Button ID="FindDate" runat="server" Text="Search" CssClass="btn btn-info form-control" OnClick="FindDate_Click" />
                                 </div>
-                            </div>                           
-                            
+                            </div>
+
                         </div>
 
                     </div>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <div class="table-bordered table-condensed table-responsive" style="height: 600px">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Activity</th>
+                                            <th scope="col">Transaction</th>
+                                            <th scope="col">Transacted by</th>
+                                            <th scope="col">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                    <div class="table-bordered table-condensed table-responsive" style="height: 600px">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Activity</th>
-                                    <th scope="col">Transaction</th>
-                                    <th scope="col">Transacted by</th>
-                                    <th scope="col">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%foreach (var notification in DisplayNotifications()) %>
-                                <%{ %>
-                                <tr>
-                                    <td><%=notification.Notifications_ID%></td>
-                                    <td><%=notification.NotificationTitle %></td>
-                                    <td><%=notification.NotificationContent %></td>
-                                    <td><%=notification.Username %></td>
-                                    <td><%=notification.NotificationDate %></td>
-                                </tr>
-                                <%} %>
-                            </tbody>
-                        </table>
-                    </div>
+                                        <%foreach (var notification in DisplayNotifications()) %>
+                                        <%{ %>
+                                        <tr>
+                                            <td><%=notification.Notifications_ID%></td>
+                                            <td><%=notification.NotificationTitle %></td>
+                                            <td><%=notification.NotificationContent %></td>
+                                            <td><%=notification.Username %></td>
+                                            <td><%=notification.NotificationDate %></td>
+                                        </tr>
+                                        <%} %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="FindDate" EventName="Click" />
+                        </Triggers>
+                    </asp:UpdatePanel>
                 </div>
             </div>
-
         </div>
     </div>
 </asp:Content>
