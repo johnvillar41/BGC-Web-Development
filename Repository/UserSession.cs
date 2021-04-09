@@ -9,9 +9,18 @@ namespace SoftEngWebEmployee.Repository
     {
         private static bool isLoggedIn;
         private static string userLoggedIn;
+        private static bool isAdministrator;
         public static bool GetLoginStatus()
         {
             return isLoggedIn;
+        }
+        public static bool IsAdministrator()
+        {
+            return isAdministrator;
+        }
+        public static void SetAdministrator(bool isAdmin)
+        {
+            isAdministrator = isAdmin;
         }
         public static void SetLoginStatus(bool loginStatus)
         {

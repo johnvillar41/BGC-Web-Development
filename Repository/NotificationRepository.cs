@@ -57,6 +57,24 @@ namespace SoftEngWebEmployee.Repository
                         Username = UserSession.GetLoggedInUser()
                     };
                     break;
+                case NotificationType.CancelledOrder:
+                    newNotification = new NotificationsModel()
+                    {
+                        NotificationTitle = "Cancelled Order",
+                        NotificationContent = "Cancelled Order for OrderID: "+ itemAction,
+                        NotificationDate = DateTime.Today,
+                        Username = UserSession.GetLoggedInUser()
+                    };
+                    break;
+                case NotificationType.FinishedOrder:
+                    newNotification = new NotificationsModel()
+                    {
+                        NotificationTitle = "Finished Order",
+                        NotificationContent = "Finished Order for Order ID: "+itemAction,
+                        NotificationDate = DateTime.Today,
+                        Username = UserSession.GetLoggedInUser()
+                    };
+                    break;
             }
             return newNotification;
         }

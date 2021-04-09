@@ -12,7 +12,10 @@ namespace SoftEngWebEmployee.Models
             DeleteUser,
             UpdateUser,
             CreateUser,
+            CancelledOrder,
+            FinishedOrder
         }
         public enum SalesType { Onsite, Order }
+        public enum EmployeeType { Administrator, Employee }
     }
 }

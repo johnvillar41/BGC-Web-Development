@@ -26,6 +26,8 @@
                         <div class="col-lg-4 col-md-3">
                             <!--Empty Div-->
                         </div>
+                        <%if (IsAdmin()) %>
+                        <%{ %>
                         <div class="col-lg-5 col-md-6 col-sm-12">
                             <button type="button" class="btn btn-success float-end" style="margin: 2px;" data-bs-toggle="modal" data-bs-target="#AddNewUserModal">
                                 Add New User
@@ -37,40 +39,47 @@
                                 Update User
                             </button>
                         </div>
+                        <%} %>
 
-                    </div>
+                        <div class="table-bordered table-condensed table-responsive" style="height: 500px">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">User ID</th>
+                                        <th scope="col">Username</th>
+                                        <%if (IsAdmin()) %>
+                                        <%{ %>
+                                        <th scope="col">Password</th>
+                                        <%} %>                                        
+                                        <th scope="col">FullName</th>
+                                        <th scope="col">Position</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%foreach (var admins in DisplayAdministrators())%>
+                                    <%{ %>
+                                    <tr>
+                                        <td><%=admins.User_ID %></td>
+                                        <td>
+                                            <img src="/Images/logo.PNG" width="35" height="35" class="d-inline-block align-top" alt="">
+                                            <%=admins.Username %>                                       
+                                        </td>
+                                        <%if (IsAdmin()) %>
+                                        <%{ %>
+                                        <td><%=admins.Password %></td>
+                                        <%} %>                                        
+                                        <td><%=admins.Fullname %></td>
+                                        <td><%=admins.EmployeeType.ToString() %></td>
+                                    </tr>
+                                    <%} %>
+                                </tbody>
 
-                    <div class="table-bordered table-condensed table-responsive" style="height: 500px">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">User ID</th>
-                                    <th scope="col">Username</th>
-                                    <th scope="col">Password</th>
-                                    <th scope="col">FullName</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%foreach (var admins in DisplayAdministrators())%>
-                                <%{ %>
-                                <tr>
-                                    <td><%=admins.User_ID %></td>
-                                    <td>
-                                        <img src="/Images/logo.PNG" width="35" height="35" class="d-inline-block align-top" alt="">
-                                        <%=admins.Username %>                                       
-                                    </td>
-                                    <td><%=admins.Password %></td>
-                                    <td><%=admins.Fullname %></td>
-                                </tr>
-                                <%} %>
-                            </tbody>
+                            </table>
 
-                        </table>
-
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <!--Delete Modal-->

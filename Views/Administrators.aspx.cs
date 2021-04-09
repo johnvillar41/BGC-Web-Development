@@ -4,22 +4,29 @@ using SoftEngWebEmployee.Repository.AdministratorRepository;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using static SoftEngWebEmployee.Models.Constants;
 
 namespace SoftEngWebEmployee.Views
 {
     public partial class Administrators : System.Web.UI.Page
     {
-        public List<AdministratorModel> Admins { get; set; }
+        private List<AdministratorModel> Admins { get; set; }
+        private bool IsAdminUser { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadAdministrators();
+            LoadIsAdministrator(UserSession.GetLoggedInUser());
         }
 
         public List<AdministratorModel> DisplayAdministrators()
         {
             return Admins;
         }
+        public bool IsAdmin()
+        {
+            return IsAdminUser;
+        }       
 
         protected void BtnSave_Click(object sender, EventArgs e)
         {
@@ -111,6 +118,10 @@ namespace SoftEngWebEmployee.Views
         {
             var administrators = await AdministratorRepository.GetInstance().FetchAdministrators();
             Admins = (List<AdministratorModel>)administrators;
+        }
+        private async void LoadIsAdministrator(string username)
+        {
+            IsAdminUser = await AdministratorRepository.GetInstance().CheckIfUserIsAdministrator(username);           
         }
     }
 }

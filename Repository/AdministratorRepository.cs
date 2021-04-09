@@ -2,6 +2,7 @@
 using SoftEngWebEmployee.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static SoftEngWebEmployee.Models.Constants;
 
 namespace SoftEngWebEmployee.Repository.AdministratorRepository
 {
@@ -21,6 +22,23 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
         {
 
         }
+        public async Task<bool> CheckIfUserIsAdministrator(string username)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT position FROM login_table WHERE user_username=@username";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@username",username);
+                MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
+                if(await reader.ReadAsync())
+                {
+                    if (reader["position"].Equals("Administrator"))
+                        return true;
+                }
+            }
+            return false;
+        }
         public async Task<AdministratorModel> FindAdministrator(int administratorID)
         {
             AdministratorModel administrator = null;
@@ -30,7 +48,7 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
                 string queryString = "SELECT * FROM login_table WHERE user_id=@administratorID";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@administratorID", administratorID);
-                MySqlDataReader reader = command.ExecuteReader();
+                MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 if(await reader.ReadAsync())
                 {
                     administrator = new AdministratorModel()
@@ -55,16 +73,31 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
                 MySqlDataReader reader = command.ExecuteReader();
                 while(await reader.ReadAsync())
                 {
-                    Admins.Add(
-                            administrator = new AdministratorModel()
-                            {
-                                User_ID = int.Parse(reader["user_id"].ToString()),
-                                Username = reader["user_username"].ToString(),
-                                Password = reader["user_password"].ToString(),
-                                Fullname = reader["user_name"].ToString(),
-                                ProfilePicture = reader["user_image"].ToString()
-                            }
-                        );
+                    if (reader["position"].ToString().Equals("Employee"))
+                    {
+                        administrator = new AdministratorModel()
+                        {
+                            User_ID = int.Parse(reader["user_id"].ToString()),
+                            Username = reader["user_username"].ToString(),
+                            Password = reader["user_password"].ToString(),
+                            Fullname = reader["user_name"].ToString(),
+                            ProfilePicture = reader["user_image"].ToString()
+                        };
+                        administrator.EmployeeType = EmployeeType.Employee;
+                    }
+                    else
+                    {
+                        administrator = new AdministratorModel()
+                        {
+                            User_ID = int.Parse(reader["user_id"].ToString()),
+                            Username = reader["user_username"].ToString(),
+                            Password = reader["user_password"].ToString(),
+                            Fullname = reader["user_name"].ToString(),
+                            ProfilePicture = reader["user_image"].ToString()
+                        };
+                        administrator.EmployeeType = EmployeeType.Administrator;
+                    }
+                    Admins.Add(administrator);
                 }
             }
             return Admins;
@@ -74,7 +107,7 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "DELETE FROM login_table WHERE user_id=@administratorID";
+                string queryString = "DELETE FROM login_table WHERE user_id=@administratorID AND position='Employee'";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@administratorID",administratorID);
                 await command.ExecuteNonQueryAsync();
@@ -85,12 +118,13 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "INSERT INTO login_table(user_username,user_password,user_name)" +
-                    "VALUES(@Username,@Passowrd,@name)";
+                string queryString = "INSERT INTO login_table(user_username,user_password,user_name,position)" +
+                    "VALUES(@Username,@Passowrd,@name,@position)";
                 MySqlCommand command = new MySqlCommand(queryString, connection);                
                 command.Parameters.AddWithValue("@Username", administrator.Username);
                 command.Parameters.AddWithValue("@Passowrd", administrator.Password);
                 command.Parameters.AddWithValue("@name", administrator.Fullname);
+                command.Parameters.AddWithValue("@position", administrator.EmployeeType);
                 //command.Parameters.AddWithValue("@image", administrator.User_Image);
                 await command.ExecuteNonQueryAsync();
             }
