@@ -68,7 +68,7 @@
                         <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Administrators">Administrators<i class="fa fa-address-card-o" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
                         <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Orders">Orders<i class="fa fa-cart-arrow-down" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li style="text-align: right"; margin-top: 10px"><asp:Button ID="LogoutButton" runat="server" CssClass="dropdown-item" Text="Logout" OnClick="LogoutButton_Click"/></li>
+                        <li style="text-align: right"; margin-top: 10px"><asp:Button ID="LogoutButton" runat="server" CssClass="dropdown-item" Text="Logout" OnClick="LogoutButton_Click" UseSubmitBehavior="false"/></li>
                         
                     </ul>
                 </div>

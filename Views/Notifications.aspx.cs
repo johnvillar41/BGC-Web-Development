@@ -25,5 +25,6 @@ namespace SoftEngWebEmployee.Views
         {
             return NotificationsList;
         }
+
     }
 }

@@ -17,8 +17,8 @@ namespace SoftEngWebEmployee
         protected void LogoutButton_Click(object sender, EventArgs e)
         {
             UserSession.SetLoginStatus(false);
-            UserSession.RemoveLoggedinUser();
-            Response.Redirect("Login", false);
+            UserSession.RemoveLoggedinUser();            
+            Response.Redirect("~/Views/Login.aspx", false);
         }
     }
 }
