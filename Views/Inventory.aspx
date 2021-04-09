@@ -1,58 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Inventory.aspx.cs" Inherits="SoftEngWebEmployee.Views.Inventory" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <p class="fs-2"><b>Inventory</b></p>
-
 
     <style>
-        div.scrollmenu {
-            background-color: #333;
-            overflow: auto;
-            white-space: nowrap;
-        }
-
-            div.scrollmenu a {
-                display: inline-block;
-                color: white;
-                text-align: center;
-                padding: 14px;
-                text-decoration: none;
-            }
-
-                div.scrollmenu a:hover {
-                    background-color: #777;
-                }
+        .scrolling-wrapper{
+	        overflow-x: auto;
+        }    
     </style>
 
+    <p class="fs-2"><b>Inventory</b></p>
 
-    <!--
-    <nav class="navbar navbar-light bg-light">
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </nav>
-    
-    <div class="input-group">
-        <div class="form-outline">
-            <input type="search" id="form1" class="form-control" />
-            <label class="form-label" for="form1">Search</label>
-        </div>
-        <button type="button" class="btn btn-primary">
-            <i class="fas fa-search"></i>
-        </button>
-    </div>
-    
-
-    <div class="input-group">
-        <div class="form-outline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        </div>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </div>
-    -->
-
-
+    <a class="btn btn-primary float-end" data-bs-toggle="modal" href="#addProduct">Add Product</a>
 
     <p class="fs-4"><b>Search Inventory</b></p>
 
@@ -66,231 +24,82 @@
     <!-- Text that disappears/changes depending on search results. This is when page is initially loaded.-->
     <p class="fs-5"><i>Use the search bar to display products.</i></p>
     <!-- In case of a search with no results, "No results found."-->
-
     <!-- Take note to modify so that the code generates a card for every result, 4 cards per row, then top to bottom-->
 
     <hr />
     <p class="fs-4"><b>Greenhouse</b></p>
 
-    <!-- Will images have standard size? Or will this be coded to adjust image size automatically? -->
+    <!-- Guide Source: https://codepen.io/Temmio/pen/gKGEYV -->
+    <div class="container-fluid" style="background-color:#44433C; border:2px solid #cecece;">
+        <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
 
-
-    <!-- NOTE: Fix this. Problem involves cards vertically stacking instead of horizontally.-->
-
-    <div class="scrollmenu">
-
-        <%for (int i = 0; i < 10; i++) %>
-        <%{ %>
-
-        <div class ="col">
-            <div class="card">
-                <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Product Name</h5>
-                    <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                    <a href="#" class="btn btn-primary">View Details</a>
-                </div>
-            </div>
-        </div>
-                   
-        <%} %>
-    </div>
-
-
-
-
-    <div class="container">
-        <div class="row justify-content-start">
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
+            <%for (int i = 0; i < 25; i++) %>
+            <%{ %>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
+                    <div class="card">
+                        <!-- Possible change: modify size of picture space -->
+                        <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Product Name</h5>
+                            <p class="card-text">Insert product details and remaining number of stocks here.</p>
+                            <a class="btn btn-primary" data-bs-toggle="modal" href="#updateProduct">View Details</a>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-start">
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
+                </div>               
+            <%} %>
+
         </div>
     </div>
+
 
     <hr />
     <p class="fs-4"><b>Hydroponics</b></p>
 
-    <div class="container">
-        <div class="row justify-content-start">
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
+    <div class="container-fluid" style="background-color:#44433C; border:2px solid #cecece;">
+        <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+
+            <%for (int i = 0; i < 25; i++) %>
+            <%{ %>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
+                    <div class="card">
+                        <!-- Possible change: modify size of picture space -->
+                        <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Product Name</h5>
+                            <p class="card-text">Insert product details and remaining number of stocks here.</p>
+                            <a class="btn btn-primary" data-bs-toggle="modal" href="#updateProduct">View Details</a>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
+                </div>               
+            <%} %>
+
         </div>
-        <div class="row justify-content-start">
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-sm-12 my-2">
-                <div class="card">
-                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Name</h5>
-                        <p class="card-text">Insert product details and remaining number of stocks here.</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
+    </div>
+
+    <!-- Modal: Update Product-->
+    <div class="modal fade" id="updateProduct" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                update product details here
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary">Back</button>
+                    <button type="button" class="btn btn-primary">Update Details</button>
                 </div>
             </div>
         </div>
     </div>
 
-
-
-    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-        <button type="button" class="btn btn-secondary">Greenhouse</button>
-        <button type="button" class="btn btn-secondary">Hydroponics</button>
-        <button type="button" class="btn btn-secondary">Seeds</button>
-    </div>
-
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Product Name</h5>
-            <p class="card-text">Insert product details and remaining number of stocks here.</p>
-            <a href="#" class="btn btn-primary">View Details</a>
+    <!-- Modal: Add Product-->
+    <div class="modal fade" id="addProduct" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                add product details here
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary">Back</button>
+                    <button type="button" class="btn btn-primary">Add Product</button>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
+
 </asp:Content>
