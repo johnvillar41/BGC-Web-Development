@@ -46,6 +46,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
+                                            <th scope="col">Tag</th>
                                             <th scope="col">Activity</th>
                                             <th scope="col">Transaction</th>
                                             <th scope="col">Transacted by</th>
@@ -58,6 +59,26 @@
                                         <%{ %>
                                         <tr>
                                             <td><%=notification.Notifications_ID%></td>
+                                            <%if (notification.TypeOfNotification == SoftEngWebEmployee.Models.Constants.NotificationType.CancelledOrder)%>
+                                            <%{ %>
+                                            <td><span class="badge bg-danger">Cancelled</span></td>
+                                            <%} %>
+                                            <%else if (notification.TypeOfNotification == SoftEngWebEmployee.Models.Constants.NotificationType.CreateUser)%>
+                                            <%{ %>
+                                            <td><span class="badge bg-success">Created</span></td>
+                                            <%} %>
+                                            <%else if (notification.TypeOfNotification == SoftEngWebEmployee.Models.Constants.NotificationType.DeleteUser)%>
+                                            <%{ %>
+                                            <td><span class="badge bg-danger">Deleted</span></td>
+                                            <%} %>
+                                            <%else if (notification.TypeOfNotification == SoftEngWebEmployee.Models.Constants.NotificationType.FinishedOrder)%>
+                                            <%{ %>
+                                            <td><span class="badge bg-success">Finished</span></td>
+                                            <%} %>
+                                            <%else if (notification.TypeOfNotification == SoftEngWebEmployee.Models.Constants.NotificationType.UpdateUser)%>
+                                            <%{ %>
+                                            <td><span class="badge bg-info">Updated</span></td>
+                                            <%} %>
                                             <td><%=notification.NotificationTitle %></td>
                                             <td><%=notification.NotificationContent %></td>
                                             <td><%=notification.Username %></td>

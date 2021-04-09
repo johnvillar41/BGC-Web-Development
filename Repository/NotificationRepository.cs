@@ -42,7 +42,8 @@ namespace SoftEngWebEmployee.Repository
                         NotificationTitle = reader["notif_title"].ToString(),
                         NotificationContent = reader["notif_content"].ToString(),
                         NotificationDate = DateTime.Parse(reader["notif_date"].ToString()),
-                        Username = reader["user_name"].ToString()
+                        Username = reader["user_name"].ToString(),
+                        TypeOfNotification = CategorizeNotification(reader["notif_title"].ToString())
                     };
                     notificationsList.Add(notifications);
                 }
@@ -62,7 +63,8 @@ namespace SoftEngWebEmployee.Repository
                         NotificationTitle = "Deleted User",
                         NotificationContent = "Deleted User: " + itemAction,
                         NotificationDate = DateTime.Today,
-                        Username = UserSession.GetLoggedInUser()
+                        Username = UserSession.GetLoggedInUser(),
+                        TypeOfNotification = NotificationType.DeleteUser
                     };
                     break;
                 case NotificationType.CreateUser:
@@ -71,7 +73,8 @@ namespace SoftEngWebEmployee.Repository
                         NotificationTitle = "Created New User",
                         NotificationContent = "Created User: " + itemAction,
                         NotificationDate = DateTime.Today,
-                        Username = UserSession.GetLoggedInUser()
+                        Username = UserSession.GetLoggedInUser(),
+                        TypeOfNotification = NotificationType.CreateUser
                     };
                     break;
                 case NotificationType.UpdateUser:
@@ -80,25 +83,28 @@ namespace SoftEngWebEmployee.Repository
                         NotificationTitle = "Updated User",
                         NotificationContent = "Updated User: " + itemAction,
                         NotificationDate = DateTime.Today,
-                        Username = UserSession.GetLoggedInUser()
+                        Username = UserSession.GetLoggedInUser(),
+                        TypeOfNotification = NotificationType.UpdateUser
                     };
                     break;
                 case NotificationType.CancelledOrder:
                     newNotification = new NotificationsModel()
                     {
                         NotificationTitle = "Cancelled Order",
-                        NotificationContent = "Cancelled Order for OrderID: "+ itemAction,
+                        NotificationContent = "Cancelled Order for OrderID: " + itemAction,
                         NotificationDate = DateTime.Today,
-                        Username = UserSession.GetLoggedInUser()
+                        Username = UserSession.GetLoggedInUser(),
+                        TypeOfNotification = NotificationType.CancelledOrder
                     };
                     break;
                 case NotificationType.FinishedOrder:
                     newNotification = new NotificationsModel()
                     {
                         NotificationTitle = "Finished Order",
-                        NotificationContent = "Finished Order for Order ID: "+itemAction,
+                        NotificationContent = "Finished Order for Order ID: " + itemAction,
                         NotificationDate = DateTime.Today,
-                        Username = UserSession.GetLoggedInUser()
+                        Username = UserSession.GetLoggedInUser(),
+                        TypeOfNotification = NotificationType.FinishedOrder
                     };
                     break;
             }
@@ -138,13 +144,31 @@ namespace SoftEngWebEmployee.Repository
                         NotificationTitle = reader["notif_title"].ToString(),
                         NotificationContent = reader["notif_content"].ToString(),
                         NotificationDate = DateTime.Parse(reader["notif_date"].ToString()),
-                        Username = reader["user_name"].ToString()
+                        Username = reader["user_name"].ToString(),
+                        TypeOfNotification = CategorizeNotification(reader["notif_title"].ToString())                        
                     };
+
                     notificationsList.Add(notifications);
                 }
             }
             return notificationsList;
         }
-
+        private NotificationType CategorizeNotification(string notification)
+        {
+            switch (notification)
+            {
+                case "Created New User":
+                    return NotificationType.CreateUser;
+                case "Updated User":
+                    return NotificationType.UpdateUser;
+                case "Deleted User":
+                    return NotificationType.DeleteUser;
+                case "Cancelled Order":
+                    return NotificationType.CancelledOrder;
+                case "Finished Order":
+                    return NotificationType.FinishedOrder;
+            }
+            return NotificationType.FinishedOrder;
+        }
     }
 }

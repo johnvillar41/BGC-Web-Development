@@ -1,4 +1,5 @@
 ﻿using System;
+using static SoftEngWebEmployee.Models.Constants;
 
 namespace SoftEngWebEmployee.Models
 {
@@ -8,6 +9,7 @@ namespace SoftEngWebEmployee.Models
         public string NotificationTitle { get; set; }
         public string NotificationContent { get; set; }
         public DateTime NotificationDate { get; set; }
-        public string Username { get; set; }      
+        public string Username { get; set; }
+        public NotificationType TypeOfNotification { get; set; }
     }
 }
