@@ -297,7 +297,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Models\AdministratorModel.cs" />
-    <Compile Include="Models\Constants.cs" />
+    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Models\InformationModel.cs" />
     <Compile Include="Models\NotificationsModel.cs" />
     <Compile Include="Models\OrdersModel.cs" />
@@ -306,7 +306,7 @@
     <Compile Include="Models\SalesModel.cs" />
     <Compile Include="Models\SpecificOrdersModel.cs" />
     <Compile Include="Repository\AdministratorRepository.cs" />
-    <Compile Include="Repository\DbConnString.cs" />
+    <Compile Include="Helpers\DbConnString.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Global.asax.cs">
@@ -317,7 +317,7 @@
     <Compile Include="Repository\OrdersRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\SpecificOrdersRepository.cs" />
-    <Compile Include="Repository\UserSession.cs" />
+    <Compile Include="Helpers\UserSession.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
