@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Administrators.aspx.cs" Inherits="SoftEngWebEmployee.Views.Administrators" Async="true" %>
-
+<%@ Import Namespace="SoftEngWebEmployee.Helpers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
         .bd-callout {
@@ -70,7 +70,15 @@
                                         <td><%=admins.Password %></td>
                                         <%} %>
                                         <td><%=admins.Fullname %></td>
-                                        <td><%=admins.EmployeeType.ToString() %></td>
+                                        <%if (admins.EmployeeType == Constants.EmployeeType.Administrator) %>
+                                        <%{ %>
+                                        <td><span class="badge bg-dark"><%=admins.EmployeeType.ToString() %></span></td>
+                                        <%}
+                                        else %>
+                                        <%{ %>
+                                        <td><span class="badge bg-secondary text-dark"><%=admins.EmployeeType.ToString() %></span></td>
+                                        <%} %>
+                                        
                                     </tr>
                                     <%} %>
                                 </tbody>
