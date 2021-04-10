@@ -2,7 +2,7 @@
 using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
-using static SoftEngWebEmployee.Models.Constants;
+using static SoftEngWebEmployee.Helpers.Constants;
 
 namespace SoftEngWebEmployee.Views
 {

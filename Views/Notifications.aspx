@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" Async="true" CodeBehind="Notifications.aspx.cs" Inherits="SoftEngWebEmployee.Views.Notifications" %>
-
+<%@ Import Namespace="SoftEngWebEmployee.Helpers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
         .bd-callout {
@@ -59,23 +59,23 @@
                                         <%{ %>
                                         <tr>
                                             <td><%=notification.Notifications_ID%></td>
-                                            <%if (notification.TypeOfNotification == SoftEngWebEmployee.Models.Constants.NotificationType.CancelledOrder)%>
+                                            <%if (notification.TypeOfNotification == Constants.NotificationType.CancelledOrder)%>
                                             <%{ %>
                                             <td><span class="badge bg-danger">Cancelled</span></td>
                                             <%} %>
-                                            <%else if (notification.TypeOfNotification == SoftEngWebEmployee.Models.Constants.NotificationType.CreateUser)%>
+                                            <%else if (notification.TypeOfNotification == Constants.NotificationType.CreateUser)%>
                                             <%{ %>
                                             <td><span class="badge bg-success">Created</span></td>
                                             <%} %>
-                                            <%else if (notification.TypeOfNotification == SoftEngWebEmployee.Models.Constants.NotificationType.DeleteUser)%>
+                                            <%else if (notification.TypeOfNotification == Constants.NotificationType.DeleteUser)%>
                                             <%{ %>
                                             <td><span class="badge bg-danger">Deleted</span></td>
                                             <%} %>
-                                            <%else if (notification.TypeOfNotification == SoftEngWebEmployee.Models.Constants.NotificationType.FinishedOrder)%>
+                                            <%else if (notification.TypeOfNotification == Constants.NotificationType.FinishedOrder)%>
                                             <%{ %>
                                             <td><span class="badge bg-success">Finished</span></td>
                                             <%} %>
-                                            <%else if (notification.TypeOfNotification == SoftEngWebEmployee.Models.Constants.NotificationType.UpdateUser)%>
+                                            <%else if (notification.TypeOfNotification == Constants.NotificationType.UpdateUser)%>
                                             <%{ %>
                                             <td><span class="badge bg-info">Updated</span></td>
                                             <%} %>

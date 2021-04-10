@@ -1,8 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
+using SoftEngWebEmployee.Helpers;
 using SoftEngWebEmployee.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using static SoftEngWebEmployee.Models.Constants;
+using static SoftEngWebEmployee.Helpers.Constants;
 
 namespace SoftEngWebEmployee.Repository.AdministratorRepository
 {

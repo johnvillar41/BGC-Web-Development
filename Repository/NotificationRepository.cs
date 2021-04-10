@@ -1,11 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
+using SoftEngWebEmployee.Helpers;
 using SoftEngWebEmployee.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using static SoftEngWebEmployee.Models.Constants;
+using static SoftEngWebEmployee.Helpers.Constants;
 
 namespace SoftEngWebEmployee.Repository
 {

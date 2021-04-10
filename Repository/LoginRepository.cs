@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using SoftEngWebEmployee.Helpers;
 using SoftEngWebEmployee.Models;
 using System;
 using System.Collections.Generic;

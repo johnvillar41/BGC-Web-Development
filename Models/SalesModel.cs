@@ -1,5 +1,5 @@
 ﻿using System;
-using static SoftEngWebEmployee.Models.Constants;
+using static SoftEngWebEmployee.Helpers.Constants;
 
 namespace SoftEngWebEmployee.Models
 {
