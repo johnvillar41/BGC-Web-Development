@@ -27,26 +27,22 @@ namespace SoftEngWebEmployee.Repository
             return instance;
         }
 
-        public async void InsertNewSale(SalesModel newSale)
+        public async Task InsertNewSale(SalesModel newSale)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "INSERT INTO sales_table(sales_title," +
-                    "sales_image," +
-                    "sales_transaction_value," +
-                    "product_id," +
+                string queryString = "INSERT INTO sales_table(sales_title," +                    
+                    "sales_transaction_value," +                    
                     "total_number_of_products," +
                     "sales_date," +
                     "date_month," +
                     "user_username," +
                     "sale_type)" +
-                    "VALUES(@salesTitle,@salesImage,@SalesTransaction,@productID,@TotalNumberProducts,@SalesDate,@DateMonth,@Username,@SaleType)";
+                    "VALUES(@salesTitle,@SalesTransaction,@TotalNumberProducts,@SalesDate,@DateMonth,@Username,@SaleType)";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@salesTitle",newSale.SalesTitle);
-                command.Parameters.AddWithValue("@salesImage",newSale.SalesImage);
-                command.Parameters.AddWithValue("@SalesTransaction",newSale.SalesTransactionValue);
-                command.Parameters.AddWithValue("@productID",newSale.Product.Product_ID);
+                command.Parameters.AddWithValue("@salesTitle",newSale.SalesTitle);                
+                command.Parameters.AddWithValue("@SalesTransaction",newSale.SalesTransactionValue);               
                 command.Parameters.AddWithValue("@TotalNumberProducts",newSale.TotalNumberOfProducts);
                 command.Parameters.AddWithValue("@SalesDate",newSale.SalesDate);
                 command.Parameters.AddWithValue("@DateMonth",newSale.DateMonth);
@@ -70,10 +66,8 @@ namespace SoftEngWebEmployee.Repository
                             new SalesModel()
                             {
                                 Sales_ID = int.Parse(reader["sales_id"].ToString()),
-                                SalesTitle = reader["sales_title"].ToString(),
-                                SalesImage = reader["sales_image"].ToString(),
-                                SalesTransactionValue = double.Parse(reader["sales_transaction_value"].ToString()),
-                                Product = await ProductRepository.GetInstance().GetProducts(int.Parse(reader["product_id"].ToString())),
+                                SalesTitle = reader["sales_title"].ToString(),                               
+                                SalesTransactionValue = double.Parse(reader["sales_transaction_value"].ToString()),                                
                                 TotalNumberOfProducts = int.Parse(reader["total_number_of_products"].ToString()),
                                 SalesDate = DateTime.Parse(reader["sales_date"].ToString()),
                                 DateMonth = int.Parse(reader["date_month"].ToString()),

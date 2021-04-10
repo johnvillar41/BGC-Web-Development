@@ -132,9 +132,7 @@
                 </div>
             </ContentTemplate>
             <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="BtnSearch" EventName="Click" />
-                <asp:AsyncPostBackTrigger ControlID="btnCancelStatus" EventName="Click" />
-                <asp:AsyncPostBackTrigger ControlID="btnFinishStatus" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="BtnSearch" EventName="Click" />               
             </Triggers>
         </asp:UpdatePanel>
     </div>
@@ -178,7 +176,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <asp:Button ID="btnFinishStatus" runat="server" CssClass="btn btn-success" Text="Confirm" OnClick="btnFinishStatus_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                    <asp:Button ID="btnFinishStatus" runat="server" CssClass="btn btn-success" Text="Confirm" OnClick="btnFinishStatus_Click" AutoPostBack="true" UseSubmitBehavior="false" data-dismiss="modal" />
                 </div>
             </div>
         </div>

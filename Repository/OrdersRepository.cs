@@ -84,7 +84,7 @@ namespace SoftEngWebEmployee.Repository
             return ordersList;
         }
 
-        public async void ChangeStatusOfOrderToCancelled(int orderID)
+        public async Task ChangeStatusOfOrderToCancelled(int orderID)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
@@ -95,7 +95,7 @@ namespace SoftEngWebEmployee.Repository
                 await command.ExecuteNonQueryAsync();                
             }
         }
-        public async void ChangeStatusOfOrderToFinished(int orderID)
+        public async Task ChangeStatusOfOrderToFinished(int orderID)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {

@@ -1,4 +1,5 @@
-﻿using SoftEngWebEmployee.Models;
+﻿using SoftEngWebEmployee.Helpers;
+using SoftEngWebEmployee.Models;
 using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
@@ -25,29 +26,42 @@ namespace SoftEngWebEmployee.Views
             OrdersList = (List<OrdersModel>)listOfOrders;
         }
 
-        protected void btnCancelStatus_Click(object sender, EventArgs e)
+        protected async void btnCancelStatus_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrWhiteSpace(OrderIDCancel.Text) && IsAllAlphabetic(OrderIDCancel.Text))
             {
-                OrdersRepository.GetInstance().ChangeStatusOfOrderToCancelled(int.Parse(OrderIDCancel.Text));
+                await OrdersRepository .GetInstance().ChangeStatusOfOrderToCancelled(int.Parse(OrderIDCancel.Text));
                 var generatedNotification = NotificationRepository
                     .GetInstance()
                     .GenerateNotification(NotificationType.CancelledOrder, OrderIDCancel.Text);
                 NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);
-                Response.Redirect(Request.RawUrl);
+                Response.Redirect(Request.RawUrl,false);
             }
         }
 
-        protected void btnFinishStatus_Click(object sender, EventArgs e)
+        protected async void btnFinishStatus_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrWhiteSpace(OrderIDFinish.Text) && IsAllAlphabetic(OrderIDFinish.Text))
             {
-                OrdersRepository.GetInstance().ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));                
+                await OrdersRepository.GetInstance().ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));                
                 var generatedNotification = NotificationRepository
                     .GetInstance()
                     .GenerateNotification(NotificationType.FinishedOrder, OrderIDFinish.Text);
                 NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);
-                Response.Redirect(Request.RawUrl);
+                
+                var orders = await OrdersRepository.GetInstance().FetchOrder(int.Parse(OrderIDFinish.Text));
+                var salesModel = new SalesModel()
+                {
+                    SalesTitle = "Finished Order",
+                    SalesTransactionValue = orders.OrderTotalPrice,
+                    TotalNumberOfProducts = orders.SpecificOrdersModel.Count,
+                    SalesDate = DateTime.Now,
+                    DateMonth = DateTime.Now.Month,
+                    Administrator = await AdministratorRepository.GetInstance().FindAdministrator(UserSession.GetLoggedInUser()),
+                    TypeOfSale = SalesType.Order
+                };
+                await SalesRepository.GetInstance().InsertNewSale(salesModel);
+                Response.Redirect(Request.RawUrl,false);
             }
         }
 
