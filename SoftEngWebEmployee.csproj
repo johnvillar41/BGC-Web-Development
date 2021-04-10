@@ -321,6 +321,7 @@
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\OrdersRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
+    <Compile Include="Repository\SalesRepository.cs" />
     <Compile Include="Repository\SpecificOrdersRepository.cs" />
     <Compile Include="Helpers\UserSession.cs" />
     <Compile Include="Site.Master.cs">

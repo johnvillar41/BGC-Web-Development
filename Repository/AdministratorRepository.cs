@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using static SoftEngWebEmployee.Helpers.Constants;
 
-namespace SoftEngWebEmployee.Repository.AdministratorRepository
+namespace SoftEngWebEmployee.Repository
 {
     public class AdministratorRepository
     {
@@ -57,6 +57,28 @@ namespace SoftEngWebEmployee.Repository.AdministratorRepository
                         Username = reader["user_username"].ToString(),
                         Password = reader["user_password"].ToString(),
                         Fullname = reader["user_name"].ToString()                        
+                    };
+                }
+            }
+            return administrator;
+        }
+        public async Task<AdministratorModel> FindAdministrator(string username)
+        {
+            AdministratorModel administrator = null;
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT * FROM login_table WHERE user_username=@username";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@username", username);
+                MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
+                if (await reader.ReadAsync())
+                {
+                    administrator = new AdministratorModel()
+                    {
+                        Username = reader["user_username"].ToString(),
+                        Password = reader["user_password"].ToString(),
+                        Fullname = reader["user_name"].ToString()
                     };
                 }
             }
