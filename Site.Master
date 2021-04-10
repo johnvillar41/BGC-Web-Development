@@ -1,5 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SoftEngWebEmployee.SiteMaster"%>
-
+<%@ Import Namespace="SoftEngWebEmployee.Helpers" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -25,7 +25,6 @@
         body {
             background-color: lightyellow;
         }
-
     </style>
     <form runat="server">
         <asp:ScriptManager runat="server">
@@ -51,29 +50,40 @@
         <!--Navbar-->
         <div class="navbar navbar-dark bg-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="#">
-                    <img src="/Images/logo.PNG" width="35" height="35" class="d-inline-block align-top" alt="">
-                    Agt Seedlings Supply
-                </a>
-           
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                        <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Inventory">Inventory<i class="fa fa-cubes" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
-                        <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Sales">Sales<i class="fa fa fa-dollar" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
-                        <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Notifications">Notifications<i class="fa fa-bell" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
-                        <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Information">Information<i class="fa fa-info" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
-                        <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Reports">Reports<i class="fa fa-bar-chart" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
-                        <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Administrators">Administrators<i class="fa fa-address-card-o" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
-                        <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Orders">Orders<i class="fa fa-cart-arrow-down" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li style="text-align: right"; margin-top: 10px"><asp:Button ID="LogoutButton" runat="server" CssClass="dropdown-item" Text="Logout" OnClick="LogoutButton_Click" UseSubmitBehavior="false"/></li>
+               
+                    <a class="navbar-brand" href="#">
+                        <img src="/Images/logo.PNG" width="35" height="35" class="d-inline-block align-top" alt="">
+                        Agt Seedlings Supply
+                    </a>           
+                    
+                   
+                    <div class="nav-item dropdown d-flex">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">Welcome! <%=UserSession.GetLoggedInUser()%></a>
+                            </li>
+                        </ul>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
+                            <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Inventory">Inventory<i class="fa fa-cubes" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                            <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Sales">Sales<i class="fa fa fa-dollar" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                            <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Notifications">Notifications<i class="fa fa-bell" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                            <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Information">Information<i class="fa fa-info" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                            <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Reports">Reports<i class="fa fa-bar-chart" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                            <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Administrators">Administrators<i class="fa fa-address-card-o" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                            <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Orders">Orders<i class="fa fa-cart-arrow-down" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li style="text-align: right"; margin-top: 10px"><asp:Button ID="LogoutButton" runat="server" CssClass="dropdown-item" Text="Logout" OnClick="LogoutButton_Click" UseSubmitBehavior="false"/></li>
                         
-                    </ul>
+                        </ul>
+                    
+                   
+                    
+                </div>
                 </div>
             </div>
-        </div>
+     
 
         <!--Body Content-->
         <div class="container body-content" style="margin-top: 50px">

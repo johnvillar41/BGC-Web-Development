@@ -46,6 +46,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">User ID</th>
+                                        <th scope="col">Profile Picture</th>
                                         <th scope="col">Username</th>
                                         <%if (IsAdmin()) %>
                                         <%{ %>
@@ -60,8 +61,8 @@
                                     <%{ %>
                                     <tr>
                                         <td><%=admins.User_ID %></td>
+                                        <td><img src="/Images/logo.PNG" width="35" height="35" class="d-inline-block align-top" alt=""></td>
                                         <td>
-                                            <img src="/Images/logo.PNG" width="35" height="35" class="d-inline-block align-top" alt="">
                                             <%=admins.Username %>                                       
                                         </td>
                                         <%if (IsAdmin()) %>
@@ -200,9 +201,9 @@
                         <asp:ListItem Text="Employee" Value="E" Selected="True"></asp:ListItem>
                         <asp:ListItem Text="Administrator" Value="A"></asp:ListItem>
                     </asp:RadioButtonList>
-                   
-                       
-                    
+
+
+
 
                 </div>
                 <div class="modal-footer">
