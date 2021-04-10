@@ -22,7 +22,7 @@
                 <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
                     <div class="row">
                         <div class="col-3">
-                            <h3 class="float-left">Business Transactions</h3>
+                            <h3 class="float-left">Notifications</h3>
                         </div>
                         <div class="col-3">
                             <!--Empty Div-->
@@ -43,7 +43,16 @@
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
                             <div class="table-bordered table-condensed table-responsive" style="height: 600px">
-                                <table class="table table-striped">
+                                <table class="table table-striped table-hover">
+                                    <%if (DisplayNotifications().Count() == 0) %>
+                                    <%{ %>
+                                    <div>
+                                        <h1><center>No Results Found!</center></h1>
+                                        <center><img src="/Images/cancell.PNG" style="border-radius: 50%" width="100" height="100" class="d-inline-block align-top" alt="" /></center>
+                                    </div>
+                                    <%} %>
+                                    <%else %>
+                                    <%{ %>
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -55,6 +64,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
 
                                         <%foreach (var notification in DisplayNotifications()) %>
                                         <%{ %>
@@ -101,6 +111,7 @@
                                             <td><%=notification.Username %></td>
                                             <td><%=notification.NotificationDate %></td>
                                         </tr>
+                                        <%} %>
                                         <%} %>
                                     </tbody>
                                 </table>
