@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace SoftEngWebEmployee.Models
@@ -13,6 +14,6 @@ namespace SoftEngWebEmployee.Models
         public int ProductPrice { get; set; }
         public string ProductPicture { get; set; }
         public int ProductStocks { get; set; }
-        public string ProductCategory { get; set; }
+        public string ProductCategory { get; set; }       
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SoftEngWebEmployee.Models;
+using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
@@ -12,49 +13,28 @@ namespace SoftEngWebEmployee.Views
             // Sample code for the use of repeater
             if (!IsPostBack)
             {
-                List<InformationModel> values = new List<InformationModel>();
-
-                values.Add(new InformationModel()
-                {
-                    Product = new ProductsModel()
-                    {
-                        Product_ID=1
-                    },
-                    ProductInformation = "Sample"
-                });
-                values.Add(new InformationModel()
-                {
-                    Product = new ProductsModel()
-                    {
-                        Product_ID = 1
-                    },
-                    ProductInformation = "HEHE"
-                });
-                values.Add(new InformationModel()
-                {
-                    Product = new ProductsModel()
-                    {
-                        Product_ID = 1
-                    },
-                    ProductInformation = "SampWAHAHAle"
-                });
-
-
-                InformationRepeater.DataSource = values;
-                InformationRepeater.DataBind();
-
+                DisplayInformationTable();
             }
-        }      
+        }
 
         protected void InformationRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "InformationCommand")
             {
-                string id = e.CommandArgument.ToString();
-                Label1.Text = id;
+                //TODO
+                int id = int.Parse(e.CommandArgument.ToString());
+                Response.Redirect("AddInformation.aspx?id=" + id);
             }
         }
 
-      
+        private async void DisplayInformationTable()
+        {
+            var informations = await InformationRepository.GetInstance().FetchInformations();
+
+            InformationRepeater.DataSource = informations;
+            InformationRepeater.DataBind();
+        }
+
+
     }
 }
