@@ -312,6 +312,7 @@
     <Compile Include="Models\SpecificOrdersModel.cs" />
     <Compile Include="Repository\AdministratorRepository.cs" />
     <Compile Include="Helpers\DbConnString.cs" />
+    <Compile Include="Repository\InformationRepository.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Global.asax.cs">

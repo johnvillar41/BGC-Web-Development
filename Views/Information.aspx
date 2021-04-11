@@ -22,9 +22,9 @@
             <tr>
                 <td><%# DataBinder.Eval(Container.DataItem, "Product_ID") %>                      
                    
-                </td>
+                </td>               
                 <td><%# DataBinder.Eval(Container.DataItem, "ProductInformation") %> </td>
-                <td><asp:Button runat="server" CommandName="InformationCommand" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "ProductInformation") %>' ID="btnOriginal" Text="Original" /></td>                    
+                <td><asp:Button runat="server" CssClass="btn btn-info" CommandName="InformationCommand" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "ProductInformation") %>' ID="btnOriginal" Text="Original" /></td>                    
             </tr>
         </ItemTemplate>
 
