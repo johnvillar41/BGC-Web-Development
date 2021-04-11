@@ -9,23 +9,33 @@ namespace SoftEngWebEmployee.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Sample code for the use of repeater
             if (!IsPostBack)
             {
                 List<InformationModel> values = new List<InformationModel>();
 
                 values.Add(new InformationModel()
                 {
-                    Product_ID = 1,
+                    Product = new ProductsModel()
+                    {
+                        Product_ID=1
+                    },
                     ProductInformation = "Sample"
                 });
                 values.Add(new InformationModel()
                 {
-                    Product_ID = 1,
+                    Product = new ProductsModel()
+                    {
+                        Product_ID = 1
+                    },
                     ProductInformation = "HEHE"
                 });
                 values.Add(new InformationModel()
                 {
-                    Product_ID = 1,
+                    Product = new ProductsModel()
+                    {
+                        Product_ID = 1
+                    },
                     ProductInformation = "SampWAHAHAle"
                 });
 

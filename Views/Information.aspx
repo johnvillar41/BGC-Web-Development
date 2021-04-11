@@ -20,7 +20,7 @@
 
         <ItemTemplate>
             <tr>
-                <td><%# DataBinder.Eval(Container.DataItem, "Product_ID") %>                      
+                <td><%# DataBinder.Eval(Container.DataItem, "Product.Product_ID") %>                      
                    
                 </td>               
                 <td><%# DataBinder.Eval(Container.DataItem, "ProductInformation") %> </td>
