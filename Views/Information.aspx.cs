@@ -9,8 +9,7 @@ namespace SoftEngWebEmployee.Views
     public partial class Information : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-            // Sample code for the use of repeater
+        {           
             if (!IsPostBack)
             {
                 DisplayInformationTable();
@@ -20,8 +19,7 @@ namespace SoftEngWebEmployee.Views
         protected void InformationRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "InformationCommand")
-            {
-                //TODO
+            {                
                 int id = int.Parse(e.CommandArgument.ToString());
                 Response.Redirect("AddInformation.aspx?id=" + id);
             }

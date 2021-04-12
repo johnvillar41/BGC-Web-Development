@@ -18,8 +18,7 @@ namespace SoftEngWebEmployee.Views
         {
             if (Request.QueryString["id"] != null)
             {
-                string id = Request.QueryString["id"].ToString();
-                Label1.Text = id;                
+                string id = Request.QueryString["id"].ToString();                         
                 LoadProduct(int.Parse(id));
                 LoadInformation(int.Parse(id));
             }
@@ -41,6 +40,6 @@ namespace SoftEngWebEmployee.Views
         {
             var information = await InformationRepository.GetInstance().FetchInformation(id);
             Information = information.ProductInformation;
-        }
+        }       
     }
 }
