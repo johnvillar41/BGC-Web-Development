@@ -24,14 +24,15 @@ namespace SoftEngWebEmployee.Repository
             }
             return instance;
         }
-        public async void UpdateInformation(InformationModel information)
+        public async Task UpdateInformation(InformationModel information)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "UPDATE information_table SET product_information=@productInfo";
-                MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue(queryString, information);
+                string queryString = "UPDATE information_table SET product_information=@productInfo WHERE product_id=@productID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);                
+                command.Parameters.AddWithValue("@productInfo", information.ProductInformation);
+                command.Parameters.AddWithValue("@productID", information.Product.Product_ID);
                 await command.ExecuteNonQueryAsync();
             }
         }
