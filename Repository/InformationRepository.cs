@@ -30,8 +30,8 @@ namespace SoftEngWebEmployee.Repository
             {
                 await connection.OpenAsync();
                 string queryString = "UPDATE information_table SET product_information=@productInfo";
-                MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue(queryString, information);
+                MySqlCommand command = new MySqlCommand(queryString, connection);                
+                command.Parameters.AddWithValue("@productInfo", information.ProductInformation);
                 await command.ExecuteNonQueryAsync();
             }
         }

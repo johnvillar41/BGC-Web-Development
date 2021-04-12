@@ -67,8 +67,7 @@
                         </FooterTemplate>
 
                     </asp:Repeater>
-                    <br />
-                    <asp:Label ID="Label1" runat="server" Text="ID here"></asp:Label>
+                    <br />                    
                 </div>
             </div>
         </div>
