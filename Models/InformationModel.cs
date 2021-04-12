@@ -7,7 +7,7 @@ namespace SoftEngWebEmployee.Models
 {
     public class InformationModel
     {
-        public ProductsModel Product { get; set; }
+        public ProductModel Product { get; set; }
         public string ProductInformation { get; set; }        
     }
 }

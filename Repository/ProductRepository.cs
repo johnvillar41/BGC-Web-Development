@@ -25,9 +25,9 @@ namespace SoftEngWebEmployee.Repository
             return instance;
         }
 
-        public async Task<ProductsModel> GetProducts(int productID)
+        public async Task<ProductModel> GetProducts(int productID)
         {
-            ProductsModel productModel = null;
+            ProductModel productModel = null;
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
@@ -37,7 +37,7 @@ namespace SoftEngWebEmployee.Repository
                 MySqlDataReader reader = command.ExecuteReader();
                 while (await reader.ReadAsync())
                 {
-                    productModel = new ProductsModel()
+                    productModel = new ProductModel()
                     {
                         Product_ID = int.Parse(reader["product_id"].ToString()),
                         ProductName = reader["product_name"].ToString(),

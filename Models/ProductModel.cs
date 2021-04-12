@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-
-namespace SoftEngWebEmployee.Models
+﻿namespace SoftEngWebEmployee.Models
 {
-    public class ProductsModel
+    public class ProductModel
     {
         public int Product_ID { get; set; }
         public string ProductName { get; set; }

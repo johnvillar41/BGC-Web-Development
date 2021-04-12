@@ -12,7 +12,7 @@ namespace SoftEngWebEmployee.Views
 {
     public partial class AddInformation : System.Web.UI.Page
     {
-        private ProductsModel Product { get; set; }
+        private ProductModel Product { get; set; }
         private string Information { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,7 +23,7 @@ namespace SoftEngWebEmployee.Views
                 LoadInformation(int.Parse(id));
             }
         }     
-        public ProductsModel DisplayProduct()
+        public ProductModel DisplayProduct()
         {
             return Product;
         }
