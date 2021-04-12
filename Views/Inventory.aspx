@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Inventory.aspx.cs" Inherits="SoftEngWebEmployee.Views.Inventory" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="Inventory.aspx.cs" Inherits="SoftEngWebEmployee.Views.Inventory" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -24,7 +24,34 @@
     <!-- Text that disappears/changes depending on search results. This is when page is initially loaded.-->
     <p class="fs-5"><i>Use the search bar to display products.</i></p>
     <!-- In case of a search with no results, "No results found."-->
-    <!-- Take note to modify so that the code generates a card for every result, 4 cards per row, then top to bottom-->
+    <!-- Put a container here for displaying searched products.-->
+
+    <!-- Repeater Cards Test -->
+
+    <div class="container-fluid" style="background-color:#44433C; border:2px solid #cecece;">
+        <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+
+            <asp:Repeater ID="InventoryRepeater" runat="server" OnItemCommand="InventoryRepeater_ItemCommand">
+
+                <ItemTemplate>
+                    <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
+                        <div class="card">
+                            <!-- Possible change: modify size of picture space -->
+                            <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
+                                <p class="card-text"><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
+                                <a class="btn btn-primary" data-bs-toggle="modal" href="#updateProduct">View Details</a>
+                            </div>
+                        </div>
+                    </div> 
+                </ItemTemplate>
+
+            </asp:Repeater>
+
+        </div>
+    </div>
+    
 
     <hr />
     <p class="fs-4"><b>Greenhouse</b></p>
