@@ -10,7 +10,7 @@ namespace SoftEngWebEmployee.Views
         private string Information { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["id"] != null)
+            if (Request.QueryString["id"] != null && !IsPostBack)
             {
                 string id = Request.QueryString["id"].ToString();
                 LoadProduct(int.Parse(id));
@@ -38,7 +38,7 @@ namespace SoftEngWebEmployee.Views
             InformationTextBox.Text = information.ProductInformation.ToString();
         }
 
-        protected void BtnSubmitInformation_Click(object sender, EventArgs e)
+        protected async void BtnSubmitInformation_Click(object sender, EventArgs e)
         {
             var product = new ProductModel()
             {
@@ -50,8 +50,8 @@ namespace SoftEngWebEmployee.Views
                 Product = product,
                 ProductInformation = information
             };
-            InformationRepository.GetInstance().UpdateInformation(informationObj);
-            Response.Redirect("Information.aspx", false);
+            await InformationRepository.GetInstance().UpdateInformation(informationObj);
+            Response.Redirect("Information.aspx",false);
         }
     }
 }
