@@ -5,30 +5,38 @@
 <%@ Import Namespace="SoftEngWebEmployee.Repository" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-   
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-lg-6">
-                    <%if (DisplayProduct() != null) %>
-                    <%{ %>
-                    <h3><b>Update Information for: <%=DisplayProduct().ProductName.ToString() %></b></h3>
-                    <%} %>                    
-                </div>
-                
+
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-6">
+                <%if (DisplayProduct() != null) %>
+                <%{ %>
+                <h3><b>Update Information for: <%=DisplayProduct().ProductName.ToString() %></b></h3>
+                <%} %>
             </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <img src="/Images/logo.PNG" width="35" height="35" class="d-inline-block align-top" alt="" />
-                </div>
-                <div class="col-lg-4">
-                    <!--Empty Div-->
-                </div>
-                <div class="col-lg-4">
-                    <button class="btn btn-info" style="float:right">Back</button>
-                </div>
-                <hr />
-            </div>
+
         </div>
-    
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="mb-3 ">
+                    <label for="exampleFormControlInput1" class="form-label">Product ID</label>
+                    <asp:TextBox ID="ProductIDTextBox" runat="server" CssClass="form-control" ReadOnly></asp:TextBox>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Product Information</label>
+                    <asp:TextBox ID="InformationTextBox" runat="server" CssClass="form-control" Rows="3" TextMode="MultiLine" required></asp:TextBox>
+                </div>
+                <asp:Button ID="BtnSubmitInformation" OnClick="BtnSubmitInformation_Click" runat="server" Text="Button" />
+            </div>
+            <div class="col-lg-3">
+            </div>
+
+            <div class="col-lg-3">
+            </div>
+
+        </div>
+    </div>
+
 
 </asp:Content>

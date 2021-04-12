@@ -1,12 +1,6 @@
 ﻿using SoftEngWebEmployee.Models;
 using SoftEngWebEmployee.Repository;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SoftEngWebEmployee.Views
 {
@@ -16,13 +10,13 @@ namespace SoftEngWebEmployee.Views
         private string Information { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["id"] != null)
+            if (Request.QueryString["id"] != null && !IsPostBack)
             {
-                string id = Request.QueryString["id"].ToString();                         
+                string id = Request.QueryString["id"].ToString();
                 LoadProduct(int.Parse(id));
                 LoadInformation(int.Parse(id));
             }
-        }     
+        }
         public ProductModel DisplayProduct()
         {
             return Product;
@@ -40,6 +34,24 @@ namespace SoftEngWebEmployee.Views
         {
             var information = await InformationRepository.GetInstance().FetchInformation(id);
             Information = information.ProductInformation;
-        }       
+            ProductIDTextBox.Text = id.ToString();
+            InformationTextBox.Text = information.ProductInformation.ToString();
+        }
+
+        protected async void BtnSubmitInformation_Click(object sender, EventArgs e)
+        {
+            var product = new ProductModel()
+            {
+                Product_ID = int.Parse(ProductIDTextBox.Text)
+            };
+            string information = InformationTextBox.Text.ToString();
+            var informationObj = new InformationModel()
+            {
+                Product = product,
+                ProductInformation = information
+            };
+            await InformationRepository.GetInstance().UpdateInformation(informationObj);
+            Response.Redirect("Information.aspx",false);
+        }
     }
 }

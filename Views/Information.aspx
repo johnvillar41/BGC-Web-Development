@@ -28,12 +28,12 @@
                             <div class="table-bordered table-condensed table-responsive" style="height: 500px">
                                 <table border="1" class="table table-striped">
                                     <tr>
-                                        <td><b>Product ID</b></td>
-                                        <td><b>ProductName</b></td>
-                                        <td><b>ProductDescription</b></td>
-                                        <td><b>ProductPicture</b></td>
-                                        <td><b>ProductInformation</b></td>
-                                        <td><b>Action</b></td>
+                                        <td style="width:10%"><b>Product ID</b></td>
+                                        <td style="width:10%"><b>ProductName</b></td>
+                                        <td style="width:10%"><b>ProductDescription</b></td>
+                                        <td style="width:10%"><b>ProductPicture</b></td>
+                                        <td style="width:50%"><b>ProductInformation</b></td>
+                                        <td style="width:10%"><b>Action</b></td>
                                     </tr>
                         </HeaderTemplate>
 
@@ -67,8 +67,7 @@
                         </FooterTemplate>
 
                     </asp:Repeater>
-                    <br />
-                    <asp:Label ID="Label1" runat="server" Text="ID here"></asp:Label>
+                    <br />                    
                 </div>
             </div>
         </div>
