@@ -21,7 +21,7 @@ namespace SoftEngWebEmployee.Views
             if (e.CommandName == "InformationCommand")
             {                
                 int id = int.Parse(e.CommandArgument.ToString());
-                Response.Redirect("AddInformation.aspx?id=" + id);
+                Response.Redirect("UpdateInformation.aspx?id=" + id);
             }
         }
 
