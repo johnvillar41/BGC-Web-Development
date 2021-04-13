@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using SoftEngWebEmployee.Helpers;
 using SoftEngWebEmployee.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static SoftEngWebEmployee.Helpers.Constants;
@@ -96,6 +97,7 @@ namespace SoftEngWebEmployee.Repository
                 MySqlDataReader reader = command.ExecuteReader();
                 while(await reader.ReadAsync())
                 {
+                    string base64String = Convert.ToBase64String((byte[])(reader["user_image"]));
                     if (reader["position"].ToString().Equals("Employee"))
                     {
                         administrator = new AdministratorModel()
@@ -104,7 +106,7 @@ namespace SoftEngWebEmployee.Repository
                             Username = reader["user_username"].ToString(),
                             Password = reader["user_password"].ToString(),
                             Fullname = reader["user_name"].ToString(),
-                            ProfilePicture = reader["user_image"].ToString()
+                            ProfilePicture = base64String
                         };
                         administrator.EmployeeType = EmployeeType.Employee;
                     }
@@ -116,7 +118,7 @@ namespace SoftEngWebEmployee.Repository
                             Username = reader["user_username"].ToString(),
                             Password = reader["user_password"].ToString(),
                             Fullname = reader["user_name"].ToString(),
-                            ProfilePicture = reader["user_image"].ToString()
+                            ProfilePicture = base64String
                         };
                         administrator.EmployeeType = EmployeeType.Administrator;
                     }

@@ -61,7 +61,8 @@
                                     <%{ %>
                                     <tr>
                                         <td><%=admins.User_ID %></td>
-                                        <td><img src="/Images/logo.PNG" width="35" height="35" class="d-inline-block align-top" alt=""></td>
+                                        <td>
+                                         <img alt="" height="50px" width="50px" src="data:image/png;base64,<%=admins.ProfilePicture %>" /></td>
                                         <td>
                                             <%=admins.Username %>                                       
                                         </td>
