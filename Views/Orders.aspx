@@ -102,6 +102,7 @@
                                                             <th scope="col">Product ID</th>
                                                             <th scope="col">Product Name</th>
                                                             <th scope="col">Product Price</th>
+                                                            <th scope="col">Product Picture</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -112,6 +113,7 @@
                                                             <td><%=orders.SpecificOrdersModel[i].ProductID %></td>
                                                             <td><%=orders.SpecificOrdersModel[i].ProductsModel.ProductName %></td>
                                                             <td><%=orders.SpecificOrdersModel[i].ProductsModel.ProductPrice %></td>
+                                                            <td><img alt="" height="100px" width="100px" src="data:image/png;base64,<%=orders.SpecificOrdersModel[i].ProductsModel.ProductPicture%>" /></td>
                                                         </tr>
                                                         <%} %>
                                                     </tbody>
