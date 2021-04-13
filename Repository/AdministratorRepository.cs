@@ -3,6 +3,7 @@ using SoftEngWebEmployee.Helpers;
 using SoftEngWebEmployee.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using static SoftEngWebEmployee.Helpers.Constants;
 
@@ -143,14 +144,17 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "INSERT INTO login_table(user_username,user_password,user_name,position)" +
-                    "VALUES(@Username,@Passowrd,@name,@position)";
+                string queryString = "INSERT INTO login_table(user_username,user_password,user_name,position,user_image)" +
+                    "VALUES(@Username,@Passowrd,@name,@position,@user_image)";
                 MySqlCommand command = new MySqlCommand(queryString, connection);                
                 command.Parameters.AddWithValue("@Username", administrator.Username);
                 command.Parameters.AddWithValue("@Passowrd", administrator.Password);
-                command.Parameters.AddWithValue("@name", administrator.Fullname);
-                command.Parameters.AddWithValue("@position", administrator.EmployeeType);
-                //command.Parameters.AddWithValue("@image", administrator.User_Image);
+                command.Parameters.AddWithValue("@name", administrator.Fullname);                
+                command.Parameters.AddWithValue("@position", administrator.EmployeeType.ToString());               
+
+                command.Parameters.Add("@user_image", MySqlDbType.MediumBlob);
+                //command.Parameters["@user_image"].Value = ConvertImageToByteArray(administrator.ProfilePicture, System.Drawing.Imaging.ImageFormat.Jpeg); ;
+
                 await command.ExecuteNonQueryAsync();
             }
         }
@@ -167,6 +171,21 @@ namespace SoftEngWebEmployee.Repository
                 command.Parameters.AddWithValue("@fullname", administrator.Fullname);
                 await command.ExecuteNonQueryAsync();
             }
+        }
+        private byte[] ConvertImageToByteArray(System.Drawing.Image imageToConvert,
+                                       System.Drawing.Imaging.ImageFormat formatOfImage)
+        {
+            byte[] Ret;
+            try
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    imageToConvert.Save(ms, formatOfImage);
+                    Ret = ms.ToArray();
+                }
+            }
+            catch (Exception) { throw; }
+            return Ret;
         }
     }
 }
