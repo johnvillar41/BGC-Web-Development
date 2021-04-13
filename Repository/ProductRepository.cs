@@ -73,12 +73,14 @@ namespace SoftEngWebEmployee.Repository
                 MySqlDataReader reader = command.ExecuteReader();
                 while (await reader.ReadAsync())
                 {
+                    string base64String = reader["product_picture"].ToString();
+                    byte[] blob = Convert.FromBase64String(base64String);
                     productModel = new ProductModel()
                     {
                         Product_ID = int.Parse(reader["product_id"].ToString()),
                         ProductName = reader["product_name"].ToString(),
                         ProductDescription = reader["product_description"].ToString(),
-                        ProductPicture = reader["product_picture"].ToString(),
+                        ProductPicture = base64String,
                         ProductStocks = int.Parse(reader["product_stocks"].ToString()),
                         ProductCategory = reader["product_category"].ToString(),
                         ProductPrice = int.Parse(reader["product_price"].ToString())
@@ -87,5 +89,6 @@ namespace SoftEngWebEmployee.Repository
             }
             return productModel;
         }
+        
     }
 }
