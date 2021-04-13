@@ -297,6 +297,7 @@
     <Content Include="Views\Reports.aspx" />
     <Content Include="Views\Sales.aspx" />
     <Content Include="Views\Login.aspx" />
+    <Content Include="Views\UserProfile.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
@@ -410,6 +411,13 @@
     </Compile>
     <Compile Include="Views\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserProfile.aspx.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\UserProfile.aspx.designer.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

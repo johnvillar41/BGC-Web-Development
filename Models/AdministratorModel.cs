@@ -13,6 +13,7 @@ namespace SoftEngWebEmployee.Models
         public string Password { get; set; }
         public string Fullname { get; set; }
         public string ProfilePicture { get; set; }
+        public byte[] ProfilePictureUpload { get; set; }
         public EmployeeType EmployeeType { get; set; }
     }
 }

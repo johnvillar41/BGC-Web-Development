@@ -48,8 +48,8 @@
                                 <td>
                                     <%# DataBinder.Eval(Container.DataItem,"Product.ProductDescription") %>
                                 </td>
-                                <td>
-                                    <%# DataBinder.Eval(Container.DataItem,"Product.ProductPicture") %>
+                                <td>                                    
+                                   <img alt="" height="100px" width="100px" src="data:image/png;base64,<%# Eval("Product.ProductPicture") %>" />
                                 </td>
                                 <td>
                                     <%# DataBinder.Eval(Container.DataItem, "ProductInformation") %> 

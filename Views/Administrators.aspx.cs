@@ -34,22 +34,21 @@ namespace SoftEngWebEmployee.Views
             var fullName = FullName.Text.ToString();
 
             if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) && !String.IsNullOrWhiteSpace(fullName))
-            {
-                //Convert Image to String
+            {                
                 AdministratorModel administrator = null;
                 Stream fs = ImageUpload.PostedFile.InputStream;
                 BinaryReader br = new System.IO.BinaryReader(fs);
                 byte[] bytes = br.ReadBytes((int)fs.Length);
-                string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
-                var imageString = base64String;
-                if(RadioButtonPosition.SelectedValue == "E")
+                //string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                //var imageString = base64String;
+                if (RadioButtonPosition.SelectedValue == "E")
                 {
                     administrator = new AdministratorModel()
                     {
                         Username = username,
                         Password = password,
                         Fullname = fullName,
-                        ProfilePicture = imageString,
+                        ProfilePictureUpload = bytes,
                         EmployeeType = EmployeeType.Employee
                     };
                 }
@@ -60,7 +59,7 @@ namespace SoftEngWebEmployee.Views
                         Username = username,
                         Password = password,
                         Fullname = fullName,
-                        ProfilePicture = imageString,
+                        ProfilePictureUpload = bytes,
                         EmployeeType = EmployeeType.Administrator
                     };
                 }                

@@ -35,14 +35,15 @@ namespace SoftEngWebEmployee.Repository
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 while(await reader.ReadAsync())
-                {                    
+                {
+                    string base64String = Convert.ToBase64String((byte[])(reader["product_picture"]));
                     productList.Add(
                             new ProductModel()
                             {
                                 Product_ID = int.Parse(reader["product_id"].ToString()),
                                 ProductName = reader["product_name"].ToString(),
                                 ProductDescription = reader["product_description"].ToString(),
-                                ProductPicture = reader["product_picture"].ToString(),
+                                ProductPicture = base64String,
                                 ProductStocks = int.Parse(reader["product_stocks"].ToString()),
                                 ProductCategory = reader["product_category"].ToString(),
                                 ProductPrice = int.Parse(reader["product_price"].ToString())
@@ -129,12 +130,14 @@ namespace SoftEngWebEmployee.Repository
                 MySqlDataReader reader = command.ExecuteReader();
                 while (await reader.ReadAsync())
                 {
+
+                    string base64String = Convert.ToBase64String((byte[])(reader["product_picture"]));
                     productModel = new ProductModel()
                     {
                         Product_ID = int.Parse(reader["product_id"].ToString()),
                         ProductName = reader["product_name"].ToString(),
                         ProductDescription = reader["product_description"].ToString(),
-                        ProductPicture = reader["product_picture"].ToString(),
+                        ProductPicture = base64String,
                         ProductStocks = int.Parse(reader["product_stocks"].ToString()),
                         ProductCategory = reader["product_category"].ToString(),
                         ProductPrice = int.Parse(reader["product_price"].ToString())
@@ -143,5 +146,6 @@ namespace SoftEngWebEmployee.Repository
             }
             return productModel;
         }
+        
     }
 }
