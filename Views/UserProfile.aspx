@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UserProfile.aspx.cs" Inherits="SoftEngWebEmployee.Views.UserProfile" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="UserProfile.aspx.cs" Inherits="SoftEngWebEmployee.Views.UserProfile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -8,21 +8,26 @@
             <div class="col-md-4 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
 
-                    <img class="rounded-circle mt-5" src="..." width="200" height="200">
+                    <img alt="" class="rounded-circle mt-5" width="200" height="200" src="data:image/png;base64,<%=ImageString%>" />
                     <div>
-                       <br />
+                        <br />
 
                     </div>
 
-                    <div class="input-group mb-3">
-                        <input type="file" class="form-control" id="inputGroupFile02">
-                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                    <div class="input-group mb-3">                        
+                        <asp:FileUpload type="file" ID="ProfileFileUpload" CssClass="form-control" runat="server" />    
+                        <asp:Button ID="UploadImage" CssClass="btn btn-info" runat="server" Text="Upload" OnClick="UploadImage_Click" />
                     </div>
 
-                    <span class="font-weight-bold">Full Name Here</span>
-                    <span class="text-black-50">username@email.com</span>
-                    <span>Administrator or Employee</span>
-
+                    <asp:Label ID="FullnameLabel" CssClass="font-weight-bold" runat="server" Text="Label"></asp:Label>
+                    <%if (EmployeeType == SoftEngWebEmployee.Helpers.Constants.EmployeeType.Administrator)%>
+                    <%{%>
+                    <span class="badge bg-dark"><%=EmployeeType.ToString() %></span>
+                    <%}%>
+                    <%else %>
+                    <%{ %>
+                    <span class="badge bg-secondary text-dark"><%=EmployeeType.ToString()  %></span>
+                    <%} %>
                 </div>
             </div>
             <div class="col-md-8">
@@ -31,54 +36,36 @@
 
                         <h6 class="text-right">User Profile</h6>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-3">
                         <div class="col-md-6">
-                            <div class="row g-3">
-                                <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="firstname" placeholder="First Name" value="Aleth">
-                                        <label for="firstname">First Name</label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="lastname" placeholder="Last Name" value="Fernandez">
-                                        <label for="lastname">Last Name</label>
-                                    </div>
-                                </div>
+                            <div class="form-floating mb-3">
+                                <asp:TextBox type="text" ID="Fullname" class="form-control" placeholder="FullName" runat="server"></asp:TextBox>
+                                <label for="floatingInput">FullName</label>
                             </div>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="email" placeholder="Email address" value="email@example.com">
-                                    <label for="email">Email address</label>
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="username" placeholder="username" value="ofeliaaa02">
-                                    <label for="floatingInput">username</label>
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="password" placeholder="password" value="123456">
-                                <label for="password">password</label>
+                                <asp:TextBox type="text" ID="Username" class="form-control" placeholder="Username" runat="server"></asp:TextBox>
+                                <label for="floatingInput">Username</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <asp:TextBox type="text" ID="Password" class="form-control" placeholder="Password" runat="server"></asp:TextBox>
+                                <label for="floatingInput">Password</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                         </div>
                     </div>
-                    <div class="mt-5">
-                        <button class="btn btn-primary profile-button" type="button">Save Profile</button>
+                    <div class="mt-5">                        
+                        <asp:Button ID="ButtonSaveProfile" class="btn btn-primary profile-button" runat="server" Text="Save Profile" OnClick="ButtonSaveProfile_Click" />
                     </div>
                 </div>
             </div>

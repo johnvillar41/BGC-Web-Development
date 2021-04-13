@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using SoftEngWebEmployee.Helpers;
 using SoftEngWebEmployee.Models;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -48,6 +49,31 @@ namespace SoftEngWebEmployee.Repository
                 command.Parameters.AddWithValue("@password", updateduser.Password);
                 await command.ExecuteNonQueryAsync();
             }
+        }
+        public async Task<AdministratorModel> FetchLoggedInModel()
+        {
+            AdministratorModel administrator = null;
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT * FROM login_table WHERE user_username=@usernameLoggedIn";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@usernameLoggedIn", UserSession.GetLoggedInUser());
+                MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
+                while(await reader.ReadAsync())
+                {
+                    string base64String = Convert.ToBase64String((byte[])(reader["user_image"]));
+                    administrator = new AdministratorModel()
+                    {
+                        User_ID = int.Parse(reader["user_id"].ToString()),
+                        Username = reader["user_username"].ToString(),
+                        Password = reader["user_password"].ToString(),
+                        Fullname = reader["user_name"].ToString(),
+                        ProfilePicture = base64String
+                    };
+                }                
+            }
+            return administrator;
         }
     }
 }
