@@ -52,6 +52,14 @@ namespace SoftEngWebEmployee.Repository
             }
             return productList;
         }
+        //Fetch for greenhouse
+        //Fetch for hydroponics
+        //Search by productName
+        //Search by Category
+        //Add Product
+        //Update product
+        //View Product Details
+        //Delete Product
 
         public async Task<ProductModel> GetProducts(int productID)
         {
