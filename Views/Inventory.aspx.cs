@@ -30,10 +30,18 @@ namespace SoftEngWebEmployee.Views
 
         private async void DisplayInventoryTable()
         {
-            var inventory = await ProductRepository.GetInstance().FetchAllProducts();
-            
+
+            var inventory = await ProductRepository.GetInstance().FetchAllProducts();            
             InventoryRepeater.DataSource = inventory;
             InventoryRepeater.DataBind();
+
+            var greenhouse = await ProductRepository.GetInstance().FetchGHProducts();
+            GHRepeater.DataSource = greenhouse;
+            GHRepeater.DataBind();
+
+            var hydroponics = await ProductRepository.GetInstance().FetchHPProducts();
+            HPRepeater.DataSource = hydroponics;
+            HPRepeater.DataBind();
         }
     }
 }
