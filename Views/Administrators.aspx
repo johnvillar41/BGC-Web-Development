@@ -62,7 +62,7 @@
                                     <tr>
                                         <td><%=admins.User_ID %></td>
                                         <td>
-                                         <img alt="" height="50px" width="50px" src="data:image/png;base64,<%=admins.ProfilePicture %>" /></td>
+                                         <img alt="" height="50px" width="50px" src="data:image/jpeg;base64,<%=admins.ProfilePicture.ToString() %>" /></td>
                                         <td>
                                             <%=admins.Username %>                                       
                                         </td>

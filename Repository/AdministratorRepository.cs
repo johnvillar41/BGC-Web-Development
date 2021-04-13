@@ -150,11 +150,9 @@ namespace SoftEngWebEmployee.Repository
                 command.Parameters.AddWithValue("@Username", administrator.Username);
                 command.Parameters.AddWithValue("@Passowrd", administrator.Password);
                 command.Parameters.AddWithValue("@name", administrator.Fullname);                
-                command.Parameters.AddWithValue("@position", administrator.EmployeeType.ToString());               
-
-                command.Parameters.Add("@user_image", MySqlDbType.MediumBlob);
-                //command.Parameters["@user_image"].Value = ConvertImageToByteArray(administrator.ProfilePicture, System.Drawing.Imaging.ImageFormat.Jpeg); ;
-
+                command.Parameters.AddWithValue("@position", administrator.EmployeeType.ToString());             
+                command.Parameters.Add("@user_image", MySqlDbType.MediumBlob).Value = administrator.ProfilePictureUpload;                
+               
                 await command.ExecuteNonQueryAsync();
             }
         }
