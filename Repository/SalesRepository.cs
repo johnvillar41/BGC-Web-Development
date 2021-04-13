@@ -1,12 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using SoftEngWebEmployee.Helpers;
 using SoftEngWebEmployee.Models;
-using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using static SoftEngWebEmployee.Helpers.Constants;
 
 namespace SoftEngWebEmployee.Repository
@@ -32,22 +29,17 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "INSERT INTO sales_table(sales_title," +                    
-                    "sales_transaction_value," +                    
-                    "total_number_of_products," +
-                    "sales_date," +
-                    "date_month," +
-                    "user_username," +
-                    "sale_type)" +
-                    "VALUES(@salesTitle,@SalesTransaction,@TotalNumberProducts,@SalesDate,@DateMonth,@Username,@SaleType)";
+                string queryString = "INSERT INTO sales_table(" +
+                    "user_username," +                    
+                    "sale_type," +                    
+                    "date," +                   
+                    "order_id)" +
+                    "VALUES(@username,@saleType,@date,@orderID)";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@salesTitle",newSale.SalesTitle);                
-                command.Parameters.AddWithValue("@SalesTransaction",newSale.SalesTransactionValue);               
-                command.Parameters.AddWithValue("@TotalNumberProducts",newSale.TotalNumberOfProducts);
-                command.Parameters.AddWithValue("@SalesDate",newSale.SalesDate);
-                command.Parameters.AddWithValue("@DateMonth",newSale.DateMonth);
-                command.Parameters.AddWithValue("@Username",newSale.Administrator.Username);
-                command.Parameters.AddWithValue("@SaleType",newSale.TypeOfSale);
+                command.Parameters.AddWithValue("@username", newSale.Administrator.Username);                
+                command.Parameters.AddWithValue("@saleType", newSale.SalesType.ToString());               
+                command.Parameters.AddWithValue("@date", newSale.Date);
+                command.Parameters.AddWithValue("@orderID", newSale.Orders.Order_ID);               
                 await command.ExecuteReaderAsync();
             }
         }
@@ -62,19 +54,15 @@ namespace SoftEngWebEmployee.Repository
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
                 {
-                    listOfSales.Add(
-                            new SalesModel()
-                            {
-                                Sales_ID = int.Parse(reader["sales_id"].ToString()),
-                                SalesTitle = reader["sales_title"].ToString(),                               
-                                SalesTransactionValue = double.Parse(reader["sales_transaction_value"].ToString()),                                
-                                TotalNumberOfProducts = int.Parse(reader["total_number_of_products"].ToString()),
-                                SalesDate = DateTime.Parse(reader["sales_date"].ToString()),
-                                DateMonth = int.Parse(reader["date_month"].ToString()),
-                                Administrator = await AdministratorRepository.GetInstance().FindAdministrator(reader["user_username"].ToString()),
-                                TypeOfSale = GenerateSaleType(reader["sale_type"].ToString())
-                            }
-                        );
+                    SalesModel sales = new SalesModel()
+                    {
+                        SalesID = int.Parse(reader["sales_id"].ToString()),
+                        Administrator = await AdministratorRepository.GetInstance().FindAdministrator(reader["user_username"].ToString()),
+                        Date = DateTime.Parse(reader["date"].ToString()),
+                        SalesType = GenerateSaleType(reader["sale_type"].ToString()),
+                        Orders = await OrdersRepository.GetInstance().FetchOrder(int.Parse(reader["order_id"].ToString()))
+                    };                    
+                    listOfSales.Add(sales);
                 }
             }
             return listOfSales;

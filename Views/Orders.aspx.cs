@@ -47,18 +47,14 @@ namespace SoftEngWebEmployee.Views
                 var generatedNotification = NotificationRepository
                     .GetInstance()
                     .GenerateNotification(NotificationType.FinishedOrder, OrderIDFinish.Text);
-                NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);
+                NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);                
                 
-                var orders = await OrdersRepository.GetInstance().FetchOrder(int.Parse(OrderIDFinish.Text));
                 var salesModel = new SalesModel()
                 {
-                    SalesTitle = "Finished Order",
-                    SalesTransactionValue = orders.OrderTotalPrice,
-                    TotalNumberOfProducts = orders.SpecificOrdersModel.Count,
-                    SalesDate = DateTime.Now,
-                    DateMonth = DateTime.Now.Month,
+                    SalesType = Constants.SalesType.Order,
                     Administrator = await AdministratorRepository.GetInstance().FindAdministrator(UserSession.GetLoggedInUser()),
-                    TypeOfSale = SalesType.Order
+                    Date = DateTime.Now,
+                    Orders = await OrdersRepository.GetInstance().FetchOrder(int.Parse(OrderIDFinish.Text))
                 };
                 await SalesRepository.GetInstance().InsertNewSale(salesModel);
                 Response.Redirect(Request.RawUrl,false);
