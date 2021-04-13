@@ -17,5 +17,6 @@ namespace SoftEngWebEmployee.Helpers
         }
         public enum SalesType { Onsite, Order }
         public enum EmployeeType { Administrator, Employee }
+        public enum UserStatus { Active, InActive }
     }
 }

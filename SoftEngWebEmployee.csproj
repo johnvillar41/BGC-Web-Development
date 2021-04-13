@@ -306,8 +306,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Models\AdministratorModel.cs" />
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\InformationModel.cs" />
     <Compile Include="Models\NotificationsModel.cs" />
+    <Compile Include="Models\OnsiteProductsTransactionModel.cs" />
+    <Compile Include="Models\OnsiteTransactionModel.cs" />
     <Compile Include="Models\OrdersModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ReportsModel.cs" />

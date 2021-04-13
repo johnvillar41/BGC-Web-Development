@@ -5,13 +5,11 @@ namespace SoftEngWebEmployee.Models
 {
     public class SalesModel
     {
-        public int Sales_ID { get; set; }
-        public string SalesTitle { get; set; }        
-        public double SalesTransactionValue { get; set; }       
-        public int TotalNumberOfProducts { get; set; }
-        public DateTime SalesDate { get; set; }
-        public int DateMonth { get; set; }        
+        public int SalesID { get; set; }
+        public SalesType SalesType { get; set; }
         public AdministratorModel Administrator { get; set; }
-        public SalesType TypeOfSale { get; set; }       
+        public DateTime Date { get; set; }
+        public OrdersModel Orders { get; set; }
+        public OnsiteTransactionModel OnsiteTransaction { get; set; }
     }
 }
