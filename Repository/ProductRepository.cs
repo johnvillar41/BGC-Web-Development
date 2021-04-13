@@ -73,8 +73,8 @@ namespace SoftEngWebEmployee.Repository
                 MySqlDataReader reader = command.ExecuteReader();
                 while (await reader.ReadAsync())
                 {
-                    string base64String = reader["product_picture"].ToString();
-                    byte[] blob = Convert.FromBase64String(base64String);
+
+                    string base64String = Convert.ToBase64String((byte[])(reader["product_picture"]));
                     productModel = new ProductModel()
                     {
                         Product_ID = int.Parse(reader["product_id"].ToString()),
