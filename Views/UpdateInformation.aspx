@@ -11,29 +11,55 @@
             <div class="col-lg-6">
                 <%if (DisplayProduct() != null) %>
                 <%{ %>
-                <h3><b>Update Information for: <%=DisplayProduct().ProductName.ToString() %></b></h3>
+                <!--<h3><b>Update Information for: <%=DisplayProduct().ProductName.ToString() %></b></h3>-->
+                <h3><b>Update Information</b></h3>
                 <%} %>
             </div>
 
         </div>
         <hr />
         <div class="row">
-            <div class="col-lg-6">
-                <div class="mb-3 ">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <!--
                     <label for="exampleFormControlInput1" class="form-label">Product ID</label>
                     <asp:TextBox ID="ProductIDTextBox" runat="server" CssClass="form-control" ReadOnly></asp:TextBox>
+                    -->
+
+                    <img class="rounded-circle mt-5" src="..." width="200" height="200">
+                    <div>
+                        <br />
+                    </div>
+
+                    <fieldset disabled>
+                        <div class="mb-3">
+                            <label for="disabledTextInput" class="form-label">Product Name</label>
+                            <input type="text" id="disabledTextInput" class="form-control" placeholder="Product Name">
+                        </div>
+                    </fieldset>
+
+
                 </div>
+
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Product Information</label>
-                    <asp:TextBox ID="InformationTextBox" runat="server" CssClass="form-control" Rows="3" TextMode="MultiLine" required></asp:TextBox>
                 </div>
-                <asp:Button ID="BtnSubmitInformation" OnClick="BtnSubmitInformation_Click" runat="server" Text="Button" />
+                <div>
+                    <br />
+                </div>
+                <asp:Button ID="BtnSubmitInformation" OnClick="BtnSubmitInformation_Click" runat="server" Text="Save" />
             </div>
+
+
             <div class="col-lg-3">
+                <label for="exampleFormControlInput1" class="form-label">Product Information</label>
+                    <asp:TextBox ID="InformationTextBox" runat="server" CssClass="form-control" Rows="3" TextMode="MultiLine" required></asp:TextBox>
+
             </div>
 
             <div class="col-lg-3">
+         
             </div>
+
 
         </div>
     </div>
