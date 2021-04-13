@@ -328,6 +328,7 @@
     <Compile Include="Repository\SalesRepository.cs" />
     <Compile Include="Repository\SpecificOrdersRepository.cs" />
     <Compile Include="Helpers\UserSession.cs" />
+    <Compile Include="Repository\UserProfileRepository.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
