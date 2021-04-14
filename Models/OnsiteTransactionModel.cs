@@ -10,5 +10,6 @@ namespace SoftEngWebEmployee.Models
         public int TransactionID { get; set; }
         public CustomerModel Customer { get; set; }
         public int TotalSale { get; set; }
+        public List<OnsiteProductsTransactionModel> OnsiteProductTransactionList { get; set; }
     }
 }

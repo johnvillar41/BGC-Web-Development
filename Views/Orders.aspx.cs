@@ -54,7 +54,8 @@ namespace SoftEngWebEmployee.Views
                     SalesType = Constants.SalesType.Order,
                     Administrator = await AdministratorRepository.GetInstance().FindAdministrator(UserSession.GetLoggedInUser()),
                     Date = DateTime.Now,
-                    Orders = await OrdersRepository.GetInstance().FetchOrder(int.Parse(OrderIDFinish.Text))
+                    Orders = await OrdersRepository.GetInstance().FetchOrder(int.Parse(OrderIDFinish.Text)),
+                    OnsiteTransaction = null
                 };
                 await SalesRepository.GetInstance().InsertNewSale(salesModel);
                 Response.Redirect(Request.RawUrl,false);
