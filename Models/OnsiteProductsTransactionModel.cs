@@ -8,7 +8,7 @@ namespace SoftEngWebEmployee.Models
     public class OnsiteProductsTransactionModel
     {
         public int OnsiteProductTransactionID { get; set; }
-        public int OnsiteTransactionID { get; set; }      
+        public int TransactionID { get; set; }      
         public ProductModel Product { get; set; }
         public int TotalProductsCount { get; set; }
     }

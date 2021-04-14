@@ -11,6 +11,6 @@ namespace SoftEngWebEmployee.Models
         public int OrdersID { get; set; }
         public int ProductID { get; set; }
         public int TotalOrders { get; set; }
-        public ProductModel ProductsModel { get; set; }
+        public ProductModel ProductsModel { get; set; }        
     }
 }

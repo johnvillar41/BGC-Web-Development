@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Sales.aspx.cs" Inherits="SoftEngWebEmployee.Views.Sales" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="Sales.aspx.cs" Inherits="SoftEngWebEmployee.Views.Sales" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <p>Sales Here</p>
@@ -32,7 +32,7 @@
     <a class="btn btn-primary" data-bs-toggle="modal" href="#modal" role="button">View Transactions List</a>
     <a class="btn btn-primary" data-bs-toggle="modal" href="#modal" role="button">Create Transaction</a>
 
-    
+
 
     <ul class="nav nav-tabs" id="trans" role="tablist">
         <li class="nav-item">
@@ -46,84 +46,36 @@
     <div class="tab-content" id="myTabContent">
         <!-- View All Transactions tab -->
         <div class="tab-pane fade show active" id="view" role="tabpanel" aria-labelledby="view-transactions">
-            <div>
-                <div class="table-bordered table-condensed table-responsive" style="height: 600px">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Product</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%for (int i = 0; i < 100; i++) %>
-                            <%{ %>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Added</td>
-                                <td>Product(s) in the Inventory</td>
-                                <td>John Doe</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View All Details</button>
-                                    <!-- Code for Modal, feel free to change or relocate-->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="form-group">
-                                                            <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="message-text" class="col-form-label">Message:</label>
-                                                            <textarea class="form-control" id="message-text"></textarea>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Send message</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Updated</td>
-                                <td>Product(s) in the Inventory</td>
-                                <td>John Doe</td>
-                                <td>April 1, 2021</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Deleted</td>
-                                <td>Product(s) in the Inventory</td>
-                                <td>John Doe</td>
-                                <td>April 1, 2021</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Added</td>
-                                <td>Sales</td>
-                                <td>John Doe</td>
-                                <td>April 1, 2021</td>
-                            </tr>
-                        </tbody>
-                        <%} %>
-                    </table>
-                </div>
+
+            <div class="table-bordered table-condensed table-responsive" style="height: 600px">
+                <asp:Repeater ID="SalesRepeater" runat="server" OnItemCommand="SalesRepeater_ItemCommand">
+                    <HeaderTemplate>
+                        <div class="table-bordered table-condensed table-responsive" style="height: 500px">
+                            <table border="1" class="table table-striped">
+                                <tr>
+                                    <th scope="col">Sales ID</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Type Of Sale</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Details</th>
+                                </tr>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <tr>
+                            <td><%# DataBinder.Eval(Container.DataItem, "SalesID") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem, "Administrator.Username") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem, "SalesType") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem, "Date") %></td>
+                            <td>
+                                <asp:Button ID="ButtonShowModal" CommandName="SalesCommand" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Orders.Order_ID") %>' CssClass="btn btn-primary" data-target="#exampleModal" data-toggle="modal" runat="server" Text="View All Details" />
+                            </td>
+                        </tr>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </table>
+                         </div>
+                    </FooterTemplate>
+                </asp:Repeater>
             </div>
         </div>
 
@@ -135,7 +87,7 @@
                     <div class="modal-content">
                         buy something
                     <div class="modal-footer">
-                    <!-- Toogle to second dialog -->
+                        <!-- Toogle to second dialog -->
                         <button type="button" class="btn btn-primary">Buy</button>
                     </div>
                     </div>
@@ -144,6 +96,4 @@
             <a class="btn btn-primary" data-bs-toggle="modal" href="#cart" role="button">Add to Cart</a>
         </div>
     </div>
-
-
 </asp:Content>
