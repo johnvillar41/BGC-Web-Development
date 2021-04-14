@@ -1,9 +1,40 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="UserProfile.aspx.cs" Inherits="SoftEngWebEmployee.Views.UserProfile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+        body {
+            background: #fdfd96;
+        }
+
+        .profile-button {
+            background: #eba800;
+            color: black;
+            box-shadow: none;
+            border: none
+        }
+
+            .profile-button:hover {
+                background: #876100;
+            }
+
+            .profile-button:focus {
+                background: #876100;
+                box-shadow: none
+            }
+
+            .profile-button:active {
+                background: #876100;
+                box-shadow: none
+            }
+
+        .rounded-lg{
+            background: #f5f5dc;
+        }
 
 
-    <div class="container rounded bg-white mt-5">
+    </style>
+
+    <div class="container rounded-lg mt-5" style="border: 5px solid orange">
         <div class="row">
             <div class="col-md-4 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -14,9 +45,9 @@
 
                     </div>
 
-                    <div class="input-group mb-3">                        
-                        <asp:FileUpload type="file" ID="ProfileFileUpload" CssClass="form-control" runat="server" />    
-                        <asp:Button ID="UploadImage" CssClass="btn btn-info" runat="server" Text="Upload" OnClick="UploadImage_Click" />
+                    <div class="input-group mb-3">
+                        <asp:FileUpload type="file" ID="ProfileFileUpload" CssClass="form-control" runat="server" />
+                        <asp:Button ID="UploadImage" CssClass="btn btn-info" runat="server" style="background-color:#eba800;border-color:none" Text ="Upload" OnClick="UploadImage_Click" />
                     </div>
 
                     <asp:Label ID="FullnameLabel" CssClass="font-weight-bold" runat="server" Text="Label"></asp:Label>
@@ -34,7 +65,7 @@
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
 
-                        <h6 class="text-right">User Profile</h6>
+                        <h6 class="text-right"><b><u>USER PROFILE</u></b></h6>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6">
@@ -64,8 +95,8 @@
                         <div class="col-md-6">
                         </div>
                     </div>
-                    <div class="mt-5">                        
-                        <asp:Button ID="ButtonSaveProfile" class="btn btn-primary profile-button" runat="server" Text="Save Profile" OnClick="ButtonSaveProfile_Click" />
+                    <div class="mt-5">
+                        <asp:Button ID="ButtonSaveProfile" class="btn btn-primary profile-button" runat="server" Text="Save Profile" OnClick="ButtonSaveProfile_Click" ForeColor="Black" />
                     </div>
                 </div>
             </div>

@@ -15,7 +15,8 @@ namespace SoftEngWebEmployee.Views
         {
             if (!IsPostBack)
             {
-                DisplayInventoryTable();
+                LoadCategories();
+                DisplayInventoryTables();                
             }
         }
 
@@ -28,12 +29,18 @@ namespace SoftEngWebEmployee.Views
             }
         }
 
-        private async void DisplayInventoryTable()
+        private async void LoadCategories()
         {
+            var categories = await ProductRepository.GetInstance().FetchAllCategories();
+            CategoryRepeater.DataSource = categories;
+            CategoryRepeater.DataBind();
+        }
 
+        private async void DisplayInventoryTables()
+        {
             var inventory = await ProductRepository.GetInstance().FetchAllProducts();            
-            InventoryRepeater.DataSource = inventory;
-            InventoryRepeater.DataBind();
+            SearchRepeater.DataSource = inventory;
+            SearchRepeater.DataBind();
 
             var greenhouse = await ProductRepository.GetInstance().FetchGHProducts();
             GHRepeater.DataSource = greenhouse;
@@ -42,6 +49,19 @@ namespace SoftEngWebEmployee.Views
             var hydroponics = await ProductRepository.GetInstance().FetchHPProducts();
             HPRepeater.DataSource = hydroponics;
             HPRepeater.DataBind();
+        }
+        
+        protected void SearchOnCategory(object source, RepeaterCommandEventArgs e)
+        {
+            string category="";
+
+            // categoryAll.ToString();
+
+            // For categories other than All Products
+            category = CategoryRepeater.Items.ToString();
+            var newSearch = ProductRepository.GetInstance().FetchOnCategory(category);
+            SearchRepeater.DataSource = newSearch;
+            SearchRepeater.DataBind();
         }
     }
 }

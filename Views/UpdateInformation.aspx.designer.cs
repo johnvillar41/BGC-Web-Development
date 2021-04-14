@@ -24,15 +24,6 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.WebControls.TextBox ProductIDTextBox;
 
         /// <summary>
-        /// BtnSubmitInformation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnSubmitInformation;
-
-        /// <summary>
         /// InformationTextBox control.
         /// </summary>
         /// <remarks>
@@ -40,5 +31,14 @@ namespace SoftEngWebEmployee.Views
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox InformationTextBox;
+
+        /// <summary>
+        /// BtnSubmitInformation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnSubmitInformation;
     }
 }
