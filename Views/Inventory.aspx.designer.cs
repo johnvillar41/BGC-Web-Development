@@ -15,13 +15,40 @@ namespace SoftEngWebEmployee.Views
     {
 
         /// <summary>
-        /// InventoryRepeater control.
+        /// categoryAll control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater InventoryRepeater;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor categoryAll;
+
+        /// <summary>
+        /// CategoryRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater CategoryRepeater;
+
+        /// <summary>
+        /// LogoutButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button LogoutButton;
+
+        /// <summary>
+        /// SearchRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater SearchRepeater;
 
         /// <summary>
         /// GHRepeater control.
