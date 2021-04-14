@@ -5,9 +5,15 @@
     <%{ %>
     <%foreach (var product in SpecificOrdersList) %>
     <%{ %>
+    <p><%=product.ProductID%></p>
+    <p><%=product.SpecificOrdersId%></p>
+    <p><%=product.TotalOrders%></p>
+    <hr />
     <p><%=product.ProductsModel.ProductName%></p>
     <p><%=product.ProductsModel.ProductCategory%></p>
-    <p><%=product.OrdersID%></p>
+    <p><%=product.ProductsModel.ProductDescription%></p>
+    <p><%=product.ProductsModel.ProductPrice%></p>
+    <p><%=product.ProductsModel.ProductPicture%></p>
     <br />
     <%} %>
     <%} %>

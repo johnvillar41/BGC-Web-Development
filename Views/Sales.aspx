@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="Sales.aspx.cs" Inherits="SoftEngWebEmployee.Views.Sales" %>
 
+<%@ Import Namespace="SoftEngWebEmployee.Helpers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <p>Sales Here</p>
 
@@ -67,7 +68,10 @@
                             <td><%# DataBinder.Eval(Container.DataItem, "SalesType") %></td>
                             <td><%# DataBinder.Eval(Container.DataItem, "Date") %></td>
                             <td>
-                                <asp:Button ID="ButtonShowModal" CommandName="SalesCommand" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Orders.Order_ID") %>' CssClass="btn btn-primary" data-target="#exampleModal" data-toggle="modal" runat="server" Text="View All Details" />
+                                <asp:PlaceHolder ID="PlaceHolder1" Visible='<%# Eval("SalesType").ToString()=="Order" %>' runat="server">
+                                    <asp:Button ID="ButtonShowModal" CommandName="SalesCommand" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Orders.Order_ID") %>' CssClass="btn btn-primary" data-target="#exampleModal" data-toggle="modal" runat="server" Text="View All Details" />
+                                </asp:PlaceHolder>
+                                <!--Add a new Place holder for Onsite button-->
                             </td>
                         </tr>
                     </ItemTemplate>
