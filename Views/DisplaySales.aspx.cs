@@ -14,28 +14,40 @@ namespace SoftEngWebEmployee.Views
             //TODO FIX ERROR HERE
             if (!IsPostBack)
             {
-                if (Request.QueryString["orderid"] != null)
+                //if (Request.QueryString["orderid"] != null)
+                //{
+                //    string id = Request.QueryString["orderid"].ToString();
+                //    LoadOrders(id);
+                //}
+                //else
+                //{
+                //    string id = Request.QueryString["onsiteID"].ToString();
+                //    LoadOnsites(id);
+                //}
+                if (Session["id"]!=null)
                 {
-                    string id = Request.QueryString["orderid"].ToString();
-                    LoadOrders(id);
-                }
-                else
-                {
-                    string id = Request.QueryString["onsiteid"].ToString();
+                    string id = Session["id"].ToString();
+                    //LoadOrders(id);
                     LoadOnsites(id);
-                }
+                }                
             }           
            
         }
         private async void LoadOrders(string id)
         {
             var orderList = await SpecificOrdersRepository.GetInstance().FetchSpecificOrders(int.Parse(id));
-            SpecificOrdersList = orderList;
+            if (orderList != null)
+            {
+                SpecificOrdersList = orderList;
+            }            
         }
         private async void LoadOnsites(string id)
         {
             var onsiteProductsList = await OnsiteProductsTransactionRepository.GetInstance().FetchTransactionsGivenByID(int.Parse(id));
-            OnSiteProducts = onsiteProductsList;
+            if (onsiteProductsList != null)
+            {
+                OnSiteProducts = onsiteProductsList;
+            }            
         }
     }
 }

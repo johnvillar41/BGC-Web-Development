@@ -1,7 +1,5 @@
-﻿using SoftEngWebEmployee.Models;
-using SoftEngWebEmployee.Repository;
+﻿using SoftEngWebEmployee.Repository;
 using System;
-using System.Collections.Generic;
 using System.Web.UI.WebControls;
 
 namespace SoftEngWebEmployee.Views
@@ -57,14 +55,15 @@ namespace SoftEngWebEmployee.Views
             string[] arguments = btn.CommandArgument.Split(';');
             string orderID = arguments[0];
             string onsiteID = arguments[1];
-            if (orderID != null)
-            {
-                Response.Redirect("DisplaySales.aspx?orderID=" + orderID);
+            if (orderID.Length != 0)
+            {                
+                Session["id"] = orderID;                
             }
             else
             {
-                Response.Redirect("DisplaySales.aspx?onsiteID=" + onsiteID);
-            }            
+                Session["id"] = onsiteID;               
+            }
+            Response.Redirect("DisplaySales");
         }
     }
 }
