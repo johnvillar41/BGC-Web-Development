@@ -68,10 +68,9 @@
                             <td><%# DataBinder.Eval(Container.DataItem, "SalesType") %></td>
                             <td><%# DataBinder.Eval(Container.DataItem, "Date") %></td>
                             <td>
-                                <asp:PlaceHolder ID="PlaceHolder1" Visible='<%# Eval("SalesType").ToString()=="Order" %>' runat="server">
-                                    <asp:Button ID="ButtonShowModal" CommandName="SalesCommand" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Orders.Order_ID") %>' CssClass="btn btn-primary" data-target="#exampleModal" data-toggle="modal" runat="server" Text="View All Details" />
-                                </asp:PlaceHolder>
-                                <!--Add a new Place holder for Onsite button-->
+                                
+                                <asp:Button  OnClick="IDS_Click" ID="IDS" CommandName ="SalesCommand" CommandArgument='<%# Eval("Orders.Order_ID") +";"+Eval("OnsiteTransaction.TransactionID") %>' CssClass="btn btn-primary" runat="server" Text="View All Details" />
+                               
                             </td>
                         </tr>
                     </ItemTemplate>

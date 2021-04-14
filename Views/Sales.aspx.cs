@@ -18,18 +18,53 @@ namespace SoftEngWebEmployee.Views
         private async void LoadSales()
         {
             var salesList = await SalesRepository.GetInstance().FetchAllSales();
-            SalesRepeater.DataSource = salesList;
-            SalesRepeater.DataBind();
+            if (salesList != null)
+            {
+                SalesRepeater.DataSource = salesList;
+                SalesRepeater.DataBind();
+            }           
         }
+        
 
         protected void SalesRepeater_ItemCommand(object source, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
         {
+            //if (e.CommandName == "SalesCommand")
+            //{
+            //    int id = int.Parse(e.CommandArgument.ToString());
+            //    Response.Redirect("DisplaySales.aspx?orderid=" + id);
+            //    return;
+            //}
+            //if (e.CommandName == "SalesCommandOnSite")
+            //{
+            //    int id = int.Parse(e.CommandArgument.ToString());
+            //    Response.Redirect("DisplaySales.aspx?onsiteid=" + id);
+            //    return;
+            //}
+           
+            //switch (e.CommandName)
+            //{                
+            //    case "SalesCommand":
+            //        int orderID = int.Parse(e.CommandArgument.ToString());
+            //        Response.Redirect("DisplaySales.aspx?orderid=" + orderID);
+            //        break;              
+            //}
 
-            if (e.CommandName == "SalesCommand")
+        }
+
+        protected void IDS_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            string[] arguments = btn.CommandArgument.Split(';');
+            string orderID = arguments[0];
+            string onsiteID = arguments[1];
+            if (orderID != null)
             {
-                int id = int.Parse(e.CommandArgument.ToString());
-                Response.Redirect("DisplaySales.aspx?id=" + id);             
+                Response.Redirect("DisplaySales.aspx?orderID=" + orderID);
             }
-        }       
+            else
+            {
+                Response.Redirect("DisplaySales.aspx?onsiteID=" + onsiteID);
+            }            
+        }
     }
 }

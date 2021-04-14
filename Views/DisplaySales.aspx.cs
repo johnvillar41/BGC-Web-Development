@@ -8,15 +8,24 @@ namespace SoftEngWebEmployee.Views
     public partial class DisplaySales : System.Web.UI.Page
     {
         public List<SpecificOrdersModel> SpecificOrdersList { get; set; }
+        public List<OnsiteProductsTransactionModel> OnSiteProducts { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["id"] != null && !IsPostBack)
+            //TODO FIX ERROR HERE
+            if (!IsPostBack)
             {
-                string id = Request.QueryString["id"].ToString();
-                LoadOrders(id);
-            }
-            //Request for onsiteID
-            //if()
+                if (Request.QueryString["orderid"] != null)
+                {
+                    string id = Request.QueryString["orderid"].ToString();
+                    LoadOrders(id);
+                }
+                else
+                {
+                    string id = Request.QueryString["onsiteid"].ToString();
+                    LoadOnsites(id);
+                }
+            }           
+           
         }
         private async void LoadOrders(string id)
         {
@@ -25,7 +34,8 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadOnsites(string id)
         {
-            //TODO
+            var onsiteProductsList = await OnsiteProductsTransactionRepository.GetInstance().FetchTransactionsGivenByID(int.Parse(id));
+            OnSiteProducts = onsiteProductsList;
         }
     }
 }

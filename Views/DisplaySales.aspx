@@ -17,4 +17,20 @@
     <br />
     <%} %>
     <%} %>
+    <%else if (OnSiteProducts != null) %>
+    <%{ %>
+    <%foreach (var product in OnSiteProducts) %>
+    <%{ %>
+    <p><%=product.OnsiteProductTransactionID%></p>
+    <p><%=product.TotalProductsCount%></p>
+    <p><%=product.TransactionID%></p>
+    <hr />
+    <p><%=product.Product.ProductName%></p>
+    <p><%=product.Product.ProductCategory%></p>
+    <p><%=product.Product.ProductDescription%></p>
+    <p><%=product.Product.ProductPrice%></p>
+    <p><%=product.Product.ProductPicture%></p>
+    <br />
+    <%} %>
+    <%} %>
 </asp:Content>

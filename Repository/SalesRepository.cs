@@ -54,14 +54,31 @@ namespace SoftEngWebEmployee.Repository
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
                 {
-                    SalesModel sales = new SalesModel()
+                    SalesModel sales = null;
+                    if (reader["sale_type"].ToString().Equals("Onsite"))
                     {
-                        SalesID = int.Parse(reader["sales_id"].ToString()),
-                        Administrator = await AdministratorRepository.GetInstance().FindAdministrator(reader["user_username"].ToString()),
-                        Date = DateTime.Parse(reader["date"].ToString()),
-                        SalesType = GenerateSaleType(reader["sale_type"].ToString()),
-                        Orders = await OrdersRepository.GetInstance().FetchOrder(int.Parse(reader["order_id"].ToString()))
-                    };                    
+                        sales = new SalesModel()
+                        {
+                            SalesID = int.Parse(reader["sales_id"].ToString()),
+                            Administrator = await AdministratorRepository.GetInstance().FindAdministrator(reader["user_username"].ToString()),
+                            Date = DateTime.Parse(reader["date"].ToString()),
+                            SalesType = GenerateSaleType(reader["sale_type"].ToString()),
+                            OnsiteTransaction = await OnsiteTransactionRepository.GetInstance().FetchOnsiteTransaction(int.Parse(reader["onsite_transaction_id"].ToString()))
+                            
+                        };
+                    }
+                    else if (reader["sale_type"].ToString().Equals("Order"))
+                    {
+                        sales = new SalesModel()
+                        {
+                            SalesID = int.Parse(reader["sales_id"].ToString()),
+                            Administrator = await AdministratorRepository.GetInstance().FindAdministrator(reader["user_username"].ToString()),
+                            Date = DateTime.Parse(reader["date"].ToString()),
+                            SalesType = GenerateSaleType(reader["sale_type"].ToString()),
+                            Orders = await OrdersRepository.GetInstance().FetchOrder(int.Parse(reader["order_id"].ToString()))
+                        };
+                    }
+                                     
                     listOfSales.Add(sales);
                 }
             }
@@ -73,7 +90,7 @@ namespace SoftEngWebEmployee.Repository
             {
                 case "Order":
                     return SalesType.Order;
-                case "OnSite":
+                case "Onsite":
                     return SalesType.Onsite;
             }
             return SalesType.Onsite;
