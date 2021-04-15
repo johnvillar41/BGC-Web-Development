@@ -20,15 +20,6 @@ namespace SoftEngWebEmployee.Views
             }
         }
 
-        protected void InventoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-            if (e.CommandName == "InventoryCommand")
-            {
-                int id = int.Parse(e.CommandArgument.ToString());
-                Response.Redirect("UpdateInformation.aspx?id=" + id);
-            }
-        }
-
         private async void LoadCategories()
         {
             var categories = await ProductRepository.GetInstance().FetchAllCategories();
@@ -50,18 +41,24 @@ namespace SoftEngWebEmployee.Views
             HPRepeater.DataSource = hydroponics;
             HPRepeater.DataBind();
         }
-        
-        protected void SearchOnCategory(object source, RepeaterCommandEventArgs e)
+
+        protected async void category_Click(object sender, EventArgs e)
         {
-            string category="";
+            string category = (sender as Button).Text.ToString();
 
-            // categoryAll.ToString();
-
-            // For categories other than All Products
-            category = CategoryRepeater.Items.ToString();
-            var newSearch = ProductRepository.GetInstance().FetchOnCategory(category);
-            SearchRepeater.DataSource = newSearch;
-            SearchRepeater.DataBind();
+            if (category=="All Products")
+            {
+                var newSearch = await ProductRepository.GetInstance().FetchAllProducts();
+                SearchRepeater.DataSource = newSearch;
+                SearchRepeater.DataBind();
+            }
+            else
+            {
+                var newSearch = await ProductRepository.GetInstance().FetchOnCategory(category);
+                SearchRepeater.DataSource = newSearch;
+                SearchRepeater.DataBind();
+            }
         }
+        
     }
 }
