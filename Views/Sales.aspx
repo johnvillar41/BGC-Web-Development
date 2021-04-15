@@ -49,7 +49,7 @@
         <div class="tab-pane fade show active" id="view" role="tabpanel" aria-labelledby="view-transactions">
 
             <div class="table-bordered table-condensed table-responsive" style="height: 600px">
-                <asp:Repeater ID="SalesRepeater" runat="server" OnItemCommand="SalesRepeater_ItemCommand">
+                <asp:Repeater ID="SalesRepeater" runat="server">
                     <HeaderTemplate>
                         <div class="table-bordered table-condensed table-responsive" style="height: 500px">
                             <table border="1" class="table table-striped">
@@ -67,10 +67,8 @@
                             <td><%# DataBinder.Eval(Container.DataItem, "Administrator.Username") %></td>
                             <td><%# DataBinder.Eval(Container.DataItem, "SalesType") %></td>
                             <td><%# DataBinder.Eval(Container.DataItem, "Date") %></td>
-                            <td>
-                                
-                                <asp:Button  OnClick="IDS_Click" ID="IDS" CommandName ="SalesCommand" CommandArgument='<%# Eval("Orders.Order_ID") +";"+Eval("OnsiteTransaction.TransactionID") %>' CssClass="btn btn-primary" runat="server" Text="View All Details" />
-                               
+                            <td>                                
+                                <asp:Button  OnClick="IDS_Click" ID="IDS" CommandName ="SalesCommand" CommandArgument='<%# Eval("Orders.Order_ID") +";"+Eval("OnsiteTransaction.TransactionID") %>' CssClass="btn btn-primary" runat="server" Text="View All Details" />                               
                             </td>
                         </tr>
                     </ItemTemplate>

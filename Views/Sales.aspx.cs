@@ -22,32 +22,6 @@ namespace SoftEngWebEmployee.Views
                 SalesRepeater.DataBind();
             }           
         }
-        
-
-        protected void SalesRepeater_ItemCommand(object source, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
-        {
-            //if (e.CommandName == "SalesCommand")
-            //{
-            //    int id = int.Parse(e.CommandArgument.ToString());
-            //    Response.Redirect("DisplaySales.aspx?orderid=" + id);
-            //    return;
-            //}
-            //if (e.CommandName == "SalesCommandOnSite")
-            //{
-            //    int id = int.Parse(e.CommandArgument.ToString());
-            //    Response.Redirect("DisplaySales.aspx?onsiteid=" + id);
-            //    return;
-            //}
-           
-            //switch (e.CommandName)
-            //{                
-            //    case "SalesCommand":
-            //        int orderID = int.Parse(e.CommandArgument.ToString());
-            //        Response.Redirect("DisplaySales.aspx?orderid=" + orderID);
-            //        break;              
-            //}
-
-        }
 
         protected void IDS_Click(object sender, EventArgs e)
         {
@@ -57,11 +31,11 @@ namespace SoftEngWebEmployee.Views
             string onsiteID = arguments[1];
             if (orderID.Length != 0)
             {                
-                Session["id"] = orderID;                
+                Session["orderID"] = orderID;                
             }
             else
             {
-                Session["id"] = onsiteID;               
+                Session["onsiteID"] = onsiteID;               
             }
             Response.Redirect("DisplaySales");
         }

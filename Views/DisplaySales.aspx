@@ -5,8 +5,8 @@
     <%{ %>
     <%foreach (var product in SpecificOrdersList) %>
     <%{ %>
-    <p><%=product.ProductID%></p>
-    <p><%=product.SpecificOrdersId%></p>
+    <p>Order ID: <%=product.SpecificOrdersId%></p>
+    <p><%=product.ProductID%></p>    
     <p><%=product.TotalOrders%></p>
     <hr />
     <p><%=product.ProductsModel.ProductName%></p>
@@ -21,7 +21,7 @@
     <%{ %>
     <%foreach (var product in OnSiteProducts) %>
     <%{ %>
-    <p><%=product.OnsiteProductTransactionID%></p>
+    <p>OnsiteID: <%=product.OnsiteProductTransactionID%></p>
     <p><%=product.TotalProductsCount%></p>
     <p><%=product.TransactionID%></p>
     <hr />

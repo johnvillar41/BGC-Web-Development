@@ -10,28 +10,21 @@ namespace SoftEngWebEmployee.Views
         public List<SpecificOrdersModel> SpecificOrdersList { get; set; }
         public List<OnsiteProductsTransactionModel> OnSiteProducts { get; set; }
         protected void Page_Load(object sender, EventArgs e)
-        {
-            //TODO FIX ERROR HERE
+        {           
             if (!IsPostBack)
-            {
-                //if (Request.QueryString["orderid"] != null)
-                //{
-                //    string id = Request.QueryString["orderid"].ToString();
-                //    LoadOrders(id);
-                //}
-                //else
-                //{
-                //    string id = Request.QueryString["onsiteID"].ToString();
-                //    LoadOnsites(id);
-                //}
-                if (Session["id"]!=null)
+            {                
+                if (Session["orderID"] !=null)
                 {
-                    string id = Session["id"].ToString();
-                    //LoadOrders(id);
+                    string id = Session["orderID"].ToString();
+                    LoadOrders(id);                    
+                } 
+                else if(Session["onsiteID"] != null)
+                {
+                    string id = Session["onsiteID"].ToString();
                     LoadOnsites(id);
-                }                
+                }
+                Session.Clear();
             }           
-           
         }
         private async void LoadOrders(string id)
         {
