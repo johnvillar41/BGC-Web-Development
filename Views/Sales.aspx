@@ -2,36 +2,7 @@
 
 <%@ Import Namespace="SoftEngWebEmployee.Helpers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <p>Sales Here</p>
 
-    <!-- First modal dialog -->
-    <div class="modal fade" id="modal" aria-hidden="true" aria-labelledby="..." tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                Modal 1 Text
-      <div class="modal-footer">
-          <!-- Toogle to second dialog -->
-          <button class="btn btn-primary" data-bs-target="#modal2" data-bs-toggle="modal" data-bs-dismiss="modal">Open #modal2</button>
-      </div>
-            </div>
-        </div>
-    </div>
-    <!-- Second modal dialog -->
-    <div class="modal fade" id="modal2" aria-hidden="true" aria-labelledby="..." tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                ...
-      <div class="modal-footer">
-          <!-- Toogle to first dialog, `data-bs-dismiss` attribute can be omitted - clicking on link will close dialog anyway -->
-          <!-- <a class="btn btn-primary" href="#modal" data-bs-toggle="modal" role="button">Open #modal</a> -->
-          <a class="btn btn-primary" href="#modal" data-bs-toggle="modal" data-bs-dismiss="modal" role="button">Open #modal</a>
-      </div>
-            </div>
-        </div>
-    </div>
-    <!-- Open first dialog -->
-    <a class="btn btn-primary" data-bs-toggle="modal" href="#modal" role="button">View Transactions List</a>
-    <a class="btn btn-primary" data-bs-toggle="modal" href="#modal" role="button">Create Transaction</a>
 
 
 
@@ -65,10 +36,10 @@
                         <tr>
                             <td><%# DataBinder.Eval(Container.DataItem, "SalesID") %></td>
                             <td><%# DataBinder.Eval(Container.DataItem, "Administrator.Username") %></td>
-                            <td><%# DataBinder.Eval(Container.DataItem, "SalesType") %></td>
+                            <td><span class="badge bg-dark"><%# Eval("SalesType")%></span> </td>
                             <td><%# DataBinder.Eval(Container.DataItem, "Date") %></td>
-                            <td>                                
-                                <asp:Button  OnClick="IDS_Click" ID="IDS" CommandName ="SalesCommand" CommandArgument='<%# Eval("Orders.Order_ID") +";"+Eval("OnsiteTransaction.TransactionID") %>' CssClass="btn btn-primary" runat="server" Text="View All Details" />                               
+                            <td>
+                                <asp:Button OnClick="IDS_Click" ID="IDS" CommandName="SalesCommand" CommandArgument='<%# Eval("Orders.Order_ID") +";"+Eval("OnsiteTransaction.TransactionID") %>' CssClass="btn btn-primary" runat="server" Text="View All Details" />
                             </td>
                         </tr>
                     </ItemTemplate>
@@ -82,19 +53,34 @@
 
         <!-- Create Transaction tab -->
         <div class="tab-pane fade" id="create" role="tabpanel" aria-labelledby="create-transactions">
-            <!-- First modal dialog -->
-            <div class="modal fade" id="cart" aria-hidden="true" aria-labelledby="..." tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-xl">
-                    <div class="modal-content">
-                        buy something
-                    <div class="modal-footer">
-                        <!-- Toogle to second dialog -->
-                        <button type="button" class="btn btn-primary">Buy</button>
-                    </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
+                        <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+
+                            <asp:Repeater ID="ProductsRepeater" runat="server">
+                                <ItemTemplate>
+                                    <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
+                                        <div class="card">
+                                            <!-- Possible change: modify size of picture space -->
+                                            <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
+                                                <p class="card-text"><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
+                                                <a class="btn btn-primary" data-bs-toggle="modal" href="#cart" role="button">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
+
+                            </asp:Repeater>
+
+                        </div>
                     </div>
                 </div>
             </div>
-            <a class="btn btn-primary" data-bs-toggle="modal" href="#cart" role="button">Add to Cart</a>
+           
+            <!-- Cart here -->
         </div>
     </div>
 </asp:Content>
