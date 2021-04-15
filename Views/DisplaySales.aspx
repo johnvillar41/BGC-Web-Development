@@ -5,32 +5,58 @@
     <%{ %>
     <%foreach (var product in SpecificOrdersList) %>
     <%{ %>
-    <p>Order ID: <%=product.SpecificOrdersId%></p>
-    <p><%=product.ProductID%></p>    
-    <p><%=product.TotalOrders%></p>
-    <hr />
-    <p><%=product.ProductsModel.ProductName%></p>
-    <p><%=product.ProductsModel.ProductCategory%></p>
-    <p><%=product.ProductsModel.ProductDescription%></p>
-    <p><%=product.ProductsModel.ProductPrice%></p>
-    <p><%=product.ProductsModel.ProductPicture%></p>
-    <br />
+    <div class="card">
+        <div class="card-header">
+            Specific Order ID: <%=product.SpecificOrdersId%>
+        </div>
+        <div class="card-body">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-3">
+                        <center><img alt="" height="100px" width="100px" src="data:image/jpeg;base64,<%=product.ProductsModel.ProductPicture%>" /></td></center>
+                    </div>
+                    <div class="col-9">
+                        <h5 class="card-title">Product ID: <%=product.ProductID%></h5>
+                        <p class="card-text">Total Orders: <%=product.TotalOrders%></p>
+                        <p class="card-text"><%=product.ProductsModel.ProductName%></p>
+                        <p class="card-text"><%=product.ProductsModel.ProductCategory%></p>
+                        <p class="card-text"><%=product.ProductsModel.ProductDescription%></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <%} %>
     <%} %>
     <%else if (OnSiteProducts != null) %>
     <%{ %>
     <%foreach (var product in OnSiteProducts) %>
     <%{ %>
-    <p>OnsiteID: <%=product.OnsiteProductTransactionID%></p>
-    <p><%=product.TotalProductsCount%></p>
-    <p><%=product.TransactionID%></p>
-    <hr />
-    <p><%=product.Product.ProductName%></p>
-    <p><%=product.Product.ProductCategory%></p>
-    <p><%=product.Product.ProductDescription%></p>
-    <p><%=product.Product.ProductPrice%></p>
-    <p><%=product.Product.ProductPicture%></p>
-    <br />
+    <div class="card">
+        <div class="card-header">
+           OnsiteID: <%=product.OnsiteProductTransactionID%>
+        </div>
+        <div class="card-body">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-3">
+                        <center><img alt="" height="100px" width="100px" src="data:image/jpeg;base64,<%=product.Product.ProductPicture%>" /></td></center>
+                    </div>
+                    <div class="col-9">
+                        <h5 class="card-title">Product ID: <%=product.Product.Product_ID %></h5>
+                        <p class="card-text">Total Orders: <%=product.TotalProductsCount%></p>
+                        <p class="card-text"><%=product.Product.ProductName%></p>
+                        <p class="card-text"><%=product.Product.ProductCategory%></p>
+                        <p class="card-text"><%=product.Product.ProductDescription%></p>
+                        <p class="card-text"><%=product.Product.ProductPrice%></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <%} %>
     <%} %>
 </asp:Content>
