@@ -3,7 +3,11 @@
 <%@ Import Namespace="SoftEngWebEmployee.Helpers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-
+    <style>
+        .scrolling-wrapper {
+            overflow-x: auto;
+        }
+    </style>
 
 
     <ul class="nav nav-tabs" id="trans" role="tablist">
@@ -54,7 +58,7 @@
         <!-- Create Transaction tab -->
         <div class="tab-pane fade" id="create" role="tabpanel" aria-labelledby="create-transactions">
             <div class="col-4 col-xl-4 col-lg-4 col-md-6 col-sm-5">
-                <div class="btn-group">
+                <div class="btn-group" style="margin-bottom: 10px; margin-top: 10px">
                     <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false">
                         Select Category
                     </button>
@@ -62,10 +66,10 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <asp:Repeater ID="CategoryRepeater" runat="server"  OnItemCreated="CategoryRepeater_ItemCreated">
+                        <asp:Repeater ID="CategoryRepeater" runat="server" OnItemCreated="CategoryRepeater_ItemCreated">
                             <ItemTemplate>
                                 <a runat="server" class="dropdown-item" id="categorySelected">
-                                    <li>                                         
+                                    <li>
                                         <asp:Button ID="CategoryBtn" runat="server" CssClass="dropdown-item" Text='<%# DataBinder.Eval(Container.DataItem,"ProductCategory") %>' OnClick="CategoryBtn_Click" />
                                     </li>
                                 </a>
@@ -98,7 +102,6 @@
                                 </div>
                             </ContentTemplate>
                             <Triggers>
-                              
                             </Triggers>
 
                         </asp:UpdatePanel>
