@@ -58,17 +58,16 @@
                     <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
                         <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
 
-                            <asp:Repeater ID="SearchRepeater" runat="server">
+                            <asp:Repeater ID="ProductsRepeater" runat="server">
                                 <ItemTemplate>
                                     <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
                                         <div class="card">
                                             <!-- Possible change: modify size of picture space -->
                                             <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                                             <div class="card-body">
-                                                <h5 class="card-title"><!-- DataBinder.Eval(Container.DataItem,"ProductName")--> %></h5>
-                                                <p class="card-text"><!-- DataBinder.Eval(Container.DataItem,"ProductDescription")--> %></p>
-                                                <a class="btn btn-secondary" data-bs-toggle="modal" href="#updateProduct">Details</a>
-                                                <a class="btn btn-danger float-right" data-bs-toggle="modal" href="#deleteProduct">Delete</a>
+                                                <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
+                                                <p class="card-text"><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
+                                                <a class="btn btn-primary" data-bs-toggle="modal" href="#cart" role="button">Add to Cart</a>
                                             </div>
                                         </div>
                                     </div>
@@ -80,7 +79,7 @@
                     </div>
                 </div>
             </div>
-            <a class="btn btn-primary" data-bs-toggle="modal" href="#cart" role="button">Add to Cart</a>
+           
             <!-- Cart here -->
         </div>
     </div>

@@ -11,6 +11,7 @@ namespace SoftEngWebEmployee.Views
             if (!IsPostBack)
             {
                 LoadSales();
+                LoadProducts();
             }
         }
         private async void LoadSales()
@@ -21,6 +22,12 @@ namespace SoftEngWebEmployee.Views
                 SalesRepeater.DataSource = salesList;
                 SalesRepeater.DataBind();
             }           
+        }
+        private async void LoadProducts()
+        {
+            var productsList = await ProductRepository.GetInstance().FetchAllProducts();
+            ProductsRepeater.DataSource = productsList;
+            ProductsRepeater.DataBind();
         }
 
         protected void IDS_Click(object sender, EventArgs e)
