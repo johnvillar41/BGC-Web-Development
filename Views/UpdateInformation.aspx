@@ -3,30 +3,40 @@
 <%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
 <%@ Import Namespace="SoftEngWebEmployee.Repository" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-        .rounded-lg{
+        .rounded-lg {
             background: #f8e7d1;
-
         }
+
+        .form-control {
+            resize: both
+        }
+
+        .button {
+            background: #eba800;
+            color: black;
+            box-shadow: none;
+            border: initial
+        }
+
     </style>
 
 
-    <div class="col-lg-12">
-        <div class="row">
-            <div class="col-lg-6">
-                <%if (DisplayProduct() != null) %>
-                <%{ %>
-                <!--<h3><b>Update Information for: <%=DisplayProduct().ProductName.ToString() %></b></h3>-->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-3">
+
                 <h3><b>Update Information</b></h3>
-                <%} %>
             </div>
         </div>
         <hr />
+             
 
         <div class="container rounded-lg" style="border: 5px solid orange">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-4">
                     <div class="mb-5">
                         <!--
                     <label for="exampleFormControlInput1" class="form-label">Product ID</label>
@@ -48,18 +58,26 @@
 
                 </div>
 
-                <div class="col-md-4">
-                    <div class="mb-5">
-                    </div>
+                <div class="col-8">
+                    <div class="mt-5">
+                    
 
                     <label for="exampleFormControlInput1" class="form-label"><b>Product Information</b></label>
-                    <asp:TextBox ID="InformationTextBox" runat="server" CssClass="form-control" Rows="7" TextMode="MultiLine"></asp:TextBox>
+                    <asp:TextBox ID="InformationTextBox" runat="server" CssClass="form-control" width="500px" height="200px" TextMode="MultiLine"></asp:TextBox>
+
+
                     <div>
                         <br />
                     </div>
-                    <asp:Button ID="BtnSubmitInformation" OnClick="BtnSubmitInformation_Click" runat="server" Text="Save" />
+                    
+                        <asp:Button ID="BtnSubmitInformation" CssClass="button" OnClick="BtnSubmitInformation_Click" runat="server" Text="Save" />
+                        </div>
+
+             <div class="mb-5">
+                 </div>
+                    <br />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </asp:Content>

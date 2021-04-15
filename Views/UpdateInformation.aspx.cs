@@ -51,7 +51,8 @@ namespace SoftEngWebEmployee.Views
                 ProductInformation = information
             };
             await InformationRepository.GetInstance().UpdateInformation(informationObj);
-            Response.Redirect("Information.aspx",false);
+            Response.Redirect("Information.aspx", false);
+
         }
     }
 }
