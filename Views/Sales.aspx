@@ -17,6 +17,9 @@
         <li class="nav-item">
             <a class="nav-link" id="create-transactions" data-toggle="tab" href="#create" role="tab" aria-controls="profile" aria-selected="false">Create Transaction</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" id="cart-transactions" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">Cart Transaction</a>
+        </li>
     </ul>
 
     <div class="tab-content" id="myTabContent">
@@ -61,26 +64,27 @@
                 <div class="row">
                     <div class="col-lg-6 col-sm-12">
                         <div class="btn-group" style="margin-bottom: 10px; margin-top: 10px">
-                        <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false">
-                            Select Category
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference">
-                            <li><asp:Button ID="CategoryBtnAllProducts" runat="server" CssClass="dropdown-item" Text="All Products" OnClick="CategoryBtnAllProducts_Click" /></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <asp:Repeater ID="CategoryRepeater" runat="server" OnItemCreated="CategoryRepeater_ItemCreated">
-                                <ItemTemplate>
-                                    <a runat="server" class="dropdown-item" id="categorySelected">                                        
-                                        <li>
-                                            <asp:Button ID="CategoryBtn" runat="server" CssClass="dropdown-item" Text='<%# DataBinder.Eval(Container.DataItem,"ProductCategory") %>' OnClick="CategoryBtn_Click" />
-                                        </li>
-                                    </a>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </ul>
+                            <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Category
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference">
+                                <li>
+                                    <asp:Button ID="CategoryBtnAllProducts" runat="server" CssClass="dropdown-item" Text="All Products" OnClick="CategoryBtnAllProducts_Click" /></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <asp:Repeater ID="CategoryRepeater" runat="server" OnItemCreated="CategoryRepeater_ItemCreated">
+                                    <ItemTemplate>
+                                        <a runat="server" class="dropdown-item" id="categorySelected">
+                                            <li>
+                                                <asp:Button ID="CategoryBtn" runat="server" CssClass="dropdown-item" Text='<%# DataBinder.Eval(Container.DataItem,"ProductCategory") %>' OnClick="CategoryBtn_Click" />
+                                            </li>
+                                        </a>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </ul>
+                        </div>
                     </div>
-                    </div>                   
                 </div>
 
             </div>
@@ -119,8 +123,46 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Cart here -->
+        <!-- Cart transaction tab-->
+
+        <div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="cart-transactions">
+            <div class="col-12">
+                <div class="row">
+                    <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
+                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                            <ContentTemplate>
+                                <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+                                    <asp:Repeater ID="CartRepeater" runat="server">
+                                        <ItemTemplate>
+                                            <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
+                                                <div class="card" style="max-width: 35rem; height: 420px">
+                                                    <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
+                                                        <p class="card-text"><b>Description: </b><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
+
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <a class="btn btn-primary" data-bs-toggle="modal" href="#cart" role="button">Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="CategoryBtnAllProducts" EventName="Click" />
+                            </Triggers>
+
+                        </asp:UpdatePanel>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+
 </asp:Content>
