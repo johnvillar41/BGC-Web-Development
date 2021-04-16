@@ -10,32 +10,32 @@
             background: #f8e7d1;
         }
 
-        .form-control {
-            resize: both
+        .form-control{           
+           width:80%;
+           margin-right:10%;
+           margin-left:10%;           
         }
 
         .button {
             background: #eba800;
             color: black;
             box-shadow: none;
-            border: initial
+            border: initial;
+            width: 100%;
         }
     </style>
 
 
     <div class="row">
-        <div class="col-md-4">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-3">
 
-                <h3><b>Update Information</b></h3>
-            </div>
-        </div>
+        <h3><b>Update Information</b></h3>
+
         <hr />
 
 
         <div class="container rounded-lg" style="border: 5px solid orange">
             <div class="row">
-                <div class="col-4">
+                <div class="col-lg-4 col-sm-12">
                     <div class="mb-5">
                         <!--
                     <label for="exampleFormControlInput1" class="form-label">Product ID</label>
@@ -62,20 +62,24 @@
 
                 </div>
 
-                <div class="col-8">
+                <div class="col-lg-8 col-sm-12">
+
                     <div class="mt-5">
-
-
-                        <label for="exampleFormControlInput1" class="form-label"><b>Product Information</b></label>
-                        <asp:TextBox ID="InformationTextBox" runat="server" CssClass="form-control" Width="500px" Height="200px" TextMode="MultiLine"></asp:TextBox>
-
+                        <div class="row">
+                            <label for="InformationTextBox" class="form-label" style="margin-right: 10%; margin-left: 10%;">
+                                <b>Product Information</b></label>
+                            <asp:TextBox ID="InformationTextBox" runat="server" CssClass="form-control" Height="200px" TextMode="MultiLine"></asp:TextBox>
+                        </div>
 
                         <div>
                             <br />
                         </div>
+                        <div class="row">
+                            <center><asp:Button ID="BtnSubmitInformation" style="width:50%; background-color:darkorange;" CssClass="btn" OnClick="BtnSubmitInformation_Click" runat="server" Text="Save" /></center>
+                        </div>
 
-                        <asp:Button ID="BtnSubmitInformation" CssClass="button" OnClick="BtnSubmitInformation_Click" runat="server" Text="Save" />
                     </div>
+
 
                     <div class="mb-5">
                     </div>
