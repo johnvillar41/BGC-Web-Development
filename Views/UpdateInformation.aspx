@@ -20,7 +20,6 @@
             box-shadow: none;
             border: initial
         }
-
     </style>
 
 
@@ -32,7 +31,7 @@
             </div>
         </div>
         <hr />
-             
+
 
         <div class="container rounded-lg" style="border: 5px solid orange">
             <div class="row">
@@ -42,8 +41,10 @@
                     <label for="exampleFormControlInput1" class="form-label">Product ID</label>
                     <asp:TextBox ID="ProductIDTextBox" runat="server" CssClass="form-control" ReadOnly></asp:TextBox>
                     -->
-
+                        <%if (DisplayProduct() != null) %>
+                        <%{ %>
                         <center><img class="rounded-circle mt-5" src="data:image/png;base64,<%=DisplayProduct().ProductPicture%>" width="200" height="200"></center>
+                        <%} %>
                         <div>
                             <br />
                         </div>
@@ -51,7 +52,10 @@
                         <fieldset disabled>
                             <div class="mb-3">
                                 <center><label for="disabledTextInput" class="form-label"><b>Product Name</b></label></center>
+                                <%if (DisplayProduct() != null) %>
+                                <%{ %>
                                 <center><input type="text" id="disabledTextInput" class="form-control" placeholder="<%=DisplayProduct().ProductName %>"></center>
+                                <%} %>
                             </div>
                         </fieldset>
                     </div>
@@ -60,24 +64,24 @@
 
                 <div class="col-8">
                     <div class="mt-5">
-                    
-
-                    <label for="exampleFormControlInput1" class="form-label"><b>Product Information</b></label>
-                    <asp:TextBox ID="InformationTextBox" runat="server" CssClass="form-control" width="500px" height="200px" TextMode="MultiLine"></asp:TextBox>
 
 
-                    <div>
-                        <br />
-                    </div>
-                    
-                        <asp:Button ID="BtnSubmitInformation" CssClass="button" OnClick="BtnSubmitInformation_Click" runat="server" Text="Save" />
+                        <label for="exampleFormControlInput1" class="form-label"><b>Product Information</b></label>
+                        <asp:TextBox ID="InformationTextBox" runat="server" CssClass="form-control" Width="500px" Height="200px" TextMode="MultiLine"></asp:TextBox>
+
+
+                        <div>
+                            <br />
                         </div>
 
-             <div class="mb-5">
-                 </div>
-                    <br />
+                        <asp:Button ID="BtnSubmitInformation" CssClass="button" OnClick="BtnSubmitInformation_Click" runat="server" Text="Save" />
                     </div>
+
+                    <div class="mb-5">
+                    </div>
+                    <br />
                 </div>
             </div>
         </div>
+    </div>
 </asp:Content>
