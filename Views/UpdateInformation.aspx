@@ -43,7 +43,7 @@
                     <asp:TextBox ID="ProductIDTextBox" runat="server" CssClass="form-control" ReadOnly></asp:TextBox>
                     -->
 
-                        <center><img class="rounded-circle mt-5" src="..." width="200" height="200"></center>
+                        <center><img class="rounded-circle mt-5" src="data:image/png;base64,<%=DisplayProduct().ProductPicture%>" width="200" height="200"></center>
                         <div>
                             <br />
                         </div>
@@ -51,7 +51,7 @@
                         <fieldset disabled>
                             <div class="mb-3">
                                 <center><label for="disabledTextInput" class="form-label"><b>Product Name</b></label></center>
-                                <center><input type="text" id="disabledTextInput" class="form-control" placeholder="Product Name"></center>
+                                <center><input type="text" id="disabledTextInput" class="form-control" placeholder="<%=DisplayProduct().ProductName %>"></center>
                             </div>
                         </fieldset>
                     </div>
