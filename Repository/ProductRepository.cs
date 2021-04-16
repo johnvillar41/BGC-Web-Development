@@ -54,11 +54,13 @@ namespace SoftEngWebEmployee.Repository
             return productList;
         }
 
-        //Search by productName
-        //View Product Details
-        //Delete Product
-        //Add Product
-        //Update product
+        // / Search Product
+        // / Dropdown text updates
+        // x Update dropdown visuals to have arrow
+        // x View Product Details
+        // x Delete Product
+        // x Add Product
+        // x Update product
 
         public async Task<List<ProductModel>> FetchGHProducts()
         {
@@ -145,6 +147,35 @@ namespace SoftEngWebEmployee.Repository
             {
                 await connection.OpenAsync();
                 string queryString = "SELECT * FROM products_table WHERE product_category='"+category+"'";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                {
+                    string base64String = Convert.ToBase64String((byte[])(reader["product_picture"]));
+                    productList.Add(
+                            new ProductModel()
+                            {
+                                Product_ID = int.Parse(reader["product_id"].ToString()),
+                                ProductName = reader["product_name"].ToString(),
+                                ProductDescription = reader["product_description"].ToString(),
+                                ProductPicture = base64String,
+                                ProductStocks = int.Parse(reader["product_stocks"].ToString()),
+                                ProductCategory = reader["product_category"].ToString(),
+                                ProductPrice = int.Parse(reader["product_price"].ToString())
+                            }
+                        );
+                }
+            }
+            return productList;
+        }
+
+        public async Task<List<ProductModel>> FetchOnSearch(string search)
+        {
+            List<ProductModel> productList = new List<ProductModel>();
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT * FROM products_table WHERE product_name LIKE '" + search + "%'";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
