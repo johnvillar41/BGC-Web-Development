@@ -9,13 +9,12 @@ namespace SoftEngWebEmployee.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
             if (!IsPostBack)
             {
                 LoadSales();
                 LoadProducts();
                 LoadCategories();
-            }           
+            }
         }
         private async void LoadSales()
         {
@@ -24,7 +23,7 @@ namespace SoftEngWebEmployee.Views
             {
                 SalesRepeater.DataSource = salesList;
                 SalesRepeater.DataBind();
-            }           
+            }
         }
         private async void LoadProducts()
         {
@@ -46,42 +45,41 @@ namespace SoftEngWebEmployee.Views
             string orderID = arguments[0];
             string onsiteID = arguments[1];
             if (orderID.Length != 0)
-            {                
-                Session["orderID"] = orderID;                
+            {
+                Session["orderID"] = orderID;
             }
             else
             {
-                Session["onsiteID"] = onsiteID;               
+                Session["onsiteID"] = onsiteID;
             }
             Response.Redirect("DisplaySales");
-        }    
+        }
 
         protected async void CategoryBtn_Click(object sender, EventArgs e)
         {
             string category = (sender as Button).Text.ToString();
 
-            if (category == "All Products")
-            {
-                var newSearch = await ProductRepository.GetInstance().FetchAllProducts();
-                ProductsRepeater.DataSource = newSearch;
-                ProductsRepeater.DataBind();
-            }
-            else
-            {
-                var newSearch = await ProductRepository.GetInstance().FetchOnCategory(category);
-                ProductsRepeater.DataSource = newSearch;
-                ProductsRepeater.DataBind();
-            }            
-        }     
+            var newSearch = await ProductRepository.GetInstance().FetchOnCategory(category);
+            ProductsRepeater.DataSource = newSearch;
+            ProductsRepeater.DataBind();
+
+        }
 
 
         protected void CategoryRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
-        {            
+        {
             Button button = e.Item.FindControl("CategoryBtn") as Button;
 
             ScriptManager current = ScriptManager.GetCurrent(Page);
             if (current != null)
                 current.RegisterAsyncPostBackControl(button);
+        }
+
+        protected async void CategoryBtnAllProducts_Click(object sender, EventArgs e)
+        {
+            var newSearch = await ProductRepository.GetInstance().FetchAllProducts();
+            ProductsRepeater.DataSource = newSearch;
+            ProductsRepeater.DataBind();
         }
     }
 }

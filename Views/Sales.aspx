@@ -58,25 +58,31 @@
         <!-- Create Transaction tab -->
         <div class="tab-pane fade" id="create" role="tabpanel" aria-labelledby="create-transactions">
             <div class="col-4 col-xl-4 col-lg-4 col-md-6 col-sm-5">
-                <div class="btn-group" style="margin-bottom: 10px; margin-top: 10px">
-                    <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false">
-                        Select Category
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference">
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <asp:Repeater ID="CategoryRepeater" runat="server" OnItemCreated="CategoryRepeater_ItemCreated">
-                            <ItemTemplate>
-                                <a runat="server" class="dropdown-item" id="categorySelected">
-                                    <li>
-                                        <asp:Button ID="CategoryBtn" runat="server" CssClass="dropdown-item" Text='<%# DataBinder.Eval(Container.DataItem,"ProductCategory") %>' OnClick="CategoryBtn_Click" />
-                                    </li>
-                                </a>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </ul>
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="btn-group" style="margin-bottom: 10px; margin-top: 10px">
+                        <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false">
+                            Select Category
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference">
+                            <li><asp:Button ID="CategoryBtnAllProducts" runat="server" CssClass="dropdown-item" Text="All Products" OnClick="CategoryBtnAllProducts_Click" /></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <asp:Repeater ID="CategoryRepeater" runat="server" OnItemCreated="CategoryRepeater_ItemCreated">
+                                <ItemTemplate>
+                                    <a runat="server" class="dropdown-item" id="categorySelected">                                        
+                                        <li>
+                                            <asp:Button ID="CategoryBtn" runat="server" CssClass="dropdown-item" Text='<%# DataBinder.Eval(Container.DataItem,"ProductCategory") %>' OnClick="CategoryBtn_Click" />
+                                        </li>
+                                    </a>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </ul>
+                    </div>
+                    </div>                   
                 </div>
+
             </div>
             <div class="col-12">
                 <div class="row">
@@ -88,11 +94,14 @@
                                     <asp:Repeater ID="ProductsRepeater" runat="server">
                                         <ItemTemplate>
                                             <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
-                                                <div class="card">
+                                                <div class="card" style="max-width: 35rem; height: 420px">
                                                     <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
                                                     <div class="card-body">
                                                         <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                                         <p class="card-text"><b>Description: </b><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
+
+                                                    </div>
+                                                    <div class="card-footer">
                                                         <a class="btn btn-primary" data-bs-toggle="modal" href="#cart" role="button">Add to Cart</a>
                                                     </div>
                                                 </div>
@@ -102,12 +111,10 @@
                                 </div>
                             </ContentTemplate>
                             <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="CategoryBtnAllProducts" EventName="Click" />
                             </Triggers>
 
                         </asp:UpdatePanel>
-
-
-
                     </div>
                 </div>
             </div>
