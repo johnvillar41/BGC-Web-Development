@@ -64,9 +64,9 @@
             color: #fff;
         }
 
-            .login-main-text h2 {
-                font-weight: 300;
-            }
+        .login-main-text h2 {
+            font-weight: 300;
+        }
 
         .btn-black {
             background-color: #000 !important;
