@@ -8,6 +8,12 @@
         public int ProductPrice { get; set; }
         public string ProductPicture { get; set; }
         public int ProductStocks { get; set; }
-        public string ProductCategory { get; set; }       
+        public string ProductCategory { get; set; }
+        /// <summary>
+        ///     This property is for cart user only
+        ///     This will consider the total number of proucts
+        ///     inside the cart.
+        /// </summary>
+        public int TotalNumberOfCartItems { get; set; }
     }
 }

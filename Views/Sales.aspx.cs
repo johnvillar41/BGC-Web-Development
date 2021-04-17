@@ -2,7 +2,6 @@
 using SoftEngWebEmployee.Models;
 using SoftEngWebEmployee.Repository;
 using System;
-using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -71,8 +70,11 @@ namespace SoftEngWebEmployee.Views
         {
             Button button = (Button)sender;
             var productID = button.CommandArgument.ToString();
-            ProductModel product = await ProductRepository.GetInstance().GetProducts(int.Parse(productID));
+            RepeaterItem repeaterItem = button.NamingContainer as RepeaterItem;
+            var totalItem = (TextBox)repeaterItem.FindControl("TotalItems");
 
+            ProductModel product = await ProductRepository.GetInstance().GetProducts(int.Parse(productID));
+            product.TotalNumberOfCartItems = int.Parse(totalItem.Text);
             Cart.AddCartItem(product);
             LoadCart();
         }
@@ -93,12 +95,9 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadSales()
         {
-            var salesList = await SalesRepository.GetInstance().FetchAllSales();
-            if (salesList != null)
-            {
-                SalesRepeater.DataSource = salesList;
-                SalesRepeater.DataBind();
-            }
+            var salesList = await SalesRepository.GetInstance().FetchAllSales();            
+            SalesRepeater.DataSource = salesList;
+            SalesRepeater.DataBind();            
         }
         private async void LoadProducts()
         {

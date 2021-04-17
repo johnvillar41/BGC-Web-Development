@@ -8,17 +8,22 @@ namespace SoftEngWebEmployee.Helpers
 {
     public class Cart
     {
-        private static List<ProductModel> CartItems = new List<ProductModel>();       
+        private static readonly List<ProductModel> CartItems = new List<ProductModel>();       
         public static void ClearCartItems()
         {
             CartItems.Clear();
         }
         public static void AddCartItem(ProductModel cartProduct)
         {
-            if (cartProduct != null)
+            foreach(var product in CartItems)
             {
-                CartItems.Add(cartProduct);
-            }            
+                if(product.Product_ID == cartProduct.Product_ID)
+                {
+                    product.TotalNumberOfCartItems = cartProduct.TotalNumberOfCartItems;
+                    return;
+                }
+            }
+            CartItems.Add(cartProduct);
         }
         public static List<ProductModel> GetCartItems()
         {

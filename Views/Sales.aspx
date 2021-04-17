@@ -106,8 +106,17 @@
                                                         <p class="card-text"><b>Description: </b><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
 
                                                     </div>
-                                                    <div class="card-footer">                                                        
-                                                        <asp:Button ID="BtnAddToCart" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Button" OnClick="BtnAddToCart_Click"/>
+                                                    <div class="card-footer">
+                                                        <div class="col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <asp:TextBox ID="TotalItems" runat="server" CssClass="form-control mb-1"></asp:TextBox>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <asp:Button ID="BtnAddToCart" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Add To Cart" OnClick="BtnAddToCart_Click" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -143,7 +152,7 @@
                                                         <p class="card-text"><b>Description: </b><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
 
                                                     </div>
-                                                    <div class="card-footer">       
+                                                    <div class="card-footer">                                                       
                                                         <asp:Button ID="BtnRemoveCartItem" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Remove Item" OnClick="BtnRemoveCartItem_Click" />
                                                     </div>
                                                 </div>
@@ -159,9 +168,13 @@
                         </asp:UpdatePanel>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-3 mt-3">
+                        <button class="btn btn-success btn-block">Confirm</button>
+                    </div>
+                </div>
             </div>
 
         </div>
     </div>
-
 </asp:Content>
