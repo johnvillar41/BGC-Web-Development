@@ -29,6 +29,15 @@ namespace SoftEngWebEmployee.Helpers
         {
             return CartItems;
         }
+        public static int CalculateTotalSales()
+        {
+            int totalSale = 0;
+            foreach(var product in CartItems)
+            {
+                totalSale += product.ProductPrice;
+            }
+            return totalSale;
+        }
         public static void RemoveCartItem(int productID)
         {
             foreach(var product in CartItems)
@@ -39,6 +48,22 @@ namespace SoftEngWebEmployee.Helpers
                     break;
                 }
             }
+        }
+        public static List<OnsiteProductsTransactionModel> ListOfOnsiteProducts(int transactionID)
+        {
+            List<OnsiteProductsTransactionModel> OnSiteProducts = new List<OnsiteProductsTransactionModel>();
+            foreach(var product in CartItems)
+            {
+                OnSiteProducts.Add(
+                        new OnsiteProductsTransactionModel
+                        {                            
+                            TransactionID = transactionID,                         
+                            Product = product,
+                            TotalProductsCount = CartItems.Count
+                        }
+                    );
+            }
+            return OnSiteProducts;
         }
     }
 }

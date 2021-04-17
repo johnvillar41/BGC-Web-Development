@@ -24,6 +24,20 @@ namespace SoftEngWebEmployee.Repository
             }
             return instance;
         }
+        public async Task InsertTransactions(OnsiteProductsTransactionModel onsiteProductsTransactionModel)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "INSERT INTO onsite_products_transaction_table(transaction_id,product_id,total_product_count)" +
+                    "VALUES(@transactionID,@productID,@totalCount)";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@transactionID", onsiteProductsTransactionModel.TransactionID);
+                command.Parameters.AddWithValue("@productID", onsiteProductsTransactionModel.Product.Product_ID);
+                command.Parameters.AddWithValue("@totalCount", onsiteProductsTransactionModel.TotalProductsCount);
+                await command.ExecuteNonQueryAsync();
+            }
+        }
         public async Task<List<OnsiteProductsTransactionModel>> FetchTransactionsGivenByID(int transactionID)
         {
             List<OnsiteProductsTransactionModel> onsiteProductList = new List<OnsiteProductsTransactionModel>();

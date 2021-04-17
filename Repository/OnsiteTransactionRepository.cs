@@ -18,11 +18,34 @@ namespace SoftEngWebEmployee.Repository
         }
         public static OnsiteTransactionRepository GetInstance()
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = new OnsiteTransactionRepository();
             }
             return instance;
+        }
+        public async Task<MySqlConnection> InsertNewTransaction(OnsiteTransactionModel onsiteTransaction)
+        {
+            MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING);
+            await connection.OpenAsync();
+            string queryString = "INSERT INTO onsite_transaction_table(total_sale)VALUES(@totalSale)";
+            MySqlCommand command = new MySqlCommand(queryString, connection);
+            command.Parameters.AddWithValue("@totalSale", onsiteTransaction.TotalSale);
+            await command.ExecuteNonQueryAsync();
+            return connection;
+        }
+        public async Task<int> FetchLastInsertID(MySqlConnection connection)
+        {
+            int lastIdInserted = 0;
+            string queryString = "SELECT LAST_INSERT_ID()";
+            MySqlCommand command = new MySqlCommand(queryString, connection);
+            MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
+            if (await reader.ReadAsync())
+            {
+                lastIdInserted = reader.GetInt32(0);
+            }
+            await connection.CloseAsync();
+            return lastIdInserted;
         }
         public async Task<OnsiteTransactionModel> FetchOnsiteTransaction(int transactionID)
         {
@@ -34,7 +57,7 @@ namespace SoftEngWebEmployee.Repository
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@transactionID", transactionID);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
-                while(await reader.ReadAsync())
+                while (await reader.ReadAsync())
                 {
                     onsiteTransactionModel = new OnsiteTransactionModel()
                     {
@@ -46,6 +69,6 @@ namespace SoftEngWebEmployee.Repository
                 }
             }
             return onsiteTransactionModel;
-        } 
+        }
     }
 }

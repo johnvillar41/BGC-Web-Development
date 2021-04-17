@@ -8,7 +8,16 @@
             overflow-x: auto;
         }
     </style>
-
+    <script type="text/javascript">     
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && charCode < 48) || charCode > 57) {
+                return false;
+            }
+            return true;
+        }     
+    </script>
 
     <ul class="nav nav-tabs" id="trans" role="tablist">
         <li class="nav-item">
@@ -110,7 +119,7 @@
                                                         <div class="col-lg-12">
                                                             <div class="row">
                                                                 <div class="col-6">
-                                                                    <asp:TextBox ID="TotalItems" runat="server" CssClass="form-control mb-1"></asp:TextBox>
+                                                                    <asp:TextBox ID="TotalItems" runat="server" CssClass="form-control mb-1"  onkeypress="return isNumber(event)" onpaste="return false;"></asp:TextBox>
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <asp:Button ID="BtnAddToCart" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Add To Cart" OnClick="BtnAddToCart_Click" />
@@ -150,7 +159,7 @@
                                                     <div class="card-body">
                                                         <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                                         <p class="card-text"><b>Description: </b><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
-
+                                                        <p class="card-text"><b>Total number of items: <%# DataBinder.Eval(Container.DataItem,"TotalNumberOfCartItems") %></b></p>
                                                     </div>
                                                     <div class="card-footer">                                                       
                                                         <asp:Button ID="BtnRemoveCartItem" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Remove Item" OnClick="BtnRemoveCartItem_Click" />
@@ -169,8 +178,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3 mt-3">
-                        <button class="btn btn-success btn-block">Confirm</button>
+                    <div class="col-3 mt-3">                        
+                        <asp:Button ID="BtnConfirmCartOrder" CssClass="btn btn-success btn-block" runat="server" Text="Confirm" OnClick="BtnConfirmCartOrder_Click"/>
                     </div>
                 </div>
             </div>

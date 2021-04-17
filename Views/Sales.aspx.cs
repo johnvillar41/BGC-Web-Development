@@ -93,6 +93,32 @@ namespace SoftEngWebEmployee.Views
             if (current != null)
                 current.RegisterAsyncPostBackControl(button);
         }
+        protected async void BtnConfirmCartOrder_Click(object sender, EventArgs e)
+        {            
+            var onSiteTransaction = new OnsiteTransactionModel
+            {
+                Customer = null,
+                TotalSale = Cart.CalculateTotalSales()                
+            };
+            var connection = await OnsiteTransactionRepository.GetInstance().InsertNewTransaction(onSiteTransaction);
+            var transactionID = await OnsiteTransactionRepository.GetInstance().FetchLastInsertID(connection);
+            var onsiteProducts = Cart.ListOfOnsiteProducts(transactionID);
+            foreach(var onsiteModels in onsiteProducts)
+            {
+                await OnsiteProductsTransactionRepository.GetInstance().InsertTransactions(onsiteModels);
+            }
+            var newSale = new SalesModel
+            {
+                SalesType = Constants.SalesType.Onsite,
+                Administrator = await AdministratorRepository.GetInstance().FindAdministrator(UserSession.GetLoggedInUser()),
+                Date = DateTime.Now,
+                OnsiteTransaction = new OnsiteTransactionModel
+                {
+                    TransactionID = transactionID
+                }
+            };           
+            await SalesRepository.GetInstance().InsertNewSale(newSale);
+        }
         private async void LoadSales()
         {
             var salesList = await SalesRepository.GetInstance().FetchAllSales();            
@@ -116,7 +142,6 @@ namespace SoftEngWebEmployee.Views
             var categories = await ProductRepository.GetInstance().FetchAllCategories();
             CategoryRepeater.DataSource = categories;
             CategoryRepeater.DataBind();
-        }
-
+        }       
     }
 }

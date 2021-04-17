@@ -23,7 +23,7 @@ namespace SoftEngWebEmployee.Repository
             }
             return instance;
         }
-
+        // Should have no order id
         public async Task InsertNewSale(SalesModel newSale)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -32,14 +32,13 @@ namespace SoftEngWebEmployee.Repository
                 string queryString = "INSERT INTO sales_table(" +
                     "user_username," +                    
                     "sale_type," +                    
-                    "date," +                   
-                    "order_id)" +
-                    "VALUES(@username,@saleType,@date,@orderID)";
+                    "date,onsite_transaction_id)" +                
+                    "VALUES(@username,@saleType,@date,@onsiteID)";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@username", newSale.Administrator.Username);                
                 command.Parameters.AddWithValue("@saleType", newSale.SalesType.ToString());               
                 command.Parameters.AddWithValue("@date", newSale.Date);
-                command.Parameters.AddWithValue("@orderID", newSale.Orders.Order_ID);               
+                command.Parameters.AddWithValue("@onsiteID", newSale.OnsiteTransaction.TransactionID);
                 await command.ExecuteReaderAsync();
             }
         }
