@@ -13,7 +13,8 @@ namespace SoftEngWebEmployee.Helpers
             UpdateUser,
             CreateUser,
             CancelledOrder,
-            FinishedOrder
+            FinishedOrder,
+            SoldItem
         }
         public enum SalesType { Onsite, Order }
         public enum EmployeeType { Administrator, Employee }

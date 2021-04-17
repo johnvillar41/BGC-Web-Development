@@ -108,6 +108,16 @@ namespace SoftEngWebEmployee.Repository
                         TypeOfNotification = NotificationType.FinishedOrder
                     };
                     break;
+                case NotificationType.SoldItem:
+                    newNotification = new NotificationsModel
+                    {
+                        NotificationTitle = "Sold Item",
+                        NotificationContent = "Sold Item: "+itemAction,
+                        NotificationDate = DateTime.Today,
+                        Username = UserSession.GetLoggedInUser(),
+                        TypeOfNotification = NotificationType.SoldItem
+                    };
+                    break;
             }
             return newNotification;
         }

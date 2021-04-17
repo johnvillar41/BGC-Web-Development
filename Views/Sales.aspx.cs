@@ -118,6 +118,10 @@ namespace SoftEngWebEmployee.Views
                 }
             };           
             await SalesRepository.GetInstance().InsertNewSale(newSale);
+            var notification = NotificationRepository.GetInstance().GenerateNotification(Constants.NotificationType.SoldItem,onsiteProducts.ToString());
+            NotificationRepository.GetInstance().InsertNewNotification(notification);
+            Cart.ClearCartItems();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
         }
         private async void LoadSales()
         {

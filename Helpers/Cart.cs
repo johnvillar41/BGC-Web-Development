@@ -59,7 +59,7 @@ namespace SoftEngWebEmployee.Helpers
                         {                            
                             TransactionID = transactionID,                         
                             Product = product,
-                            TotalProductsCount = CartItems.Count
+                            TotalProductsCount = product.TotalNumberOfCartItems
                         }
                     );
             }
