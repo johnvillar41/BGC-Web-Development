@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SoftEngWebEmployee.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,16 @@ namespace SoftEngWebEmployee.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                ReportsRepository reportsRepository = new ReportsRepository();
 
+                total_sales.Text = reportsRepository.FetchTotalSales().ToString();
+                total_inventory.Text = reportsRepository.FetchTotalInventory().ToString();
+                total_products.Text = reportsRepository.FetchTotalProducts().ToString();
+
+
+            }
         }
     }
 }

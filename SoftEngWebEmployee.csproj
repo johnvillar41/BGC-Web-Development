@@ -332,6 +332,7 @@
     <Compile Include="Repository\OnsiteTransactionRepository.cs" />
     <Compile Include="Repository\OrdersRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
+    <Compile Include="Repository\ReportsRepository.cs" />
     <Compile Include="Repository\SalesRepository.cs" />
     <Compile Include="Repository\SpecificOrdersRepository.cs" />
     <Compile Include="Helpers\UserSession.cs" />

@@ -11,12 +11,13 @@ namespace SoftEngWebEmployee.Views
 {
     public partial class Inventory : System.Web.UI.Page
     {
+        public ProductModel Details { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 LoadCategories();
-                DisplayInventoryTables();                
+                DisplayInventoryTables();
             }
         }
 
@@ -45,7 +46,8 @@ namespace SoftEngWebEmployee.Views
         protected async void category_Click(object sender, EventArgs e)
         {
             string category = (sender as Button).Text.ToString();
-            dropdownMenuReference1.Text = category;
+            char caret = Convert.ToChar(0x000025BC);
+            dropdownMenuReference1.Text = category+" "+caret;
             if (category=="All Products")
             {
                 var newSearch = await ProductRepository.GetInstance().FetchAllProducts();
@@ -67,6 +69,13 @@ namespace SoftEngWebEmployee.Views
             SearchRepeater.DataSource = newSearch;
             SearchRepeater.DataBind();
         }
+        
+        /*
+        protected void deleteButton_Click(object sender, EventArgs e)
+        {
+            string deleteID = (sender as Button).Text.ToString();
+        }
+        */
 
         protected void CategoryRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
@@ -75,6 +84,15 @@ namespace SoftEngWebEmployee.Views
             ScriptManager current = ScriptManager.GetCurrent(Page);
             if (current != null)
                 current.RegisterAsyncPostBackControl(button);
+        }
+
+        protected async void detailsButton_Click(object sender, EventArgs e)
+        {
+            // string productID = (sender as Label).Text.ToString();
+            Button button = (Button)sender;
+            var productID = button.CommandArgument.ToString();
+            Details = await ProductRepository.GetInstance().FetchProductDetails(productID);
+            
         }
     }
 }
