@@ -31,8 +31,8 @@
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
                         <!-- Dropdown Button -->
-                        <asp:Button ID="dropdownMenuReference1" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Category" />
-
+                        <asp:Button ID="dropdownMenuReference1" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Category &#x25BC;" />
+                        <!-- btn btn-warning dropdown-toggle dropdown-toggle-split  -->
                         <!-- Dropdown List -->
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference1">
                             <li><asp:Button ID="btnCategoryAll" runat="server" CssClass="dropdown-item" Text="All Products" OnClick="category_Click" UseSubmitBehavior="false"/></li>
@@ -59,11 +59,9 @@
     <!-- Text that disappears/changes depending on search results. This is when page is initially loaded.-->
     <p class="fs-5"><i>Use the search bar to display products.</i></p>
     <!-- In case of a search with no results, "No results found."-->
-    <!-- Put a container here for displaying searched products.-->
 
     <!-- Search Repeater -->
     <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
-
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
@@ -76,7 +74,10 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                         <p class="card-text"><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
+                                        <!--
                                         <a class="btn btn-secondary" data-bs-toggle="modal" href="#updateProduct">Details</a>
+                                        -->
+                                        <asp:Button ID="detailsButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-secondary" Text="Details" data-bs-toggle="modal" href="#updateProduct" OnClick="detailsButton_Click" runat="server"/>
                                         <a class="btn btn-danger float-right" data-bs-toggle="modal" href="#deleteProduct">Delete</a>
                                     </div>
                                 </div>
@@ -85,14 +86,10 @@
                     </asp:Repeater>
                 </div>
             </ContentTemplate>
-
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="btnCategoryAll" EventName="Click" />
-            </Triggers>
-           
+            </Triggers>           
         </asp:UpdatePanel>
-
-
     </div>
 
 
@@ -157,7 +154,19 @@
     <div class="modal fade" id="updateProduct" aria-hidden="true" aria-labelledby="..." tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
-                update product details here
+
+                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                    <ContentTemplate>
+                        <p> Name: <%if (Details != null){%> <%=Details.ProductName %> <%}%> </p>
+                        <p> ID: <%if (Details != null){%> <%=Details.Product_ID %> <%}%> </p>
+                        <p> Description: <%if (Details != null){%> <%=Details.ProductDescription %> <%}%> </p>
+                        <p> Category: <%if (Details != null){%> <%=Details.ProductCategory %> <%}%> </p>
+                        <p> Picture: <%if (Details != null){%> <%=Details.ProductPicture %> <%}%> </p>
+                        <p> Number of Stocks: <%if (Details != null){%> <%=Details.ProductStocks %> <%}%> </p>
+                        <p> Price: Php <%if (Details != null){%> <%=Details.ProductPrice %> <%}%> </p>                        
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary">Back</button>
                     <button type="button" class="btn btn-primary">Update Details</button>
@@ -186,7 +195,9 @@
                 Are you sure you want to delete this product?
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary">No</button>
+                    
                     <button type="button" class="btn btn-danger">Yes</button>
+                    
                 </div>
             </div>
         </div>
