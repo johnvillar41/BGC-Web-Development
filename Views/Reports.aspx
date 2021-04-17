@@ -23,7 +23,8 @@
                         <div class="col-4">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
-                                    <h5 class="card-title">3,000,000</h5>
+                                    <%--<h5 class="card-title">3,000,000</h5>--%>
+                                    <asp:Label ID="total_sales" runat="server" Text="Total Sales" CssClass="card-title"></asp:Label>
                                     <h6 class="card-subtitle mb-2 text-muted">Total Sales</h6>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                     <a href="#" class="card-link">Card link</a>
@@ -34,7 +35,8 @@
                         <div class="col-4">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
-                                    <h5 class="card-title">600 stocks</h5>
+                                    <%--<h5 class="card-title">600 stocks</h5>--%>
+                                    <asp:Label ID="total_inventory" runat="server" Text="Total Inventory" CssClass="card-title"></asp:Label>
                                     <h6 class="card-subtitle mb-2 text-muted">Total Inventory</h6>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                     <a href="#" class="card-link">Card link</a>
@@ -45,7 +47,8 @@
                         <div class="col-4">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
-                                    <h5 class="card-title">75</h5>
+                                    <%--<h5 class="card-title">75</h5>--%>
+                                    <asp:Label ID="total_products" runat="server" Text="Total Products" CssClass="card-title"></asp:Label>
                                     <h6 class="card-subtitle mb-2 text-muted">Total Products</h6>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                     <a href="#" class="card-link">Card link</a>
