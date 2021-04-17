@@ -189,25 +189,40 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12">
-                        <div id="myalert" class="alert alert-success collapse">
-                            <a id="linkClose" href="#" class="close" data-dismiss="alert">&times;</a>
-                            <strong>Success!</strong> You have successfully inserted a sale
-                        </div>
+                    <div class="col-12 mt-3">
+                        <!--Success Panel-->
+                        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                            <ContentTemplate>
+                                <asp:Panel ID="StatusPanel" runat="server">
+                                    <div  class="alert alert-success">
+                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                        <strong>Success!</strong> You have successfully inserted a sale
+                                    </div>
+                                </asp:Panel>
+                            </ContentTemplate>
+                             <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="BtnConfirmCartOrder" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+                        <!--UnSuccessful panel-->
+                        <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                            <ContentTemplate>
+                                <asp:Panel ID="UnsucessPanel" runat="server">
+                                    <div class="alert alert-danger">
+                                        <a id="linkClose" href="#" class="close" data-dismiss="alert">&times;</a>
+                                        <strong>Error!</strong> Error Creating Sale
+                                    </div>
+                                </asp:Panel>
+                            </ContentTemplate>
+                             <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="BtnConfirmCartOrder" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
                     </div>
                 </div>
 
             </div>
         </div>
-    </div>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#BtnConfirmCartOrder').click(function () {
-                $('#myalert').show();
-            });
-            $('#linkClose').click(function () {
-                $('#myalert').hide('fade');
-            });
-        });
-    </script>
+    </div>  
+    
 </asp:Content>

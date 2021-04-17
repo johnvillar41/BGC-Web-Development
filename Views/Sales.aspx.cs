@@ -17,6 +17,8 @@ namespace SoftEngWebEmployee.Views
                 LoadProducts();
                 LoadCategories();
                 LoadCart();
+                StatusPanel.Visible = false;
+                UnsucessPanel.Visible = false;
             }
         }
         protected void IDS_Click(object sender, EventArgs e)
@@ -94,16 +96,21 @@ namespace SoftEngWebEmployee.Views
                 current.RegisterAsyncPostBackControl(button);
         }
         protected async void BtnConfirmCartOrder_Click(object sender, EventArgs e)
-        {            
+        {           
+            if(Cart.GetCartItems().Count == 0)
+            {
+                UnsucessPanel.Visible = true;
+                return;
+            }
             var onSiteTransaction = new OnsiteTransactionModel
             {
                 Customer = null,
-                TotalSale = Cart.CalculateTotalSales()                
+                TotalSale = Cart.CalculateTotalSales()
             };
             var connection = await OnsiteTransactionRepository.GetInstance().InsertNewTransaction(onSiteTransaction);
             var transactionID = await OnsiteTransactionRepository.GetInstance().FetchLastInsertID(connection);
             var onsiteProducts = Cart.ListOfOnsiteProducts(transactionID);
-            foreach(var onsiteModels in onsiteProducts)
+            foreach (var onsiteModels in onsiteProducts)
             {
                 await OnsiteProductsTransactionRepository.GetInstance().InsertTransactions(onsiteModels);
             }
@@ -116,12 +123,13 @@ namespace SoftEngWebEmployee.Views
                 {
                     TransactionID = transactionID
                 }
-            };           
+            };
             await SalesRepository.GetInstance().InsertNewSale(newSale);
-            var notification = NotificationRepository.GetInstance().GenerateNotification(Constants.NotificationType.SoldItem,onsiteProducts.ToString());
+            var notification = NotificationRepository.GetInstance().GenerateNotification(Constants.NotificationType.SoldItem, onsiteProducts.ToString());
             NotificationRepository.GetInstance().InsertNewNotification(notification);
             Cart.ClearCartItems();
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
+            StatusPanel.Visible = true;
         }
         private async void LoadSales()
         {
