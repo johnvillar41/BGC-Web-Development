@@ -76,13 +76,27 @@ namespace SoftEngWebEmployee.Views
             ProductModel product = await ProductRepository.GetInstance().GetProducts(int.Parse(productID));
             try
             {
-                product.TotalNumberOfCartItems = int.Parse(totalItem.Text);                
-                SweetAlertBuilder.BuildMessage(this, Constants.AlertStatus.success, "Successfull", "Successfully added to cart: " + product.ProductName );
+                product.TotalNumberOfCartItems = int.Parse(totalItem.Text);
+                SweetAlertBuilder sweetAlert = new SweetAlertBuilder
+                {
+                    HexaBackgroundColor = "#90EE90",
+                    AlertIcons = Constants.AlertStatus.success,
+                    Title = "Successfull",
+                    Message = "Successfully added to cart: " + product.ProductName,
+                };
+                sweetAlert.BuildSweetAlert(this);
                 Cart.AddCartItem(product);
             }
             catch (Exception)
             {
-                SweetAlertBuilder.BuildMessage(this, Constants.AlertStatus.error, "Error Adding to Cart", product.ProductName);                
+                SweetAlertBuilder sweetAlert = new SweetAlertBuilder
+                {
+                    HexaBackgroundColor = "#ffcccb",
+                    AlertIcons = Constants.AlertStatus.error,
+                    Title = "Error",
+                    Message = "Error Adding to Cart: " + product.ProductName,
+                };
+                sweetAlert.BuildSweetAlert(this);                            
             }                       
             LoadCart();            
         }
@@ -102,10 +116,18 @@ namespace SoftEngWebEmployee.Views
                 current.RegisterAsyncPostBackControl(button);
         }
         protected async void BtnConfirmCartOrder_Click(object sender, EventArgs e)
-        {           
-            if(Cart.GetCartItems().Count == 0)
+        {
+            SweetAlertBuilder sweetAlert = null;
+            if (Cart.GetCartItems().Count == 0)
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "Swal.fire( 'Error Adding to Cart','Empty Cart Items', 'error')", true);
+                sweetAlert = new SweetAlertBuilder
+                {
+                    HexaBackgroundColor = "#ffcccb",
+                    AlertIcons = Constants.AlertStatus.error,
+                    Title = "Error Processing Request",
+                    Message = "Cart has no items"
+                };
+                sweetAlert.BuildSweetAlert(this);
                 return;
             }
             var onSiteTransaction = new OnsiteTransactionModel
@@ -133,8 +155,13 @@ namespace SoftEngWebEmployee.Views
             await SalesRepository.GetInstance().InsertNewSale(newSale);
             var notification = NotificationRepository.GetInstance().GenerateNotification(Constants.NotificationType.SoldItem, onsiteProducts.ToString());
             NotificationRepository.GetInstance().InsertNewNotification(notification);
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "Swal.fire( 'Successfull','Added a new sale transaction ID:"+transactionID+"', 'success')", true);
-            Cart.ClearCartItems();
+            sweetAlert = new SweetAlertBuilder
+            {
+                HexaBackgroundColor = "#ffcccb",
+                AlertIcons = Constants.AlertStatus.success,
+                Title = "Successfully Added Sales",                
+            };
+            sweetAlert.BuildSweetAlert(this);            
             LoadCart();
         }
         private async void LoadSales()

@@ -33,7 +33,14 @@ namespace SoftEngWebEmployee.Views
             }
             else
             {
-                SweetAlertBuilder.BuildMessage(this, Constants.AlertStatus.error, "Error Loggin In!", "Invalid Credentials");               
+                SweetAlertBuilder sweetAlertBuilder = new SweetAlertBuilder
+                {
+                    HexaBackgroundColor = "#fff",
+                    Title = "Login Error!",
+                    Message ="Invalid Credentials",
+                    AlertIcons = Constants.AlertStatus.error                    
+                };
+                sweetAlertBuilder.BuildSweetAlert(this);
             }
         }
     }

@@ -8,17 +8,39 @@ namespace SoftEngWebEmployee.Helpers
 {
     public class SweetAlertBuilder
     {
-        public static void BuildMessage(Page page, Constants.AlertStatus alertStatus, string title, string message)
+        public string HexaBackgroundColor { get; set; }
+        public string Title { get; set; }
+        public string Message { get; set; }
+        public Constants.AlertStatus AlertIcons { get; set; }
+        public string AlertPositions { get; set; }
+        public int? Timer { get; set; }
+        public bool ShowConfirmationDialog { get; set; }
+        public string FooterMessage { get; set; }
+
+        public void BuildSweetAlert(Page page)
         {
-            ScriptManager.RegisterClientScriptBlock(page, page.GetType(), "alertMessage", "Swal.fire( '" + title + "','" + message + "', '" + alertStatus.ToString() + "')", true);
-        }
-        public static void BuildAlertGivenPosition(Page page, Constants.AlertStatus alertStatus, string alertPositions, string title, int timer)
-        {
-            ScriptManager.RegisterClientScriptBlock(page, page.GetType(), "alertMessage", "Swal.fire({position: '" + alertPositions + "', icon: '" + alertStatus.ToString() + "',title: '" + title + "',showConfirmButton: false, timer: " + timer + "})", true);
-        }
-        public static void BuildBasicAlert(Page page, string message)
-        {
-            ScriptManager.RegisterClientScriptBlock(page, page.GetType(), "alertMessage", "Swal.fire('" + message + "')", true);
+            if (Timer != null)
+            {
+                ScriptManager.RegisterClientScriptBlock(page, page.GetType(), "alertMessage", "Swal.fire({" +
+                   "background:'" + HexaBackgroundColor +
+                   "',title:'" + Title + "'," +
+                   "text:'" + Message + "'," +
+                   "footer:'" + FooterMessage + "'," +
+                   "timer:'" + Timer + "'," +
+                   "icon:'" + AlertIcons.ToString() +
+                   "'})", true);
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(page, page.GetType(), "alertMessage", "Swal.fire({" +
+                  "background:'" + HexaBackgroundColor +
+                  "',title:'" + Title + "'," +
+                  "text:'" + Message + "'," +
+                  "footer:'" + FooterMessage + "'," +
+                  "icon:'" + AlertIcons.ToString() +
+                  "'})", true);
+            }
+
         }
     }
 }
