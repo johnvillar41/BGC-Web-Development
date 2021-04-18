@@ -33,7 +33,7 @@ namespace SoftEngWebEmployee.Views
             }
             else
             {             
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "Swal.fire('Login Error!')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "Swal.fire( 'Error Logging In','Invalid Credentials', 'error')", true);
             }
         }            
     }

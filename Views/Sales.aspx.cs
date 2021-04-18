@@ -16,9 +16,7 @@ namespace SoftEngWebEmployee.Views
                 LoadSales();
                 LoadProducts();
                 LoadCategories();
-                LoadCart();
-                StatusPanel.Visible = false;
-                UnsucessPanel.Visible = false;
+                LoadCart();               
             }
         }
         protected void IDS_Click(object sender, EventArgs e)
@@ -76,9 +74,16 @@ namespace SoftEngWebEmployee.Views
             var totalItem = (TextBox)repeaterItem.FindControl("TotalItems");
 
             ProductModel product = await ProductRepository.GetInstance().GetProducts(int.Parse(productID));
-            product.TotalNumberOfCartItems = int.Parse(totalItem.Text);
-            Cart.AddCartItem(product);
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "Swal.fire('Successfully Added Product')", true);
+            try
+            {
+                product.TotalNumberOfCartItems = int.Parse(totalItem.Text);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "Swal.fire( 'Successfully Added To cart','" + product.ProductName + "', 'success')", true);
+                Cart.AddCartItem(product);
+            }
+            catch (Exception)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "Swal.fire( 'Error Adding to Cart','" + product.ProductName + "', 'warning')", true);
+            }                       
             LoadCart();            
         }
         protected void BtnRemoveCartItem_Click(object sender, EventArgs e)
@@ -100,7 +105,7 @@ namespace SoftEngWebEmployee.Views
         {           
             if(Cart.GetCartItems().Count == 0)
             {
-                UnsucessPanel.Visible = true;
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "Swal.fire( 'Error Adding to Cart','Empty Cart Items', 'error')", true);
                 return;
             }
             var onSiteTransaction = new OnsiteTransactionModel
@@ -127,8 +132,8 @@ namespace SoftEngWebEmployee.Views
             };
             await SalesRepository.GetInstance().InsertNewSale(newSale);
             var notification = NotificationRepository.GetInstance().GenerateNotification(Constants.NotificationType.SoldItem, onsiteProducts.ToString());
-            NotificationRepository.GetInstance().InsertNewNotification(notification);                 
-            StatusPanel.Visible = true;
+            NotificationRepository.GetInstance().InsertNewNotification(notification);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "Swal.fire( 'Successfull','Added a new sale transaction ID:"+transactionID+"', 'success')", true);
             Cart.ClearCartItems();
             LoadCart();
         }
