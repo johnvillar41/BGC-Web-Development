@@ -29,12 +29,12 @@ namespace SoftEngWebEmployee.Views
             {
                 UserSession.SetLoginStatus(true);
                 UserSession.SetLoginUser(username);
-                Response.Redirect("~/Views/Inventory.aspx",false);               
+                Response.Redirect("~/Views/Inventory.aspx", false);
             }
             else
-            {             
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "Swal.fire( 'Error Logging In','Invalid Credentials', 'error')", true);
+            {
+                SweetAlertBuilder.BuildMessage(this, Constants.AlertStatus.error, "Error Loggin In!", "Invalid Credentials");               
             }
-        }            
+        }
     }
 }

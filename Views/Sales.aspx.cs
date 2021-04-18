@@ -76,13 +76,13 @@ namespace SoftEngWebEmployee.Views
             ProductModel product = await ProductRepository.GetInstance().GetProducts(int.Parse(productID));
             try
             {
-                product.TotalNumberOfCartItems = int.Parse(totalItem.Text);
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "Swal.fire( 'Successfully Added To cart','" + product.ProductName + "', 'success')", true);
+                product.TotalNumberOfCartItems = int.Parse(totalItem.Text);                
+                SweetAlertBuilder.BuildMessage(this, Constants.AlertStatus.success, "Successfull", "Successfully added to cart: " + product.ProductName );
                 Cart.AddCartItem(product);
             }
             catch (Exception)
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "Swal.fire( 'Error Adding to Cart','" + product.ProductName + "', 'warning')", true);
+                SweetAlertBuilder.BuildMessage(this, Constants.AlertStatus.error, "Error Adding to Cart", product.ProductName);                
             }                       
             LoadCart();            
         }
