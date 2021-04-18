@@ -78,7 +78,8 @@ namespace SoftEngWebEmployee.Views
             ProductModel product = await ProductRepository.GetInstance().GetProducts(int.Parse(productID));
             product.TotalNumberOfCartItems = int.Parse(totalItem.Text);
             Cart.AddCartItem(product);
-            LoadCart();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
+            LoadCart();            
         }
         protected void BtnRemoveCartItem_Click(object sender, EventArgs e)
         {
@@ -126,10 +127,10 @@ namespace SoftEngWebEmployee.Views
             };
             await SalesRepository.GetInstance().InsertNewSale(newSale);
             var notification = NotificationRepository.GetInstance().GenerateNotification(Constants.NotificationType.SoldItem, onsiteProducts.ToString());
-            NotificationRepository.GetInstance().InsertNewNotification(notification);
-            Cart.ClearCartItems();
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
+            NotificationRepository.GetInstance().InsertNewNotification(notification);                 
             StatusPanel.Visible = true;
+            Cart.ClearCartItems();
+            LoadCart();
         }
         private async void LoadSales()
         {

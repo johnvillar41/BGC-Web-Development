@@ -148,7 +148,6 @@
             <div class="col-12">
                 <div class="row">
                     <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
-
                         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                             <ContentTemplate>
                                 <%if (Cart.GetCartItems().Count == 0) %>
