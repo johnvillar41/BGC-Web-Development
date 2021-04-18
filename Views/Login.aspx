@@ -6,6 +6,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <head runat="server">
     <title></title>
     <style>
@@ -64,9 +65,9 @@
             color: #fff;
         }
 
-        .login-main-text h2 {
-            font-weight: 300;
-        }
+            .login-main-text h2 {
+                font-weight: 300;
+            }
 
         .btn-black {
             background-color: #000 !important;
@@ -100,21 +101,26 @@
             </div>
             <div class="main">
                 <div class="col-md-6 col-sm-12">
-                    <div class="login-form">
+                    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <div class="login-form">
 
-                        <div class="form-group">
-                            <label><b>Username</b></label><br />
-                            <asp:TextBox ID="txtbox_username" runat="server" placeholder="username" Width="400" Height="35"></asp:TextBox>
-                        </div>
-                        <div class="form-group">
-                            <label><b>Password</b></label><br />
-                            <asp:TextBox ID="txtbox_password" runat="server" placeholder="password" Width="400" Height="35"></asp:TextBox>
-                        </div>
+                                <div class="form-group">
+                                    <label><b>Username</b></label><br />
+                                    <asp:TextBox ID="txtbox_username" runat="server" placeholder="username" Width="400" Height="35"></asp:TextBox>
+                                </div>
+                                <div class="form-group">
+                                    <label><b>Password</b></label><br />
+                                    <asp:TextBox ID="txtbox_password" runat="server" placeholder="password" Width="400" Height="35"></asp:TextBox>
+                                </div>
 
-                        <asp:Button ID="btn_login" runat="server" Text="Login" class="btn btn-black" OnClick="btn_login_Click" />
+                                <asp:Button ID="btn_login" runat="server" Text="Login" class="btn btn-black" OnClick="btn_login_Click" />
 
 
-                    </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
         </div>

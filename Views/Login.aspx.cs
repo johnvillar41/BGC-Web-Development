@@ -3,6 +3,7 @@ using SoftEngWebEmployee.Models;
 using SoftEngWebEmployee.Repository;
 using SoftEngWebEmployee.Repository.LoginRepository;
 using System;
+using System.Web.UI;
 
 namespace SoftEngWebEmployee.Views
 {
@@ -31,8 +32,8 @@ namespace SoftEngWebEmployee.Views
                 Response.Redirect("~/Views/Inventory.aspx",false);               
             }
             else
-            {
-                Response.Redirect(Request.RawUrl, false);                                
+            {             
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "Swal.fire('Login Error!')", true);
             }
         }            
     }

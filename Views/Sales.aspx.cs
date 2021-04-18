@@ -78,7 +78,7 @@ namespace SoftEngWebEmployee.Views
             ProductModel product = await ProductRepository.GetInstance().GetProducts(int.Parse(productID));
             product.TotalNumberOfCartItems = int.Parse(totalItem.Text);
             Cart.AddCartItem(product);
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "Swal.fire('Successfully Added Product')", true);
             LoadCart();            
         }
         protected void BtnRemoveCartItem_Click(object sender, EventArgs e)
