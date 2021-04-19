@@ -14,12 +14,11 @@ namespace SoftEngWebEmployee.Views
         {
             if (!IsPostBack)
             {
-                ReportsRepository reportsRepository = new ReportsRepository();
 
-                total_sales.Text = reportsRepository.FetchTotalSales().ToString();
-                total_inventory.Text = reportsRepository.FetchTotalInventory().ToString();
-                total_products.Text = reportsRepository.FetchTotalProducts().ToString();
 
+                total_sales.Text = ReportsRepository.GetInstance().FetchTotalSales().ToString();
+                total_inventory.Text = ReportsRepository.GetInstance().FetchTotalInventory().ToString();
+                total_products.Text = ReportsRepository.GetInstance().FetchTotalProducts().ToString();
 
             }
         }
