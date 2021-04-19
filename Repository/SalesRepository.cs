@@ -32,13 +32,13 @@ namespace SoftEngWebEmployee.Repository
                 string queryString = "INSERT INTO sales_table(" +
                     "user_username," +                    
                     "sale_type," +                    
-                    "date,onsite_transaction_id)" +                
-                    "VALUES(@username,@saleType,@date,@onsiteID)";
+                    "date,order_id)" +
+                    "VALUES(@username,@saleType,@date,@order_id)";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@username", newSale.Administrator.Username);                
                 command.Parameters.AddWithValue("@saleType", newSale.SalesType.ToString());               
                 command.Parameters.AddWithValue("@date", newSale.Date);
-                command.Parameters.AddWithValue("@onsiteID", newSale.OnsiteTransaction.TransactionID);
+                command.Parameters.AddWithValue("@order_id", newSale.Orders.Order_ID);
                 await command.ExecuteReaderAsync();
             }
         }

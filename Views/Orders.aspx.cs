@@ -35,7 +35,17 @@ namespace SoftEngWebEmployee.Views
                     .GetInstance()
                     .GenerateNotification(NotificationType.CancelledOrder, OrderIDCancel.Text);
                 NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);
-                Response.Redirect(Request.RawUrl,false);
+                LoadOrders();
+                SweetAlertBuilder sweetAlert = new SweetAlertBuilder
+                {
+                    HexaBackgroundColor = "#fff",
+                    Title = "Cancelled Order",
+                    Message = "Cancelled Order for: " + OrderIDCancel.Text,
+                    AlertIcons = Constants.AlertStatus.warning,
+                    AlertPositions = Constants.AlertPositions.TOP_END,
+                    ShowCloseButton = true
+                };
+                sweetAlert.BuildSweetAlert(this);                
             }
         }
 
@@ -47,8 +57,8 @@ namespace SoftEngWebEmployee.Views
                 var generatedNotification = NotificationRepository
                     .GetInstance()
                     .GenerateNotification(NotificationType.FinishedOrder, OrderIDFinish.Text);
-                NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);                
-                
+                NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);
+                LoadOrders();
                 var salesModel = new SalesModel()
                 {
                     SalesType = Constants.SalesType.Order,
@@ -57,8 +67,19 @@ namespace SoftEngWebEmployee.Views
                     Orders = await OrdersRepository.GetInstance().FetchOrder(int.Parse(OrderIDFinish.Text)),
                     OnsiteTransaction = null
                 };
+                //TODO FIX THIS
                 await SalesRepository.GetInstance().InsertNewSale(salesModel);
-                Response.Redirect(Request.RawUrl,false);
+                
+                SweetAlertBuilder sweetAlert = new SweetAlertBuilder
+                {
+                    HexaBackgroundColor = "#fff",
+                    Title = "Finished Order",
+                    Message = "Finished Order for: " + OrderIDFinish.Text,
+                    AlertIcons = Constants.AlertStatus.success,
+                    AlertPositions = Constants.AlertPositions.TOP_END,
+                    ShowCloseButton = true
+                };
+                sweetAlert.BuildSweetAlert(this);                
             }
         }
 

@@ -16,6 +16,7 @@ namespace SoftEngWebEmployee.Helpers
         public int? Timer { get; set; }
         public bool ShowConfirmationDialog { get; set; }
         public string FooterMessage { get; set; }
+        public bool ShowCloseButton { get; set; }
 
         public void BuildSweetAlert(Page page)
         {
@@ -25,8 +26,10 @@ namespace SoftEngWebEmployee.Helpers
                    "background:'" + HexaBackgroundColor +
                    "',title:'" + Title + "'," +
                    "text:'" + Message + "'," +
+                   "showCloseButton:'" + ShowCloseButton + "'," +
                    "footer:'" + FooterMessage + "'," +
                    "timer:'" + Timer + "'," +
+                   "position:'" + AlertPositions + "'," +
                    "icon:'" + AlertIcons.ToString() +
                    "'})", true);
             }
@@ -35,7 +38,9 @@ namespace SoftEngWebEmployee.Helpers
                 ScriptManager.RegisterClientScriptBlock(page, page.GetType(), "alertMessage", "Swal.fire({" +
                   "background:'" + HexaBackgroundColor +
                   "',title:'" + Title + "'," +
+                  "showCloseButton:'" + ShowCloseButton + "'," +
                   "text:'" + Message + "'," +
+                  "position:'" + AlertPositions + "'," +
                   "footer:'" + FooterMessage + "'," +
                   "icon:'" + AlertIcons.ToString() +
                   "'})", true);

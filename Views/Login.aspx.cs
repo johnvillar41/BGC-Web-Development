@@ -37,8 +37,10 @@ namespace SoftEngWebEmployee.Views
                 {
                     HexaBackgroundColor = "#fff",
                     Title = "Login Error!",
-                    Message ="Invalid Credentials",
-                    AlertIcons = Constants.AlertStatus.error                    
+                    Message = "Invalid Credentials",
+                    AlertIcons = Constants.AlertStatus.error,
+                    ShowCloseButton = true,
+                    AlertPositions = Constants.AlertPositions.CENTER
                 };
                 sweetAlertBuilder.BuildSweetAlert(this);
             }
