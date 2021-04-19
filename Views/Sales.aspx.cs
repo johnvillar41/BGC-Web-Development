@@ -161,6 +161,7 @@ namespace SoftEngWebEmployee.Views
                 AlertIcons = Constants.AlertStatus.success,
                 Title = "Successfully Added Sales",                
             };
+            Cart.ClearCartItems();
             sweetAlert.BuildSweetAlert(this);            
             LoadCart();
         }
