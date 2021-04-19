@@ -13,6 +13,21 @@ namespace SoftEngWebEmployee.Repository
         //fetch total inventory
         //fetch total # products
 
+        private static ReportsRepository instance = null;
+        public static ReportsRepository GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new ReportsRepository();
+            }
+            return instance;
+        }
+
+        private ReportsRepository()
+        {
+
+        }
+
 
         public int FetchTotalSales()
         {
@@ -88,14 +103,14 @@ namespace SoftEngWebEmployee.Repository
                 if (reader.Read())
                 {
                     total_products = int.Parse(reader["products"].ToString());
-                }
-
-                
+                }  
 
             }
 
             return total_products;
         }
+
+
 
     }
 }
