@@ -83,10 +83,16 @@ namespace SoftEngWebEmployee.Views
         {
             Button button = (Button)sender;
             var productID = button.CommandArgument.ToString();
-            List<ProductModel> Details = await ProductRepository.GetInstance().FetchProductDetails(productID);
-            DetailsRepeater.DataSource = Details;
+            ProductModel Details = await ProductRepository.GetInstance().FetchProductDetails(productID);
+
+            List<ProductModel> ProductDetail = new List<ProductModel>
+            {
+                Details
+            };
+
+            DetailsRepeater.DataSource = ProductDetail;
             DetailsRepeater.DataBind();
-            DeleteRepeater.DataSource = Details;
+            DeleteRepeater.DataSource = ProductDetail;
             DeleteRepeater.DataBind();
         }
 
