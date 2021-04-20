@@ -66,62 +66,50 @@
 
                     <div class="row">
                         <div class="col-4">
-                            <div class="card" style="width: 18rem;">
-                                <%--<img src="..." class="card-img-top" alt="...">--%>
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
+                            <div class="card border-success mb-3" style="max-width: 18rem;">
+                                <div class="card-header">Date</div>
+                                <div class="card-body text-success">
+                                    <h5 class="card-title">Total Sales today!</h5>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">See More
+                                    </a>
                                 </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">An item</li>
-                                    <li class="list-group-item">A second item</li>
-                                    <li class="list-group-item">A third item</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
+                            </div>
+                       
+                        <!--See More-->
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+
+                                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+
+
+                            </div>
+                        </div>
+                         </div>
+
+
+
+
+                        <div class="col-4">
+                            <div class="card border-success mb-3" style="max-width: 18rem;">
+                                <div class="card-header">Header</div>
+                                <div class="card-body text-success">
+                                    <h5 class="card-title">Success card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class="card" style="width: 18rem;">
-                                <%--                 <img src="..." class="card-img-top" alt="...">--%>
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
+                            <div class="card border-success mb-3" style="max-width: 18rem;">
+                                <div class="card-header">Header</div>
+                                <div class="card-body text-success">
+                                    <h5 class="card-title">Success card title</h5>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">An item</li>
-                                    <li class="list-group-item">A second item</li>
-                                    <li class="list-group-item">A third item</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card" style="width: 18rem;">
-                                <%--         <img src="..." class="card-img-top" alt="...">--%>
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">An item</li>
-                                    <li class="list-group-item">A second item</li>
-                                    <li class="list-group-item">A third item</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">
                     <!-- Products -->
                     <div class="row">
@@ -133,18 +121,18 @@
                                     <h4 class="card-title"><b>Product Name</b></h4>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                         
+
 
                                     <li class="list-group-item">Unit Price:
 
                                         <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                                     </li>
-                                    
-                                  
+
+
                                     <li class="list-group-item">Quantity Sold:
                                         <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
                                     </li>
-                              
+
                                     <li class="list-group-item">Product Revenue:
                                         <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
                                     </li>
@@ -163,18 +151,18 @@
                                     <h4 class="card-title"><b>Product Name</b></h4>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                         
+
 
                                     <li class="list-group-item">Unit Price:
 
                                         <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
                                     </li>
-                                    
-                                  
+
+
                                     <li class="list-group-item">Quantity Sold:
                                         <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
                                     </li>
-                              
+
                                     <li class="list-group-item">Product Revenue:
                                         <asp:Label ID="Label6" runat="server" Text="Label"></asp:Label>
                                     </li>
@@ -193,18 +181,18 @@
                                     <h4 class="card-title"><b>Product Name</b></h4>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                         
+
 
                                     <li class="list-group-item">Unit Price:
 
                                         <asp:Label ID="Label7" runat="server" Text="Label"></asp:Label>
                                     </li>
-                                    
-                                  
+
+
                                     <li class="list-group-item">Quantity Sold:
                                         <asp:Label ID="Label8" runat="server" Text="Label"></asp:Label>
                                     </li>
-                              
+
                                     <li class="list-group-item">Product Revenue:
                                         <asp:Label ID="Label9" runat="server" Text="Label"></asp:Label>
                                     </li>
