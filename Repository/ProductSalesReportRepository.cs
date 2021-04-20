@@ -30,26 +30,24 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 connection.Open();
-                string queryString = "SELECT SUM(onsite_transaction_table.total_sale) as quantity_sold,onsite_products_transaction_table.transaction_id, onsite_products_transaction_table.total_product_count,onsite_products_transaction_table.product_id FROM onsite_transaction_table INNER JOIN onsite_products_transaction_table ON onsite_transaction_table.transaction_id = onsite_products_transaction_table.transaction_id WHERE onsite_products_transaction_table.product_id= " + productID;
+                string queryString = "SELECT SUM(onsite_transaction_table.total_sale) as pruductRevenue," +
+                    "onsite_products_transaction_table.transaction_id, " +
+                    "SUM(onsite_products_transaction_table.total_product_count) as quantitySold," +
+                    "onsite_products_transaction_table.product_id FROM onsite_transaction_table INNER JOIN onsite_products_transaction_table ON onsite_transaction_table.transaction_id = onsite_products_transaction_table.transaction_id WHERE onsite_products_transaction_table.product_id=@productID";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@productID", productID);
                 MySqlDataReader reader = command.ExecuteReader();
 
                 if (reader.Read())
                 {
                     ProductSalesReportModel = new ProductSalesReportModel();
-
                     ProductSalesReportModel.Product = await ProductRepository.GetInstance().FetchProductDetails(productID.ToString());
-                    ProductSalesReportModel.QuantitySold = int.Parse(reader["quantity_sold"].ToString());
-                    ProductSalesReportModel.ProductRevenue = ProductSalesReportModel.QuantitySold * ProductSalesReportModel.Product.ProductPrice;
-
+                    ProductSalesReportModel.QuantitySold = int.Parse(reader["quantitySold"].ToString());
+                    ProductSalesReportModel.ProductRevenue = int.Parse(reader["pruductRevenue"].ToString());
                 }
 
                 return ProductSalesReportModel;
-
-            }
-
-         
-
+            }       
         }
     }
 }
