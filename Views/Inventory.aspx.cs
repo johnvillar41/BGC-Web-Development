@@ -6,12 +6,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SoftEngWebEmployee.Models;
 using SoftEngWebEmployee.Repository;
+using SoftEngWebEmployee.Helpers;
 
 namespace SoftEngWebEmployee.Views
 {
     public partial class Inventory : System.Web.UI.Page
     {
-        public ProductModel Details { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -83,14 +83,50 @@ namespace SoftEngWebEmployee.Views
         {
             Button button = (Button)sender;
             var productID = button.CommandArgument.ToString();
-            Details = await ProductRepository.GetInstance().FetchProductDetails(productID);            
+            List<ProductModel> Details = await ProductRepository.GetInstance().FetchProductDetails(productID);
+            DetailsRepeater.DataSource = Details;
+            DetailsRepeater.DataBind();
+            DeleteRepeater.DataSource = Details;
+            DeleteRepeater.DataBind();
         }
 
-        protected async void DeleteButton_Click(object sender, EventArgs e)
+        protected void DeleteButton_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             var productID = button.CommandArgument.ToString();
             ProductRepository.GetInstance().DeleteProduct(productID);
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Pop", "$('#deleteModal').modal('hide');", true);
+
+            DisplayInventoryTables();
+
+            SweetAlertBuilder sweetAlertBuilder = new SweetAlertBuilder
+            {
+                HexaBackgroundColor = "#fff",
+                Title = "Product Deleted!",
+                AlertIcons = Constants.AlertStatus.success,
+                ShowCloseButton = true,
+                AlertPositions = Constants.AlertPositions.CENTER
+            };
+            sweetAlertBuilder.BuildSweetAlert(this);
         }
+
+        protected void UpdateButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /* C# code for displaying card details
+
+        <p> Are you sure you want to delete this product? </p>
+        <p> Name: <%if (Details != null){%> <%=Details.ProductName %> <%}%> </p>
+        <asp:Label runat="server" ID="modalID"> <%if (Details != null){%> <%=Details.Product_ID %> <%}%></asp:Label>
+        <p> ID: <%if (Details != null){%> <%=Details.Product_ID %> <%}%> </p>
+        <p> Description: <%if (Details != null){%> <%=Details.ProductDescription %> <%}%> </p>
+        <p> Category: <%if (Details != null){%> <%=Details.ProductCategory %> <%}%> </p>
+        <p> Picture: <%if (Details != null){%> <%=Details.ProductPicture %> <%}%> </p>
+        <p> Number of Stocks: <%if (Details != null){%> <%=Details.ProductStocks %> <%}%> </p>
+        <p> Price: Php <%if (Details != null){%> <%=Details.ProductPrice %> <%}%> </p>
+
+        */
     }
 }

@@ -87,6 +87,15 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.WebControls.Repeater SearchRepeater;
 
         /// <summary>
+        /// UpdatePanel_GHRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel_GHRepeater;
+
+        /// <summary>
         /// GHRepeater control.
         /// </summary>
         /// <remarks>
@@ -94,6 +103,15 @@ namespace SoftEngWebEmployee.Views
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater GHRepeater;
+
+        /// <summary>
+        /// UpdatePanel_HPRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel_HPRepeater;
 
         /// <summary>
         /// HPRepeater control.
@@ -114,6 +132,15 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.UpdatePanel UpdatePanel_DetailsModal;
 
         /// <summary>
+        /// DetailsRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater DetailsRepeater;
+
+        /// <summary>
         /// UpdatePanel_DeleteModal control.
         /// </summary>
         /// <remarks>
@@ -123,12 +150,12 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.UpdatePanel UpdatePanel_DeleteModal;
 
         /// <summary>
-        /// DeleteButton control.
+        /// DeleteRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button DeleteButton;
+        protected global::System.Web.UI.WebControls.Repeater DeleteRepeater;
     }
 }
