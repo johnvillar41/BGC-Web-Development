@@ -21,33 +21,32 @@
                 <div class="form-outline">                   
                     <asp:TextBox ID="searchBox" placeholder="Search" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
-                <asp:LinkButton ID="searchButton" runat="server" OnClick="searchButton_Click" CssClass="btn btn-small btn-primary"><i class="fa fa-search"></i></asp:LinkButton>
+                <asp:LinkButton ID="searchButton" runat="server" OnClick="SearchButton_Click" CssClass="btn btn-small btn-primary"><i class="fa fa-search"></i></asp:LinkButton>
             </div>
         </div>
               
         <!-- Category Dropdown -->
         <div class="col-4 col-xl-4 col-lg-4 col-md-6 col-sm-5">
             <div class="btn-group">
-                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                <asp:UpdatePanel ID="UpdatePanel_Dropdown" runat="server">
                     <ContentTemplate>
                         <!-- Dropdown Button -->
                         <asp:Button ID="dropdownMenuReference1" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Category &#x25BC;" />
-                        <!-- btn btn-warning dropdown-toggle dropdown-toggle-split  -->
                         <!-- Dropdown List -->
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference1">
-                            <li><asp:Button ID="btnCategoryAll" runat="server" CssClass="dropdown-item" Text="All Products" OnClick="category_Click" UseSubmitBehavior="false"/></li>
+                            <li><asp:Button ID="btnCategoryAll" runat="server" CssClass="dropdown-item" Text="All Products" OnClick="Category_Click" UseSubmitBehavior="false"/></li>
                             <li><hr class="dropdown-divider"></li>
 
                             <asp:Repeater ID="CategoryRepeater" OnItemCreated="CategoryRepeater_ItemCreated" runat="server">
                                 <ItemTemplate>
                                     <a runat="server" class="dropdown-item" id="categorySelected">
-                                        <li><asp:Button ID="category" runat="server" CssClass="dropdown-item" Text='<%# DataBinder.Eval(Container.DataItem,"ProductCategory") %>' OnClick="category_Click" UseSubmitBehavior="false"/></li>                               
+                                        <li><asp:Button ID="category" runat="server" CssClass="dropdown-item" Text='<%# DataBinder.Eval(Container.DataItem,"ProductCategory") %>' OnClick="Category_Click" UseSubmitBehavior="false"/></li>                               
                                     </a>
                                 </ItemTemplate>
                             </asp:Repeater>
                         </ul>
                     </ContentTemplate>
-
+                    
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="dropdownMenuReference1" EventName="Click" />
                     </Triggers>
@@ -62,7 +61,7 @@
 
     <!-- Search Repeater -->
     <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <asp:UpdatePanel ID="UpdatePanel_SearchRepeater" runat="server">
             <ContentTemplate>
                 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
                     <asp:Repeater ID="SearchRepeater" runat="server">
@@ -74,14 +73,11 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                         <p class="card-text"><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
-                                        <!--
-                                        <a class="btn btn-secondary" data-bs-toggle="modal" href="#updateProduct">Details</a>
-                                        -->
-                                        <asp:Button ID="detailsButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-secondary" Text="Details" data-bs-toggle="modal" href="#updateProduct" OnClick="detailsButton_Click" runat="server"/>
-                                        <a class="btn btn-danger float-right" data-bs-toggle="modal" href="#deleteProduct">Delete</a>
+                                        <asp:Button ID="detailsButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-secondary" Text="Details" data-bs-toggle="modal" href="#detailsModal" OnClick="RetrieveDetails" runat="server"/>
+                                        <asp:Button ID="deleteProduct" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-danger float-right" Text="Delete" data-bs-toggle="modal" href="#deleteModal" OnClick="RetrieveDetails" runat="server"/>                                       
                                     </div>
                                 </div>
-                            </div>
+                            </div>                            
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
@@ -109,8 +105,8 @@
                             <div class="card-body">
                                 <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                 <p class="card-text"><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
-                                <a class="btn btn-secondary" data-bs-toggle="modal" href="#updateProduct">Details</a>
-                                <a class="btn btn-danger float-right" data-bs-toggle="modal" href="#deleteProduct">Delete</a>
+                                <a class="btn btn-secondary" data-bs-toggle="modal" href="#detailsModal">Details</a>
+                                <a class="btn btn-danger float-right" data-bs-toggle="modal" href="#deleteModal">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -136,8 +132,8 @@
                             <div class="card-body">
                                 <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                 <p class="card-text"><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
-                                <a class="btn btn-secondary" data-bs-toggle="modal" href="#updateProduct">Details</a>
-                                <a class="btn btn-danger float-right" data-bs-toggle="modal" href="#deleteProduct">Delete</a>
+                                <a class="btn btn-secondary" data-bs-toggle="modal" href="#detailsModal">Details</a>
+                                <a class="btn btn-danger float-right" data-bs-toggle="modal" href="#deleteModal">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -150,27 +146,29 @@
 
     <!-- Modals -->
 
-    <!-- Update Product -->
-    <div class="modal fade" id="updateProduct" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+    <!-- Details Modal / Update Product -->
+    <div class="modal fade" id="detailsModal" aria-hidden="true" aria-labelledby="..." tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
 
-                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                <asp:UpdatePanel ID="UpdatePanel_DetailsModal" runat="server">
                     <ContentTemplate>
+                        <p> Product Details </p>
                         <p> Name: <%if (Details != null){%> <%=Details.ProductName %> <%}%> </p>
                         <p> ID: <%if (Details != null){%> <%=Details.Product_ID %> <%}%> </p>
                         <p> Description: <%if (Details != null){%> <%=Details.ProductDescription %> <%}%> </p>
                         <p> Category: <%if (Details != null){%> <%=Details.ProductCategory %> <%}%> </p>
                         <p> Picture: <%if (Details != null){%> <%=Details.ProductPicture %> <%}%> </p>
                         <p> Number of Stocks: <%if (Details != null){%> <%=Details.ProductStocks %> <%}%> </p>
-                        <p> Price: Php <%if (Details != null){%> <%=Details.ProductPrice %> <%}%> </p>                        
+                        <p> Price: Php <%if (Details != null){%> <%=Details.ProductPrice %> <%}%> </p>     
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="$('#detailsModal').modal('hide');">Back</button>
+                            <button type="button" class="btn btn-primary">Update Details</button>
+                        </div>
                     </ContentTemplate>
-                </asp:UpdatePanel>
+                </asp:UpdatePanel>  
                 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary">Back</button>
-                    <button type="button" class="btn btn-primary">Update Details</button>
-                </div>
             </div>
         </div>
     </div>
@@ -189,18 +187,36 @@
     </div>
 
     <!-- Delete Confirm -->
-    <div class="modal fade" id="deleteProduct" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+    <div class="modal fade" id="deleteModal" aria-hidden="true" aria-labelledby="..." tabindex="-1"> 
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content">
-                Are you sure you want to delete this product?
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Product</h5>
+                    <button type="button" class="close" onclick="$('#deleteModal').modal('hide');" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="UpdatePanel_DeleteModal" runat="server">
+                        <ContentTemplate>                                                    
+                            <p> Are you sure you want to delete this product? </p>
+                            <p> Name: <%if (Details != null){%> <%=Details.ProductName %> <%}%> </p>
+                            <p> ID: <%if (Details != null){%> <%=Details.Product_ID %> <%}%> </p>
+                            <p> Description: <%if (Details != null){%> <%=Details.ProductDescription %> <%}%> </p>
+                            <p> Category: <%if (Details != null){%> <%=Details.ProductCategory %> <%}%> </p>
+                            <p> Picture: <%if (Details != null){%> <%=Details.ProductPicture %> <%}%> </p>
+                            <p> Number of Stocks: <%if (Details != null){%> <%=Details.ProductStocks %> <%}%> </p>
+                            <p> Price: Php <%if (Details != null){%> <%=Details.ProductPrice %> <%}%> </p>                                                                                                     
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary">No</button>
-                    
-                    <button type="button" class="btn btn-danger">Yes</button>
-                    
+                    <button type="button" class="btn btn-secondary" onclick="$('#deleteModal').modal('hide');">No</button> 
+                    <asp:Button ID="DeleteButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-danger float-right" Text="Yes" OnClick="DeleteButton_Click" runat="server"/>                   
                 </div>
             </div>
         </div>
     </div>
-
+    
+            
 </asp:Content>

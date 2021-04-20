@@ -233,6 +233,17 @@ namespace SoftEngWebEmployee.Repository
             return productList;
         }
 
+        public async void DeleteProduct(string productID)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "DELETE FROM products_table WHERE product_id='" + productID + "'";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.ExecuteNonQuery();
+            }
+        }
+
         public async Task<ProductModel> GetProducts(int productID)
         {
             ProductModel productModel = null;

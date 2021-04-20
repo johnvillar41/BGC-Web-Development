@@ -33,13 +33,13 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.WebControls.LinkButton searchButton;
 
         /// <summary>
-        /// UpdatePanel2 control.
+        /// UpdatePanel_Dropdown control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel_Dropdown;
 
         /// <summary>
         /// dropdownMenuReference1 control.
@@ -69,13 +69,13 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.WebControls.Repeater CategoryRepeater;
 
         /// <summary>
-        /// UpdatePanel1 control.
+        /// UpdatePanel_SearchRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel_SearchRepeater;
 
         /// <summary>
         /// SearchRepeater control.
@@ -105,12 +105,30 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.WebControls.Repeater HPRepeater;
 
         /// <summary>
-        /// UpdatePanel3 control.
+        /// UpdatePanel_DetailsModal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel_DetailsModal;
+
+        /// <summary>
+        /// UpdatePanel_DeleteModal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel_DeleteModal;
+
+        /// <summary>
+        /// DeleteButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DeleteButton;
     }
 }

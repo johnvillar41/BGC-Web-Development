@@ -43,7 +43,7 @@ namespace SoftEngWebEmployee.Views
             HPRepeater.DataBind();
         }
 
-        protected async void category_Click(object sender, EventArgs e)
+        protected async void Category_Click(object sender, EventArgs e)
         {
             string category = (sender as Button).Text.ToString();
             char caret = Convert.ToChar(0x000025BC);
@@ -62,20 +62,13 @@ namespace SoftEngWebEmployee.Views
             }           
         }
 
-        protected async void searchButton_Click(object sender, EventArgs e)
+        protected async void SearchButton_Click(object sender, EventArgs e)
         {
             string search = searchBox.Text.ToString();
             var newSearch = await ProductRepository.GetInstance().FetchOnSearch(search);
             SearchRepeater.DataSource = newSearch;
             SearchRepeater.DataBind();
-        }
-        
-        /*
-        protected void deleteButton_Click(object sender, EventArgs e)
-        {
-            string deleteID = (sender as Button).Text.ToString();
-        }
-        */
+        }        
 
         protected void CategoryRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
@@ -86,13 +79,18 @@ namespace SoftEngWebEmployee.Views
                 current.RegisterAsyncPostBackControl(button);
         }
 
-        protected async void detailsButton_Click(object sender, EventArgs e)
+        protected async void RetrieveDetails(object sender, EventArgs e)
         {
-            // string productID = (sender as Label).Text.ToString();
             Button button = (Button)sender;
             var productID = button.CommandArgument.ToString();
-            Details = await ProductRepository.GetInstance().FetchProductDetails(productID);
-            
+            Details = await ProductRepository.GetInstance().FetchProductDetails(productID);            
+        }
+
+        protected async void DeleteButton_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            var productID = button.CommandArgument.ToString();
+            ProductRepository.GetInstance().DeleteProduct(productID);
         }
     }
 }
