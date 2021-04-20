@@ -62,12 +62,11 @@ namespace SoftEngWebEmployee.Repository
             / View Details
             - Finalize Format (modal size, text position)
             - Fix resetting of position of repeaters when details modal loads
-            - Copy code to other two repeaters
+            - Have text appear if repeaters load with no products "No products found."
         */
-        // x Delete Product
+        // / Delete Product
         // x Add Product
         // x Update product
-
         // Add settings to first repeater, orders products by name, ID, number of stocks, etc.
 
         public async Task<List<ProductModel>> FetchGHProducts()
@@ -206,9 +205,9 @@ namespace SoftEngWebEmployee.Repository
             return productList;
         }
 
-        public async Task<ProductModel> FetchProductDetails(string productID)
+        public async Task<List<ProductModel>> FetchProductDetails(string productID)
         {
-            ProductModel productList = null;
+            List<ProductModel> productList = new List<ProductModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
@@ -218,16 +217,18 @@ namespace SoftEngWebEmployee.Repository
                 while (await reader.ReadAsync())
                 {
                     string base64String = Convert.ToBase64String((byte[])(reader["product_picture"]));
-                    productList = new ProductModel()
-                    {
-                        Product_ID = int.Parse(reader["product_id"].ToString()),
-                        ProductName = reader["product_name"].ToString(),
-                        ProductDescription = reader["product_description"].ToString(),
-                        ProductPicture = base64String,
-                        ProductStocks = int.Parse(reader["product_stocks"].ToString()),
-                        ProductCategory = reader["product_category"].ToString(),
-                        ProductPrice = int.Parse(reader["product_price"].ToString())
-                    };
+                    productList.Add(
+                            new ProductModel()
+                            {
+                                Product_ID = int.Parse(reader["product_id"].ToString()),
+                                ProductName = reader["product_name"].ToString(),
+                                ProductDescription = reader["product_description"].ToString(),
+                                ProductPicture = base64String,
+                                ProductStocks = int.Parse(reader["product_stocks"].ToString()),
+                                ProductCategory = reader["product_category"].ToString(),
+                                ProductPrice = int.Parse(reader["product_price"].ToString())
+                            }
+                        );
                 }
             }
             return productList;
