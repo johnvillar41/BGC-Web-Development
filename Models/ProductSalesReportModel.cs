@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace SoftEngWebEmployee.Models
+﻿namespace SoftEngWebEmployee.Models
 {
     public class ProductSalesReportModel
     {
-        public String ProductName { get; set; }
-        public int UnitPrice { get; set; }
-        public int QuantitySold { get; set; }
+        public ProductModel Product { get; set; }
+        /// <summary>
+        ///     Total product count for column total_product_count
+        /// </summary>
+        public int QuantitySold { get; set; } 
+        /// <summary>
+        ///     Sum of rows in total_sale
+        /// </summary>
         public int ProductRevenue { get; set; }
     }
 }

@@ -1,10 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using SoftEngWebEmployee.Helpers;
-using SoftEngWebEmployee.Models;
+﻿using SoftEngWebEmployee.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace SoftEngWebEmployee.Repository
 {
@@ -25,12 +20,10 @@ namespace SoftEngWebEmployee.Repository
 
         }
 
-        public ProductSalesReportModel FetchProductSalesReport()
+        public ProductSalesReportModel FetchProductSalesReport(int productID)
         {
+
             throw new Exception();
-            //planning pa po
         }
-
-
     }
 }
