@@ -1,4 +1,5 @@
-﻿using SoftEngWebEmployee.Repository;
+﻿using SoftEngWebEmployee.Models;
+using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,39 @@ namespace SoftEngWebEmployee.Views
         {
             if (!IsPostBack)
             {
-
-
-                total_sales.Text = ReportsRepository.GetInstance().FetchTotalSales().ToString();
-                total_inventory.Text = ReportsRepository.GetInstance().FetchTotalInventory().ToString();
-                total_products.Text = ReportsRepository.GetInstance().FetchTotalProducts().ToString();
-
+                DisplayDashBoard();
+                DisplayProductSalesReport();
             }
         }
+
+
+        private async void DisplayProductSalesReport()
+        {
+            var productList = await ProductRepository.GetInstance().FetchAllProducts();
+            List<ProductSalesReportModel> ProductSalesList = new List<ProductSalesReportModel>();
+            foreach (var product in productList)
+            {
+                try
+                {
+                    var productSalesReport = await ProductSalesReportRepository.GetInstance().FetchProductSalesReport(product.Product_ID);
+                    ProductSalesList.Add(productSalesReport);
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+            ProductsRepeater.DataSource = ProductSalesList;
+            ProductsRepeater.DataBind();
+        }
+
+
+        private void DisplayDashBoard() 
+        {
+            total_sales.Text = ReportsRepository.GetInstance().FetchTotalSales().ToString();
+            total_inventory.Text = ReportsRepository.GetInstance().FetchTotalInventory().ToString();
+            total_products.Text = ReportsRepository.GetInstance().FetchTotalProducts().ToString();
+        }
+
     }
 }

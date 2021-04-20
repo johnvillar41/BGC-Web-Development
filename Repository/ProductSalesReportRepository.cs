@@ -30,7 +30,7 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 connection.Open();
-                string queryString = "SELECT SUM(onsite_transaction_table.total_sale) as pruductRevenue," +
+                string queryString = "SELECT SUM(onsite_transaction_table.total_sale) as productRevenue," +
                     "onsite_products_transaction_table.transaction_id, " +
                     "SUM(onsite_products_transaction_table.total_product_count) as quantitySold," +
                     "onsite_products_transaction_table.product_id FROM onsite_transaction_table INNER JOIN onsite_products_transaction_table ON onsite_transaction_table.transaction_id = onsite_products_transaction_table.transaction_id WHERE onsite_products_transaction_table.product_id=@productID";
@@ -41,9 +41,9 @@ namespace SoftEngWebEmployee.Repository
                 if (reader.Read())
                 {
                     ProductSalesReportModel = new ProductSalesReportModel();
-                    ProductSalesReportModel.Product = await ProductRepository.GetInstance().FetchProductDetails(productID.ToString());
-                    ProductSalesReportModel.QuantitySold = int.Parse(reader["quantitySold"].ToString());
-                    ProductSalesReportModel.ProductRevenue = int.Parse(reader["pruductRevenue"].ToString());
+                    ProductSalesReportModel.Product = await ProductRepository.GetInstance().FetchProductDetails(productID.ToString());                   
+                    ProductSalesReportModel.QuantitySold = int.Parse(reader["quantitySold"].ToString());                   
+                    ProductSalesReportModel.ProductRevenue = int.Parse(reader["productRevenue"].ToString());
                 }
 
                 return ProductSalesReportModel;

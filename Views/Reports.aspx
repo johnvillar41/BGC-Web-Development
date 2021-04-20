@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Reports.aspx.cs" Inherits="SoftEngWebEmployee.Views.Reports" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" Async="true" CodeBehind="Reports.aspx.cs" Inherits="SoftEngWebEmployee.Views.Reports" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <p><b><u>REPORTS</u></b></p>
@@ -125,95 +125,39 @@
                 <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">
                     <!-- Products -->
                     <div class="row">
-                        <div class="col-4">
-                            <div class="card" style="width: 18rem;">
-                                <%--<img src="..." class="card-img-top" alt="...">--%>
-                                <div class="card-body">
-                                    <h5 class="card-title">Product ID</h5>
-                                    <h4 class="card-title"><b>Product Name</b></h4>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                         
+                        <div class="col-12">
+                            <asp:Repeater ID="ProductsRepeater" runat="server">
+                                <ItemTemplate>
 
-                                    <li class="list-group-item">Unit Price:
+                                    <div class="row mb-3">
+                                        <div class="card text-center p-0">
+                                            <center><img alt="" height="250px" width="300px" style="border-radius:50%" src="data:image/jpeg;base64,<%# DataBinder.Eval(Container.DataItem,"Product.ProductPicture") %>" /></center>
+                                            <hr style="margin:20px"/>
+                                            <div class="card-body">
+                                                <h5 class="card-title">Product ID: <%# DataBinder.Eval(Container.DataItem,"Product.Product_ID") %></h5>
+                                                <h4 class="card-title"><b><%# DataBinder.Eval(Container.DataItem,"Product.ProductName") %></b></h4>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Unit Price:
 
-                                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-                                    </li>
-                                    
-                                  
-                                    <li class="list-group-item">Quantity Sold:
-                                        <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-                                    </li>
-                              
-                                    <li class="list-group-item">Product Revenue:
-                                        <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
-                                    </li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card" style="width: 18rem;">
-                                <%--<img src="..." class="card-img-top" alt="...">--%>
-                                <div class="card-body">
-                                    <h5 class="card-title">Product ID</h5>
-                                    <h4 class="card-title"><b>Product Name</b></h4>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                         
+                                        <asp:Label ID="Label1" runat="server" Text='<%# DataBinder.Eval(Container.DataItem,"Product.ProductPrice") %>'></asp:Label>
+                                                </li>
+                                                <li class="list-group-item">Quantity Sold:
+                                        <asp:Label ID="Label2" runat="server" Text='<%# DataBinder.Eval(Container.DataItem,"QuantitySold") %>'></asp:Label>
+                                                </li>
 
-                                    <li class="list-group-item">Unit Price:
+                                                <li class="list-group-item">Product Revenue:
+                                        <asp:Label ID="Label3" runat="server" Text='<%# DataBinder.Eval(Container.DataItem,"ProductRevenue") %>'></asp:Label>
+                                                </li>
+                                            </ul>
 
-                                        <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
-                                    </li>
-                                    
-                                  
-                                    <li class="list-group-item">Quantity Sold:
-                                        <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
-                                    </li>
-                              
-                                    <li class="list-group-item">Product Revenue:
-                                        <asp:Label ID="Label6" runat="server" Text="Label"></asp:Label>
-                                    </li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card" style="width: 18rem;">
-                                <%--<img src="..." class="card-img-top" alt="...">--%>
-                                <div class="card-body">
-                                    <h5 class="card-title">Product ID</h5>
-                                    <h4 class="card-title"><b>Product Name</b></h4>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                         
+                                        </div>
+                                    </div>
 
-                                    <li class="list-group-item">Unit Price:
 
-                                        <asp:Label ID="Label7" runat="server" Text="Label"></asp:Label>
-                                    </li>
-                                    
-                                  
-                                    <li class="list-group-item">Quantity Sold:
-                                        <asp:Label ID="Label8" runat="server" Text="Label"></asp:Label>
-                                    </li>
-                              
-                                    <li class="list-group-item">Product Revenue:
-                                        <asp:Label ID="Label9" runat="server" Text="Label"></asp:Label>
-                                    </li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
-                                </div>
-                            </div>
+
+                                </ItemTemplate>
+                            </asp:Repeater>
                         </div>
                     </div>
                 </div>

@@ -6,10 +6,10 @@
         /// <summary>
         ///     Total product count for column total_product_count
         /// </summary>
-        public int QuantitySold { get; set; } 
+        public int? QuantitySold { get; set; } 
         /// <summary>
         ///     Sum of rows in total_sale
         /// </summary>
-        public int ProductRevenue { get; set; }
+        public int? ProductRevenue { get; set; }
     }
 }
