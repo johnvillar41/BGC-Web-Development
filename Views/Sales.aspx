@@ -7,6 +7,17 @@
         .scrolling-wrapper {
             overflow-x: auto;
         }
+
+        .bd-callout {
+            padding: 1.25rem;
+            border: 1px solid #e9ecef;
+            border-left-width: .25rem;
+            border-radius: .25rem;
+        }
+
+        .bd-callout-warning {
+            border-left-color: #f0ad4e;
+        }
     </style>
     <script type="text/javascript">     
         function isNumber(evt) {
@@ -31,163 +42,165 @@
         </li>
     </ul>
 
-    <div class="tab-content" id="myTabContent">
-        <!-- View All Transactions tab -->
-        <div class="tab-pane fade show active" id="view" role="tabpanel" aria-labelledby="view-transactions">
+    <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
+        <div class="tab-content" id="myTabContent">
+            <!-- View All Transactions tab -->
+            <div class="tab-pane fade show active" id="view" role="tabpanel" aria-labelledby="view-transactions">
 
-            <div class="table-bordered table-condensed table-responsive" style="height: 600px">
-                <asp:Repeater ID="SalesRepeater" runat="server">
-                    <HeaderTemplate>
-                        <div class="table-bordered table-condensed table-responsive" style="height: 500px">
-                            <table border="1" class="table table-striped">
-                                <tr>
-                                    <th scope="col">Sales ID</th>
-                                    <th scope="col">Username</th>
-                                    <th scope="col">Type Of Sale</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Details</th>
-                                </tr>
-                    </HeaderTemplate>
-                    <ItemTemplate>
-                        <tr>
-                            <td><%# DataBinder.Eval(Container.DataItem, "SalesID") %></td>
-                            <td><%# DataBinder.Eval(Container.DataItem, "Administrator.Username") %></td>
-                            <td><span class="badge bg-dark"><%# Eval("SalesType")%></span> </td>
-                            <td><%# DataBinder.Eval(Container.DataItem, "Date") %></td>
-                            <td>
-                                <asp:Button OnClick="IDS_Click" ID="IDS" CommandName="SalesCommand" CommandArgument='<%# Eval("Orders.Order_ID") +";"+Eval("OnsiteTransaction.TransactionID") %>' CssClass="btn btn-primary" runat="server" Text="View All Details" />
-                            </td>
-                        </tr>
-                    </ItemTemplate>
-                    <FooterTemplate>
-                        </table>
+                <div class="table-bordered table-condensed table-responsive" style="height: 600px">
+                    <asp:Repeater ID="SalesRepeater" runat="server">
+                        <HeaderTemplate>
+                            <div class="table-bordered table-condensed table-responsive" style="height: 500px">
+                                <table border="1" class="table table-striped">
+                                    <tr>
+                                        <th scope="col">Sales ID</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Type Of Sale</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Details</th>
+                                    </tr>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <tr>
+                                <td><%# DataBinder.Eval(Container.DataItem, "SalesID") %></td>
+                                <td><%# DataBinder.Eval(Container.DataItem, "Administrator.Username") %></td>
+                                <td><span class="badge bg-dark"><%# Eval("SalesType")%></span> </td>
+                                <td><%# DataBinder.Eval(Container.DataItem, "Date") %></td>
+                                <td>
+                                    <asp:Button OnClick="IDS_Click" ID="IDS" CommandName="SalesCommand" CommandArgument='<%# Eval("Orders.Order_ID") +";"+Eval("OnsiteTransaction.TransactionID") %>' CssClass="btn btn-primary" runat="server" Text="View All Details" />
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </table>
                          </div>
-                    </FooterTemplate>
-                </asp:Repeater>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                </div>
             </div>
-        </div>
 
-        <!-- Create Transaction tab -->
-        <div class="tab-pane fade" id="create" role="tabpanel" aria-labelledby="create-transactions">
-            <div class="col-4 col-xl-4 col-lg-4 col-md-6 col-sm-5">
-                <div class="row">
-                    <div class="col-lg-6 col-sm-12">
-                        <div class="btn-group" style="margin-bottom: 10px; margin-top: 10px">
-                            <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false">
-                                Select Category
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference">
-                                <li>
-                                    <asp:Button ID="CategoryBtnAllProducts" runat="server" CssClass="dropdown-item" Text="All Products" OnClick="CategoryBtnAllProducts_Click" /></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <asp:Repeater ID="CategoryRepeater" runat="server" OnItemCreated="CategoryRepeater_ItemCreated">
-                                    <ItemTemplate>
-                                        <a runat="server" class="dropdown-item" id="categorySelected">
-                                            <li>
-                                                <asp:Button ID="CategoryBtn" runat="server" CssClass="dropdown-item" Text='<%# DataBinder.Eval(Container.DataItem,"ProductCategory") %>' OnClick="CategoryBtn_Click" />
-                                            </li>
-                                        </a>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </ul>
+            <!-- Create Transaction tab -->
+            <div class="tab-pane fade" id="create" role="tabpanel" aria-labelledby="create-transactions">
+                <div class="col-4 col-xl-4 col-lg-4 col-md-6 col-sm-5">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="btn-group" style="margin-bottom: 10px; margin-top: 10px">
+                                <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Select Category
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference">
+                                    <li>
+                                        <asp:Button ID="CategoryBtnAllProducts" runat="server" CssClass="dropdown-item" Text="All Products" OnClick="CategoryBtnAllProducts_Click" /></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <asp:Repeater ID="CategoryRepeater" runat="server" OnItemCreated="CategoryRepeater_ItemCreated">
+                                        <ItemTemplate>
+                                            <a runat="server" class="dropdown-item" id="categorySelected">
+                                                <li>
+                                                    <asp:Button ID="CategoryBtn" runat="server" CssClass="dropdown-item" Text='<%# DataBinder.Eval(Container.DataItem,"ProductCategory") %>' OnClick="CategoryBtn_Click" />
+                                                </li>
+                                            </a>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </ul>
+                            </div>
                         </div>
                     </div>
+
                 </div>
+                <!--Product List-->
+                <div class="col-12">
+                    <div class="row">
+                        <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
 
-            </div>
-            <!--Product List-->
-            <div class="col-12">
-                <div class="row">
-                    <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                <ContentTemplate>
+                                    <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+                                        <asp:Repeater ID="ProductsRepeater" runat="server" OnItemCreated="ProductsRepeater_ItemCreated">
+                                            <ItemTemplate>
+                                                <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
+                                                    <div class="card" style="max-width: 35rem; height: 420px">
+                                                        <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
+                                                        <div class="card-body">
+                                                            <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
+                                                            <p class="card-text"><b>Description: </b><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
 
-                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                            <ContentTemplate>
-                                <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
-                                    <asp:Repeater ID="ProductsRepeater" runat="server" OnItemCreated="ProductsRepeater_ItemCreated">
-                                        <ItemTemplate>
-                                            <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
-                                                <div class="card" style="max-width: 35rem; height: 420px">
-                                                    <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
-                                                    <div class="card-body">
-                                                        <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
-                                                        <p class="card-text"><b>Description: </b><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
-
-                                                    </div>
-                                                    <div class="card-footer">
-                                                        <div class="col-lg-12">
-                                                            <div class="row">
-                                                                <div class="col-6">
-                                                                    <asp:TextBox ID="TotalItems" runat="server" CssClass="form-control mb-1" onkeypress="return isNumber(event)" onpaste="return false;"></asp:TextBox>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <asp:Button ID="BtnAddToCart" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Add To Cart" OnClick="BtnAddToCart_Click" />
+                                                        </div>
+                                                        <div class="card-footer">
+                                                            <div class="col-lg-12">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <asp:TextBox ID="TotalItems" runat="server" CssClass="form-control mb-1" onkeypress="return isNumber(event)" onpaste="return false;"></asp:TextBox>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <asp:Button ID="BtnAddToCart" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Add To Cart" OnClick="BtnAddToCart_Click" />
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </div>
-                            </ContentTemplate>
-                            <Triggers>
-                                <asp:AsyncPostBackTrigger ControlID="CategoryBtnAllProducts" EventName="Click" />
-                            </Triggers>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="CategoryBtnAllProducts" EventName="Click" />
+                                </Triggers>
 
-                        </asp:UpdatePanel>
+                            </asp:UpdatePanel>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Cart transaction tab-->
-        <div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="cart-transactions">
-            <div class="col-12">
-                <div class="row">
-                    <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
-                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                            <ContentTemplate>
-                                <%if (Cart.GetCartItems().Count == 0) %>
-                                <%{ %>
-                                <h3>No Items found</h3>
-                                <%} %>
-                                <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
-                                    <asp:Repeater ID="CartRepeater" runat="server" OnItemCreated="CartRepeater_ItemCreated">
-                                        <ItemTemplate>
-                                            <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
-                                                <div class="card" style="max-width: 35rem; height: 420px">
-                                                    <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
-                                                    <div class="card-body">
-                                                        <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
-                                                        <p class="card-text"><b>Description: </b><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
-                                                        <p class="card-text"><b>Total number of items: <%# DataBinder.Eval(Container.DataItem,"TotalNumberOfCartItems") %></b></p>
-                                                    </div>
-                                                    <div class="card-footer">
-                                                        <asp:Button ID="BtnRemoveCartItem" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Remove Item" OnClick="BtnRemoveCartItem_Click" />
+            <!-- Cart transaction tab-->
+            <div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="cart-transactions">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
+                            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                <ContentTemplate>
+                                    <%if (Cart.GetCartItems().Count == 0) %>
+                                    <%{ %>
+                                    <h3>No Items found</h3>
+                                    <%} %>
+                                    <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+                                        <asp:Repeater ID="CartRepeater" runat="server" OnItemCreated="CartRepeater_ItemCreated">
+                                            <ItemTemplate>
+                                                <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
+                                                    <div class="card" style="max-width: 35rem; height: 420px">
+                                                        <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
+                                                        <div class="card-body">
+                                                            <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
+                                                            <p class="card-text"><b>Description: </b><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
+                                                            <p class="card-text"><b>Total number of items: <%# DataBinder.Eval(Container.DataItem,"TotalNumberOfCartItems") %></b></p>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                            <asp:Button ID="BtnRemoveCartItem" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Remove Item" OnClick="BtnRemoveCartItem_Click" />
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </div>
-                            </ContentTemplate>
-                            <Triggers>
-                                <asp:AsyncPostBackTrigger ControlID="BtnConfirmCartOrder" EventName="Click" />
-                            </Triggers>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="BtnConfirmCartOrder" EventName="Click" />
+                                </Triggers>
 
-                        </asp:UpdatePanel>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 mt-3">
+                            <asp:Button ID="BtnConfirmCartOrder" CssClass="btn btn-success btn-block" runat="server" Text="Confirm" OnClick="BtnConfirmCartOrder_Click" />
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-3 mt-3">
-                        <asp:Button ID="BtnConfirmCartOrder" CssClass="btn btn-success btn-block" runat="server" Text="Confirm" OnClick="BtnConfirmCartOrder_Click" />
-                    </div>
-                </div>               
             </div>
         </div>
-    </div>  
-    
+    </div>
+
 </asp:Content>

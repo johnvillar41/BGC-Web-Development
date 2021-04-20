@@ -15,14 +15,14 @@
             border-left-color: #f0ad4e;
         }
     </style>
-    <h3>Information</h3>
-
-    <hr />
-
     <div class="container">
+          
         <div class="row">
+           
             <div class="col-12">
+                 
                 <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
+                    <h3>Information</h3>
                     <asp:Repeater ID="InformationRepeater" runat="server" OnItemCommand="InformationRepeater_ItemCommand">
                         <HeaderTemplate>
                             <div class="table-bordered table-condensed table-responsive" style="height: 500px">
