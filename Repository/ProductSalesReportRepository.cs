@@ -2,9 +2,7 @@
 using SoftEngWebEmployee.Helpers;
 using SoftEngWebEmployee.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 
 namespace SoftEngWebEmployee.Repository
 {
@@ -25,12 +23,31 @@ namespace SoftEngWebEmployee.Repository
 
         }
 
-        public ProductSalesReportModel FetchProductSalesReport()
+        public async Task<ProductSalesReportModel>  FetchProductSalesReport(int productID)
         {
-            throw new Exception();
-            //planning pa po
+            ProductSalesReportModel ProductSalesReportModel = null;
+
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                connection.Open();
+                string queryString = "SELECT SUM(onsite_transaction_table.total_sale) as pruductRevenue," +
+                    "onsite_products_transaction_table.transaction_id, " +
+                    "SUM(onsite_products_transaction_table.total_product_count) as quantitySold," +
+                    "onsite_products_transaction_table.product_id FROM onsite_transaction_table INNER JOIN onsite_products_transaction_table ON onsite_transaction_table.transaction_id = onsite_products_transaction_table.transaction_id WHERE onsite_products_transaction_table.product_id=@productID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@productID", productID);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    ProductSalesReportModel = new ProductSalesReportModel();
+                    ProductSalesReportModel.Product = await ProductRepository.GetInstance().FetchProductDetails(productID.ToString());
+                    ProductSalesReportModel.QuantitySold = int.Parse(reader["quantitySold"].ToString());
+                    ProductSalesReportModel.ProductRevenue = int.Parse(reader["pruductRevenue"].ToString());
+                }
+
+                return ProductSalesReportModel;
+            }       
         }
-
-
     }
 }

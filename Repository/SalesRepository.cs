@@ -29,17 +29,34 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "INSERT INTO sales_table(" +
-                    "user_username," +                    
-                    "sale_type," +                    
-                    "date,order_id)" +
-                    "VALUES(@username,@saleType,@date,@order_id)";
-                MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@username", newSale.Administrator.Username);                
-                command.Parameters.AddWithValue("@saleType", newSale.SalesType.ToString());               
-                command.Parameters.AddWithValue("@date", newSale.Date);
-                command.Parameters.AddWithValue("@order_id", newSale.Orders.Order_ID);
-                await command.ExecuteReaderAsync();
+                if (newSale.Orders != null)
+                {
+                    string queryString = "INSERT INTO sales_table(" +
+                   "user_username," +
+                   "sale_type," +
+                   "date,order_id)" +
+                   "VALUES(@username,@saleType,@date,@order_id)";
+                    MySqlCommand command = new MySqlCommand(queryString, connection);
+                    command.Parameters.AddWithValue("@username", newSale.Administrator.Username);
+                    command.Parameters.AddWithValue("@saleType", newSale.SalesType.ToString());
+                    command.Parameters.AddWithValue("@date", newSale.Date);
+                    command.Parameters.AddWithValue("@order_id", newSale.Orders.Order_ID);
+                    await command.ExecuteReaderAsync();
+                }
+                else
+                {
+                   string queryString = "INSERT INTO sales_table(" +
+                  "user_username," +
+                  "sale_type," +
+                  "date,onsite_transaction_id)" +
+                  "VALUES(@username,@saleType,@date,@onsite_transaction_id)";
+                    MySqlCommand command = new MySqlCommand(queryString, connection);
+                    command.Parameters.AddWithValue("@username", newSale.Administrator.Username);
+                    command.Parameters.AddWithValue("@saleType", newSale.SalesType.ToString());
+                    command.Parameters.AddWithValue("@date", newSale.Date);
+                    command.Parameters.AddWithValue("@onsite_transaction_id", newSale.OnsiteTransaction.TransactionID);
+                    await command.ExecuteReaderAsync();
+                }
             }
         }
         public async Task<List<SalesModel>> FetchAllSales()
@@ -63,7 +80,7 @@ namespace SoftEngWebEmployee.Repository
                             Date = DateTime.Parse(reader["date"].ToString()),
                             SalesType = GenerateSaleType(reader["sale_type"].ToString()),
                             OnsiteTransaction = await OnsiteTransactionRepository.GetInstance().FetchOnsiteTransaction(int.Parse(reader["onsite_transaction_id"].ToString()))
-                            
+
                         };
                     }
                     else if (reader["sale_type"].ToString().Equals("Order"))
@@ -77,7 +94,7 @@ namespace SoftEngWebEmployee.Repository
                             Orders = await OrdersRepository.GetInstance().FetchOrder(int.Parse(reader["order_id"].ToString()))
                         };
                     }
-                                     
+
                     listOfSales.Add(sales);
                 }
             }
