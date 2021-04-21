@@ -6,8 +6,6 @@
 
     <div class="d-flex align-items-start">
         <div class="col-2">
-
-
             <div class="list-group" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <button class="list-group-item list-group-item-action active" id="v-pills-dashboard-tab" data-bs-toggle="pill" data-bs-target="#v-pills-dashboard" type="button" role="tab" aria-controls="v-pills-dashboard" aria-selected="true">Dashboard</button>
                 <button class="list-group-item list-group-item-action" id="v-pills-products-tab" data-bs-toggle="pill" data-bs-target="#v-pills-products" type="button" role="tab" aria-controls="v-pills-products" aria-selected="false">Product Sales Report</button>
@@ -23,39 +21,36 @@
                         <div class="col-4">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
-                                    <%--<h5 class="card-title">3,000,000</h5>--%>
-                                    <asp:Label ID="total_sales" runat="server" Text="Total Sales" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
+
+                                    <center><asp:Label ID="total_sales" runat="server" Text="Total Sales" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
                                     <br />
 
                                     <h5 class="card-subtitle mb-2 text-muted">Total Sales</h5>
-                                    <img src="..." height="200" width="200" class="img-thumbnail" alt="...">
+                                    <img src="/Images/growth.PNG" height="150" width="150" class="img-thumbnail" alt="..."></center>
 
-                            <%--        <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>--%>
+
                                 </div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
-                                    <%--<h5 class="card-title">600 stocks</h5>--%>
-                                    <asp:Label ID="total_inventory" runat="server" Text="Total Inventory" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
+
+                                    <center><asp:Label ID="total_inventory" runat="server" Text="Total Inventory" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
                                     <h5 class="card-subtitle mb-2 text-muted">Total Inventory</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
+                                    <img src="/Images/invoice.PNG" height="150" width="150" class="img-thumbnail" alt="..."></center>
+
                                 </div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
-                                    <%--<h5 class="card-title">75</h5>--%>
-                                    <asp:Label ID="total_products" runat="server" Text="Total Products" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
+
+                                    <center><asp:Label ID="total_products" runat="server" Text="Total Products" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
                                     <h5 class="card-subtitle mb-2 text-muted">Total Products</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
+                                    <img src="/Images/plant.PNG" height="150" width="150" class="img-thumbnail" alt="..."></center>
+
                                 </div>
                             </div>
                         </div>
@@ -66,38 +61,93 @@
                     <!--Sales Income-->
 
                     <div class="row">
+                        <!--1st card-->
                         <div class="col-4">
                             <div class="card border-success mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Date</div>
+                                <div class="card-header">Date ngayon</div>
                                 <div class="card-body text-success">
-                                    <h5 class="card-title">Total Sales today!</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <h5 class="card-title"><b>Total Sales Today:</b></h5>
+                                    <p>
+                                        <asp:Label ID="Label3" runat="server" Text="280" Font-Size="X-Large"></asp:Label>
+                                    </p>
+
                                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">See More
                                     </a>
                                     <!--See More-->
-                                    <div class="collapse mt-2" id="collapseExample">
+
+                                    <div class="collapse mt-3" id="collapseExample">
                                         <div class="card card-body">
-                                            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                                            <asp:Label ID="Label1" runat="server" Text="Onsite Orders"></asp:Label>
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                                                    256
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <asp:Label ID="Label2" runat="server" Text="Online Orders"></asp:Label>
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                                    24
+                                                </div>
+                                            </div>
+
+
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
+                            <!--end 1st card-->
 
                         </div>
 
                         <div class="col-4">
                             <div class="card border-success mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Header</div>
+                                <div class="card-header">
+                                    <label for="date"><b>Select Date:</b></label>
+                                    <input type="date" id="date" name="date">
+                                </div>
+
                                 <div class="card-body text-success">
-                                    <h5 class="card-title">Success card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <h5 class="card-title"><b>Total Sales:</b></h5>
+                                    <p>
+                                        <asp:Label ID="Label4" runat="server" Text="280" Font-Size="X-Large"></asp:Label>
+                                    </p>
+
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">See More
+                                    </a>
+                                    <!--See More-->
+
+                                    <div class="collapse mt-3" id="collapseExample2">
+                                        <div class="card card-body">
+                                            <asp:Label ID="Label5" runat="server" Text="Onsite Orders"></asp:Label>
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                                                    256
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <asp:Label ID="Label6" runat="server" Text="Online Orders"></asp:Label>
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                                    24
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="card border-success mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Header</div>
+                                <div class="card-header"><b>Average Sales</b></div>
                                 <div class="card-body text-success">
                                     <h5 class="card-title">Success card title</h5>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -107,6 +157,8 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">
+
+
                     <!-- Products -->
                     <div class="col-12">
                         <%if (ProductSalesListDisplay == null) return; %>
@@ -134,7 +186,7 @@
 
                                     <!--See More-->
                                     <li class="list-group-item">Quantity Sold:
-                                        <label><%=productSales.ProductReport.QuantitySold %></label>                                        
+                                        <label><%=productSales.ProductReport.QuantitySold %></label>
                                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapse<%=productSales.ProductReport.Product.Product_ID %>" role="button" aria-expanded="false" aria-controls="collapseExample">See More
                                         </a>
                                         <div class="collapse mt-2" id="collapse<%=productSales.ProductReport.Product.Product_ID %>">
