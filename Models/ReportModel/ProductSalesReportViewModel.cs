@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SoftEngWebEmployee.Models.ViewModels
+namespace SoftEngWebEmployee.Models.ReportModel
 {
     public class ProductSalesReportViewModel
     {
