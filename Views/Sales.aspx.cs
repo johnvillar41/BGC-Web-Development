@@ -117,7 +117,7 @@ namespace SoftEngWebEmployee.Views
         }
         protected async void BtnConfirmCartOrder_Click(object sender, EventArgs e)
         {
-            SweetAlertBuilder sweetAlert = null;
+            SweetAlertBuilder sweetAlert;
             if (Cart.GetCartItems().Count == 0)
             {
                 sweetAlert = new SweetAlertBuilder

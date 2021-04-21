@@ -317,8 +317,10 @@
     <Compile Include="Models\OrdersModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ProductSalesReportModel.cs" />
+    <Compile Include="Models\QuantitySoldModel.cs" />
     <Compile Include="Models\SalesModel.cs" />
     <Compile Include="Models\SpecificOrdersModel.cs" />
+    <Compile Include="Models\ViewModels\ProductSalesReportViewModel.cs" />
     <Compile Include="Repository\AdministratorRepository.cs" />
     <Compile Include="Helpers\DbConnString.cs" />
     <Compile Include="Repository\InformationRepository.cs" />

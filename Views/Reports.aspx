@@ -110,73 +110,105 @@
                 <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">
                     <!-- Products -->
                     <div class="col-12">
-                        <asp:Repeater ID="ProductsRepeater" runat="server">
-                            <ItemTemplate>
-
-                                <div class="row mb-3">
-                                    <div class="card text-center p-0">
-                                        <center><img alt="" height="250px" width="300px" style="border-radius:50%" src="data:image/jpeg;base64,<%# DataBinder.Eval(Container.DataItem,"Product.ProductPicture") %>" /></center>
-                                        <hr style="margin: 20px" />
-                                        <div class="card-body">
-                                            <h5 class="card-title">Product ID: <%# DataBinder.Eval(Container.DataItem,"Product.Product_ID") %></h5>
-                                            <h4 class="card-title"><b><%# DataBinder.Eval(Container.DataItem,"Product.ProductName") %></b></h4>
-                                        </div>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">Unit Price:
-
-                                        <asp:Label ID="Label1" runat="server" Text='<%# DataBinder.Eval(Container.DataItem,"Product.ProductPrice") %>'></asp:Label>
-                                            </li>
-                                            <li class="list-group-item">Quantity Sold:
-                                        <asp:Label ID="Label2" runat="server" Text='<%# DataBinder.Eval(Container.DataItem,"QuantitySold") %>'></asp:Label>
-                                            </li>
-
-                                            <li class="list-group-item">Product Revenue:
-                                        <asp:Label ID="Label3" runat="server" Text='<%# DataBinder.Eval(Container.DataItem,"ProductRevenue") %>'></asp:Label>
-                                            </li>
-                                        </ul>
-
-                                    </div>
+                        <%if (ProductSalesListDisplay == null) return; %>
+                        <%foreach (var productSales in ProductSalesListDisplay) %>
+                        <%{ %>
+                        <div class="row mb-3">
+                            <div class="card text-center p-0">
+                                <center><img alt="" height="250px" width="300px" style="border-radius:50%" src="data:image/jpeg;base64,<%=productSales.ProductReport.Product.ProductPicture%>" /></center>
+                                <hr style="margin: 20px" />
+                                <div class="card-body">
+                                    <h5 class="card-title">Product ID: <%=productSales.ProductReport.Product.Product_ID%></h5>
+                                    <h4 class="card-title"><b><%=productSales.ProductReport.Product.ProductName %></b></h4>
                                 </div>
-                            </ItemTemplate>
-                        </asp:Repeater>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Unit Price:
+
+                                        <label><%=productSales.ProductReport.Product.ProductPrice%></label>
+                                    </li>
+
+
+                                    <li class="list-group-item">Product Revenue:
+                                         <label><%=productSales.ProductReport.ProductRevenue %></label>
+                                        
+                                    </li>
+
+                                    <li class="list-group-item">Quantity Sold:
+                                        <label><%=productSales.ProductReport.QuantitySold %></label>                                        
+                                        <hr />
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ProductName</th>
+                                                    <th scope="col">ProductPrice</th>
+                                                    <th scope="col">ProductID</th>
+                                                    <th scope="col">SaleType</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Administrator</th>
+                                                    <th scope="col">TotalSale</th>
+                                                    <th scope="col">ProductCount</th>
+                                                </tr>
+                                            </thead>
+                                            <%foreach (var quantitySold in productSales.QuantitySold) %>
+                                            <%{ %>
+                                             <tbody>
+                                                <tr>
+                                                    <td><%=quantitySold.ProductName %></td>
+                                                    <td><%=quantitySold.ProductPrice %></td>
+                                                    <td><%=quantitySold.ProductID %></td>
+                                                    <td><%=quantitySold.SaleType %></td>
+                                                    <td><%=quantitySold.Date %></td>
+                                                    <td><%=quantitySold.Administrator %></td>
+                                                    <td><%=quantitySold.TotalSale %></td>
+                                                    <td><%=quantitySold.ProductCount %></td>
+                                                </tr>
+                                            </tbody>
+                                            <%} %>
+                                        </table>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                        <%} %>
                     </div>
 
-                   
+
                 </div>
-                 <div class="tab-pane fade" id="v-pills-inventory" role="tabpanel" aria-labelledby="v-pills-inventory-tab">
-                        <!--Inventory-->
+                <div class="tab-pane fade" id="v-pills-inventory" role="tabpanel" aria-labelledby="v-pills-inventory-tab">
+                    <!--Inventory-->
 
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col">Unit Price</th>
-                                    <th scope="col">Quantity Sold</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Unit Price</th>
+                                <th scope="col">Quantity Sold</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry</td>
+                                <td>the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

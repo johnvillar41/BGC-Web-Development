@@ -1,4 +1,5 @@
 ﻿using SoftEngWebEmployee.Models;
+using SoftEngWebEmployee.Models.ViewModels;
 using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace SoftEngWebEmployee.Views
 {
     public partial class Reports : System.Web.UI.Page
     {
+        public List<ProductSalesReportViewModel> ProductSalesListDisplay { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -24,21 +26,29 @@ namespace SoftEngWebEmployee.Views
         private async void DisplayProductSalesReport()
         {
             var productList = await ProductRepository.GetInstance().FetchAllProducts();
-            List<ProductSalesReportModel> ProductSalesList = new List<ProductSalesReportModel>();
+            List<ProductSalesReportViewModel> ProductSalesList = new List<ProductSalesReportViewModel>();
             foreach (var product in productList)
             {
                 try
                 {
                     var productSalesReport = await ProductSalesReportRepository.GetInstance().FetchProductSalesReport(product.Product_ID);
-                    ProductSalesList.Add(productSalesReport);
+                    var quantitySold = await ProductSalesReportRepository.GetInstance().FetchQuantitySoldList(product.Product_ID);
+                    ProductSalesList.Add(
+                            new ProductSalesReportViewModel
+                            {
+                                ProductReport = productSalesReport,
+                                QuantitySold = quantitySold
+                            }
+                        );
                 }
                 catch (Exception)
                 {
 
                 }
             }
-            ProductsRepeater.DataSource = ProductSalesList;
-            ProductsRepeater.DataBind();
+            ProductSalesListDisplay = ProductSalesList;
+            //ProductsRepeater.DataSource = ProductSalesList;
+            //ProductsRepeater.DataBind();
         }
 
 

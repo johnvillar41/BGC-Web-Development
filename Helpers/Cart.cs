@@ -22,7 +22,7 @@ namespace SoftEngWebEmployee.Helpers
                     product.TotalNumberOfCartItems = cartProduct.TotalNumberOfCartItems;
                     return;
                 }
-            }
+            }         
             CartItems.Add(cartProduct);
         }
         public static List<ProductModel> GetCartItems()

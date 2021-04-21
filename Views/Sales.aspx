@@ -44,10 +44,10 @@
 
     <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
         <div class="tab-content" id="myTabContent">
-            <!-- View All Transactions tab -->
+            <!-- View Transactions list -->
             <div class="tab-pane fade show active" id="view" role="tabpanel" aria-labelledby="view-transactions">
 
-                <div class="table-bordered table-condensed table-responsive" style="height: 600px">
+                <div class="table-bordered table-condensed table-responsive" style="height: 500px">
                     <asp:Repeater ID="SalesRepeater" runat="server">
                         <HeaderTemplate>
                             <div class="table-bordered table-condensed table-responsive" style="height: 500px">
@@ -108,15 +108,14 @@
                         </div>
                     </div>
 
-                </div>
-                <!--Product List-->
+                </div>               
                 <div class="col-12">
                     <div class="row">
                         <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
 
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                 <ContentTemplate>
-                                    <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+                                    <div class="scrolling-wrapper row flex-row flex-nowrap mt-1 pb-4 pt-2">
                                         <asp:Repeater ID="ProductsRepeater" runat="server" OnItemCreated="ProductsRepeater_ItemCreated">
                                             <ItemTemplate>
                                                 <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
@@ -131,7 +130,7 @@
                                                             <div class="col-lg-12">
                                                                 <div class="row">
                                                                     <div class="col-6">
-                                                                        <asp:TextBox ID="TotalItems" runat="server" CssClass="form-control mb-1" onkeypress="return isNumber(event)" onpaste="return false;"></asp:TextBox>
+                                                                        <asp:TextBox ID="TotalItems" runat="server" CssClass="form-control mb-1" placeholder="Enter number of items" onkeypress="return isNumber(event)" onpaste="return false;"></asp:TextBox>
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <asp:Button ID="BtnAddToCart" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Add To Cart" OnClick="BtnAddToCart_Click" />
@@ -164,7 +163,7 @@
                                 <ContentTemplate>
                                     <%if (Cart.GetCartItems().Count == 0) %>
                                     <%{ %>
-                                    <h3>No Items found</h3>
+                                    <center><h3>No Items found</h3></center>
                                     <%} %>
                                     <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
                                         <asp:Repeater ID="CartRepeater" runat="server" OnItemCreated="CartRepeater_ItemCreated">
