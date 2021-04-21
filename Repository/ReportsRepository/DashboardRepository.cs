@@ -6,25 +6,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace SoftEngWebEmployee.Repository
+namespace SoftEngWebEmployee.Repository.ReportsRepository
 {
-    public class ReportsRepository
+    public class DashboardRepository
     {
         //fetch total sales
         //fetch total inventory
         //fetch total # products
 
-        private static ReportsRepository instance = null;
-        public static ReportsRepository GetInstance()
+        private static DashboardRepository instance = null;
+        public static DashboardRepository GetInstance()
         {
             if (instance == null)
             {
-                instance = new ReportsRepository();
+                instance = new DashboardRepository();
             }
             return instance;
         }
 
-        private ReportsRepository()
+        private DashboardRepository()
         {
 
         }

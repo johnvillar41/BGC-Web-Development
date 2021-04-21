@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SoftEngWebEmployee.Repository
+namespace SoftEngWebEmployee.Repository.ReportsRepository
 {
     public class ProductSalesReportRepository
     {

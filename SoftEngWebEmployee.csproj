@@ -319,9 +319,10 @@
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ProductSalesReportModel.cs" />
     <Compile Include="Models\QuantitySoldModel.cs" />
+    <Compile Include="Models\ReportModel\SalesIncomeReportViewModel.cs" />
     <Compile Include="Models\SalesModel.cs" />
     <Compile Include="Models\SpecificOrdersModel.cs" />
-    <Compile Include="Models\ViewModels\ProductSalesReportViewModel.cs" />
+    <Compile Include="Models\ReportModel\ProductSalesReportViewModel.cs" />
     <Compile Include="Repository\AdministratorRepository.cs" />
     <Compile Include="Helpers\DbConnString.cs" />
     <Compile Include="Repository\InformationRepository.cs" />
@@ -336,8 +337,9 @@
     <Compile Include="Repository\OnsiteTransactionRepository.cs" />
     <Compile Include="Repository\OrdersRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
-    <Compile Include="Repository\ProductSalesReportRepository.cs" />
-    <Compile Include="Repository\ReportsRepository.cs" />
+    <Compile Include="Repository\ReportsRepository\ProductSalesReportRepository.cs" />
+    <Compile Include="Repository\ReportsRepository\DashboardRepository.cs" />
+    <Compile Include="Repository\ReportsRepository\SalesIncomeReportRepository.cs" />
     <Compile Include="Repository\SalesRepository.cs" />
     <Compile Include="Repository\SpecificOrdersRepository.cs" />
     <Compile Include="Helpers\UserSession.cs" />
