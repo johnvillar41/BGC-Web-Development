@@ -32,12 +32,12 @@ namespace SoftEngWebEmployee.Views
                 try
                 {
                     var productSalesReport = await ProductSalesReportRepository.GetInstance().FetchProductSalesReport(product.Product_ID);
-                    var quantitySold = await ProductSalesReportRepository.GetInstance().FetchQuantitySoldList(product.Product_ID);
+                    var listOfQuantitySold = await ProductSalesReportRepository.GetInstance().FetchQuantitySoldList(product.Product_ID);
                     ProductSalesList.Add(
                             new ProductSalesReportViewModel
                             {
                                 ProductReport = productSalesReport,
-                                QuantitySold = quantitySold
+                                QuantitySold = listOfQuantitySold
                             }
                         );
                 }
@@ -47,16 +47,18 @@ namespace SoftEngWebEmployee.Views
                 }
             }
             ProductSalesListDisplay = ProductSalesList;
-            //ProductsRepeater.DataSource = ProductSalesList;
-            //ProductsRepeater.DataBind();
         }
 
 
-        private void DisplayDashBoard() 
+        private async void DisplayDashBoard()
         {
-            total_sales.Text = ReportsRepository.GetInstance().FetchTotalSales().ToString();
-            total_inventory.Text = ReportsRepository.GetInstance().FetchTotalInventory().ToString();
-            total_products.Text = ReportsRepository.GetInstance().FetchTotalProducts().ToString();
+            var totalSales = await ReportsRepository.GetInstance().FetchTotalSales();
+            var totalInventory = await ReportsRepository.GetInstance().FetchTotalInventory();
+            var totalProducts = await ReportsRepository.GetInstance().FetchTotalProducts();
+
+            total_sales.Text = totalSales.ToString();
+            total_inventory.Text = totalInventory.ToString();
+            total_products.Text = totalProducts.ToString();
         }
 
     }

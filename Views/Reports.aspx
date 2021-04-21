@@ -73,18 +73,16 @@
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">See More
                                     </a>
+                                    <!--See More-->
+                                    <div class="collapse mt-2" id="collapseExample">
+                                        <div class="card card-body">
+                                            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <!--See More-->
-                            <div class="collapse" id="collapseExample">
-                                <div class="card card-body">
-                                    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
 
-
-                           
-                                </div>
-                            </div>
                         </div>
 
                         <div class="col-4">
@@ -130,41 +128,47 @@
 
                                     <li class="list-group-item">Product Revenue:
                                          <label><%=productSales.ProductReport.ProductRevenue %></label>
-                                        
+
                                     </li>
 
+                                    <!--See More-->
                                     <li class="list-group-item">Quantity Sold:
                                         <label><%=productSales.ProductReport.QuantitySold %></label>                                        
-                                        <hr />
-                                        <table class="table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">ProductName</th>
-                                                    <th scope="col">ProductPrice</th>
-                                                    <th scope="col">ProductID</th>
-                                                    <th scope="col">SaleType</th>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Administrator</th>
-                                                    <th scope="col">TotalSale</th>
-                                                    <th scope="col">ProductCount</th>
-                                                </tr>
-                                            </thead>
-                                            <%foreach (var quantitySold in productSales.QuantitySold) %>
-                                            <%{ %>
-                                             <tbody>
-                                                <tr>
-                                                    <td><%=quantitySold.ProductName %></td>
-                                                    <td><%=quantitySold.ProductPrice %></td>
-                                                    <td><%=quantitySold.ProductID %></td>
-                                                    <td><%=quantitySold.SaleType %></td>
-                                                    <td><%=quantitySold.Date %></td>
-                                                    <td><%=quantitySold.Administrator %></td>
-                                                    <td><%=quantitySold.TotalSale %></td>
-                                                    <td><%=quantitySold.ProductCount %></td>
-                                                </tr>
-                                            </tbody>
-                                            <%} %>
-                                        </table>
+                                        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapse<%=productSales.ProductReport.Product.Product_ID %>" role="button" aria-expanded="false" aria-controls="collapseExample">See More
+                                        </a>
+                                        <div class="collapse mt-2" id="collapse<%=productSales.ProductReport.Product.Product_ID %>">
+                                            <div class="card card-body">
+                                                <table class="table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">ProductName</th>
+                                                            <th scope="col">ProductPrice</th>
+                                                            <th scope="col">ProductID</th>
+                                                            <th scope="col">SaleType</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Administrator</th>
+                                                            <th scope="col">TotalSale</th>
+                                                            <th scope="col">ProductCount</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <%foreach (var quantitySold in productSales.QuantitySold) %>
+                                                    <%{ %>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><%=quantitySold.ProductName %></td>
+                                                            <td><%=quantitySold.ProductPrice %></td>
+                                                            <td><%=quantitySold.ProductID %></td>
+                                                            <td><%=quantitySold.SaleType %></td>
+                                                            <td><%=quantitySold.Date %></td>
+                                                            <td><%=quantitySold.Administrator %></td>
+                                                            <td><%=quantitySold.TotalSale %></td>
+                                                            <td><%=quantitySold.ProductCount %></td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <%} %>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </li>
                                 </ul>
 
