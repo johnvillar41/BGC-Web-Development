@@ -57,16 +57,24 @@ namespace SoftEngWebEmployee.Views
             List<SalesIncomeReportViewModel> listOfIncomeReports = new List<SalesIncomeReportViewModel>();
             foreach(var admin in admins)
             {
-                var totalSale = await SalesIncomeReportRepository.GetInstance().FetchTotalSaleOfAdmin(admin.Username);
-                listOfIncomeReports.Add(
-                        new SalesIncomeReportViewModel 
-                        { 
-                            Administrator = admin,
-                            TotalSale = totalSale.TotalSale,
-                            TotalSaleOnsite = totalSale.TotalSaleOnsite,
-                            TotalSaleOrders = totalSale.TotalSaleOrders
-                        }
-                    );
+                try
+                {
+                    var totalSale = await SalesIncomeReportRepository.GetInstance().FetchTotalSaleOfAdmin(admin.Username);
+                    listOfIncomeReports.Add(
+                            new SalesIncomeReportViewModel
+                            {
+                                Administrator = admin,
+                                TotalSale = totalSale.TotalSale,
+                                TotalSaleOnsite = totalSale.TotalSaleOnsite,
+                                TotalSaleOrders = totalSale.TotalSaleOrders
+                            }
+                        );
+                }
+                catch (Exception)
+                {
+
+                }
+                
             }
             SalesIncomeDisplay = listOfIncomeReports;
         }
