@@ -4,7 +4,7 @@
     <p><b><u>REPORTS</u></b></p>
 
 
-    <div class="d-flex align-items-start">
+
         <div class="row">
             <div class="col-lg-2 col-md-4 col-sm-12 mb-3">
                 <div class="list-group" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -21,7 +21,7 @@
                     <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel" aria-labelledby="v-pills-dashboard-tab">
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
-                                <div class="card" style="min-width: 16rem;">
+                                <div class="card">
                                     <div class="card-body">
 
                                         <center><asp:Label ID="total_sales" runat="server" Text="Total Sales" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
-                                <div class="card" style="min-width: 16rem;">
+                                <div class="card">
                                     <div class="card-body">
 
                                         <center><asp:Label ID="total_inventory" runat="server" Text="Total Inventory" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
@@ -287,5 +287,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 </asp:Content>
