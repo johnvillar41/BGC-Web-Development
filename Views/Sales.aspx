@@ -164,6 +164,7 @@
                                     <%if (Cart.GetCartItems().Count == 0) %>
                                     <%{ %>
                                     <center><h3>No Items found</h3></center>
+                                    <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;"loop autoplay></lottie-player></center>
                                     <%} %>
                                     <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
                                         <asp:Repeater ID="CartRepeater" runat="server" OnItemCreated="CartRepeater_ItemCreated">
