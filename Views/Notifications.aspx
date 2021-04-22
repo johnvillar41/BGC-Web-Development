@@ -29,10 +29,10 @@
                         </div>
                         <div class="col-6 ">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-lg-6 col-sm-12">
                                     <asp:TextBox class="form-control" ID="DateText" runat="server" type="date"></asp:TextBox>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-lg-6 col-sm-12">
                                     <asp:Button ID="FindDate" runat="server" Text="Search" CssClass="btn btn-info form-control" OnClick="FindDate_Click" />
                                 </div>
                             </div>

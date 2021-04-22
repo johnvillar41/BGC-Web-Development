@@ -18,8 +18,8 @@
                 <!--Dashboard-->
                 <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel" aria-labelledby="v-pills-dashboard-tab">
                     <div class="row">
-                        <div class="col-4">
-                            <div class="card" style="width: 18rem;">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
+                            <div class="card" style="min-width: 16rem;">
                                 <div class="card-body">
 
                                     <center><asp:Label ID="total_sales" runat="server" Text="Total Sales" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
@@ -32,8 +32,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4">
-                            <div class="card" style="width: 18rem;">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
+                            <div class="card" style="min-width: 16rem;">
                                 <div class="card-body">
 
                                     <center><asp:Label ID="total_inventory" runat="server" Text="Total Inventory" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
@@ -43,8 +43,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4">
-                            <div class="card" style="min-width: 18rem;">
+                        <div class="col-lg-4 col-md-12 col-sm-12 mb-1">
+                            <div class="card" style="min-width: 16rem;">
                                 <div class="card-body">
 
                                     <center><asp:Label ID="total_products" runat="server" Text="Total Products" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
