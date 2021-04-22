@@ -29,12 +29,14 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "INSERT INTO onsite_products_transaction_table(transaction_id,product_id,total_product_count)" +
-                    "VALUES(@transactionID,@productID,@totalCount)";
+                string queryString = "INSERT INTO onsite_products_transaction_table(transaction_id,product_id,administrator_username,total_product_count,subtotal_price)" +
+                    "VALUES(@transactionID,@productID,@administrator,@totalCount,@subtotal)";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@transactionID", onsiteProductsTransactionModel.TransactionID);
                 command.Parameters.AddWithValue("@productID", onsiteProductsTransactionModel.Product.Product_ID);
+                command.Parameters.AddWithValue("@administrator", onsiteProductsTransactionModel.Administrator);
                 command.Parameters.AddWithValue("@totalCount", onsiteProductsTransactionModel.TotalProductsCount);
+                command.Parameters.AddWithValue("@subtotal", onsiteProductsTransactionModel.SubTotalPrice);
                 await command.ExecuteNonQueryAsync();
             }
         }

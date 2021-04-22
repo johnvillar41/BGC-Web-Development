@@ -26,27 +26,26 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
         }
         public async Task<SalesIncomeReportViewModel> FetchTotalSaleOfAdmin(string administrator)
         {
-            SalesIncomeReportViewModel salesIncome = null;
+            SalesIncomeReportViewModel salesIncome = new SalesIncomeReportViewModel();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "SELECT SUM(onsite_transaction_table.total_sale + customer_orders_table.order_total_price) as TotalSale, " +
-                    "SUM(onsite_transaction_table.total_sale) as TotalSaleOnsite, " +
-                    "SUM(customer_orders_table.order_total_price) as TotalSaleOrders " +
-                    "FROM onsite_transaction_table INNER JOIN sales_table ON onsite_transaction_table.transaction_id = sales_table.onsite_transaction_id " +
-                    "INNER JOIN customer_orders_table WHERE sales_table.user_username = @administrator";
+                string queryString = "SELECT (SELECT SUM(onsite_products_transaction_table.subtotal_price) FROM onsite_products_transaction_table WHERE onsite_products_transaction_table.administrator_username = 'sample') as TotalSaleOnSite, (SELECT SUM(specific_orders_table.subtotal_price) FROM specific_orders_table WHERE specific_orders_table.administrator_username = 'sample') AS TotalSaleOrder";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@administrator", administrator);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 if(await reader.ReadAsync())
                 {
-                    salesIncome = new SalesIncomeReportViewModel
-                    {
-                        Administrator = await AdministratorRepository.GetInstance().FindAdministrator(administrator),
-                        TotalSale = int.Parse(reader["TotalSale"].ToString()),
-                        TotalSaleOrders = int.Parse(reader["TotalSaleOnsite"].ToString()),
-                        TotalSaleOnsite = int.Parse(reader["TotalSaleOrders"].ToString())
-                    };
+                    if (String.IsNullOrEmpty(reader["TotalSaleOnSite"].ToString()))
+                        salesIncome.TotalSaleOnsite = 0;
+                    else
+                        salesIncome.TotalSaleOnsite = int.Parse(reader["TotalSaleOnSite"].ToString());
+                    if (String.IsNullOrEmpty(reader["TotalSaleOrder"].ToString()))
+                        salesIncome.TotalSaleOrders = 0;
+                    else
+                        salesIncome.TotalSaleOrders = int.Parse(reader["TotalSaleOrder"].ToString());
+                    salesIncome.TotalSale = salesIncome.TotalSaleOnsite + salesIncome.TotalSaleOrders;
+                    salesIncome.Administrator = await AdministratorRepository.GetInstance().FindAdministrator(administrator);
                 }
             }
             return salesIncome;

@@ -9,7 +9,9 @@ namespace SoftEngWebEmployee.Models
     {
         public int OnsiteProductTransactionID { get; set; }
         public int TransactionID { get; set; }
+        public string Administrator { get; set; }
         public ProductModel Product { get; set; }
-        public int TotalProductsCount { get; set; }        
+        public int TotalProductsCount { get; set; }
+        public int SubTotalPrice { get; set; }
     }
 }

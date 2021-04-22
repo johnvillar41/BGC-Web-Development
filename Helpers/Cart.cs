@@ -59,7 +59,9 @@ namespace SoftEngWebEmployee.Helpers
                         {                            
                             TransactionID = transactionID,                         
                             Product = product,
-                            TotalProductsCount = product.TotalNumberOfProduct
+                            TotalProductsCount = product.TotalNumberOfProduct,
+                            Administrator = UserSession.GetLoggedInUser(),
+                            SubTotalPrice = product.TotalNumberOfProduct * product.ProductPrice
                         }
                     );
             }

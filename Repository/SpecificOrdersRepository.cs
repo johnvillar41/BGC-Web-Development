@@ -41,6 +41,7 @@ namespace SoftEngWebEmployee.Repository
                         OrdersID = int.Parse(reader["order_id"].ToString()),
                         ProductID = int.Parse(reader["product_id"].ToString()),
                         TotalOrders = int.Parse(reader["total_orders"].ToString()),
+                        Administrator = reader["administrator_username"].ToString(),
                         ProductsModel = await ProductRepository.GetInstance().GetProducts(int.Parse(reader["product_id"].ToString()))
                     };
                     specificOrdersModels.Add(specificOrdersModel);
