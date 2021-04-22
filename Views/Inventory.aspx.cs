@@ -12,6 +12,10 @@ namespace SoftEngWebEmployee.Views
 {
     public partial class Inventory : System.Web.UI.Page
     {
+        public List<ProductModel> listSearchRepeater {get; set;}
+        public List<ProductModel> listGHRepeater { get; set; }
+        public List<ProductModel> listHPRepeater { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -32,14 +36,17 @@ namespace SoftEngWebEmployee.Views
         {
             var inventory = await ProductRepository.GetInstance().FetchAllProducts();            
             SearchRepeater.DataSource = inventory;
+            listSearchRepeater = inventory;
             SearchRepeater.DataBind();
 
             var greenhouse = await ProductRepository.GetInstance().FetchGHProducts();
             GHRepeater.DataSource = greenhouse;
+            listGHRepeater = greenhouse;
             GHRepeater.DataBind();
 
             var hydroponics = await ProductRepository.GetInstance().FetchHPProducts();
             HPRepeater.DataSource = hydroponics;
+            listHPRepeater = hydroponics;
             HPRepeater.DataBind();
         }
 
@@ -52,12 +59,14 @@ namespace SoftEngWebEmployee.Views
             {
                 var newSearch = await ProductRepository.GetInstance().FetchAllProducts();
                 SearchRepeater.DataSource = newSearch;
+                listSearchRepeater = newSearch;
                 SearchRepeater.DataBind();
             }
             else
             {
                 var newSearch = await ProductRepository.GetInstance().FetchOnCategory(category);
                 SearchRepeater.DataSource = newSearch;
+                listSearchRepeater = newSearch;
                 SearchRepeater.DataBind();
             }           
         }
@@ -67,6 +76,7 @@ namespace SoftEngWebEmployee.Views
             string search = searchBox.Text.ToString();
             var newSearch = await ProductRepository.GetInstance().FetchOnSearch(search);
             SearchRepeater.DataSource = newSearch;
+            listSearchRepeater = newSearch;
             SearchRepeater.DataBind();
         }        
 
@@ -133,6 +143,12 @@ namespace SoftEngWebEmployee.Views
         <p> Number of Stocks: <%if (Details != null){%> <%=Details.ProductStocks %> <%}%> </p>
         <p> Price: Php <%if (Details != null){%> <%=Details.ProductPrice %> <%}%> </p>
 
+        Code for Lottie
+        <%if (SearchRepeater.DataBind() == "") %>
+                <%{ %>
+                <center><h3 style="color:white">No Items Found</h3></center>
+                <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;"loop autoplay></lottie-player></center>
+                <%} %>
         */
     }
 }
