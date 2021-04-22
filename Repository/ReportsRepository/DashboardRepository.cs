@@ -66,7 +66,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                     }
                     else
                     {
-                        total_sales = int.Parse(reader["TotalSaleOrder"].ToString());
+                        total_order_sale = int.Parse(reader["TotalSaleOrder"].ToString());
                     }                    
                 }
             }

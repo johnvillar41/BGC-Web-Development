@@ -42,8 +42,7 @@ namespace SoftEngWebEmployee.Repository
                     order = new OrdersModel()
                     {
                         Order_ID = int.Parse(reader["order_id"].ToString()),
-                        CustomerName = reader["customer_name"].ToString(),
-                        CustomerEmail = reader["customer_email"].ToString(),
+                        CustomerID = int.Parse(reader["user_id"].ToString()),
                         OrderTotalPrice = int.Parse(reader["order_total_price"].ToString()),
                         OrderStatus = reader["order_status"].ToString(),
                         OrderDate = reader["order_date"].ToString(),
@@ -70,8 +69,7 @@ namespace SoftEngWebEmployee.Repository
                             new OrdersModel()
                             {
                                 Order_ID = int.Parse(reader["order_id"].ToString()),
-                                CustomerName = reader["customer_name"].ToString(),
-                                CustomerEmail = reader["customer_email"].ToString(),
+                                CustomerID = int.Parse(reader["user_id"].ToString()),
                                 OrderTotalPrice = int.Parse(reader["order_total_price"].ToString()),
                                 OrderStatus = reader["order_status"].ToString(),
                                 OrderDate = reader["order_date"].ToString(),
@@ -100,9 +98,10 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "UPDATE customer_orders_table SET order_status='Finished' WHERE order_id=@orderID";
+                string queryString = "UPDATE customer_orders_table SET order_status='Finished',administrator_username=@administrator WHERE order_id=@orderID";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@orderID", orderID);
+                command.Parameters.AddWithValue("@administrator", UserSession.GetLoggedInUser());
                 await command.ExecuteNonQueryAsync();
             }
         }

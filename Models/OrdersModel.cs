@@ -8,8 +8,7 @@ namespace SoftEngWebEmployee.Models
     public class OrdersModel
     {
         public int Order_ID { get; set; }
-        public string CustomerName { get; set; }
-        public string CustomerEmail { get; set; }
+        public int CustomerID { get; set; }
         public double OrderTotalPrice { get; set; }
         public string OrderStatus { get; set; }
         public string OrderDate { get; set; }

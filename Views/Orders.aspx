@@ -77,8 +77,7 @@
                                             </div>
 
                                             <div class="card-body">
-                                                <p class="card-text">Customer Name: <%=orders.CustomerName %></p>
-                                                <p class="card-text">Customer Email: <%=orders.CustomerEmail %></p>
+                                                <p class="card-text">Customer ID: <%=orders.CustomerID %></p>                                                
                                                 <p class="card-text">Order Date: <%=orders.OrderDate %></p>
                                                 <p class="card-text">Total Number Of Orders: <%=orders.TotalNumberOfOrders %></p>
                                             </div>
