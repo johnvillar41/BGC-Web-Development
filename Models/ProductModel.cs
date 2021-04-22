@@ -11,9 +11,9 @@
         public string ProductCategory { get; set; }
         /// <summary>
         ///     This property is for cart user only
-        ///     This will consider the total number of proucts
+        ///     This will consider the total number of products
         ///     inside the cart.
         /// </summary>
-        public int TotalNumberOfCartItems { get; set; }
+        public int TotalNumberOfProduct { get; set; }       
     }
 }

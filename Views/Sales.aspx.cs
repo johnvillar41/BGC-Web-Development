@@ -76,7 +76,7 @@ namespace SoftEngWebEmployee.Views
             ProductModel product = await ProductRepository.GetInstance().GetProducts(int.Parse(productID));
             try
             {
-                product.TotalNumberOfCartItems = int.Parse(totalItem.Text);
+                product.TotalNumberOfProduct = int.Parse(totalItem.Text);                
                 SweetAlertBuilder sweetAlert = new SweetAlertBuilder
                 {
                     HexaBackgroundColor = "#90EE90",

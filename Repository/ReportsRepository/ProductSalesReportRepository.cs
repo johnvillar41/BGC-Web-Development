@@ -24,17 +24,18 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
 
         }
 
-        public async Task<ProductSalesReportModel>  FetchProductSalesReport(int productID)
+        public async Task<ProductSalesReportModel> FetchProductSalesReport(int productID)
         {
             ProductSalesReportModel ProductSalesReportModel = null;
 
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "SELECT SUM(onsite_transaction_table.total_sale) as productRevenue," +
-                    "onsite_products_transaction_table.transaction_id, " +
-                    "SUM(onsite_products_transaction_table.total_product_count) as quantitySold," +
-                    "onsite_products_transaction_table.product_id FROM onsite_transaction_table INNER JOIN onsite_products_transaction_table ON onsite_transaction_table.transaction_id = onsite_products_transaction_table.transaction_id WHERE onsite_products_transaction_table.product_id=@productID";
+                string queryString = "SELECT onsite_products_transaction_table.total_product_count as ProductCount, " +
+                    "(SELECT products_table.product_price FROM products_table WHERE products_table.product_id = @productID) as ProductPrice, " +
+                    "SUM(onsite_products_transaction_table.total_product_count) as quantitySold, " +
+                    "SUM(onsite_products_transaction_table.total_product_count * (SELECT products_table.product_price FROM products_table WHERE products_table.product_id = @productID)) AS Total " +
+                    "FROM onsite_transaction_table INNER JOIN onsite_products_transaction_table ON onsite_transaction_table.transaction_id = onsite_products_transaction_table.transaction_id WHERE onsite_products_transaction_table.product_id = @productID";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@productID", productID);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
@@ -42,13 +43,13 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                 if (reader.Read())
                 {
                     ProductSalesReportModel = new ProductSalesReportModel();
-                    ProductSalesReportModel.Product = await ProductRepository.GetInstance().FetchProductDetails(productID.ToString());                   
-                    ProductSalesReportModel.QuantitySold = int.Parse(reader["quantitySold"].ToString());                   
-                    ProductSalesReportModel.ProductRevenue = int.Parse(reader["productRevenue"].ToString());
+                    ProductSalesReportModel.Product = await ProductRepository.GetInstance().FetchProductDetails(productID.ToString());
+                    ProductSalesReportModel.ProductRevenue = int.Parse(reader["quantitySold"].ToString()) * int.Parse(reader["ProductPrice"].ToString());
+                    ProductSalesReportModel.QuantitySold = int.Parse(reader["quantitySold"].ToString());
                 }
 
                 return ProductSalesReportModel;
-            }       
+            }
         }
         public async Task<List<QuantitySoldModel>> FetchQuantitySoldList(int productID)
         {
@@ -72,7 +73,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@productID", productID);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
-                while(await reader.ReadAsync())
+                while (await reader.ReadAsync())
                 {
                     quantitySoldModels.Add(
                             new QuantitySoldModel
@@ -82,7 +83,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                                 ProductID = int.Parse(reader["ProductID"].ToString()),
                                 Date = DateTime.Parse(reader["Date"].ToString()),
                                 Administrator = reader["Administrator"].ToString(),
-                                TotalSale = int.Parse(reader["TotalSale"].ToString()),
+                                TotalSale = int.Parse(reader["ProductCount"].ToString()) * int.Parse(reader["ProductPrice"].ToString()),
                                 SaleType = reader["SaleType"].ToString(),
                                 ProductCount = int.Parse(reader["ProductCount"].ToString())
                             }

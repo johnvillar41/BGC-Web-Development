@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class="card" style="width: 18rem;">
+                            <div class="card" style="min-width: 18rem;">
                                 <div class="card-body">
 
                                     <center><asp:Label ID="total_products" runat="server" Text="Total Products" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
@@ -62,8 +62,8 @@
 
                     <div class="row">
                         <!--1st card-->
-                        <div class="col-4">
-                            <div class="card border-success mb-3" style="max-width: 18rem;">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="card border-success mb-3" style="max-width: 18rem; min-height: 15rem;">
                                 <div class="card-header"><%=DateTime.Today.Date.DayOfWeek %>: <%=DateTime.Now.Month %>,<%=DateTime.Now.Day %>,<%=DateTime.Now.Year %></div>
                                 <div class="card-body text-success">
                                     <h5 class="card-title"><b>Total Sales Today:</b></h5>
@@ -99,11 +99,11 @@
 
                         </div>
 
-                        <div class="col-4">
-                            <div class="card border-success mb-3" style="max-width: 18rem;">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="card border-success mb-3" style="max-width: 18rem; min-height: 15rem;">
                                 <div class="card-header">
                                     <label for="date"><b>Select Date:</b></label>
-                                    <input type="date" id="date" name="date">
+                                    <input type="date" class="form-control" id="date" name="date">
                                 </div>
 
                                 <div class="card-body text-success">
@@ -138,8 +138,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4">
-                            <div class="card border-success mb-3" style="max-width: 18rem;">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <div class="card border-success mb-3" style="max-width: 18rem; min-width:15rem; min-height:15rem;">
                                 <div class="card-header"><b>Average Sales</b></div>
                                 <div class="card-body text-success">
                                     <h5 class="card-title">Success card title</h5>

@@ -19,7 +19,7 @@ namespace SoftEngWebEmployee.Helpers
             {
                 if(product.Product_ID == cartProduct.Product_ID)
                 {
-                    product.TotalNumberOfCartItems = cartProduct.TotalNumberOfCartItems;
+                    product.TotalNumberOfProduct = cartProduct.TotalNumberOfProduct;
                     return;
                 }
             }         
@@ -34,7 +34,7 @@ namespace SoftEngWebEmployee.Helpers
             int totalSale = 0;
             foreach(var product in CartItems)
             {
-                totalSale += product.ProductPrice;
+                totalSale += (product.ProductPrice * product.TotalNumberOfProduct);
             }
             return totalSale;
         }
@@ -59,7 +59,7 @@ namespace SoftEngWebEmployee.Helpers
                         {                            
                             TransactionID = transactionID,                         
                             Product = product,
-                            TotalProductsCount = product.TotalNumberOfCartItems
+                            TotalProductsCount = product.TotalNumberOfProduct
                         }
                     );
             }

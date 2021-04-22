@@ -32,45 +32,50 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
 
         public async Task<int> FetchTotalSales()
         {
-            int total_sales=0;
-            int total_sales2 = 0;
-
+            int total_sales = 0;
+            int total_order_sale = 0;
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "SELECT SUM(order_total_price) as total_sales FROM customer_orders_table";
+                string queryString = "SELECT SUM(onsite_transaction_table.total_sale) as TotalSale FROM onsite_transaction_table";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
-
                 if (await reader.ReadAsync())
                 {
-                    total_sales = int.Parse(reader["total_sales"].ToString());
+                    if (String.IsNullOrEmpty(reader["TotalSale"].ToString()))
+                    {
+                        total_sales = 0;
+                    }
+                    else
+                    {
+                        total_sales = int.Parse(reader["TotalSale"].ToString());
+                    }                    
                 }
-
             }
-
-            using (MySqlConnection connection2 = new MySqlConnection(DbConnString.DBCONN_STRING))
-
-                
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
-                await connection2.OpenAsync();
-                string queryString2 = "SELECT SUM(total_sale) as total_sales2 FROM onsite_transaction_table";
-                MySqlCommand command2 = new MySqlCommand(queryString2, connection2);
-                MySqlDataReader reader2 = (MySqlDataReader)await command2.ExecuteReaderAsync();
-
-                if (await reader2.ReadAsync())
+                await connection.OpenAsync();
+                string queryString = "SELECT SUM(customer_orders_table.order_total_price) as TotalSaleOrder FROM customer_orders_table";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
+                if (await reader.ReadAsync())
                 {
-                    total_sales2 = int.Parse(reader2["total_sales2"].ToString());
+                    if (String.IsNullOrEmpty(reader["TotalSaleOrder"].ToString()))
+                    {
+                        total_order_sale = 0;
+                    }
+                    else
+                    {
+                        total_sales = int.Parse(reader["TotalSaleOrder"].ToString());
+                    }                    
                 }
-
             }
-            return total_sales + total_sales2;
-
+            return total_sales + total_order_sale;
         }
 
-        public async Task<int> FetchTotalInventory()    
+        public async Task<int> FetchTotalInventory()
         {
-            int total_inventory=0;
+            int total_inventory = 0;
 
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
@@ -81,6 +86,10 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
 
                 if (await reader.ReadAsync())
                 {
+                    if (String.IsNullOrEmpty(reader["total_inventory"].ToString()))
+                    {
+                        return 0;
+                    }
                     total_inventory = int.Parse(reader["total_inventory"].ToString());
                 }
 
@@ -92,7 +101,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
 
         public async Task<int> FetchTotalProducts()
         {
-            int total_products=0;
+            int total_products = 0;
 
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
@@ -103,8 +112,12 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
 
                 if (await reader.ReadAsync())
                 {
+                    if (String.IsNullOrEmpty(reader["products"].ToString()))
+                    {
+                        return 0;
+                    }
                     total_products = int.Parse(reader["products"].ToString());
-                }  
+                }
 
             }
 
