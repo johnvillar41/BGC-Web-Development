@@ -118,8 +118,8 @@
                                     <div class="scrolling-wrapper row flex-row flex-nowrap mt-1 pb-4 pt-2">
                                         <asp:Repeater ID="ProductsRepeater" runat="server" OnItemCreated="ProductsRepeater_ItemCreated">
                                             <ItemTemplate>
-                                                <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
-                                                    <div class="card" style="max-width: 35rem; height: 420px">
+                                                <div class="col-lg-3 col-md-6 col-sm-12 my-2">
+                                                    <div class="card" style="max-width: 35rem; min-width:15rem; height: 420px">
                                                         <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
                                                         <div class="card-body">
                                                             <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
@@ -129,10 +129,10 @@
                                                         <div class="card-footer">
                                                             <div class="col-lg-12">
                                                                 <div class="row">
-                                                                    <div class="col-6">
+                                                                    <div class="col-lg-6 col-sm-12">
                                                                         <asp:TextBox ID="TotalItems" runat="server" CssClass="form-control mb-1" placeholder="Enter number of items" onkeypress="return isNumber(event)" onpaste="return false;"></asp:TextBox>
                                                                     </div>
-                                                                    <div class="col-6">
+                                                                    <div class="col-lg-6 col-sm-12">
                                                                         <asp:Button ID="BtnAddToCart" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Add To Cart" OnClick="BtnAddToCart_Click" />
                                                                     </div>
                                                                 </div>
