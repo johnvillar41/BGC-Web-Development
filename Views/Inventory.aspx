@@ -61,20 +61,23 @@
     <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
         <asp:UpdatePanel ID="UpdatePanel_SearchRepeater" runat="server">
             <ContentTemplate>
-                <%if (listSearchRepeater.Count == 0) %>
+                <%if (listSearchRepeater != null)%>
+                <%{ %>
+                <%if (listSearchRepeater.Count == 0)%>
                 <%{ %>
                 <br>
                 <br>
                 <center><h3 style="color:white">No Items Found</h3></center>
                 <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;"loop autoplay></lottie-player></center>
                 <%} %>
+                <%} %>
                 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
                     <asp:Repeater ID="SearchRepeater" runat="server">
                         <ItemTemplate>
-                            <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
+                            <div class="col-lg-3 col-md-4 col-sm-5 col-9 my-1">
                                 <div class="card">
                                     <!-- Possible change: modify size of picture space -->
-                                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
+                                    <img class="card-img-top" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="200px" width="100px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                         <p class="card-text">Number of Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
@@ -100,12 +103,15 @@
     <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
         <asp:UpdatePanel ID="UpdatePanel_GHRepeater" runat="server">
             <ContentTemplate>
+                <%if (listGHRepeater != null)%>
+                <%{ %>
                 <%if (listGHRepeater.Count == 0) %>
                 <%{ %>
                 <br>
                 <br>
                 <center><h3 style="color:white">No Items Found</h3></center>
                 <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;"loop autoplay></lottie-player></center>
+                <%} %>
                 <%} %>
                 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
                     <asp:Repeater ID="GHRepeater" runat="server">
@@ -135,12 +141,15 @@
     <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
         <asp:UpdatePanel ID="UpdatePanel_HPRepeater" runat="server">
             <ContentTemplate>
+                <%if (listHPRepeater != null)%>
+                <%{ %>
                 <%if (listHPRepeater.Count == 0) %>
                 <%{ %>
                 <br>
                 <br>
                 <center><h3 style="color:white">No Items Found</h3></center>
                 <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;"loop autoplay></lottie-player></center>
+                <%} %>
                 <%} %>
                 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
                     <asp:Repeater ID="HPRepeater" runat="server">
@@ -188,7 +197,7 @@
                                     <p> ID: <%# DataBinder.Eval(Container.DataItem,"Product_ID") %> </p>
                                     <p> Description: <%# DataBinder.Eval(Container.DataItem,"ProductDescription") %> </p>
                                     <p> Category: <%# DataBinder.Eval(Container.DataItem,"ProductCategory") %> </p>
-                                    <p> Image: <%# DataBinder.Eval(Container.DataItem,"ProductPicture") %> </p>
+                                    <img src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="200px" width="100px"></img>
                                     <p> Number of Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %> </p>
                                     <p> Price: Php <%# DataBinder.Eval(Container.DataItem,"ProductPrice") %> </p>
                                 </div>
@@ -236,7 +245,7 @@
                             <ItemTemplate>
                                 <div class="modal-body" style="word-wrap"> 
                                     <p> Are you sure you want to delete this product? </p>
-                                    <p> Image: <%# DataBinder.Eval(Container.DataItem,"ProductPicture") %> </p>
+                                    <img src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="200px" width="100px"></img>
                                     <p> Name: <%# DataBinder.Eval(Container.DataItem,"ProductName") %> </p>
                                     <p> Category: <%# DataBinder.Eval(Container.DataItem,"ProductCategory") %> </p>
 
@@ -255,7 +264,7 @@
                                                 <li> Description: <%# DataBinder.Eval(Container.DataItem,"ProductDescription") %> </li>
                                                 <li> Number of Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %> </li>
                                                 <li> Price: Php <%# DataBinder.Eval(Container.DataItem,"ProductPrice") %> </li>
-                                                <li> Image: <%# DataBinder.Eval(Container.DataItem,"ProductPicture") %> </li>
+                                                <img src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="200px" width="100px"></img>
                                             </div>
                                         </div>
                                     </div>

@@ -63,6 +63,11 @@ namespace SoftEngWebEmployee.Repository
         // x Add settings to first repeater, orders products by name, ID, number of stocks, etc.
         // x Fix code to properly display images
 
+        /*
+        NOTE: For card format: product pictures tend to have an approx. 7:10 aspect ratio.
+        Pictures will be placed to the left, with the other details on the right.
+        */
+
         // x Finalize Format (modal size, text position, modal elements)
         // x Fix resetting of position of repeaters when details modal loads
         // x Insert Lottie animations for situations of no products being found.
