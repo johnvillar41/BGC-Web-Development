@@ -57,17 +57,20 @@ namespace SoftEngWebEmployee.Repository
         // / Search Product
         // / Dropdown text updates
         // / Update dropdown visuals to have arrow
-        // x View Product Details
-        /*
-            / View Details
-            - Finalize Format (modal size, text position)
-            - Fix resetting of position of repeaters when details modal loads
-            - Have text appear if repeaters load with no products "No products found."
-        */
+        // / View Product Details
         // / Delete Product
+        // / Responsiveness
+        // x Add settings to first repeater, orders products by name, ID, number of stocks, etc.
+        // x Fix code to properly display images
+
+        // x Finalize Format (modal size, text position, modal elements)
+        // x Fix resetting of position of repeaters when details modal loads
+        // x Insert Lottie animations for situations of no products being found.
+        // / Have card displays have equal size during display (maybe remove "descriptions" as the displayed detail?)
+
         // x Add Product
         // x Update product
-        // Add settings to first repeater, orders products by name, ID, number of stocks, etc.
+
 
         public async Task<List<ProductModel>> FetchGHProducts()
         {
