@@ -43,99 +43,92 @@
 
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
-                <table class="col-12">
-                    <tbody>
-                        <%foreach (var orders in DisplayOrders()) %>
-                        <%{%>
-                        <tr>
-                            <td>
-                                <div class="row" style="margin-bottom: 5px">
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <div class="card text-white bg-secondary mb-3" style="max-width: 35rem; height: 298px">
-                                            <div class="card-header">
-                                                <div class="row">
-                                                    <div class="col-4">
-                                                        Order ID: <%=orders.Order_ID %>
-                                                    </div>
-                                                    <div class="col-5">
-                                                    </div>
-                                                    <div class="col-3 float-end">
-                                                        <%if (orders.OrderStatus.Equals("Finished")) %>
-                                                        <%{ %>
-                                                        <span class="badge bg-success"><%=orders.OrderStatus %></span>
-                                                        <%} %>
-                                                        <%else if(orders.OrderStatus.Equals("Cancelled"))%>
-                                                        <%{ %>
-                                                        <span class="badge bg-danger"><%=orders.OrderStatus %></span>
-                                                        <%} %>
-                                                        <%else%>
-                                                        <%{ %>
-                                                        <span class="badge bg-warning"><%=orders.OrderStatus %></span>
-                                                        <%} %>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="card-body">
-                                                <p class="card-text">Customer ID: <%=orders.CustomerID %></p>                                                
-                                                <p class="card-text">Order Date: <%=orders.OrderDate %></p>
-                                                <p class="card-text">Total Number Of Orders: <%=orders.TotalNumberOfOrders %></p>
-                                            </div>
-                                            <div class="card-footer">Total Price: <%=orders.OrderTotalPrice %></div>
-                                        </div>
+                <%foreach (var orders in DisplayOrders()) %>
+                <%{%>
+                <div class="row" style="margin-bottom: 5px">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card text-white bg-secondary mb-3" style="max-width: 35rem; height: 298px">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-4">
+                                        Order ID: <%=orders.Order_ID %>
                                     </div>
-
-                                    <div class="col-lg-8 col-md-6 col-sm-12">
-                                        <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
-                                            <div class="row">
-                                                <div class="col-lg-9 col-md-6 col-sm-6">
-                                                    <h1>Orders</h1>
-                                                </div>
-                                            </div>
-
-                                            <div class="table-bordered table-condensed table-responsive" style="height: 200px">
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Order ID</th>
-                                                            <th scope="col">Product ID</th>
-                                                            <th scope="col">Product Name</th>
-                                                            <th scope="col">Product Price</th>
-                                                            <th scope="col">Product Picture</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <%for (int i = 0; i < orders.SpecificOrdersModel.Count(); i++) %>
-                                                        <%{ %>
-                                                        <tr>
-                                                            <th scope="row"><%=orders.SpecificOrdersModel[i].OrdersID %></th>
-                                                            <td><%=orders.SpecificOrdersModel[i].ProductID %></td>
-                                                            <td><%=orders.SpecificOrdersModel[i].ProductsModel.ProductName %></td>
-                                                            <td><%=orders.SpecificOrdersModel[i].ProductsModel.ProductPrice %></td>
-                                                            <td><img alt="" height="100px" width="100px" src="data:image/png;base64,<%=orders.SpecificOrdersModel[i].ProductsModel.ProductPicture%>" /></td>
-                                                        </tr>
-                                                        <%} %>
-                                                    </tbody>
-                                                </table>
-                                                <%if (orders.SpecificOrdersModel.Count() == 0) %>
-                                                <%{ %>
-                                                <center><h1>Empty Orders</h1></center>
-                                                <%} %>
-                                            </div>
-                                        </div>
+                                    <div class="col-5">
+                                    </div>
+                                    <div class="col-3 float-end">
+                                        <%if (orders.OrderStatus.Equals("Finished")) %>
+                                        <%{ %>
+                                        <span class="badge bg-success"><%=orders.OrderStatus %></span>
+                                        <%} %>
+                                        <%else if(orders.OrderStatus.Equals("Cancelled"))%>
+                                        <%{ %>
+                                        <span class="badge bg-danger"><%=orders.OrderStatus %></span>
+                                        <%} %>
+                                        <%else%>
+                                        <%{ %>
+                                        <span class="badge bg-warning"><%=orders.OrderStatus %></span>
+                                        <%} %>
                                     </div>
                                 </div>
-                            </td>
-                        </tr>
-                        <%}%>
-                    </tbody>
-                </table>
+                            </div>
+
+                            <div class="card-body">
+                                <p class="card-text">Customer ID: <%=orders.CustomerID %></p>
+                                <p class="card-text">Order Date: <%=orders.OrderDate %></p>
+                                <p class="card-text">Total Number Of Orders: <%=orders.TotalNumberOfOrders %></p>
+                            </div>
+                            <div class="card-footer">Total Price: <%=orders.OrderTotalPrice %></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 col-md-6 col-sm-12">
+                        <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
+                            <div class="row">
+                                <div class="col-lg-9 col-md-6 col-sm-6">
+                                    <h1>Orders</h1>
+                                </div>
+                            </div>
+
+                            <div class="table-bordered table-condensed table-responsive" style="height: 200px">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Order ID</th>
+                                            <th scope="col">Product ID</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Product Price</th>
+                                            <th scope="col">Product Picture</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%for (int i = 0; i < orders.SpecificOrdersModel.Count(); i++) %>
+                                        <%{ %>
+                                        <tr>
+                                            <th scope="row"><%=orders.SpecificOrdersModel[i].OrdersID %></th>
+                                            <td><%=orders.SpecificOrdersModel[i].ProductID %></td>
+                                            <td><%=orders.SpecificOrdersModel[i].ProductsModel.ProductName %></td>
+                                            <td><%=orders.SpecificOrdersModel[i].ProductsModel.ProductPrice %></td>
+                                            <td>
+                                                <img alt="" height="100px" width="100px" src="data:image/png;base64,<%=orders.SpecificOrdersModel[i].ProductsModel.ProductPicture%>" /></td>
+                                        </tr>
+                                        <%} %>
+                                    </tbody>
+                                </table>
+                                <%if (orders.SpecificOrdersModel.Count() == 0) %>
+                                <%{ %>
+                                <center><h1>Empty Orders</h1></center>
+                                <%} %>
+                            </div>
+                        </div>
+                    </div>
+                </div>                                  
+                 <%}%>
                 </div>
             </ContentTemplate>
             <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="BtnSearch" EventName="Click" />   
-                <asp:AsyncPostBackTrigger ControlID="btnFinishStatus" EventName="Click" />     
-                <asp:AsyncPostBackTrigger ControlID="btnCancelStatus" EventName="Click" />     
+                <asp:AsyncPostBackTrigger ControlID="BtnSearch" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="btnFinishStatus" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="btnCancelStatus" EventName="Click" />
             </Triggers>
         </asp:UpdatePanel>
     </div>
