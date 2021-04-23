@@ -1,12 +1,13 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="SoftEngWebEmployee.Views.Login" Async="true" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <head runat="server">
     <title></title>
     <style>
@@ -22,22 +23,6 @@
             padding-top: 10px;
         }
 
-        .main {
-            padding: 0px 0px;
-        }
-
-        @media screen and (max-height: 450px) {
-            .sidenav {
-                padding-top: 15px;
-            }
-        }
-
-        @media screen and (max-width: 450px) {
-            .login-form {
-                margin-top: 100%;
-            }
-        }
-
         @media screen and (min-width: 768px) {
             .main {
                 margin-left: 30%;
@@ -45,7 +30,7 @@
             }
 
             .sidenav {
-                width: 30%;
+                width: 32%;
                 position: fixed;
                 z-index: 10;
                 top: 0;
