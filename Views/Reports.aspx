@@ -214,8 +214,8 @@
                                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapse<%=productSales.ProductReport.Product.Product_ID %>" role="button" aria-expanded="false" aria-controls="collapseExample">See More
                                         </a>
                                         <div class="collapse mt-2" id="collapse<%=productSales.ProductReport.Product.Product_ID %>">
-                                            <div class="card card-body">
-                                                <table class="table table-striped table-hover">
+                                            <div class="card card-body table table-striped table-hover table-responsive">
+                                                <table>
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">ProductName</th>
