@@ -70,7 +70,10 @@ namespace SoftEngWebEmployee.Repository
 
         // x Finalize Format (modal size, text position, modal elements)
         // x Fix resetting of position of repeaters when details modal loads
-        // x Insert Lottie animations for situations of no products being found.
+        // x Fix Lottie animations for situations of no products being found (animations not working in mobile)
+        // x test vertical scrolling in modal collapsible cards (in case of long descriptions)
+        // x Have dropdown menu on site.master align right when screen is small
+        // x Change images being squished in cards
         // / Have card displays have equal size during display (maybe remove "descriptions" as the displayed detail?)
 
         // x Add Product

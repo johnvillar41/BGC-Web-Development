@@ -12,7 +12,7 @@
     </style>
 
     <p class="fs-2"><b>Inventory</b></p>
-    <a class="btn btn-primary float-end" data-bs-toggle="modal" href="#addProduct">Add Product</a>
+    <a class="btn btn-primary float-end fa fa-plus-circle" data-bs-toggle="modal" href="#addProduct">Add Product</a>
     <p class="fs-4"><b>Search Inventory</b></p>
 
     <!-- Search Bar -->
@@ -74,13 +74,13 @@
                 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
                     <asp:Repeater ID="SearchRepeater" runat="server">
                         <ItemTemplate>
-                            <div class="col-lg-3 col-md-4 col-sm-5 col-9 my-1">
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5 col-9 my-1">
                                 <div class="card">
                                     <!-- Possible change: modify size of picture space -->
                                     <img class="card-img-top" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="200px" width="100px" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
-                                        <p class="card-text">Number of Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
+                                        <p class="card-text">Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
                                         <asp:Button ID="detailsButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-secondary" Text="Details" data-bs-toggle="modal" href="#detailsModal" OnClick="RetrieveDetails" runat="server"/>
                                         <asp:Button ID="deleteProduct" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-danger float-right" Text="Delete" data-bs-toggle="modal" href="#deleteModal" OnClick="RetrieveDetails" runat="server"/>                                       
                                     </div>
@@ -122,7 +122,7 @@
                                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
-                                        <p class="card-text">Number of Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
+                                        <p class="card-text">Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
                                         <asp:Button ID="detailsButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-secondary" Text="Details" data-bs-toggle="modal" href="#detailsModal" OnClick="RetrieveDetails" runat="server"/>
                                         <asp:Button ID="deleteProduct" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-danger float-right" Text="Delete" data-bs-toggle="modal" href="#deleteModal" OnClick="RetrieveDetails" runat="server"/>                                       
                                     </div>
@@ -160,7 +160,7 @@
                                     <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
-                                        <p class="card-text">Number of Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
+                                        <p class="card-text">Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
                                         <asp:Button ID="detailsButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-secondary" Text="Details" data-bs-toggle="modal" href="#detailsModal" OnClick="RetrieveDetails" runat="server"/>
                                         <asp:Button ID="deleteProduct" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-danger float-right" Text="Delete" data-bs-toggle="modal" href="#deleteModal" OnClick="RetrieveDetails" runat="server"/>                                       
                                     </div>
@@ -193,13 +193,32 @@
                         <asp:Repeater ID="DetailsRepeater" runat="server">
                             <ItemTemplate>
                                 <div class="modal-body" style="word-wrap"> 
-                                    <p> Name: <%# DataBinder.Eval(Container.DataItem,"ProductName") %> </p>
-                                    <p> ID: <%# DataBinder.Eval(Container.DataItem,"Product_ID") %> </p>
-                                    <p> Description: <%# DataBinder.Eval(Container.DataItem,"ProductDescription") %> </p>
-                                    <p> Category: <%# DataBinder.Eval(Container.DataItem,"ProductCategory") %> </p>
-                                    <img src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="200px" width="100px"></img>
-                                    <p> Number of Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %> </p>
-                                    <p> Price: Php <%# DataBinder.Eval(Container.DataItem,"ProductPrice") %> </p>
+                                    <div class="row">
+                                        <div class="col-4"><img src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" class="img-fluid"></img></div>
+                                        <div class="col-8">                                                                                       
+                                            <b style="font-size:20px"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></b><br />
+                                            <br />
+                                            <b style="font-size:15px">Price: </b>Php <%# DataBinder.Eval(Container.DataItem,"ProductPrice") %><br />
+                                            <b style="font-size:15px">Stocks: </b><%# DataBinder.Eval(Container.DataItem,"ProductStocks") %><br />
+                                            <b style="font-size:15px">Category: </b><%# DataBinder.Eval(Container.DataItem,"ProductCategory") %><br />
+                                            <b style="font-size:15px">ID: </b><%# DataBinder.Eval(Container.DataItem,"Product_ID") %>                                                                                                                                                               
+                                        </div>                                        
+                                    </div>
+                                    <br />
+                                    <div class="card">
+                                        <div class="card-header" id="descriptionHeading">
+                                            <h5 class="my-0">
+                                            <button class="btn btn-link collapsed"  type="button" data-toggle="collapse" data-target="#descriptionCollapse" aria-expanded="false" aria-controls="descriptionCollapse">
+                                                <u style="font-size:15px">View Description</u>
+                                            </button>
+                                            </h5>
+                                        </div>
+                                        <div id="descriptionCollapse" class="collapse" aria-labelledby="descriptionHeading" data-parent="#detailsModal">
+                                            <div class="card-body">
+                                                <i style="font-size:15px"><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></i>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" onclick="$('#detailsModal').modal('hide');">Back</button> 
@@ -245,26 +264,31 @@
                             <ItemTemplate>
                                 <div class="modal-body" style="word-wrap"> 
                                     <p> Are you sure you want to delete this product? </p>
-                                    <img src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="200px" width="100px"></img>
-                                    <p> Name: <%# DataBinder.Eval(Container.DataItem,"ProductName") %> </p>
-                                    <p> Category: <%# DataBinder.Eval(Container.DataItem,"ProductCategory") %> </p>
-
-                                    <!-- Collapsible Card -->
+                                    <div class="row">
+                                        <div class="col-4"><img src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" class="img-fluid"></img></div>
+                                        <div class="col-8">                                                                                       
+                                            <b style="font-size:20px"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></b><br />
+                                            <br />
+                                            <b style="font-size:15px">Price: </b>Php <%# DataBinder.Eval(Container.DataItem,"ProductPrice") %><br />
+                                            <b style="font-size:15px">Stocks: </b><%# DataBinder.Eval(Container.DataItem,"ProductStocks") %>
+                                                                                                                                                                                                         
+                                        </div>                                        
+                                    </div>
+                                    <br />
                                     <div class="card">
-                                        <div class="card-header" id="detailsHeading">
-                                            <h2 class="mb-0">
-                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#detailsCollapse" aria-expanded="false" aria-controls="detailsCollapse">
-                                                Details
+                                        <div class="card-header" id="deleteHeading">
+                                            <h5 class="my-0">
+                                            <button class="btn btn-link collapsed"  type="button" data-toggle="collapse" data-target="#deleteCollapse" aria-expanded="false" aria-controls="deleteCollapse">
+                                                <u style="font-size:15px">View Details</u>
                                             </button>
-                                            </h2>
+                                            </h5>
                                         </div>
-                                        <div id="detailsCollapse" class="collapse" aria-labelledby="detailsHeading" data-parent="#deleteModal">
+                                        <div id="deleteCollapse" class="collapse" aria-labelledby="deleteHeading" data-parent="#deleteModal">
                                             <div class="card-body">
-                                                <li> ID: <%# DataBinder.Eval(Container.DataItem,"Product_ID") %> </li>
-                                                <li> Description: <%# DataBinder.Eval(Container.DataItem,"ProductDescription") %> </li>
-                                                <li> Number of Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %> </li>
-                                                <li> Price: Php <%# DataBinder.Eval(Container.DataItem,"ProductPrice") %> </li>
-                                                <img src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="200px" width="100px"></img>
+                                                <b style="font-size:15px">Category: </b><%# DataBinder.Eval(Container.DataItem,"ProductCategory") %><br />
+                                                <b style="font-size:15px">ID: </b><%# DataBinder.Eval(Container.DataItem,"Product_ID") %><br />   
+                                                <b style="font-size:15px">Description: </b><br />
+                                                <i style="font-size:15px"><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></i>
                                             </div>
                                         </div>
                                     </div>
