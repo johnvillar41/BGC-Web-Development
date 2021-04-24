@@ -46,6 +46,7 @@
             flex-direction: column;
             justify-content: center;
             min-height: 100vh;
+            background-color: lightyellow;
         }
 
         .vertical-center {
@@ -53,6 +54,12 @@
             top: 50%;
             -ms-transform: translateY(-50%);
             transform: translateY(-50%);
+        }
+        .submit {
+            background: #eba800;
+            color: black;
+            box-shadow: none;
+            border: none
         }
     </style>
 </head>
@@ -69,7 +76,7 @@
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
                             <div class="row">
-                                <h1 class="mb-3"><b>Welcome to Agt Seedlings Supply</b></h1>
+                                <h1 class="mb-3"><b>Welcome to AGT Seedlings Supply</b></h1>
                             </div>
                             <div class="row">
                                 <div class="form-group">
@@ -86,7 +93,7 @@
 
                             </div>
                             <div class="row">
-                                <asp:Button ID="btn_login" runat="server" Text="Login" CssClass="btn btn-submit" OnClick="btn_login_Click" />
+                                <asp:Button ID="btn_login" runat="server" Text="Login" style="font-family:'Arial Rounded MT'" CssClass="btn btn-submit submit" OnClick="btn_login_Click" />
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
