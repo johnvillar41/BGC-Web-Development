@@ -21,12 +21,13 @@
 
 
        
-            .centerRight {
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: auto;
-                margin-bottom: auto;
-            }
+        .centerRight {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: auto;
+            width:220px;
+            margin-bottom: auto;
+        }
         
 
         .parentDiv {
