@@ -19,16 +19,22 @@
             position: initial;
         }
 
-
-       
         .centerRight {
             margin-left: auto;
             margin-right: auto;
+            width: 300px;
             margin-top: auto;
-            width:220px;
             margin-bottom: auto;
         }
-        
+
+        .centerPage {
+            left: 50%;
+            top: 50%;
+            margin-left: -10px;
+            /* -1/2 width */
+            margin-top: -10px;
+            /* -1/2 height */
+        }
 
         .parentDiv {
             display: flex;
@@ -64,10 +70,10 @@
 
     <div class="container-fluid center p-3" style="background-color: lightblue">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-               <center><img class="animated-gif img-fluid" src="../Images/money-tree.gif" style="min-height:300px;min-width:300px;"></center>
+            <div class="col-lg-8 col-md-6 col-sm-12">
+                <center><img class="animated-gif img-fluid" src="../Images/money-tree.gif" style="min-height:300px;min-width:300px;"></center>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 centerRight">
+            <div class="col-lg-4 col-md-6 col-sm-12 centerRight ">
                 <form runat="server">
                     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
