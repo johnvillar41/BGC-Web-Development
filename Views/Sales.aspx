@@ -124,7 +124,7 @@
                                                         <div class="card-body">
                                                             <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                                             <p class="card-text"><b>Description: </b><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
-
+                                                            <p class="card-text"><b>Stocks: </b><%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
                                                         </div>
                                                         <div class="card-footer">
                                                             <div class="col-lg-12">
@@ -175,7 +175,7 @@
                                                         <div class="card-body">
                                                             <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                                             <p class="card-text"><b>Description: </b><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
-                                                            <p class="card-text"><b>Total number of items: <%# DataBinder.Eval(Container.DataItem,"TotalNumberOfProduct") %></b></p>
+                                                            <p class="card-text"><b>Total number of items: <%# DataBinder.Eval(Container.DataItem,"TotalNumberOfProduct") %></b></p>                                                            
                                                         </div>
                                                         <div class="card-footer">
                                                             <asp:Button ID="BtnRemoveCartItem" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Remove Item" OnClick="BtnRemoveCartItem_Click" />
