@@ -50,15 +50,17 @@
                 <div class="table-bordered table-condensed table-responsive" style="height: 500px">
                     <asp:Repeater ID="SalesRepeater" runat="server">
                         <HeaderTemplate>
-                            <div class="table-bordered table-condensed table-responsive" style="height: 500px">
+                            <div class="table-condensed table-responsive table-borderless" style="height: 500px">
                                 <table border="1" class="table table-striped">
-                                    <tr>
-                                        <th scope="col">Sales ID</th>
-                                        <th scope="col">Username</th>
-                                        <th scope="col">Type Of Sale</th>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Details</th>
-                                    </tr>
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Sales ID</th>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Type Of Sale</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Details</th>
+                                        </tr>
+                                    </thead>
                         </HeaderTemplate>
                         <ItemTemplate>
                             <tr>
@@ -108,7 +110,7 @@
                         </div>
                     </div>
 
-                </div>               
+                </div>
                 <div class="col-12">
                     <div class="row">
                         <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
@@ -119,7 +121,7 @@
                                         <asp:Repeater ID="ProductsRepeater" runat="server" OnItemCreated="ProductsRepeater_ItemCreated">
                                             <ItemTemplate>
                                                 <div class="col-lg-3 col-md-6 col-sm-12 my-2">
-                                                    <div class="card" style="max-width: 35rem; min-width:15rem; height: 420px">
+                                                    <div class="card" style="max-width: 35rem; min-width: 15rem; height: 420px">
                                                         <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
                                                         <div class="card-body">
                                                             <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
@@ -163,7 +165,7 @@
                                 <ContentTemplate>
                                     <%if (Cart.GetCartItems().Count == 0) %>
                                     <%{ %>
-                                    <center><h3>No Items found</h3></center>
+                                    <center><h3 class="text-light">No Items found</h3></center>
                                     <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;"loop autoplay></lottie-player></center>
                                     <%} %>
                                     <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
@@ -175,7 +177,7 @@
                                                         <div class="card-body">
                                                             <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                                             <p class="card-text"><b>Description: </b><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
-                                                            <p class="card-text"><b>Total number of items: <%# DataBinder.Eval(Container.DataItem,"TotalNumberOfProduct") %></b></p>                                                            
+                                                            <p class="card-text"><b>Total number of items: <%# DataBinder.Eval(Container.DataItem,"TotalNumberOfProduct") %></b></p>
                                                         </div>
                                                         <div class="card-footer">
                                                             <asp:Button ID="BtnRemoveCartItem" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Remove Item" OnClick="BtnRemoveCartItem_Click" />

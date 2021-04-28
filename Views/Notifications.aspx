@@ -43,7 +43,7 @@
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
                             <div class="table-bordered table-condensed table-responsive" style="height: 600px">
-                                <table class="table table-striped table-hover">
+                                <table class="table table-borderless table-hover">
                                     <%if (DisplayNotifications().Count() == 0) %>
                                     <%{ %>
                                     <div>
@@ -53,7 +53,7 @@
                                     <%} %>
                                     <%else %>
                                     <%{ %>
-                                    <thead>
+                                    <thead class="thead-dark">
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Tag</th>

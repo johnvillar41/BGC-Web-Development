@@ -41,9 +41,9 @@
                         </div>
                         <%} %>
 
-                        <div class="table-bordered table-condensed table-responsive" style="height: 500px">
-                            <table class="table table-striped">
-                                <thead>
+                        <div class="table-condensed table-responsive table-bordered" style="height: 500px">
+                            <table class="table table-borderless">
+                                <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">User ID</th>
                                         <th scope="col">Profile Picture</th>
