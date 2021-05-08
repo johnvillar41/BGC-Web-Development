@@ -156,6 +156,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\LoginCss.css" />
     <Content Include="Images\add_product.png" />
     <Content Include="Images\cancell.png" />
     <Content Include="Images\check.png" />
