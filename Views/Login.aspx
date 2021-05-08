@@ -16,7 +16,7 @@
             color: #000;
             overflow-x: hidden;
             height: 100%;
-            background-color: #B0BEC5;
+            background-color: lightyellow;
             background-repeat: no-repeat
         }
 
@@ -146,7 +146,7 @@
         }
 
         .btn-blue {
-            background-color: #1A237E;
+            background-color: #f0ad4e;
             width: 150px;
             color: #fff;
             border-radius: 2px
@@ -157,8 +157,8 @@
                 cursor: pointer
             }
 
-        .bg-blue {
-            color: #fff;
+        .bg-orange {
+            color: #f0ad4e;
             background-color: #1A237E
         }
 
@@ -209,19 +209,18 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label><b>Username</b></label>
-                                            <asp:TextBox ID="txtbox_username" runat="server" placeholder="username" CssClass="form-control" Height="35"></asp:TextBox>
+                                            <asp:TextBox ID="txtbox_username" runat="server" placeholder="username" CssClass="form-control text-area" Height="35"></asp:TextBox>
                                         </div>
 
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
                                             <label><b>Password</b></label><br />
-                                            <asp:TextBox ID="txtbox_password" runat="server" placeholder="password" CssClass="form-control" Height="35"></asp:TextBox>
+                                            <asp:TextBox ID="txtbox_password" runat="server" placeholder="password" CssClass="form-control text-area" Height="35"></asp:TextBox>
                                         </div>
-
                                     </div>
                                     <div class="row">
-                                        <asp:Button ID="btn_login" runat="server" Text="Login" Style="font-family: 'Arial Rounded MT'" CssClass="btn btn-submit submit" OnClick="btn_login_Click" />
+                                        <asp:Button ID="btn_login" runat="server" Text="Login" Style="font-family: 'Arial Rounded MT'" CssClass="btn btn-submit submit btn-blue btn-blue:hover" OnClick="btn_login_Click" />
                                     </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
@@ -229,9 +228,9 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-blue py-4">
+            <div class="bg-orange py-4">
                 <div class="row px-3">
-                    <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2019. All rights reserved.</small>
+                    <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2021. All rights reserved.</small>
                     <div class="social-contact ml-4 ml-sm-auto"><span class="fa fa-facebook mr-4 text-sm"></span><span class="fa fa-google-plus mr-4 text-sm"></span><span class="fa fa-linkedin mr-4 text-sm"></span><span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span></div>
                 </div>
             </div>
