@@ -37,7 +37,7 @@ namespace SoftEngWebEmployee.Repository
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@orderID", orderId);
                 MySqlDataReader reader = command.ExecuteReader();
-                if(await reader.ReadAsync())
+                if (await reader.ReadAsync())
                 {
                     order = new OrdersModel()
                     {
@@ -55,7 +55,7 @@ namespace SoftEngWebEmployee.Repository
         }
 
         public async Task<IEnumerable<OrdersModel>> FetchAllOrders()
-        {            
+        {
             List<OrdersModel> ordersList = new List<OrdersModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
@@ -73,7 +73,7 @@ namespace SoftEngWebEmployee.Repository
                                 OrderTotalPrice = int.Parse(reader["order_total_price"].ToString()),
                                 OrderStatus = reader["order_status"].ToString(),
                                 OrderDate = reader["order_date"].ToString(),
-                                TotalNumberOfOrders = int.Parse(reader["total_number_of_orders"].ToString()),                                
+                                TotalNumberOfOrders = int.Parse(reader["total_number_of_orders"].ToString()),
                                 SpecificOrdersModel = await SpecificOrdersRepository.GetInstance().FetchSpecificOrders(int.Parse(reader["order_id"].ToString()))
                             }
                         );
@@ -87,23 +87,49 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "UPDATE customer_orders_table SET order_status='Cancelled' WHERE order_id=@orderID";
-                MySqlCommand command = new MySqlCommand(queryString,connection);
-                command.Parameters.AddWithValue("@orderID", orderID);
-                await command.ExecuteNonQueryAsync();                
+                var isOk = await CheckOrderStatus(connection);
+                if (isOk)
+                {
+                    string queryString = "UPDATE customer_orders_table SET order_status='Cancelled' WHERE order_id=@orderID";
+                    MySqlCommand command = new MySqlCommand(queryString, connection);
+                    command.Parameters.AddWithValue("@orderID", orderID);
+                    await command.ExecuteNonQueryAsync();
+                }                
             }
         }
         public async Task ChangeStatusOfOrderToFinished(int orderID)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
+                
                 await connection.OpenAsync();
-                string queryString = "UPDATE customer_orders_table SET order_status='Finished' WHERE order_id=@orderID";
-                MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@orderID", orderID);                
-                await command.ExecuteNonQueryAsync();
+                var isOk = await CheckOrderStatus(connection);
+                if (isOk)
+                {
+                    string queryString = "UPDATE customer_orders_table SET order_status='Finished' WHERE order_id=@orderID";
+                    MySqlCommand command = new MySqlCommand(queryString, connection);
+                    command.Parameters.AddWithValue("@orderID", orderID);
+                    await command.ExecuteNonQueryAsync();
+                }                
             }
         }
-
+        private async Task<bool> CheckOrderStatus(MySqlConnection connection)
+        {
+            bool isOk = false;
+            string queryCheck = "SELECT order_status FROM customer_orders_table";
+            MySqlCommand commandCheck = new MySqlCommand(queryCheck, connection);
+            using (MySqlDataReader reader = (MySqlDataReader)await commandCheck.ExecuteReaderAsync())
+            {
+                if (await reader.ReadAsync())
+                {
+                    var orderStatus = reader["order_status"].ToString();
+                    if (orderStatus.Equals("Finished") || orderStatus.Equals("Cancelled"))
+                    {
+                        isOk = true;
+                    }
+                }
+            }
+            return isOk;
+        }
     }
 }
