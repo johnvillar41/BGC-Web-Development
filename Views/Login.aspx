@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../Content/LoginCss.css" />
-    
+
 </head>
 <body>
     <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="card2 card border-0 px-4 py-5">                       
+                    <div class="card2 card border-0 px-4 py-5">
                         <form runat="server">
                             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -38,24 +38,21 @@
                                         <h1 class="mb-3"><b>Welcome to AGT Seedlings Supply</b></h1>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group">
-                                            <label><b>Username</b></label>
-                                            <asp:TextBox ID="txtbox_username" runat="server" placeholder="username" CssClass="form-control text-area" Height="35"></asp:TextBox>
-                                        </div>
+                                        <label><b>Username</b></label>
+                                        <asp:TextBox ID="txtbox_username" runat="server" placeholder="username" CssClass="form-control text-area" Height="35"></asp:TextBox>
 
                                     </div>
                                     <div class="row">
-                                        <div class="form-group">
-                                            <label><b>Password</b></label><br />
-                                            <asp:TextBox ID="txtbox_password" runat="server" placeholder="password" CssClass="form-control text-area" Height="35"></asp:TextBox>
-                                        </div>
+                                        <label><b>Password</b></label><br />
+                                        <asp:TextBox ID="txtbox_password" type="password" runat="server" placeholder="password" CssClass="form-control text-area" Height="35"></asp:TextBox>
+
                                     </div>
-                                    <div class="row">
-                                        <asp:Button ID="btn_login" runat="server" Text="Login" Style="font-family: 'Arial Rounded MT'" CssClass="btn btn-submit submit btn-blue btn-blue:hover" OnClick="btn_login_Click" />
+                                    <div class="row mt-5">
+                                        <asp:Button ID="btn_login" runat="server" Text="Login" Style="font-family: 'Arial Rounded MT'" CssClass="btn btn-success form-control" OnClick="btn_login_Click" />
                                     </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-                        </form>                        
+                        </form>
                     </div>
                 </div>
             </div>
