@@ -4,21 +4,32 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>
-        .scrolling-wrapper {
-            overflow-x: auto;
-        }
+    .scrolling-wrapper {
+        overflow-x: auto;
+    }
 
-        .bd-callout {
-            padding: 1.25rem;
-            border: 1px solid #e9ecef;
-            border-left-width: .25rem;
-            border-radius: .25rem;
-        }
+    .bd-callout {
+        padding: 1.25rem;
+        border: 1px solid #e9ecef;
+        border-left-width: .25rem;
+        border-radius: .25rem;
+    }
 
-        .bd-callout-warning {
-            border-left-color: #f0ad4e;
+    .bd-callout-warning {
+        border-left-color: #f0ad4e;
+    }
+
+    .card-text {
+        height: 54px;
+        overflow-y: scroll;
+        width: 100%;
+    }
+
+        .card-text p {
+            width: 650px;
+            word-break: break-word;
         }
-    </style>
+</style>
     <script type="text/javascript">     
         function isNumber(evt) {
             evt = (evt) ? evt : window.event;
@@ -124,9 +135,14 @@
                                                     <div class="card" style="max-width: 35rem; min-width: 15rem; height: 420px">
                                                         <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
                                                         <div class="card-body">
-                                                            <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
-                                                            <p class="card-text"><b>Description: </b><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
-                                                            <p class="card-text"><b>Stocks: </b><%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
+                                                            <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>                                                            
+                                                            <p class="card-text">
+                                                                <b>Description: </b>
+                                                                <%# DataBinder.Eval(Container.DataItem,"ProductDescription") %>
+                                                                <br />
+                                                                <b>Stocks: </b>                                                                
+                                                                <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %>
+                                                            </p>                                                            
                                                         </div>
                                                         <div class="card-footer">
                                                             <div class="col-lg-12">
@@ -166,7 +182,8 @@
                                     <%if (Cart.GetCartItems().Count == 0) %>
                                     <%{ %>
                                     <center><h3 class="text-light">No Items found</h3></center>
-                                    <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;"loop autoplay></lottie-player></center>
+                                    <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="        width: 300px;
+        height: 300px;"loop autoplay></lottie-player></center>
                                     <%} %>
                                     <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
                                         <asp:Repeater ID="CartRepeater" runat="server" OnItemCreated="CartRepeater_ItemCreated">
@@ -175,9 +192,14 @@
                                                     <div class="card" style="max-width: 35rem; height: 420px">
                                                         <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
                                                         <div class="card-body">
-                                                            <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
-                                                            <p class="card-text"><b>Description: </b><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></p>
-                                                            <p class="card-text"><b>Total number of items: <%# DataBinder.Eval(Container.DataItem,"TotalNumberOfProduct") %></b></p>
+                                                            <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>                                                            
+                                                            <p class="card-text">
+                                                                <b>Description: </b>
+                                                                <%# DataBinder.Eval(Container.DataItem,"ProductDescription") %>
+                                                                <br />
+                                                                <b>Total number of items: </b>                                                                
+                                                                <%# DataBinder.Eval(Container.DataItem,"TotalNumberOfProduct") %>
+                                                            </p>                                                               
                                                         </div>
                                                         <div class="card-footer">
                                                             <asp:Button ID="BtnRemoveCartItem" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Remove Item" OnClick="BtnRemoveCartItem_Click" />

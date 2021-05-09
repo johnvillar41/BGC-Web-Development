@@ -30,11 +30,25 @@ namespace SoftEngWebEmployee.Views
         {
             if (!String.IsNullOrWhiteSpace(OrderIDCancel.Text) && IsAllAlphabetic(OrderIDCancel.Text))
             {
+                if (await OrdersRepository.GetInstance().CheckIfIdExist(int.Parse(OrderIDCancel.Text)) == false)
+                {
+                    SweetAlertBuilder alert = new SweetAlertBuilder
+                    {
+                        HexaBackgroundColor = "#fff",
+                        Title = "ID Not Found!",
+                        Message = "ID not found for: " + OrderIDCancel.Text,
+                        AlertIcons = Constants.AlertStatus.error,
+                        AlertPositions = Constants.AlertPositions.TOP_END,
+                        ShowCloseButton = true
+                    };
+                    alert.BuildSweetAlert(this);
+                    return;
+                }
                 await OrdersRepository .GetInstance().ChangeStatusOfOrderToCancelled(int.Parse(OrderIDCancel.Text));
                 var generatedNotification = NotificationRepository
                     .GetInstance()
                     .GenerateNotification(NotificationType.CancelledOrder, OrderIDCancel.Text);
-                NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);
+                await NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);
                 LoadOrders();
                 SweetAlertBuilder sweetAlert = new SweetAlertBuilder
                 {
@@ -53,11 +67,25 @@ namespace SoftEngWebEmployee.Views
         {
             if (!String.IsNullOrWhiteSpace(OrderIDFinish.Text) && IsAllAlphabetic(OrderIDFinish.Text))
             {
+                if (await OrdersRepository.GetInstance().CheckIfIdExist(int.Parse(OrderIDFinish.Text)) == false)
+                {
+                    SweetAlertBuilder alert = new SweetAlertBuilder
+                    {
+                        HexaBackgroundColor = "#fff",
+                        Title = "ID Not Found!",
+                        Message = "ID not found for: " + OrderIDFinish.Text,
+                        AlertIcons = Constants.AlertStatus.error,
+                        AlertPositions = Constants.AlertPositions.TOP_END,
+                        ShowCloseButton = true
+                    };
+                    alert.BuildSweetAlert(this);
+                    return;
+                }
                 await OrdersRepository.GetInstance().ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));                
                 var generatedNotification = NotificationRepository
                     .GetInstance()
                     .GenerateNotification(NotificationType.FinishedOrder, OrderIDFinish.Text);
-                NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);
+                await NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);
                 LoadOrders();
                 var salesModel = new SalesModel()
                 {

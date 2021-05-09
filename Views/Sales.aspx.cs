@@ -16,7 +16,7 @@ namespace SoftEngWebEmployee.Views
                 LoadSales();
                 LoadProducts();
                 LoadCategories();
-                LoadCart();               
+                LoadCart();
             }
         }
         protected void IDS_Click(object sender, EventArgs e)
@@ -33,7 +33,7 @@ namespace SoftEngWebEmployee.Views
             {
                 Session["onsiteID"] = onsiteID;
             }
-            Response.Redirect("DisplaySales");
+            Response.Redirect("DisplaySales", false);
         }
         protected async void CategoryBtn_Click(object sender, EventArgs e)
         {
@@ -76,7 +76,7 @@ namespace SoftEngWebEmployee.Views
             ProductModel product = await ProductRepository.GetInstance().GetProducts(int.Parse(productID));
             try
             {
-                product.TotalNumberOfProduct = int.Parse(totalItem.Text);                
+                product.TotalNumberOfProduct = int.Parse(totalItem.Text);
                 SweetAlertBuilder sweetAlert = new SweetAlertBuilder
                 {
                     HexaBackgroundColor = "#90EE90",
@@ -96,9 +96,9 @@ namespace SoftEngWebEmployee.Views
                     Title = "Error",
                     Message = "Error Adding to Cart: " + product.ProductName,
                 };
-                sweetAlert.BuildSweetAlert(this);                            
-            }                       
-            LoadCart();            
+                sweetAlert.BuildSweetAlert(this);
+            }
+            LoadCart();
         }
         protected void BtnRemoveCartItem_Click(object sender, EventArgs e)
         {
@@ -150,7 +150,7 @@ namespace SoftEngWebEmployee.Views
                 OnsiteTransaction = new OnsiteTransactionModel
                 {
                     OnsiteProductTransactionList = onsiteProducts,
-                    TransactionID = transactionID,                        
+                    TransactionID = transactionID,
                 }
             };
             foreach (var sale in newSale.OnsiteTransaction.OnsiteProductTransactionList)
@@ -164,19 +164,19 @@ namespace SoftEngWebEmployee.Views
             {
                 HexaBackgroundColor = "#ffcccb",
                 AlertIcons = Constants.AlertStatus.success,
-                Title = "Successfully Added Sales",                
+                Title = "Successfully Added Sales",
             };
             Cart.ClearCartItems();
-            sweetAlert.BuildSweetAlert(this);            
+            sweetAlert.BuildSweetAlert(this);
             LoadCart();
             LoadSales();
             LoadProducts();
         }
         private async void LoadSales()
         {
-            var salesList = await SalesRepository.GetInstance().FetchAllSales();            
+            var salesList = await SalesRepository.GetInstance().FetchAllSales();
             SalesRepeater.DataSource = salesList;
-            SalesRepeater.DataBind();            
+            SalesRepeater.DataBind();
         }
         private async void LoadProducts()
         {
@@ -195,6 +195,6 @@ namespace SoftEngWebEmployee.Views
             var categories = await ProductRepository.GetInstance().FetchAllCategories();
             CategoryRepeater.DataSource = categories;
             CategoryRepeater.DataBind();
-        }       
+        }
     }
 }

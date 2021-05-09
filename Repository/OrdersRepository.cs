@@ -26,7 +26,24 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
-
+        public async Task<bool> CheckIfIdExist(int orderID)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryCheckId = "SELECT order_id FROM customer_orders_table WHERE order_id=@orderID";
+                MySqlCommand command = new MySqlCommand(queryCheckId,connection);
+                command.Parameters.AddWithValue("@orderID",orderID);
+                using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
         public async Task<OrdersModel> FetchOrder(int orderId)
         {
             OrdersModel order = null;
