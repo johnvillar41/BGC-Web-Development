@@ -159,7 +159,7 @@ namespace SoftEngWebEmployee.Views
             }
             await SalesRepository.GetInstance().InsertNewSale(newSale);
             var notification = NotificationRepository.GetInstance().GenerateNotification(Constants.NotificationType.SoldItem, onsiteProducts.ToString());
-            NotificationRepository.GetInstance().InsertNewNotification(notification);
+            await NotificationRepository.GetInstance().InsertNewNotification(notification);
             sweetAlert = new SweetAlertBuilder
             {
                 HexaBackgroundColor = "#ffcccb",

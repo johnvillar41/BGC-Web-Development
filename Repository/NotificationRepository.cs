@@ -122,7 +122,7 @@ namespace SoftEngWebEmployee.Repository
             return newNotification;
         }
 
-        public async void InsertNewNotification(NotificationsModel notification)
+        public async Task InsertNewNotification(NotificationsModel notification)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {

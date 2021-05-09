@@ -40,14 +40,21 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                 command.Parameters.AddWithValue("@productID", productID);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
 
-                if (reader.Read())
+                if (await reader.ReadAsync())
                 {
                     ProductSalesReportModel = new ProductSalesReportModel();
                     ProductSalesReportModel.Product = await ProductRepository.GetInstance().FetchProductDetails(productID.ToString());
-                    ProductSalesReportModel.ProductRevenue = int.Parse(reader["quantitySold"].ToString()) * int.Parse(reader["ProductPrice"].ToString());
-                    ProductSalesReportModel.QuantitySold = int.Parse(reader["quantitySold"].ToString());
+                    if (reader["quantitySold"] != DBNull.Value)
+                    {
+                        ProductSalesReportModel.ProductRevenue = int.Parse(reader["quantitySold"].ToString()) * ProductSalesReportModel.Product.ProductPrice;
+                        ProductSalesReportModel.QuantitySold = int.Parse(reader["quantitySold"].ToString());
+                    }
+                    else
+                    {
+                        ProductSalesReportModel.ProductRevenue = 0;
+                        ProductSalesReportModel.QuantitySold = 0;                        
+                    }
                 }
-
                 return ProductSalesReportModel;
             }
         }
