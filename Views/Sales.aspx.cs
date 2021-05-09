@@ -169,6 +169,8 @@ namespace SoftEngWebEmployee.Views
             Cart.ClearCartItems();
             sweetAlert.BuildSweetAlert(this);            
             LoadCart();
+            LoadSales();
+            LoadProducts();
         }
         private async void LoadSales()
         {
