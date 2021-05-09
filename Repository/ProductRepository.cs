@@ -283,6 +283,33 @@ namespace SoftEngWebEmployee.Repository
             }
             return productModel;
         }
-
+        public async Task UpdateProductStocks(int stockSold, int productID)
+        {
+            bool isOk = false;
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryCheckProduct = "SELECT product_stocks FROM products_table WHERE product_id=@productID";
+                MySqlCommand commandCheck = new MySqlCommand(queryCheckProduct, connection);
+                commandCheck.Parameters.AddWithValue("@productID", productID);
+                MySqlDataReader reader = (MySqlDataReader)await commandCheck.ExecuteReaderAsync();
+                if (await reader.ReadAsync())
+                {
+                    if (stockSold < int.Parse(reader["product_stocks"].ToString()))
+                    {
+                        isOk = true;
+                    }
+                }
+                reader.Close();
+                if (isOk)
+                {
+                    string queryString = "UPDATE products_table SET product_stocks = (product_stocks - @stockSold) WHERE product_id=@productID";
+                    MySqlCommand command = new MySqlCommand(queryString, connection);
+                    command.Parameters.AddWithValue("@stockSold", stockSold);
+                    command.Parameters.AddWithValue("@productID", productID);
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
     }
 }

@@ -149,9 +149,14 @@ namespace SoftEngWebEmployee.Views
                 Date = DateTime.Now,
                 OnsiteTransaction = new OnsiteTransactionModel
                 {
-                    TransactionID = transactionID
+                    OnsiteProductTransactionList = onsiteProducts,
+                    TransactionID = transactionID,                        
                 }
             };
+            foreach (var sale in newSale.OnsiteTransaction.OnsiteProductTransactionList)
+            {
+                await ProductRepository.GetInstance().UpdateProductStocks(sale.Product.TotalNumberOfProduct, sale.Product.Product_ID);
+            }
             await SalesRepository.GetInstance().InsertNewSale(newSale);
             var notification = NotificationRepository.GetInstance().GenerateNotification(Constants.NotificationType.SoldItem, onsiteProducts.ToString());
             NotificationRepository.GetInstance().InsertNewNotification(notification);
