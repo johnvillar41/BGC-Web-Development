@@ -50,7 +50,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
             }
             return salesIncome;
         }
-        public async Task<IEnumerable<int>> FetchOrderIds()
+        public async Task<IEnumerable<int>> FetchOrderIds(DateTime date)
         {
             List<int> orderIds = new List<int>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -58,7 +58,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                 await connection.OpenAsync();
                 string queryString = "SELECT DISTINCT(order_id) FROM sales_table WHERE date LIKE @dateToday";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
-                var dateToday = DateTime.Now.ToString("yyyy-MM-dd");
+                var dateToday = date.ToString("yyyy-MM-dd");
                 command.Parameters.AddWithValue("@dateToday", dateToday + "%");
                 using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
                 {
@@ -71,7 +71,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
             }
             return orderIds;
         }
-        public async Task<IEnumerable<int>> FetchOnsiteIds()
+        public async Task<IEnumerable<int>> FetchOnsiteIds(DateTime date)
         {
             List<int> onsiteId = new List<int>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -79,7 +79,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                 await connection.OpenAsync();
                 string queryString = "SELECT DISTINCT(onsite_transaction_id) FROM sales_table WHERE date LIKE @dateToday";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
-                var dateToday = DateTime.Now.ToString("yyyy-MM-dd");
+                var dateToday = date.ToString("yyyy-MM-dd");
                 command.Parameters.AddWithValue("@dateToday", dateToday + "%");
                 using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
                 {

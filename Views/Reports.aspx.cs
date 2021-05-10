@@ -14,7 +14,9 @@ namespace SoftEngWebEmployee.Views
     public partial class Reports : System.Web.UI.Page
     {
         public List<ProductSalesReportViewModel> ProductSalesListDisplay { get; set; }
-        public List<SalesIncomeReportViewModel> SalesIncomeDisplay { get; set; }        
+        public List<SalesIncomeReportViewModel> SalesIncomeDisplay { get; set; }
+        public int TotalSaleOnsite { get; set; }
+        public int TotalSaleOrder { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -24,6 +26,11 @@ namespace SoftEngWebEmployee.Views
                 DisplayListOfAdministrators();
                 LoadTotalSalesToday();
             }
+        }
+        protected void FindDate_Click(object sender, EventArgs e)
+        {
+            var date = DateTime.Parse(Date.Text.ToString());
+            LoadTotalSalesAtGivenDate(date);
         }
         private async void DisplayProductSalesReport()
         {
@@ -50,10 +57,28 @@ namespace SoftEngWebEmployee.Views
             }
             ProductSalesListDisplay = ProductSalesList;
         }
+        private async void LoadTotalSalesAtGivenDate(DateTime date)
+        {
+            var orderIds = await SalesIncomeReportRepository.GetInstance().FetchOrderIds(date);
+            var onsiteIds = await SalesIncomeReportRepository.GetInstance().FetchOnsiteIds(date);
+
+            var totalSaleOrders = 0;
+            var totalSaleOnsite = 0;
+            foreach (var id in orderIds)
+            {
+                totalSaleOrders += await OrdersRepository.GetInstance().CalculateTotalSaleOrder(id);
+            }
+            foreach (var id in onsiteIds)
+            {
+                totalSaleOnsite += await OnsiteTransactionRepository.GetInstance().CalculateTotalSaleOnsite(id);
+            }
+            int totalSale = totalSaleOrders + totalSaleOnsite;
+            TotalSaleGivenDate.Text = totalSale.ToString();
+        }
         private async void LoadTotalSalesToday()
         {
-            var orderIds = await SalesIncomeReportRepository.GetInstance().FetchOrderIds();
-            var onsiteIds = await SalesIncomeReportRepository.GetInstance().FetchOnsiteIds();
+            var orderIds = await SalesIncomeReportRepository.GetInstance().FetchOrderIds(DateTime.Now);
+            var onsiteIds = await SalesIncomeReportRepository.GetInstance().FetchOnsiteIds(DateTime.Now);
 
             var totalSaleOrders = 0;
             var totalSaleOnsite = 0;
@@ -66,6 +91,8 @@ namespace SoftEngWebEmployee.Views
                 totalSaleOnsite += await OnsiteTransactionRepository.GetInstance().CalculateTotalSaleOnsite(id);
             }
             int totalSale = totalSaleOrders + totalSaleOnsite;
+            TotalSaleOnsite = totalSaleOnsite;
+            TotalSaleOrder = totalSaleOrders;
             TotalSale.Text = totalSale.ToString();
         }
         private async void DisplayListOfAdministrators()
@@ -106,5 +133,6 @@ namespace SoftEngWebEmployee.Views
             total_products.Text = totalProducts.ToString();
         }
 
+        
     }
 }

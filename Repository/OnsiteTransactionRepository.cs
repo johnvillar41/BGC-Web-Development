@@ -46,7 +46,7 @@ namespace SoftEngWebEmployee.Repository
             }
             await connection.CloseAsync();
             return lastIdInserted;
-        }
+        }       
         public async Task<int> CalculateTotalSaleOnsite(int transactionID)
         {
             int totalOnsiteSale = 0;

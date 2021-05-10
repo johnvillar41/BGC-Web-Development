@@ -7,7 +7,7 @@
             <div class="list-group" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <button class="list-group-item list-group-item-action active" id="v-pills-dashboard-tab" data-bs-toggle="pill" data-bs-target="#v-pills-dashboard" type="button" role="tab" aria-controls="v-pills-dashboard" aria-selected="true">Dashboard</button>
                 <button class="list-group-item list-group-item-action" id="v-pills-products-tab" data-bs-toggle="pill" data-bs-target="#v-pills-products" type="button" role="tab" aria-controls="v-pills-products" aria-selected="false">Product Sales Report</button>
-                <button class="list-group-item list-group-item-action" id="v-pills-sales-tab" data-bs-toggle="pill" data-bs-target="#v-pills-sales" type="button" role="tab" aria-controls="v-pills-sales" aria-selected="false">Sales Income Report</button>                
+                <button class="list-group-item list-group-item-action" id="v-pills-sales-tab" data-bs-toggle="pill" data-bs-target="#v-pills-sales" type="button" role="tab" aria-controls="v-pills-sales" aria-selected="false">Sales Income Report</button>
             </div>
         </div>
 
@@ -62,9 +62,9 @@
                         <!--1st card-->
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="card border-success mb-3" style="min-height: 16rem;">
-                                <div class="card-header"><%=DateTime.Today.Date.DayOfWeek %>: <%=DateTime.Now.Month %>,<%=DateTime.Now.Day %>,<%=DateTime.Now.Year %></div>
-                                <div class="card-body text-success">                                   
-                                    <h5 class="card-title"><b>Total Sales Today:</b></h5>                                   
+                                <div class="card-header"><b>Date Today: <%=DateTime.Now.ToShortDateString() %></b></div>
+                                <div class="card-body text-success">
+                                    <h5 class="card-title"><b>Total Sales Today:</b></h5>
                                     <p>
                                         <asp:Label ID="TotalSale" runat="server" Text="None" Font-Size="X-Large"></asp:Label>
                                     </p>
@@ -75,19 +75,13 @@
                                     <div class="collapse mt-3" id="collapseExample">
                                         <div class="card card-body">
                                             <asp:Label ID="Label1" runat="server" Text="Onsite Orders"></asp:Label>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                                                    256
-                                                </div>
+                                            <div class="row">
+                                                <p><%=TotalSaleOnsite.ToString() %></p>
                                             </div>
                                             <br />
                                             <asp:Label ID="Label2" runat="server" Text="Online Orders"></asp:Label>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                                    24
-                                                </div>
+                                            <div class="row">
+                                                <p><%=TotalSaleOrder.ToString() %></p>
                                             </div>
                                         </div>
                                     </div>
@@ -101,19 +95,31 @@
                             <div class="card border-success mb-3" style="min-height: 16rem;">
                                 <div class="card-header">
                                     <label for="date"><b>Select Date:</b></label>
-                                    <input type="date" class="form-control" id="date" name="date">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <asp:TextBox ID="Date" type="date" CssClass="form-control" runat="server"></asp:TextBox>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <asp:Button ID="FindDate" runat="server" Text="Find" CssClass="btn btn-info" OnClick="FindDate_Click" />
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="card-body text-success">
-                                    <h5 class="card-title"><b>Total Sales:</b></h5>
-                                    <p>
-                                        <asp:Label ID="Label4" runat="server" Text="280" Font-Size="X-Large"></asp:Label>
-                                    </p>
-
+                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                        <ContentTemplate>
+                                            <h5 class="card-title"><b>Total Sales:</b></h5>
+                                            <p>
+                                                <asp:Label ID="TotalSaleGivenDate" runat="server" Text="0" Font-Size="X-Large"></asp:Label>
+                                            </p>
+                                        </ContentTemplate>
+                                        <Triggers>
+                                             <asp:AsyncPostBackTrigger ControlID="FindDate" EventName="Click" />
+                                        </Triggers>
+                                    </asp:UpdatePanel>
                                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">See More
                                     </a>
                                     <!--See More-->
-
                                     <div class="collapse mt-3" id="collapseExample2">
                                         <div class="card card-body">
                                             <asp:Label ID="Label5" runat="server" Text="Onsite Orders"></asp:Label>
@@ -134,7 +140,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>                                
                         </div>
                         <div class="col-lg-4 col-md-12 col-sm-12">
                             <div class="card border-success mb-3" style="min-height: 16rem;">
@@ -243,7 +249,7 @@
                         </div>
                         <%} %>
                     </div>
-                </div>              
+                </div>
             </div>
         </div>
     </div>
