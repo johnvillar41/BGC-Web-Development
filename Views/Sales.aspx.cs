@@ -2,6 +2,7 @@
 using SoftEngWebEmployee.Models;
 using SoftEngWebEmployee.Repository;
 using System;
+using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -138,6 +139,24 @@ namespace SoftEngWebEmployee.Views
             var connection = await OnsiteTransactionRepository.GetInstance().InsertNewTransaction(onSiteTransaction);
             var transactionID = await OnsiteTransactionRepository.GetInstance().FetchLastInsertID(connection);
             var onsiteProducts = Cart.ListOfOnsiteProducts(transactionID);
+
+            BuildSale(onsiteProducts, transactionID);
+            BuildNotification(onsiteProducts);
+
+            sweetAlert = new SweetAlertBuilder
+            {
+                HexaBackgroundColor = "#ffcccb",
+                AlertIcons = Constants.AlertStatus.success,
+                Title = "Successfully Added Sales",
+            };
+            Cart.ClearCartItems();
+            sweetAlert.BuildSweetAlert(this);
+            LoadCart();
+            LoadSales();
+            LoadProducts();
+        }
+        private async void BuildSale(List<OnsiteProductsTransactionModel> onsiteProducts, int transactionID)
+        {
             foreach (var onsiteModels in onsiteProducts)
             {
                 await OnsiteProductsTransactionRepository.GetInstance().InsertTransactions(onsiteModels);
@@ -158,32 +177,23 @@ namespace SoftEngWebEmployee.Views
                 await ProductRepository.GetInstance().UpdateProductStocks(sale.Product.TotalNumberOfProduct, sale.Product.Product_ID);
             }
             await SalesRepository.GetInstance().InsertNewSale(newSale);
-
+        }
+        private async void BuildNotification(List<OnsiteProductsTransactionModel> onsiteProducts)
+        {
             string productListString = "";
             int counter = 0;
             foreach (var onsite in onsiteProducts)
             {
                 productListString += onsite.Product.ProductName;
-                counter++;                
+                counter++;
                 if (counter == onsiteProducts.Count)
                 {
-                    break;                    
+                    break;
                 }
                 productListString += "|";
             }
             var notification = NotificationRepository.GetInstance().GenerateNotification(Constants.NotificationType.SoldItem, productListString);
             await NotificationRepository.GetInstance().InsertNewNotification(notification);
-            sweetAlert = new SweetAlertBuilder
-            {
-                HexaBackgroundColor = "#ffcccb",
-                AlertIcons = Constants.AlertStatus.success,
-                Title = "Successfully Added Sales",
-            };
-            Cart.ClearCartItems();
-            sweetAlert.BuildSweetAlert(this);
-            LoadCart();
-            LoadSales();
-            LoadProducts();
         }
         private async void LoadSales()
         {
