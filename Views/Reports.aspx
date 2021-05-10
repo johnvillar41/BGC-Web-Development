@@ -112,146 +112,139 @@
                                             <p>
                                                 <asp:Label ID="TotalSaleGivenDate" runat="server" Text="0" Font-Size="X-Large"></asp:Label>
                                             </p>
+                                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">See More
+                                            </a>
+                                            <!--See More-->
+                                            <div class="collapse mt-3" id="collapseExample2">
+                                                <div class="card card-body">
+                                                    <asp:Label ID="Label5" runat="server" Text="Onsite Orders"></asp:Label>
+                                                    <div class="row">
+                                                        <p><%=TotalSaleOnsite_GivenDate.ToString() %></p>
+                                                    </div>
+                                                    <br />
+                                                    <asp:Label ID="Label3" runat="server" Text="Online Orders"></asp:Label>
+                                                    <div class="row">
+                                                        <p><%=TotalSaleOrder_GivenDate.ToString() %></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
                                         </ContentTemplate>
                                         <Triggers>
-                                             <asp:AsyncPostBackTrigger ControlID="FindDate" EventName="Click" />
+                                            <asp:AsyncPostBackTrigger ControlID="FindDate" EventName="Click" />
                                         </Triggers>
                                     </asp:UpdatePanel>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">See More
-                                    </a>
-                                    <!--See More-->
-                                    <div class="collapse mt-3" id="collapseExample2">
-                                        <div class="card card-body">
-                                            <asp:Label ID="Label5" runat="server" Text="Onsite Orders"></asp:Label>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                                                    256
-                                                </div>
-                                            </div>
-                                            <br />
-                                            <asp:Label ID="Label6" runat="server" Text="Online Orders"></asp:Label>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                                    24
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>                                
-                        </div>
-                        <div class="col-lg-4 col-md-12 col-sm-12">
-                            <div class="card border-success mb-3" style="min-height: 16rem;">
-                                <div class="card-header"><b>Average Sales</b></div>
-                                <div class="card-body text-success">
-                                    <label for="term"><b>Term: &nbsp;</b></label>
-                                    <select name="term" id="term">
-                                        <option value="daily">Daily</option>
-                                        <option value="weekly">Weekly</option>
-                                        <option value="monthly">Monthly</option>
-                                        <option value="annually">Annually</option>
-                                    </select>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <div class="card border-success mb-3" style="min-height: 16rem;">
+                                    <div class="card-header"><b>Average Sales</b></div>
+                                    <div class="card-body text-success">
+                                        <label for="term"><b>Term: &nbsp;</b></label>
+                                        <select name="term" id="term">
+                                            <option value="daily">Daily</option>
+                                            <option value="weekly">Weekly</option>
+                                            <option value="monthly">Monthly</option>
+                                            <option value="annually">Annually</option>
+                                        </select>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <%if (SalesIncomeDisplay == null) return; %>
+                                <%foreach (var sales in SalesIncomeDisplay) %>
+                                <%{ %>
+                                <div class="card mb-2">
+                                    <center><img src="data:image/jpeg;base64,<%=sales.Administrator.ProfilePicture %>" class="card-img-top" style="height:200px; width:200px"></center>
+                                    <hr />
+                                    <div class="card-body">
+                                        <h5 class="card-title">Username: <%=sales.Administrator.Username %></h5>
+                                        <h5 class="card-title">FullName: <%=sales.Administrator.Fullname %></h5>
+                                        <p class="card-text">Total Sale: <%=sales.TotalSale %></p>
+                                        <p class="card-text">Total Sale On Site: <%=sales.TotalSaleOnsite %></p>
+                                        <p class="card-text">Total Sale Orders: <%=sales.TotalSaleOrders %></p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+                                <%} %>
+                            </div>
+                        </div>
+
+
+
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <%if (SalesIncomeDisplay == null) return; %>
-                            <%foreach (var sales in SalesIncomeDisplay) %>
+                    <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">
+                        <!-- Products -->
+                        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 g-4">
+                            <%if (ProductSalesListDisplay == null) return; %>
+                            <%foreach (var productSales in ProductSalesListDisplay) %>
                             <%{ %>
-                            <div class="card mb-2">
-                                <center><img src="data:image/jpeg;base64,<%=sales.Administrator.ProfilePicture %>" class="card-img-top" style="height:200px; width:200px"></center>
-                                <hr />
-                                <div class="card-body">
-                                    <h5 class="card-title">Username: <%=sales.Administrator.Username %></h5>
-                                    <h5 class="card-title">FullName: <%=sales.Administrator.Fullname %></h5>
-                                    <p class="card-text">Total Sale: <%=sales.TotalSale %></p>
-                                    <p class="card-text">Total Sale On Site: <%=sales.TotalSaleOnsite %></p>
-                                    <p class="card-text">Total Sale Orders: <%=sales.TotalSaleOrders %></p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                            <div class="col">
+
+                                <div class="card">
+                                    <img src="data:image/jpeg;base64,<%=productSales.ProductReport.Product.ProductPicture%>" class="card-img-top img-thumbnail" style="min-width: 200px; height: 300px">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Product ID: <%=productSales.ProductReport.Product.Product_ID%></h5>
+                                        <p class="card-text"><b><%=productSales.ProductReport.Product.ProductName %></b></p>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">Unit Price:
+                                        <label><%=productSales.ProductReport.Product.ProductPrice%></label>
+                                            </li>
+                                            <li class="list-group-item">Product Revenue:
+                                         <label><%=productSales.ProductReport.ProductRevenue %></label>
+
+                                            </li>
+                                            <!--See More-->
+                                            <li class="list-group-item">Quantity Sold:                                       
+                                       <label><%=productSales.ProductReport.QuantitySold %></label>
+                                                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapse<%=productSales.ProductReport.Product.Product_ID %>" role="button" aria-expanded="false" aria-controls="collapseExample">See More
+                                                </a>
+                                                <div class="collapse mt-2" id="collapse<%=productSales.ProductReport.Product.Product_ID %>">
+                                                    <div class="card card-body table table-striped table-hover table-responsive">
+                                                        <table>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">ProductName</th>
+                                                                    <th scope="col">ProductPrice</th>
+                                                                    <th scope="col">ProductID</th>
+                                                                    <th scope="col">SaleType</th>
+                                                                    <th scope="col">Date</th>
+                                                                    <th scope="col">Administrator</th>
+                                                                    <th scope="col">TotalSale</th>
+                                                                    <th scope="col">ProductCount</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <%foreach (var quantitySold in productSales.QuantitySold) %>
+                                                            <%{ %>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><%=quantitySold.ProductName %></td>
+                                                                    <td><%=quantitySold.ProductPrice %></td>
+                                                                    <td><%=quantitySold.ProductID %></td>
+                                                                    <td><%=quantitySold.SaleType %></td>
+                                                                    <td><%=quantitySold.Date %></td>
+                                                                    <td><%=quantitySold.Administrator %></td>
+                                                                    <td><%=quantitySold.TotalSale %></td>
+                                                                    <td><%=quantitySold.ProductCount %></td>
+                                                                </tr>
+                                                            </tbody>
+                                                            <%} %>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                             <%} %>
                         </div>
                     </div>
-
-
-
-                </div>
-                <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">
-                    <!-- Products -->
-                    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 g-4">
-                        <%if (ProductSalesListDisplay == null) return; %>
-                        <%foreach (var productSales in ProductSalesListDisplay) %>
-                        <%{ %>
-
-                        <div class="col">
-
-                            <div class="card">
-                                <img src="data:image/jpeg;base64,<%=productSales.ProductReport.Product.ProductPicture%>" class="card-img-top img-thumbnail" style="min-width: 200px; height: 300px">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product ID: <%=productSales.ProductReport.Product.Product_ID%></h5>
-                                    <p class="card-text"><b><%=productSales.ProductReport.Product.ProductName %></b></p>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Unit Price:
-                                        <label><%=productSales.ProductReport.Product.ProductPrice%></label>
-                                        </li>
-                                        <li class="list-group-item">Product Revenue:
-                                         <label><%=productSales.ProductReport.ProductRevenue %></label>
-
-                                        </li>
-                                        <!--See More-->
-                                        <li class="list-group-item">Quantity Sold:                                       
-                                       <label><%=productSales.ProductReport.QuantitySold %></label>
-                                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapse<%=productSales.ProductReport.Product.Product_ID %>" role="button" aria-expanded="false" aria-controls="collapseExample">See More
-                                            </a>
-                                            <div class="collapse mt-2" id="collapse<%=productSales.ProductReport.Product.Product_ID %>">
-                                                <div class="card card-body table table-striped table-hover table-responsive">
-                                                    <table>
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col">ProductName</th>
-                                                                <th scope="col">ProductPrice</th>
-                                                                <th scope="col">ProductID</th>
-                                                                <th scope="col">SaleType</th>
-                                                                <th scope="col">Date</th>
-                                                                <th scope="col">Administrator</th>
-                                                                <th scope="col">TotalSale</th>
-                                                                <th scope="col">ProductCount</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <%foreach (var quantitySold in productSales.QuantitySold) %>
-                                                        <%{ %>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td><%=quantitySold.ProductName %></td>
-                                                                <td><%=quantitySold.ProductPrice %></td>
-                                                                <td><%=quantitySold.ProductID %></td>
-                                                                <td><%=quantitySold.SaleType %></td>
-                                                                <td><%=quantitySold.Date %></td>
-                                                                <td><%=quantitySold.Administrator %></td>
-                                                                <td><%=quantitySold.TotalSale %></td>
-                                                                <td><%=quantitySold.ProductCount %></td>
-                                                            </tr>
-                                                        </tbody>
-                                                        <%} %>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <%} %>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
 </asp:Content>

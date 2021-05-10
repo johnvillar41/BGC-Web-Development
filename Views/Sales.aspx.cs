@@ -158,7 +158,20 @@ namespace SoftEngWebEmployee.Views
                 await ProductRepository.GetInstance().UpdateProductStocks(sale.Product.TotalNumberOfProduct, sale.Product.Product_ID);
             }
             await SalesRepository.GetInstance().InsertNewSale(newSale);
-            var notification = NotificationRepository.GetInstance().GenerateNotification(Constants.NotificationType.SoldItem, onsiteProducts.ToString());
+
+            string productListString = "";
+            int counter = 0;
+            foreach (var onsite in onsiteProducts)
+            {
+                productListString += onsite.Product.ProductName;
+                counter++;                
+                if (counter == onsiteProducts.Count)
+                {
+                    break;                    
+                }
+                productListString += "|";
+            }
+            var notification = NotificationRepository.GetInstance().GenerateNotification(Constants.NotificationType.SoldItem, productListString);
             await NotificationRepository.GetInstance().InsertNewNotification(notification);
             sweetAlert = new SweetAlertBuilder
             {

@@ -13,5 +13,12 @@ namespace SoftEngWebEmployee.Models
         public ProductModel Product { get; set; }
         public int TotalProductsCount { get; set; }
         public int SubTotalPrice { get; set; }
+        public override string ToString()
+        {
+            string generateStringVal =
+                "Transaction ID: " + TransactionID + "\n" +
+                "Product: " + Product.ProductName + "\n";                
+            return generateStringVal;
+        }
     }
 }

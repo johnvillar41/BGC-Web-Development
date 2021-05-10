@@ -1,4 +1,5 @@
-﻿using SoftEngWebEmployee.Models;
+﻿using SoftEngWebEmployee.Helpers;
+using SoftEngWebEmployee.Models;
 using SoftEngWebEmployee.Models.ReportModel;
 using SoftEngWebEmployee.Repository;
 using SoftEngWebEmployee.Repository.ReportsRepository;
@@ -17,6 +18,8 @@ namespace SoftEngWebEmployee.Views
         public List<SalesIncomeReportViewModel> SalesIncomeDisplay { get; set; }
         public int TotalSaleOnsite { get; set; }
         public int TotalSaleOrder { get; set; }
+        public int TotalSaleOnsite_GivenDate { get; set; }
+        public int TotalSaleOrder_GivenDate { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -29,8 +32,20 @@ namespace SoftEngWebEmployee.Views
         }
         protected void FindDate_Click(object sender, EventArgs e)
         {
-            var date = DateTime.Parse(Date.Text.ToString());
-            LoadTotalSalesAtGivenDate(date);
+            if (String.IsNullOrWhiteSpace(Date.Text.ToString()))
+            {
+                SweetAlertBuilder sweetAlert = new SweetAlertBuilder
+                {
+                    HexaBackgroundColor = "#fff",
+                    Title = "Error Date",
+                    Message = "Invalid Date Pls Pick a Date!",
+                    AlertIcons = Constants.AlertStatus.error
+                };
+                sweetAlert.BuildSweetAlert(this);
+                return;
+            }
+            DateTime date = DateTime.Parse(Date.Text.ToString());
+            LoadTotalSalesAtGivenDate(date);           
         }
         private async void DisplayProductSalesReport()
         {
@@ -74,6 +89,8 @@ namespace SoftEngWebEmployee.Views
             }
             int totalSale = totalSaleOrders + totalSaleOnsite;
             TotalSaleGivenDate.Text = totalSale.ToString();
+            TotalSaleOnsite_GivenDate = totalSaleOnsite;
+            TotalSaleOrder_GivenDate = totalSaleOrders;
         }
         private async void LoadTotalSalesToday()
         {
@@ -86,7 +103,7 @@ namespace SoftEngWebEmployee.Views
             {
                 totalSaleOrders += await OrdersRepository.GetInstance().CalculateTotalSaleOrder(id);
             }
-            foreach(var id in onsiteIds)
+            foreach (var id in onsiteIds)
             {
                 totalSaleOnsite += await OnsiteTransactionRepository.GetInstance().CalculateTotalSaleOnsite(id);
             }
@@ -111,12 +128,12 @@ namespace SoftEngWebEmployee.Views
                         TotalSaleOnsite = totalSale.TotalSaleOnsite,
                         TotalSaleOrders = totalSale.TotalSaleOrders
                     };
-                                       
+
                     listOfIncomeReports.Add(salesIncomeReportViewModel);
                 }
                 catch (Exception)
                 {
-                   
+
                 }
 
             }
@@ -133,6 +150,6 @@ namespace SoftEngWebEmployee.Views
             total_products.Text = totalProducts.ToString();
         }
 
-        
+
     }
 }
