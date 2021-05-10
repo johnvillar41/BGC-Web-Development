@@ -130,6 +130,28 @@ namespace SoftEngWebEmployee.Repository
                 }                
             }
         }
+        public async Task<int> CalculateTotalSaleOrder(int orderID)
+        {
+            int totalOrderSale = 0;
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT SUM(order_total_price) as TotalSale FROM customer_orders_table WHERE order_id = @orderID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@orderID", orderID);
+                using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
+                {
+                    if(await reader.ReadAsync())
+                    {
+                        if(reader["TotalSale"] != DBNull.Value)
+                        {
+                            totalOrderSale = int.Parse(reader["TotalSale"].ToString());
+                        }
+                    }
+                }
+            }
+            return totalOrderSale;
+        }        
         private async Task<bool> CheckOrderStatus(MySqlConnection connection)
         {
             bool isOk = false;

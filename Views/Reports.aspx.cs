@@ -14,7 +14,7 @@ namespace SoftEngWebEmployee.Views
     public partial class Reports : System.Web.UI.Page
     {
         public List<ProductSalesReportViewModel> ProductSalesListDisplay { get; set; }
-        public List<SalesIncomeReportViewModel> SalesIncomeDisplay { get; set; }
+        public List<SalesIncomeReportViewModel> SalesIncomeDisplay { get; set; }        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -22,10 +22,9 @@ namespace SoftEngWebEmployee.Views
                 DisplayDashBoard();
                 DisplayProductSalesReport();
                 DisplayListOfAdministrators();
+                LoadTotalSalesToday();
             }
         }
-
-
         private async void DisplayProductSalesReport()
         {
             var productList = await ProductRepository.GetInstance().FetchAllProducts();
@@ -50,6 +49,24 @@ namespace SoftEngWebEmployee.Views
                 }
             }
             ProductSalesListDisplay = ProductSalesList;
+        }
+        private async void LoadTotalSalesToday()
+        {
+            var orderIds = await SalesIncomeReportRepository.GetInstance().FetchOrderIds();
+            var onsiteIds = await SalesIncomeReportRepository.GetInstance().FetchOnsiteIds();
+
+            var totalSaleOrders = 0;
+            var totalSaleOnsite = 0;
+            foreach (var id in orderIds)
+            {
+                totalSaleOrders += await OrdersRepository.GetInstance().CalculateTotalSaleOrder(id);
+            }
+            foreach(var id in onsiteIds)
+            {
+                totalSaleOnsite += await OnsiteTransactionRepository.GetInstance().CalculateTotalSaleOnsite(id);
+            }
+            int totalSale = totalSaleOrders + totalSaleOnsite;
+            TotalSale.Text = totalSale.ToString();
         }
         private async void DisplayListOfAdministrators()
         {
@@ -78,8 +95,6 @@ namespace SoftEngWebEmployee.Views
             }
             SalesIncomeDisplay = listOfIncomeReports;
         }
-
-
         private async void DisplayDashBoard()
         {
             var totalSales = await DashboardRepository.GetInstance().FetchTotalSales();

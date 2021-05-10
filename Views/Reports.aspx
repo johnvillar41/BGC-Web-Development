@@ -63,10 +63,10 @@
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="card border-success mb-3" style="min-height: 16rem;">
                                 <div class="card-header"><%=DateTime.Today.Date.DayOfWeek %>: <%=DateTime.Now.Month %>,<%=DateTime.Now.Day %>,<%=DateTime.Now.Year %></div>
-                                <div class="card-body text-success">
-                                    <h5 class="card-title"><b>Total Sales Today:</b></h5>
+                                <div class="card-body text-success">                                   
+                                    <h5 class="card-title"><b>Total Sales Today:</b></h5>                                   
                                     <p>
-                                        <asp:Label ID="Label3" runat="server" Text="280" Font-Size="X-Large"></asp:Label>
+                                        <asp:Label ID="TotalSale" runat="server" Text="None" Font-Size="X-Large"></asp:Label>
                                     </p>
 
                                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">See More

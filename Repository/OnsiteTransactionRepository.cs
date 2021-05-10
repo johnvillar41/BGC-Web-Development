@@ -47,6 +47,28 @@ namespace SoftEngWebEmployee.Repository
             await connection.CloseAsync();
             return lastIdInserted;
         }
+        public async Task<int> CalculateTotalSaleOnsite(int transactionID)
+        {
+            int totalOnsiteSale = 0;
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT SUM(total_sale) as TotalSale FROM onsite_transaction_table WHERE transaction_id = @transactionId";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@transactionId", transactionID);
+                using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        if (reader["TotalSale"] != DBNull.Value)
+                        {
+                            totalOnsiteSale = int.Parse(reader["TotalSale"].ToString());
+                        }
+                    }
+                }
+            }
+            return totalOnsiteSale;
+        }
         public async Task<OnsiteTransactionModel> FetchOnsiteTransaction(int transactionID)
         {
             OnsiteTransactionModel onsiteTransactionModel = null;

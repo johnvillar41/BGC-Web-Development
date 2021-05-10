@@ -42,13 +42,13 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.WebControls.Label total_products;
 
         /// <summary>
-        /// Label3 control.
+        /// TotalSale control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label TotalSale;
 
         /// <summary>
         /// Label1 control.

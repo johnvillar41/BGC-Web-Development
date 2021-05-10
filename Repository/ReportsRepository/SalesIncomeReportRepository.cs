@@ -50,5 +50,47 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
             }
             return salesIncome;
         }
+        public async Task<IEnumerable<int>> FetchOrderIds()
+        {
+            List<int> orderIds = new List<int>();
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT DISTINCT(order_id) FROM sales_table WHERE date LIKE @dateToday";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                var dateToday = DateTime.Now.ToString("yyyy-MM-dd");
+                command.Parameters.AddWithValue("@dateToday", dateToday + "%");
+                using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
+                {
+                    while(await reader.ReadAsync())
+                    {                   
+                        if(reader["order_id"] != DBNull.Value)
+                            orderIds.Add(int.Parse(reader["order_id"].ToString()));                                              
+                    }
+                }
+            }
+            return orderIds;
+        }
+        public async Task<IEnumerable<int>> FetchOnsiteIds()
+        {
+            List<int> onsiteId = new List<int>();
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT DISTINCT(onsite_transaction_id) FROM sales_table WHERE date LIKE @dateToday";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                var dateToday = DateTime.Now.ToString("yyyy-MM-dd");
+                command.Parameters.AddWithValue("@dateToday", dateToday + "%");
+                using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        if (reader["onsite_transaction_id"] != DBNull.Value)
+                            onsiteId.Add(int.Parse(reader["onsite_transaction_id"].ToString()));                       
+                    }
+                }
+            }
+            return onsiteId;
+        }
     }
 }
