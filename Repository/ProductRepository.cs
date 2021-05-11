@@ -60,6 +60,8 @@ namespace SoftEngWebEmployee.Repository
         // / View Product Details
         // / Delete Product
         // / Responsiveness
+        // x Inventory: Fix code so that only the first repeater gets updated by the dropdown list,
+        //   since the Lottie animations disappear right now when dropdown is click
         // x Add settings to first repeater, orders products by name, ID, number of stocks, etc.
         // x Fix code to properly display images
 
