@@ -81,7 +81,12 @@ namespace SoftEngWebEmployee.Views
                     alert.BuildSweetAlert(this);
                     return;
                 }
-                await OrdersRepository.GetInstance().ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));                
+                var productIds = await SpecificOrdersRepository.GetInstance().FetchProductIDs(int.Parse(OrderIDFinish.Text));
+                foreach(KeyValuePair<int, int> productId in productIds)
+                {                    
+                    await ProductRepository.GetInstance().UpdateProductStocks(productId.Value, productId.Key);
+                }
+                await OrdersRepository.GetInstance().ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));
                 var generatedNotification = NotificationRepository
                     .GetInstance()
                     .GenerateNotification(NotificationType.FinishedOrder, OrderIDFinish.Text);

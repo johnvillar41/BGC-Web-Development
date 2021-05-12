@@ -162,7 +162,7 @@ namespace SoftEngWebEmployee.Repository
                 if (await reader.ReadAsync())
                 {
                     var orderStatus = reader["order_status"].ToString();
-                    if (orderStatus.Equals("Finished") || orderStatus.Equals("Cancelled"))
+                    if (!orderStatus.Equals("Finished") || !orderStatus.Equals("Cancelled"))
                     {
                         isOk = true;
                     }

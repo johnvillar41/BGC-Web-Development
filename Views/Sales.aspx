@@ -218,15 +218,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-12 mt-3">
-                            <table>
-                                <tr>
-                                    <th><b>Total</b></th>
-                                </tr>
-                                <tbody>
-                                    <th>100</th>
-                                </tbody>
-                            </table>
+                        <div class="col-lg-3 col-md-6 col-sm-12 mt-3">                            
                             <asp:Button ID="BtnConfirmCartOrder" CssClass="btn btn-success btn-block" runat="server" Text="Confirm" OnClick="BtnConfirmCartOrder_Click" />
                         </div>
                     </div>
