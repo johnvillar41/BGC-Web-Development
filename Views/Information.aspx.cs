@@ -27,7 +27,7 @@ namespace SoftEngWebEmployee.Views
 
         private async void DisplayInformationTable()
         {
-            var informations = await InformationRepository.GetInstance().FetchInformations();
+            var informations = await InformationRepository.SingleInstance.FetchInformations();
 
             InformationRepeater.DataSource = informations;
             InformationRepeater.DataBind();

@@ -27,7 +27,7 @@ namespace SoftEngWebEmployee.Views
             return IsAdminUser;
         }       
 
-        protected void BtnSave_Click(object sender, EventArgs e)
+        protected async void BtnSave_Click(object sender, EventArgs e)
         {
             var username = Username.Text.ToString();
             var password = Password.Text.ToString();
@@ -64,24 +64,24 @@ namespace SoftEngWebEmployee.Views
                     };
                 }                
 
-                AdministratorRepository.GetInstance().CreateNewAdministrator(administrator);
-                NotificationRepository.GetInstance()
+                AdministratorRepository.SingleInstance.CreateNewAdministrator(administrator);
+                await NotificationRepository.SingleInstance
                     .InsertNewNotification(NotificationRepository
-                    .GetInstance()
+                    .SingleInstance
                     .GenerateNotification(NotificationType.CreateUser, username));                
                 Response.Redirect(Request.RawUrl);                
             }
 
         }
 
-        protected void BtnDelete_Click(object sender, EventArgs e)
+        protected async void BtnDelete_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrWhiteSpace(AdministratorId_Delete.Text))
             {
-                AdministratorRepository.GetInstance().DeleteAdministrator(int.Parse(AdministratorId_Delete.Text));
-                NotificationRepository.GetInstance()
+                AdministratorRepository.SingleInstance.DeleteAdministrator(int.Parse(AdministratorId_Delete.Text));
+                await NotificationRepository.SingleInstance
                    .InsertNewNotification(NotificationRepository
-                   .GetInstance()
+                   .SingleInstance
                    .GenerateNotification(NotificationType.DeleteUser, AdministratorID.Text.ToString()));
                 Response.Redirect(Request.RawUrl);
             }
@@ -91,7 +91,7 @@ namespace SoftEngWebEmployee.Views
         {
             if (!String.IsNullOrWhiteSpace(AdministratorID.Text))
             {
-                AdministratorModel administrator = await AdministratorRepository.GetInstance().FindAdministrator(int.Parse(AdministratorID.Text));
+                AdministratorModel administrator = await AdministratorRepository.SingleInstance.FindAdministrator(int.Parse(AdministratorID.Text));
                 if (administrator != null)
                 {
                     UsernameUpdate.Text = administrator.Username;
@@ -102,7 +102,7 @@ namespace SoftEngWebEmployee.Views
             UpdatePanel1.Update();
         }
 
-        protected void ButtonUpdateUser_Click(object sender, EventArgs e)
+        protected async void ButtonUpdateUser_Click(object sender, EventArgs e)
         {
             var userId = AdministratorID.Text.ToString();
             var username = UsernameUpdate.Text.ToString();
@@ -118,10 +118,10 @@ namespace SoftEngWebEmployee.Views
                     Password = password,
                     Fullname = fullName
                 };
-                AdministratorRepository.GetInstance().UpdateAdministrator(administrator);
-                NotificationRepository.GetInstance()
+                AdministratorRepository.SingleInstance.UpdateAdministrator(administrator);
+                await NotificationRepository.SingleInstance
                    .InsertNewNotification(NotificationRepository
-                   .GetInstance()
+                   .SingleInstance
                    .GenerateNotification(NotificationType.UpdateUser, username));
                 Response.Redirect(Request.RawUrl);
             }
@@ -129,12 +129,12 @@ namespace SoftEngWebEmployee.Views
 
         private async void LoadAdministrators()
         {
-            var administrators = await AdministratorRepository.GetInstance().FetchAdministrators();
+            var administrators = await AdministratorRepository.SingleInstance.FetchAdministrators();
             Admins = (List<AdministratorModel>)administrators;
         }
         private async void LoadIsAdministrator(string username)
         {
-            IsAdminUser = await AdministratorRepository.GetInstance().CheckIfUserIsAdministrator(username);           
+            IsAdminUser = await AdministratorRepository.SingleInstance.CheckIfUserIsAdministrator(username);           
         }
     }
 }

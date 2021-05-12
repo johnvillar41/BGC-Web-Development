@@ -25,7 +25,7 @@ namespace SoftEngWebEmployee.Views
                 Password = password
             };
 
-            if (await LoginRepository.GetInstance().IsLoginSuccessfull(administratorModel) == true)
+            if (await LoginRepository.SingleInstance.IsLoginSuccessfull(administratorModel) == true)
             {
                 UserSession.SetLoginStatus(true);
                 UserSession.SetLoginUser(username);

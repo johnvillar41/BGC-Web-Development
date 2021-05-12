@@ -76,10 +76,10 @@ namespace SoftEngWebEmployee.Repository
                         sales = new SalesModel()
                         {
                             SalesID = int.Parse(reader["sales_id"].ToString()),
-                            Administrator = await AdministratorRepository.GetInstance().FindAdministrator(reader["user_username"].ToString()),
+                            Administrator = await AdministratorRepository.SingleInstance.FindAdministrator(reader["user_username"].ToString()),
                             Date = DateTime.Parse(reader["date"].ToString()),
                             SalesType = GenerateSaleType(reader["sale_type"].ToString()),
-                            OnsiteTransaction = await OnsiteTransactionRepository.GetInstance().FetchOnsiteTransaction(int.Parse(reader["onsite_transaction_id"].ToString()))
+                            OnsiteTransaction = await OnsiteTransactionRepository.SingleInstance.FetchOnsiteTransaction(int.Parse(reader["onsite_transaction_id"].ToString()))
 
                         };
                     }
@@ -88,10 +88,10 @@ namespace SoftEngWebEmployee.Repository
                         sales = new SalesModel()
                         {
                             SalesID = int.Parse(reader["sales_id"].ToString()),
-                            Administrator = await AdministratorRepository.GetInstance().FindAdministrator(reader["user_username"].ToString()),
+                            Administrator = await AdministratorRepository.SingleInstance.FindAdministrator(reader["user_username"].ToString()),
                             Date = DateTime.Parse(reader["date"].ToString()),
                             SalesType = GenerateSaleType(reader["sale_type"].ToString()),
-                            Orders = await OrdersRepository.GetInstance().FetchOrder(int.Parse(reader["order_id"].ToString()))
+                            Orders = await OrdersRepository.SingleInstance.FetchOrder(int.Parse(reader["order_id"].ToString()))
                         };
                     }
 

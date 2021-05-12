@@ -10,13 +10,16 @@ namespace SoftEngWebEmployee.Repository
     public class UserProfileRepository
     {
         private static UserProfileRepository instance = null;
-        public static UserProfileRepository GetInstance()
+        public static UserProfileRepository SingleInstance
         {
-            if(instance == null)
+            get
             {
-                instance = new UserProfileRepository();
-            }
-            return instance;
+                if (instance == null)
+                {
+                    instance = new UserProfileRepository();
+                }
+                return instance;
+            }            
         }
         private UserProfileRepository()
         {

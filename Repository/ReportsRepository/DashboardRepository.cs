@@ -15,15 +15,17 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
         //fetch total # products
 
         private static DashboardRepository instance = null;
-        public static DashboardRepository GetInstance()
+        public static DashboardRepository SingleInstance
         {
-            if (instance == null)
+            get
             {
-                instance = new DashboardRepository();
-            }
-            return instance;
+                if (instance == null)
+                {
+                    instance = new DashboardRepository();
+                }                    
+                return instance;
+            }           
         }
-
         private DashboardRepository()
         {
 

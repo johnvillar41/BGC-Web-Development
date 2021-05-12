@@ -22,7 +22,7 @@ namespace SoftEngWebEmployee.Views
 
         private async void LoadOrders()
         {
-            var listOfOrders = await OrdersRepository.GetInstance().FetchAllOrders();
+            var listOfOrders = await OrdersRepository.SingleInstance.FetchAllOrders();
             OrdersList = (List<OrdersModel>)listOfOrders;
         }
 
@@ -30,7 +30,7 @@ namespace SoftEngWebEmployee.Views
         {
             if (!String.IsNullOrWhiteSpace(OrderIDCancel.Text) && IsAllAlphabetic(OrderIDCancel.Text))
             {
-                if (await OrdersRepository.GetInstance().CheckIfIdExist(int.Parse(OrderIDCancel.Text)) == false)
+                if (await OrdersRepository.SingleInstance.CheckIfIdExist(int.Parse(OrderIDCancel.Text)) == false)
                 {
                     SweetAlertBuilder alert = new SweetAlertBuilder
                     {
@@ -44,11 +44,11 @@ namespace SoftEngWebEmployee.Views
                     alert.BuildSweetAlert(this);
                     return;
                 }
-                await OrdersRepository .GetInstance().ChangeStatusOfOrderToCancelled(int.Parse(OrderIDCancel.Text));
+                await OrdersRepository .SingleInstance.ChangeStatusOfOrderToCancelled(int.Parse(OrderIDCancel.Text));
                 var generatedNotification = NotificationRepository
-                    .GetInstance()
+                    .SingleInstance
                     .GenerateNotification(NotificationType.CancelledOrder, OrderIDCancel.Text);
-                await NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);
+                await NotificationRepository.SingleInstance.InsertNewNotification(generatedNotification);
                 LoadOrders();
                 SweetAlertBuilder sweetAlert = new SweetAlertBuilder
                 {
@@ -67,7 +67,7 @@ namespace SoftEngWebEmployee.Views
         {
             if (!String.IsNullOrWhiteSpace(OrderIDFinish.Text) && IsAllAlphabetic(OrderIDFinish.Text))
             {
-                if (await OrdersRepository.GetInstance().CheckIfIdExist(int.Parse(OrderIDFinish.Text)) == false)
+                if (await OrdersRepository.SingleInstance.CheckIfIdExist(int.Parse(OrderIDFinish.Text)) == false)
                 {
                     SweetAlertBuilder alert = new SweetAlertBuilder
                     {
@@ -81,23 +81,23 @@ namespace SoftEngWebEmployee.Views
                     alert.BuildSweetAlert(this);
                     return;
                 }
-                var productIds = await SpecificOrdersRepository.GetInstance().FetchProductIDs(int.Parse(OrderIDFinish.Text));
+                var productIds = await SpecificOrdersRepository.SingleInstance.FetchProductIDs(int.Parse(OrderIDFinish.Text));
                 foreach(KeyValuePair<int, int> productId in productIds)
                 {                    
-                    await ProductRepository.GetInstance().UpdateProductStocks(productId.Value, productId.Key);
+                    await ProductRepository.SingleInstance.UpdateProductStocks(productId.Value, productId.Key);
                 }
-                await OrdersRepository.GetInstance().ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));
+                await OrdersRepository.SingleInstance.ChangeStatusOfOrderToFinished(int.Parse(OrderIDFinish.Text));
                 var generatedNotification = NotificationRepository
-                    .GetInstance()
+                    .SingleInstance
                     .GenerateNotification(NotificationType.FinishedOrder, OrderIDFinish.Text);
-                await NotificationRepository.GetInstance().InsertNewNotification(generatedNotification);
+                await NotificationRepository.SingleInstance.InsertNewNotification(generatedNotification);
                 LoadOrders();
                 var salesModel = new SalesModel()
                 {
                     SalesType = Constants.SalesType.Order,
-                    Administrator = await AdministratorRepository.GetInstance().FindAdministrator(UserSession.GetLoggedInUser()),
+                    Administrator = await AdministratorRepository.SingleInstance.FindAdministrator(UserSession.GetLoggedInUser()),
                     Date = DateTime.Now,
-                    Orders = await OrdersRepository.GetInstance().FetchOrder(int.Parse(OrderIDFinish.Text)),
+                    Orders = await OrdersRepository.SingleInstance.FetchOrder(int.Parse(OrderIDFinish.Text)),
                     OnsiteTransaction = null
                 };
                 //TODO FIX THIS
@@ -120,7 +120,7 @@ namespace SoftEngWebEmployee.Views
         {
             if (!String.IsNullOrWhiteSpace(OrderIdSearchTextbox.Text) && IsAllAlphabetic(OrderIdSearchTextbox.Text))
             {
-                var order = await OrdersRepository.GetInstance().FetchOrder(int.Parse(OrderIdSearchTextbox.Text));
+                var order = await OrdersRepository.SingleInstance.FetchOrder(int.Parse(OrderIdSearchTextbox.Text));
                 if (order != null)
                 {
                     OrdersList.Clear();

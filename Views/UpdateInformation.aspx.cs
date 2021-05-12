@@ -27,12 +27,12 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadProduct(int id)
         {
-            var product = await ProductRepository.GetInstance().GetProducts(id);
+            var product = await ProductRepository.SingleInstance.GetProducts(id);
             Product = product;
         }
         private async void LoadInformation(int id)
         {
-            var information = await InformationRepository.GetInstance().FetchInformation(id);
+            var information = await InformationRepository.SingleInstance.FetchInformation(id);
             Information = information.ProductInformation;
             ProductIDTextBox.Text = id.ToString();
             InformationTextBox.Text = information.ProductInformation.ToString();
@@ -50,7 +50,7 @@ namespace SoftEngWebEmployee.Views
                 Product = product,
                 ProductInformation = information
             };
-            await InformationRepository.GetInstance().UpdateInformation(informationObj);
+            await InformationRepository.SingleInstance.UpdateInformation(informationObj);
             Response.Redirect("Information.aspx", false);
 
         }

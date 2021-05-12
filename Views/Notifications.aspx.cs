@@ -14,7 +14,7 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadNotifications()
         {
-            var notifications = await NotificationRepository.GetInstance().FetchNotifications();
+            var notifications = await NotificationRepository.SingleInstance.FetchNotifications();
             NotificationsList = notifications;
         }
         public List<NotificationsModel> DisplayNotifications()
@@ -24,7 +24,7 @@ namespace SoftEngWebEmployee.Views
 
         protected async void FindDate_Click(object sender, EventArgs e)
         {            
-            var notifications = await NotificationRepository.GetInstance().FetchNotificationsGivenDate(DateText.Text);
+            var notifications = await NotificationRepository.SingleInstance.FetchNotificationsGivenDate(DateText.Text);
             NotificationsList = notifications;
         }
     }

@@ -12,13 +12,16 @@ namespace SoftEngWebEmployee.Repository
     public class AdministratorRepository
     {
         private static AdministratorRepository instance = null;
-        public static AdministratorRepository GetInstance()
+        public static AdministratorRepository SingleInstance
         {
-            if(instance == null)
+            get
             {
-                instance = new AdministratorRepository();
-            }
-            return instance;
+                if (instance == null)
+                {
+                    instance = new AdministratorRepository();
+                }
+                return instance;
+            }            
         }
 
         private AdministratorRepository()

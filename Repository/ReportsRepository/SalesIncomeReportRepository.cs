@@ -16,13 +16,16 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
         {
 
         }
-        public static SalesIncomeReportRepository GetInstance()
+        public static SalesIncomeReportRepository SingleInstance
         {
-            if(instance == null)
+            get
             {
-                instance = new SalesIncomeReportRepository();
-            }
-            return instance;
+                if (instance == null)
+                {
+                    instance = new SalesIncomeReportRepository();
+                }
+                return instance;
+            }            
         }
         public async Task<SalesIncomeReportViewModel> FetchTotalSaleOfAdmin(string administrator)
         {
@@ -45,7 +48,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                     else
                         salesIncome.TotalSaleOrders = int.Parse(reader["TotalSaleOrder"].ToString());
                     salesIncome.TotalSale = salesIncome.TotalSaleOnsite + salesIncome.TotalSaleOrders;
-                    salesIncome.Administrator = await AdministratorRepository.GetInstance().FindAdministrator(administrator);
+                    salesIncome.Administrator = await AdministratorRepository.SingleInstance.FindAdministrator(administrator);
                 }
             }
             return salesIncome;

@@ -16,13 +16,16 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
-        public static OnsiteTransactionRepository GetInstance()
+        public static OnsiteTransactionRepository SingleInstance
         {
-            if (instance == null)
+            get
             {
-                instance = new OnsiteTransactionRepository();
-            }
-            return instance;
+                if (instance == null)
+                {
+                    instance = new OnsiteTransactionRepository();
+                }
+                return instance;
+            }            
         }
         public async Task<MySqlConnection> InsertNewTransaction(OnsiteTransactionModel onsiteTransaction)
         {
@@ -86,7 +89,7 @@ namespace SoftEngWebEmployee.Repository
                         TransactionID = int.Parse(reader["transaction_id"].ToString()),
                         //Generate Customer Model
                         TotalSale = int.Parse(reader["total_sale"].ToString()),
-                        OnsiteProductTransactionList = await OnsiteProductsTransactionRepository.GetInstance().FetchTransactionsGivenByID(int.Parse(reader["transaction_id"].ToString()))
+                        OnsiteProductTransactionList = await OnsiteProductsTransactionRepository.SingleInstance.FetchTransactionsGivenByID(int.Parse(reader["transaction_id"].ToString()))
                     };
                 }
             }

@@ -16,13 +16,16 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
-        public static OnsiteProductsTransactionRepository GetInstance()
+        public static OnsiteProductsTransactionRepository SingleInstance
         {
-            if (instance == null)
+            get
             {
-                instance = new OnsiteProductsTransactionRepository();
-            }
-            return instance;
+                if (instance == null)
+                {
+                    instance = new OnsiteProductsTransactionRepository();
+                }
+                return instance;
+            }            
         }
         public async Task InsertTransactions(OnsiteProductsTransactionModel onsiteProductsTransactionModel)
         {
@@ -57,7 +60,7 @@ namespace SoftEngWebEmployee.Repository
                             {
                                 OnsiteProductTransactionID = int.Parse(reader["optt_id"].ToString()),
                                 TransactionID = int.Parse(reader["transaction_id"].ToString()),
-                                Product = await ProductRepository.GetInstance().GetProducts(int.Parse(reader["product_id"].ToString())),
+                                Product = await ProductRepository.SingleInstance.GetProducts(int.Parse(reader["product_id"].ToString())),
                                 TotalProductsCount = int.Parse(reader["total_product_count"].ToString())
                             }
                         );

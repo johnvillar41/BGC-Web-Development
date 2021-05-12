@@ -10,20 +10,21 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
     public class ProductSalesReportRepository
     {
         private static ProductSalesReportRepository instance = null;
-        public static ProductSalesReportRepository GetInstance()
+        public static ProductSalesReportRepository SingleInstance
         {
-            if (instance == null)
+            get
             {
-                instance = new ProductSalesReportRepository();
-            }
-            return instance;
+                if (instance == null)
+                {
+                    instance = new ProductSalesReportRepository();
+                }
+                return instance;
+            }           
         }
-
         private ProductSalesReportRepository()
         {
 
         }
-
         public async Task<ProductSalesReportModel> FetchProductSalesReport(int productID)
         {
             ProductSalesReportModel ProductSalesReportModel = null;
@@ -43,7 +44,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                 if (await reader.ReadAsync())
                 {
                     ProductSalesReportModel = new ProductSalesReportModel();
-                    ProductSalesReportModel.Product = await ProductRepository.GetInstance().FetchProductDetails(productID.ToString());
+                    ProductSalesReportModel.Product = await ProductRepository.SingleInstance.FetchProductDetails(productID.ToString());
                     if (reader["quantitySold"] != DBNull.Value)
                     {
                         ProductSalesReportModel.ProductRevenue = int.Parse(reader["quantitySold"].ToString()) * ProductSalesReportModel.Product.ProductPrice;

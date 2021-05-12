@@ -16,13 +16,16 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
-        public static InformationRepository GetInstance()
+        public static InformationRepository SingleInstance
         {
-            if (instance == null)
+            get
             {
-                instance = new InformationRepository();
-            }
-            return instance;
+                if (instance == null)
+                {
+                    instance = new InformationRepository();
+                }
+                return instance;
+            }            
         }
         public async Task UpdateInformation(InformationModel information)
         {
@@ -71,7 +74,7 @@ namespace SoftEngWebEmployee.Repository
                     informations.Add(
                             new InformationModel()
                             {
-                                Product = await ProductRepository.GetInstance().GetProducts(int.Parse(reader["product_id"].ToString())),
+                                Product = await ProductRepository.SingleInstance.GetProducts(int.Parse(reader["product_id"].ToString())),
                                 ProductInformation = reader["product_information"].ToString()
                             }
                         );

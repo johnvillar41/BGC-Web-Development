@@ -14,13 +14,16 @@ namespace SoftEngWebEmployee.Repository
     {
         private static OrdersRepository instance = null;
 
-        public static OrdersRepository GetInstance()
+        public static OrdersRepository SingleInstance
         {
-            if (instance == null)
+            get
             {
-                instance = new OrdersRepository();
-            }
-            return instance;
+                if (instance == null)
+                {
+                    instance = new OrdersRepository();
+                }
+                return instance;
+            }            
         }
         private OrdersRepository()
         {
@@ -64,7 +67,7 @@ namespace SoftEngWebEmployee.Repository
                         OrderStatus = reader["order_status"].ToString(),
                         OrderDate = reader["order_date"].ToString(),
                         TotalNumberOfOrders = int.Parse(reader["total_number_of_orders"].ToString()),
-                        SpecificOrdersModel = await SpecificOrdersRepository.GetInstance().FetchSpecificOrders(int.Parse(reader["order_id"].ToString()))
+                        SpecificOrdersModel = await SpecificOrdersRepository.SingleInstance.FetchSpecificOrders(int.Parse(reader["order_id"].ToString()))
                     };
                 }
             }
@@ -91,7 +94,7 @@ namespace SoftEngWebEmployee.Repository
                                 OrderStatus = reader["order_status"].ToString(),
                                 OrderDate = reader["order_date"].ToString(),
                                 TotalNumberOfOrders = int.Parse(reader["total_number_of_orders"].ToString()),
-                                SpecificOrdersModel = await SpecificOrdersRepository.GetInstance().FetchSpecificOrders(int.Parse(reader["order_id"].ToString()))
+                                SpecificOrdersModel = await SpecificOrdersRepository.SingleInstance.FetchSpecificOrders(int.Parse(reader["order_id"].ToString()))
                             }
                         );
                 }

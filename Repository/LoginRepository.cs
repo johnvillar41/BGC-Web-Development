@@ -14,13 +14,16 @@ namespace SoftEngWebEmployee.Repository.LoginRepository
 
         private static LoginRepository instance = null;        
 
-        public static LoginRepository GetInstance()
+        public static LoginRepository SingleInstance
         {
-            if (instance == null)
+            get
             {
-                instance = new LoginRepository();
-            }
-            return instance;
+                if (instance == null)
+                {
+                    instance = new LoginRepository();
+                }
+                return instance;
+            }            
         }
 
         private LoginRepository()

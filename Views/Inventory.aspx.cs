@@ -27,24 +27,24 @@ namespace SoftEngWebEmployee.Views
 
         private async void LoadCategories()
         {
-            var categories = await ProductRepository.GetInstance().FetchAllCategories();
+            var categories = await ProductRepository.SingleInstance.FetchAllCategories();
             CategoryRepeater.DataSource = categories;
             CategoryRepeater.DataBind();
         }
 
         private async void DisplayInventoryTables()
         {
-            var inventory = await ProductRepository.GetInstance().FetchAllProducts();            
+            var inventory = await ProductRepository.SingleInstance.FetchAllProducts();            
             SearchRepeater.DataSource = inventory;
             listSearchRepeater = inventory;
             SearchRepeater.DataBind();
 
-            var greenhouse = await ProductRepository.GetInstance().FetchGHProducts();
+            var greenhouse = await ProductRepository.SingleInstance.FetchGHProducts();
             GHRepeater.DataSource = greenhouse;
             listGHRepeater = greenhouse;
             GHRepeater.DataBind();
 
-            var hydroponics = await ProductRepository.GetInstance().FetchHPProducts();
+            var hydroponics = await ProductRepository.SingleInstance.FetchHPProducts();
             HPRepeater.DataSource = hydroponics;
             listHPRepeater = hydroponics;
             HPRepeater.DataBind();
@@ -57,14 +57,14 @@ namespace SoftEngWebEmployee.Views
             dropdownMenuReference1.Text = category+" "+caret;
             if (category=="All Products")
             {
-                var newSearch = await ProductRepository.GetInstance().FetchAllProducts();
+                var newSearch = await ProductRepository.SingleInstance.FetchAllProducts();
                 SearchRepeater.DataSource = newSearch;
                 listSearchRepeater = newSearch;
                 SearchRepeater.DataBind();
             }
             else
             {
-                var newSearch = await ProductRepository.GetInstance().FetchOnCategory(category);
+                var newSearch = await ProductRepository.SingleInstance.FetchOnCategory(category);
                 SearchRepeater.DataSource = newSearch;
                 listSearchRepeater = newSearch;
                 SearchRepeater.DataBind();
@@ -74,7 +74,7 @@ namespace SoftEngWebEmployee.Views
         protected async void SearchButton_Click(object sender, EventArgs e)
         {
             string search = searchBox.Text.ToString();
-            var newSearch = await ProductRepository.GetInstance().FetchOnSearch(search);
+            var newSearch = await ProductRepository.SingleInstance.FetchOnSearch(search);
             SearchRepeater.DataSource = newSearch;
             listSearchRepeater = newSearch;
             SearchRepeater.DataBind();
@@ -93,7 +93,7 @@ namespace SoftEngWebEmployee.Views
         {
             Button button = (Button)sender;
             var productID = button.CommandArgument.ToString();
-            ProductModel Details = await ProductRepository.GetInstance().FetchProductDetails(productID);
+            ProductModel Details = await ProductRepository.SingleInstance.FetchProductDetails(productID);
 
             List<ProductModel> ProductDetail = new List<ProductModel>
             {
@@ -110,7 +110,7 @@ namespace SoftEngWebEmployee.Views
         {
             Button button = (Button)sender;
             var productID = button.CommandArgument.ToString();
-            ProductRepository.GetInstance().DeleteProduct(productID);
+            ProductRepository.SingleInstance.DeleteProduct(productID);
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Pop", "$('#deleteModal').modal('hide');", true);
 
             DisplayInventoryTables();

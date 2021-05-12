@@ -14,13 +14,16 @@ namespace SoftEngWebEmployee.Repository
 
         }
 
-        public static SpecificOrdersRepository GetInstance()
+        public static SpecificOrdersRepository SingleInstance
         {
-            if (instance == null)
+            get
             {
-                instance = new SpecificOrdersRepository();
-            }
-            return instance;
+                if (instance == null)
+                {
+                    instance = new SpecificOrdersRepository();
+                }
+                return instance;
+            }            
         }
         public async Task<Dictionary<int, int>> FetchProductIDs(int orderID)
         {
@@ -60,7 +63,7 @@ namespace SoftEngWebEmployee.Repository
                         ProductID = int.Parse(reader["product_id"].ToString()),
                         TotalOrders = int.Parse(reader["total_orders"].ToString()),
                         Administrator = reader["administrator_username"].ToString(),
-                        ProductsModel = await ProductRepository.GetInstance().GetProducts(int.Parse(reader["product_id"].ToString()))
+                        ProductsModel = await ProductRepository.SingleInstance.GetProducts(int.Parse(reader["product_id"].ToString()))
                     };
                     specificOrdersModels.Add(specificOrdersModel);
                 }

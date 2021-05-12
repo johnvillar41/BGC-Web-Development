@@ -13,13 +13,17 @@ namespace SoftEngWebEmployee.Repository
     public class NotificationRepository
     {
         private static NotificationRepository instance = null;
-        public static NotificationRepository GetInstance()
+        public static NotificationRepository SingleInstance
         {
-            if (instance == null)
+            get
             {
-                instance = new NotificationRepository();
+                if (instance == null)
+                {
+                    instance = new NotificationRepository();
+                }
+                return instance;
             }
-            return instance;
+
         }
         private NotificationRepository()
         {
@@ -112,7 +116,7 @@ namespace SoftEngWebEmployee.Repository
                     newNotification = new NotificationsModel
                     {
                         NotificationTitle = "Sold Item",
-                        NotificationContent = "Sold Item: "+itemAction,
+                        NotificationContent = "Sold Item: " + itemAction,
                         NotificationDate = DateTime.Today,
                         Username = UserSession.GetLoggedInUser(),
                         TypeOfNotification = NotificationType.SoldItem
@@ -156,7 +160,7 @@ namespace SoftEngWebEmployee.Repository
                         NotificationContent = reader["notif_content"].ToString(),
                         NotificationDate = DateTime.Parse(reader["notif_date"].ToString()),
                         Username = reader["user_name"].ToString(),
-                        TypeOfNotification = CategorizeNotification(reader["notif_title"].ToString())                        
+                        TypeOfNotification = CategorizeNotification(reader["notif_title"].ToString())
                     };
 
                     notificationsList.Add(notifications);

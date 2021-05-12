@@ -16,15 +16,17 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
-        public static ProductRepository GetInstance()
+        public static ProductRepository SingleInstance
         {
-            if (instance == null)
+            get
             {
-                instance = new ProductRepository();
-            }
-            return instance;
+                if (instance == null)
+                {
+                    instance = new ProductRepository();
+                }
+                return instance;
+            }            
         }
-
         public async Task<List<ProductModel>> FetchAllProducts()
         {
             List<ProductModel> productList = new List<ProductModel>();
