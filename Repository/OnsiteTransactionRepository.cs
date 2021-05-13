@@ -2,10 +2,7 @@
 using SoftEngWebEmployee.Helpers;
 using SoftEngWebEmployee.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace SoftEngWebEmployee.Repository
 {
@@ -27,6 +24,20 @@ namespace SoftEngWebEmployee.Repository
                 return instance;
             }            
         }
+        /// <summary>
+        ///     <para>
+        ///         <br>Inserts a new transaction object inside the database</br> 
+        ///         <br>and returns a MySqlConnection to be used on last_insert_id()</br>
+        ///         <br>Mysql function due to the reason of a single connection is required</br>
+        ///     </para>
+        /// </summary>
+        /// <param name="onsiteTransaction">
+        ///     Passes an onsitetransaction model async parameter
+        /// </param>
+        /// <returns>
+        ///     <para>Returns the used MysqlConnection</para>
+        ///     <para>Type: MySqlConnection</para>
+        /// </returns>
         public async Task<MySqlConnection> InsertNewTransaction(OnsiteTransactionModel onsiteTransaction)
         {
             MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING);
@@ -37,6 +48,16 @@ namespace SoftEngWebEmployee.Repository
             await command.ExecuteNonQueryAsync();
             return connection;
         }
+        /// <summary>
+        ///     Fetches the last inserted id inside the database
+        /// </summary>
+        /// <param name="connection">
+        ///     Passes a MySqlConnection as parameter to be reused to determine the last inserted id
+        /// </param>
+        /// <returns>
+        ///     <para>Returns the last inserted id</para>
+        ///     <para>Type: int</para>
+        /// </returns>
         public async Task<int> FetchLastInsertID(MySqlConnection connection)
         {
             int lastIdInserted = 0;
@@ -50,6 +71,16 @@ namespace SoftEngWebEmployee.Repository
             await connection.CloseAsync();
             return lastIdInserted;
         }       
+        /// <summary>
+        ///     Calculates the total sales on the onsite transactions for a specific paramref name="transactionID"
+        /// </summary>
+        /// <param name="transactionID">
+        ///     Passes a transaction id as parameter
+        /// </param>
+        /// <returns>
+        ///     <para>Returns a total sale.</para>
+        ///     <para>Type: int</para>
+        /// </returns>
         public async Task<int> CalculateTotalSaleOnsite(int transactionID)
         {
             int totalOnsiteSale = 0;
@@ -72,6 +103,16 @@ namespace SoftEngWebEmployee.Repository
             }
             return totalOnsiteSale;
         }
+        /// <summary>
+        ///     Fetches an onsite transaction from database given a paramref name="transactionID"
+        /// </summary>
+        /// <param name="transactionID">
+        ///     Passes a transaction id as parameter
+        /// </param>
+        /// <returns>
+        ///     <para>Returns an object of onsitetransaction</para>
+        ///     <para>Type: OnsiteTransactionModel</para>
+        /// </returns>
         public async Task<OnsiteTransactionModel> FetchOnsiteTransaction(int transactionID)
         {
             OnsiteTransactionModel onsiteTransactionModel = null;

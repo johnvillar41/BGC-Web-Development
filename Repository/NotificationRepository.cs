@@ -3,9 +3,7 @@ using SoftEngWebEmployee.Helpers;
 using SoftEngWebEmployee.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using static SoftEngWebEmployee.Helpers.Constants;
 
 namespace SoftEngWebEmployee.Repository
@@ -29,6 +27,16 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
+        /// <summary>
+        ///     Fetches a list of notifications on a certain date
+        /// </summary>
+        /// <param name="date">
+        ///     Passes a date as paramter
+        /// </param>
+        /// <returns>
+        ///     <para>Returns a list of all the notifications for abstract certain date</para>
+        ///     <para>Type: List<NotificationsModel></para>
+        /// </returns>
         public async Task<List<NotificationsModel>> FetchNotificationsGivenDateAsync(string date)
         {
             List<NotificationsModel> notificationsList = new List<NotificationsModel>();
@@ -55,8 +63,19 @@ namespace SoftEngWebEmployee.Repository
             }
             return notificationsList;
         }
-
-
+        /// <summary>
+        ///     Generates a notification for each database transaction done inside the database
+        /// </summary>
+        /// <param name="notificationType">
+        ///     Passes an enum of what type the notification is
+        /// </param>
+        /// <param name="itemAction">
+        ///     Passes the description content of the notification
+        /// </param>
+        /// <returns>
+        ///     <para>Returns a new generated notification</para>
+        ///     <para>Type: NotificationsModel</para>
+        /// </returns>
         public NotificationsModel GenerateNotification(NotificationType notificationType, string itemAction)
         {
             NotificationsModel newNotification = null;
@@ -125,7 +144,12 @@ namespace SoftEngWebEmployee.Repository
             }
             return newNotification;
         }
-
+        /// <summary>
+        ///     Inserts a new notification inside the database
+        /// </summary>
+        /// <param name="notification">
+        ///     Passes abstract notification object as paramater
+        /// </param>
         public async Task InsertNewNotificationAsync(NotificationsModel notification)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -141,7 +165,13 @@ namespace SoftEngWebEmployee.Repository
                 await command.ExecuteNonQueryAsync();
             }
         }
-
+        /// <summary>
+        ///     Fetches all the notifications inside the database
+        /// </summary>
+        /// <returns>
+        ///     <para>Returns a list of all the notifications</para>
+        ///     <para>Type: List<NotificationsModel></para>
+        /// </returns>
         public async Task<List<NotificationsModel>> FetchNotificationsAsync()
         {
             List<NotificationsModel> notificationsList = new List<NotificationsModel>();

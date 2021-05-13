@@ -27,6 +27,13 @@ namespace SoftEngWebEmployee.Repository
                 return instance;
             }            
         }
+        /// <summary>
+        ///     Fetches all the products inside the database.
+        /// </summary>
+        /// <returns>
+        ///     <para>Returns a list of all the products</para>
+        ///     <para>Type: List<ProductModel></para>
+        /// </returns>
         public async Task<List<ProductModel>> FetchAllProductsAsync()
         {
             List<ProductModel> productList = new List<ProductModel>();
@@ -83,7 +90,13 @@ namespace SoftEngWebEmployee.Repository
         // x Add Product
         // x Update product
 
-
+        /// <summary>
+        ///     Fetches all the products inside the database with a Greenhouse category
+        /// </summary>
+        /// <returns>
+        ///     <para>Returns a list of products with greenhouse category</para>
+        ///     <para>Type: List<ProductModel></para>
+        /// </returns>
         public async Task<List<ProductModel>> FetchGHProductsAsync()
         {
             List<ProductModel> productList = new List<ProductModel>();
@@ -111,7 +124,13 @@ namespace SoftEngWebEmployee.Repository
             }
             return productList;
         }
-
+        /// <summary>
+        ///     Fetches all the products inside the database with a Hydroponics category
+        /// </summary>
+        /// <returns>
+        ///     <para>Returns a list of products with Hydroponics category</para>
+        ///     <para>Type: List<ProductModel></para>
+        /// </returns>
         public async Task<List<ProductModel>> FetchHPProductsAsync()
         {
             List<ProductModel> productList = new List<ProductModel>();
@@ -139,7 +158,14 @@ namespace SoftEngWebEmployee.Repository
             }
             return productList;
         }
-
+        /// <summary>
+        ///     Fetches all the categories from the database
+        /// </summary>
+        /// <returns>
+        ///     <para>Returns a list of categories</para>
+        ///     <para>Type: string</para>
+        /// </returns>
+        // TODO: Fix return type! This should be a string only not an object model
         public async Task<List<ProductModel>> FetchAllCategoriesAsync()
         {
             List<ProductModel> productList = new List<ProductModel>();
@@ -161,7 +187,16 @@ namespace SoftEngWebEmployee.Repository
             }
             return productList;
         }
-
+        /// <summary>
+        ///     Fecthes all the products based on the given paramref name="category"
+        /// </summary>
+        /// <param name="category">
+        ///     Passes a category string value
+        /// </param>
+        /// <returns>
+        ///     <para>Returns a list of products with the category selected</para>
+        ///     <para>Type: List<ProductModel></para>
+        /// </returns>
         public async Task<List<ProductModel>> FetchOnCategoryAsync(string category)
         {
             List<ProductModel> productList = new List<ProductModel>();
@@ -190,7 +225,16 @@ namespace SoftEngWebEmployee.Repository
             }
             return productList;
         }
-
+        /// <summary>
+        ///     Searches products from the database with the similar searched paramref name="search"
+        /// </summary>
+        /// <param name="search">
+        ///     Passes a product paramref name="search"
+        /// </param>
+        /// <returns>
+        ///     <para>Returns a list of products that are similar to the searched name</para>
+        ///     <para>Type: List<ProductModel></para>
+        /// </returns>
         public async Task<List<ProductModel>> FetchOnSearchAsync(string search)
         {
             List<ProductModel> productList = new List<ProductModel>();
@@ -219,14 +263,23 @@ namespace SoftEngWebEmployee.Repository
             }
             return productList;
         }
-
+        /// <summary>
+        ///     Fetches the product details of a certain product given a product id
+        /// </summary>
+        /// <param name="productID">
+        ///     Passes a product id as parameters
+        /// </param>
+        /// <returns>
+        ///     <para>Returns product details for the product</para>
+        ///     <para>Type: ProductModel</para>
+        /// </returns>
         public async Task<ProductModel> FetchProductDetailsAsync(string productID)
         {
             ProductModel productModel = null;
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "SELECT * FROM products_table WHERE product_id='" + productID + "%'";
+                string queryString = "SELECT * FROM products_table WHERE product_id='" + productID + "'";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
@@ -247,7 +300,12 @@ namespace SoftEngWebEmployee.Repository
             }
             return productModel;
         }
-
+        /// <summary>
+        ///     Deletes a product inside the database given a product id
+        /// </summary>
+        /// <param name="productID">
+        ///     Passes a product id as parameter
+        /// </param>
         public async void DeleteProduct(string productID)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -258,7 +316,12 @@ namespace SoftEngWebEmployee.Repository
                 command.ExecuteNonQuery();
             }
         }
-
+        /// <summary>
+        ///     Fetches a product for a given product id
+        /// </summary>
+        /// <param name="productID">
+        ///     Passes a product is as parameter
+        /// </param>
         public async Task<ProductModel> GetProductsAsync(int productID)
         {
             ProductModel productModel = null;
@@ -287,6 +350,15 @@ namespace SoftEngWebEmployee.Repository
             }
             return productModel;
         }
+        /// <summary>
+        ///     This will update the product stocks given the stocks to be subtracted and the product id
+        /// </summary>
+        /// <param name="stockSold">
+        ///     Number of stocks to be subtracted to a certain product inside the database
+        /// </param>
+        /// <param name="productID">
+        ///     The product id that should have their product stocks subtracted 
+        /// </param>
         public async Task UpdateProductStocksAsync(int stockSold, int productID)
         {
             bool isOk = false;

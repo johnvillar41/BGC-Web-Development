@@ -25,6 +25,16 @@ namespace SoftEngWebEmployee.Repository
                 return instance;
             }            
         }
+        /// <summary>
+        ///     This function retrieves the total orders of a certain order ID
+        /// </summary>
+        /// <param name="orderID">
+        ///     Passes order ID as a parameter
+        /// </param>
+        /// <returns>
+        ///     <para>Returns product ID</para>
+        ///     <para>Type: Int</para>
+        /// </returns>
         public async Task<Dictionary<int, int>> FetchProductIDsAsync(int orderID)
         {
             Dictionary<int, int> productID = new Dictionary<int, int>();
@@ -44,6 +54,16 @@ namespace SoftEngWebEmployee.Repository
             }
             return productID;
         }
+        /// <summary>
+        ///     This function retrieves the specific orders of a certain order ID
+        /// </summary>
+        /// <param name="orderID">
+        ///     Passes order ID as a parameter
+        /// </param>
+        /// <returns>
+        ///     <para>Returns specific orders details</para>
+        ///     <para>Type: List<SpecificOrdersModel></para>
+        /// </returns>
         public async Task<List<SpecificOrdersModel>> FetchSpecificOrdersAsync(int orderID)
         {
             List<SpecificOrdersModel> specificOrdersModels = new List<SpecificOrdersModel>();

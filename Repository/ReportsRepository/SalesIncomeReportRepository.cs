@@ -3,9 +3,7 @@ using SoftEngWebEmployee.Helpers;
 using SoftEngWebEmployee.Models.ReportModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace SoftEngWebEmployee.Repository.ReportsRepository
 {
@@ -94,6 +92,16 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
             }
             return orderIds;
         }
+        /// <summary>
+        ///     Fetches all the onsiteIds within a given date
+        /// </summary>
+        /// <param name="date">
+        ///     Passes a datetime async parameter
+        /// </param>
+        /// <returns>
+        ///     <para>Returns a list of onsite ids</para>
+        ///     <para>Type: IEnumerable<int></para>
+        /// </returns>
         public async Task<IEnumerable<int>> FetchOnsiteIdsAsync(DateTime date)
         {
             List<int> onsiteId = new List<int>();

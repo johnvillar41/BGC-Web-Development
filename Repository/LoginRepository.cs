@@ -30,7 +30,16 @@ namespace SoftEngWebEmployee.Repository.LoginRepository
         {
 
         }
-
+        /// <summary>
+        ///     This function checks if the administrator was able to log in successfully
+        /// </summary>
+        /// <param name="adminModel">
+        ///     Passes an adminModel parameter
+        /// </param>
+        /// <returns>
+        ///     <para>Returns whether the log in is successful or not</para>
+        ///     <para>Type: bool</para>
+        /// </returns>
         public async Task<bool> IsLoginSuccessfullAsync(AdministratorModel adminModel)
         {
             bool isLoginSuccessfull = false;

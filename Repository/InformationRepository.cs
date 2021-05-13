@@ -27,6 +27,12 @@ namespace SoftEngWebEmployee.Repository
                 return instance;
             }            
         }
+        /// <summary>
+        ///     Updates the information of a certain product
+        /// </summary>
+        /// <param name="information">
+        ///     Passes a new set of information as parameter
+        /// </param>
         public async Task UpdateInformationAsync(InformationModel information)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -39,7 +45,12 @@ namespace SoftEngWebEmployee.Repository
                 await command.ExecuteNonQueryAsync();
             }
         }
-
+        /// <summary>
+        ///     Fetches an information regarding a certain product
+        /// </summary>
+        /// <param name="id">
+        ///     Passes abstract product id as parameter
+        /// </param>
         public async Task<InformationModel> FetchInformationAsync(int id)
         {
             InformationModel information = null;
@@ -60,6 +71,13 @@ namespace SoftEngWebEmployee.Repository
             }
             return information;
         }
+        /// <summary>
+        ///     Fetches all of the information for all of the products
+        /// </summary>
+        /// <returns>
+        ///     <para>Returns abstract list of informations</para>
+        ///     <para>Type: List<InformationModel></para>
+        /// </returns>
         public async Task<List<InformationModel>> FetchInformationsAsync()
         {
             List<InformationModel> informations = new List<InformationModel>();

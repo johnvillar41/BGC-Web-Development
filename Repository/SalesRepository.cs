@@ -24,6 +24,14 @@ namespace SoftEngWebEmployee.Repository
             return instance;
         }
         // Should have no order id
+
+        /// <summary>
+        ///     This function inserts a new sale transation in the database
+        /// </summary>
+        /// <param name="newSale">
+        ///     Passes newSale as a parameter
+        /// </param>
+
         public async Task InsertNewSaleAsync(SalesModel newSale)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -59,6 +67,14 @@ namespace SoftEngWebEmployee.Repository
                 }
             }
         }
+
+        /// <summary>
+        ///     This function retrieves all sales transactions
+        /// </summary>
+        /// <returns>
+        /// <para>Returns the list of sales transactions</para>
+        /// <para>Type: List<SalesModel> </SalesModel></para>
+        /// </returns>
         public async Task<List<SalesModel>> FetchAllSalesAsync()
         {
             List<SalesModel> listOfSales = new List<SalesModel>();
@@ -100,6 +116,12 @@ namespace SoftEngWebEmployee.Repository
             }
             return listOfSales;
         }
+
+        /// <summary>
+        ///     
+        /// </summary>
+        /// <param name="saleType"></param>
+        /// <returns></returns>
         private SalesType GenerateSaleType(string saleType)
         {
             switch (saleType)

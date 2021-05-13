@@ -25,6 +25,13 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
+        /// <summary>
+        ///     This function updates the administrator's profile picture
+        /// </summary>
+        /// <param name="profilePicture">
+        ///     Passes profilePicture as a parameter
+        /// </param>
+
         public async Task UpdateProfilePictureAsync(Stream profilePicture)
         {           
             BinaryReader br = new BinaryReader(profilePicture);
@@ -39,7 +46,13 @@ namespace SoftEngWebEmployee.Repository
                 await command.ExecuteNonQueryAsync();
             }
         }
-        
+        /// <summary>
+        ///     This function lets the administrator update his profile
+        /// </summary>
+        /// <param name="updateduser">
+        ///     Passes updateduser as a parameter
+        /// </param>
+
         public async Task UpdateProfileAsync(AdministratorModel updateduser)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -53,6 +66,14 @@ namespace SoftEngWebEmployee.Repository
                 await command.ExecuteNonQueryAsync();
             }
         }
+
+        /// <summary>
+        ///     This function retrieves all information of the admin user
+        /// </summary>
+        /// <returns>
+        ///     <para>Returns administrator's information</para>
+        ///     <para>Type: AdministratorModel</para>
+        /// </returns>
         public async Task<AdministratorModel> FetchLoggedInModelAsync()
         {
             AdministratorModel administrator = null;

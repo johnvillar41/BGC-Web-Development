@@ -28,6 +28,16 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
+        /// <summary>
+        ///     This functions checks whether the logged in user is an administrator
+        /// </summary>
+        /// <param name="username">
+        ///     Passes a specific username to be checked
+        /// </param>
+        /// <returns>
+        ///     <para>Returns whether the username is an administrator or an employee</para>
+        ///     <para>Type: bool</para>
+        /// </returns>
         public async Task<bool> CheckIfUserIsAdministratorAsync(string username)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -45,6 +55,16 @@ namespace SoftEngWebEmployee.Repository
             }
             return false;
         }
+        /// <summary>
+        ///     This function will retrieve the details of a specific administrator
+        /// </summary>
+        /// <param name="administratorID">
+        ///     Passes a string value of the username for the administrator
+        /// </param>
+        /// <returns>
+        ///     <para>Returns Administrator Details</para>
+        ///     <para>Type: AdministratorModel</para>
+        /// </returns>
         public async Task<AdministratorModel> FindAdministratorAsync(int administratorID)
         {
             AdministratorModel administrator = null;
@@ -67,6 +87,16 @@ namespace SoftEngWebEmployee.Repository
             }
             return administrator;
         }
+        /// <summary>
+        ///     This function will retrieve the details of a specific administrator
+        /// </summary>
+        /// <param name="username">
+        ///     Passes a string value of the username for the administrator
+        /// </param>
+        /// <returns>
+        ///     <para>Returns Administrator Details</para>
+        ///     <para>Type: AdministratorModel</para>
+        /// </returns>
         public async Task<AdministratorModel> FindAdministratorAsync(string username)
         {
             AdministratorModel administrator = null;
@@ -89,6 +119,14 @@ namespace SoftEngWebEmployee.Repository
             }
             return administrator;
         }
+
+        /// <summary>
+        ///     This function will retrieve all the administrators and employees
+        /// </summary>
+        /// <returns>
+        ///     <para>Returns Administrators and Employees Details</para>
+        ///     <para>Type: Administratot Model</para>
+        /// </returns>
         public async Task<IEnumerable<AdministratorModel>> FetchAdministratorsAsync()
         {
             List<AdministratorModel> Admins = new List<AdministratorModel>();
@@ -131,6 +169,12 @@ namespace SoftEngWebEmployee.Repository
             }
             return Admins;
         }
+        /// <summary>
+        ///     Deletes an administrator or an employee given an id
+        /// </summary>
+        /// <param name="administratorID">
+        ///     Passes an administrator id as parameter
+        /// </param>
         public async void DeleteAdministrator(int administratorID)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -142,6 +186,13 @@ namespace SoftEngWebEmployee.Repository
                 await command.ExecuteNonQueryAsync();
             }
         }
+
+        /// <summary>
+        ///     This function creates a new administrator
+        /// </summary>
+        /// <param name="administrator">
+        ///     Passes an administrator as parameter
+        /// </param>
         public async void CreateNewAdministrator(AdministratorModel administrator)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -159,6 +210,13 @@ namespace SoftEngWebEmployee.Repository
                 await command.ExecuteNonQueryAsync();
             }
         }
+
+        /// <summary>
+        ///     This function updates an administrator details
+        /// </summary>
+        /// <param name="administrator">
+        ///     Passes an administrator parameter
+        /// </param>
         public async void UpdateAdministrator(AdministratorModel administrator)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))

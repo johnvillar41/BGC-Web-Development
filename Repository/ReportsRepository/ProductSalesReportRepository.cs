@@ -34,8 +34,8 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
         ///     the database
         /// </param>
         /// <returns>
-        ///     Returns the total amount os sales for the certain product
-        ///     Type: ProductSalesReportModel
+        ///     <para>Returns the total amount os sales for the certain product</para>
+        ///     <para>Type: ProductSalesReportModel</para>
         /// </returns>
         public async Task<ProductSalesReportModel> FetchProductSalesReportAsync(int productID)
         {
@@ -78,8 +78,8 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
         ///     Passes a productID as a parameter
         /// </param>
         /// <returns>
-        ///     Returs a list of all the products that are sold
-        ///     Type: List<QuantitySoldModel>
+        ///     <para>Returs a list of all the products that are sold</para>
+        ///     <para>Type: List<QuantitySoldModel></para>
         /// </returns>
         public async Task<List<QuantitySoldModel>> FetchQuantitySoldListAsync(int productID)
         {

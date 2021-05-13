@@ -29,6 +29,16 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
+        /// <summary>
+        ///     This function checks if the order ID exists
+        /// </summary>
+        /// <param name="orderID">
+        ///     Passes order ID as a parameter
+        /// </param>
+        /// <returns>
+        ///     <para>Returns if the order ID exists or not</para>
+        ///     <para>Type: Bool</para>
+        /// </returns>
         public async Task<bool> CheckIfIdExistAsync(int orderID)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -47,6 +57,16 @@ namespace SoftEngWebEmployee.Repository
             }
             return false;
         }
+        /// <summary>
+        ///     This function retrieves the customer orders
+        /// </summary>
+        /// <param name="orderId">
+        ///     Passes order ID as a parameter
+        /// </param>
+        /// <returns>
+        ///     <para>Returns customer orders</para>
+        ///     <para>Type: OrdersModel</para>
+        /// </returns>
         public async Task<OrdersModel> FetchOrderAsync(int orderId)
         {
             OrdersModel order = null;
@@ -73,7 +93,13 @@ namespace SoftEngWebEmployee.Repository
             }
             return order;
         }
-
+        /// <summary>
+        ///     This function retrieves all customer orders and displays it
+        /// </summary>
+        /// <returns>
+        ///     <para>Returns all customers orders</para>
+        ///     <para>Type: OrdersModel</para>
+        /// </returns>
         public async Task<IEnumerable<OrdersModel>> FetchAllOrdersAsync()
         {
             List<OrdersModel> ordersList = new List<OrdersModel>();
@@ -101,6 +127,12 @@ namespace SoftEngWebEmployee.Repository
             }
             return ordersList;
         }
+        /// <summary>
+        ///     This function changes the status of customer order to Cancelled
+        /// </summary>
+        /// <param name="orderID">
+        ///     Passes order ID as a parameter
+        /// </param>
 
         public async Task ChangeStatusOfOrderToCancelledAsync(int orderID)
         {
@@ -117,6 +149,13 @@ namespace SoftEngWebEmployee.Repository
                 }                
             }
         }
+        /// <summary>
+        ///     This function changes the status of customer order to Finished
+        /// </summary>
+        /// <param name="orderID">
+        ///     Passes order ID as a parameter
+        /// </param>
+
         public async Task ChangeStatusOfOrderToFinishedAsync(int orderID)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -133,6 +172,17 @@ namespace SoftEngWebEmployee.Repository
                 }                
             }
         }
+
+        /// <summary>
+        ///     This function calculates the total sales orders
+        /// </summary>
+        /// <param name="orderID">
+        ///     Passes order ID as a parameter
+        /// </param>
+        /// <returns>
+        /// <para>Returns the totalOrderSale</para>
+        /// <para>Type: Int</para>
+        /// </returns>
         public async Task<int> CalculateTotalSaleOrderAsync(int orderID)
         {
             int totalOrderSale = 0;
@@ -154,7 +204,18 @@ namespace SoftEngWebEmployee.Repository
                 }
             }
             return totalOrderSale;
-        }        
+        }  
+        
+        /// <summary>
+        ///     This function checks the status of customer orders
+        /// </summary>
+        /// <param name="connection">
+        ///     Passes connection as a parameter
+        /// </param>
+        /// <returns>
+        /// <para>Returns the status of customer orders</para>
+        /// <para>Type: Bool</para>
+        /// </returns>
         private async Task<bool> CheckOrderStatusAsync(MySqlConnection connection)
         {
             bool isOk = false;
