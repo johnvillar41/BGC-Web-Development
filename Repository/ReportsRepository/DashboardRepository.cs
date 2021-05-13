@@ -30,8 +30,8 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
         ///     Calculates sum of onsite transactions and order transactions
         /// </summary>
         /// <returns>
-        ///     Returns the total sum of sales for onsite and order transactions
-        ///     Type: int
+        ///     <para>Returns the total sum of sales for onsite and order transactions</para>
+        ///     <para>Type: int</para>
         /// </returns>
         public async Task<int> FetchTotalSalesAsync()
         {
@@ -79,8 +79,8 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
         ///     Fetches Total number products stocks
         /// </summary>
         /// <returns>
-        ///     Returns number of total product stocks
-        ///     Type: int
+        ///     <para>Returns number of total product stocks</para>
+        ///     <para>Type: int</para>
         /// </returns>
         public async Task<int> FetchTotalInventoryAsync()
         {

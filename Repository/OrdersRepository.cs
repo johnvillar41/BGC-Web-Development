@@ -29,7 +29,7 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
-        public async Task<bool> CheckIfIdExist(int orderID)
+        public async Task<bool> CheckIfIdExistAsync(int orderID)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
@@ -47,7 +47,7 @@ namespace SoftEngWebEmployee.Repository
             }
             return false;
         }
-        public async Task<OrdersModel> FetchOrder(int orderId)
+        public async Task<OrdersModel> FetchOrderAsync(int orderId)
         {
             OrdersModel order = null;
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -67,14 +67,14 @@ namespace SoftEngWebEmployee.Repository
                         OrderStatus = reader["order_status"].ToString(),
                         OrderDate = reader["order_date"].ToString(),
                         TotalNumberOfOrders = int.Parse(reader["total_number_of_orders"].ToString()),
-                        SpecificOrdersModel = await SpecificOrdersRepository.SingleInstance.FetchSpecificOrders(int.Parse(reader["order_id"].ToString()))
+                        SpecificOrdersModel = await SpecificOrdersRepository.SingleInstance.FetchSpecificOrdersAsync(int.Parse(reader["order_id"].ToString()))
                     };
                 }
             }
             return order;
         }
 
-        public async Task<IEnumerable<OrdersModel>> FetchAllOrders()
+        public async Task<IEnumerable<OrdersModel>> FetchAllOrdersAsync()
         {
             List<OrdersModel> ordersList = new List<OrdersModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -94,7 +94,7 @@ namespace SoftEngWebEmployee.Repository
                                 OrderStatus = reader["order_status"].ToString(),
                                 OrderDate = reader["order_date"].ToString(),
                                 TotalNumberOfOrders = int.Parse(reader["total_number_of_orders"].ToString()),
-                                SpecificOrdersModel = await SpecificOrdersRepository.SingleInstance.FetchSpecificOrders(int.Parse(reader["order_id"].ToString()))
+                                SpecificOrdersModel = await SpecificOrdersRepository.SingleInstance.FetchSpecificOrdersAsync(int.Parse(reader["order_id"].ToString()))
                             }
                         );
                 }
@@ -102,12 +102,12 @@ namespace SoftEngWebEmployee.Repository
             return ordersList;
         }
 
-        public async Task ChangeStatusOfOrderToCancelled(int orderID)
+        public async Task ChangeStatusOfOrderToCancelledAsync(int orderID)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                var isOk = await CheckOrderStatus(connection);
+                var isOk = await CheckOrderStatusAsync(connection);
                 if (isOk)
                 {
                     string queryString = "UPDATE customer_orders_table SET order_status='Cancelled' WHERE order_id=@orderID";
@@ -117,13 +117,13 @@ namespace SoftEngWebEmployee.Repository
                 }                
             }
         }
-        public async Task ChangeStatusOfOrderToFinished(int orderID)
+        public async Task ChangeStatusOfOrderToFinishedAsync(int orderID)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 
                 await connection.OpenAsync();
-                var isOk = await CheckOrderStatus(connection);
+                var isOk = await CheckOrderStatusAsync(connection);
                 if (isOk)
                 {
                     string queryString = "UPDATE customer_orders_table SET order_status='Finished' WHERE order_id=@orderID";
@@ -133,7 +133,7 @@ namespace SoftEngWebEmployee.Repository
                 }                
             }
         }
-        public async Task<int> CalculateTotalSaleOrder(int orderID)
+        public async Task<int> CalculateTotalSaleOrderAsync(int orderID)
         {
             int totalOrderSale = 0;
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -155,7 +155,7 @@ namespace SoftEngWebEmployee.Repository
             }
             return totalOrderSale;
         }        
-        private async Task<bool> CheckOrderStatus(MySqlConnection connection)
+        private async Task<bool> CheckOrderStatusAsync(MySqlConnection connection)
         {
             bool isOk = false;
             string queryCheck = "SELECT order_status FROM customer_orders_table";

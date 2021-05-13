@@ -40,7 +40,7 @@ namespace SoftEngWebEmployee.Views
         {
             string category = (sender as Button).Text.ToString();
 
-            var newSearch = await ProductRepository.SingleInstance.FetchOnCategory(category);
+            var newSearch = await ProductRepository.SingleInstance.FetchOnCategoryAsync(category);
             ProductsRepeater.DataSource = newSearch;
             ProductsRepeater.DataBind();
 
@@ -63,7 +63,7 @@ namespace SoftEngWebEmployee.Views
         }
         protected async void CategoryBtnAllProducts_Click(object sender, EventArgs e)
         {
-            var newSearch = await ProductRepository.SingleInstance.FetchAllProducts();
+            var newSearch = await ProductRepository.SingleInstance.FetchAllProductsAsync();
             ProductsRepeater.DataSource = newSearch;
             ProductsRepeater.DataBind();
         }
@@ -74,7 +74,7 @@ namespace SoftEngWebEmployee.Views
             RepeaterItem repeaterItem = button.NamingContainer as RepeaterItem;
             var totalItem = (TextBox)repeaterItem.FindControl("TotalItems");
 
-            ProductModel product = await ProductRepository.SingleInstance.GetProducts(int.Parse(productID));
+            ProductModel product = await ProductRepository.SingleInstance.GetProductsAsync(int.Parse(productID));
             try
             {
                 product.TotalNumberOfProduct = int.Parse(totalItem.Text);
@@ -159,12 +159,12 @@ namespace SoftEngWebEmployee.Views
         {
             foreach (var onsiteModels in onsiteProducts)
             {
-                await OnsiteProductsTransactionRepository.SingleInstance.InsertTransactions(onsiteModels);
+                await OnsiteProductsTransactionRepository.SingleInstance.InsertTransactionsAsync(onsiteModels);
             }
             var newSale = new SalesModel
             {
                 SalesType = Constants.SalesType.Onsite,
-                Administrator = await AdministratorRepository.SingleInstance.FindAdministrator(UserSession.GetLoggedInUser()),
+                Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser()),
                 Date = DateTime.Now,
                 OnsiteTransaction = new OnsiteTransactionModel
                 {
@@ -174,9 +174,9 @@ namespace SoftEngWebEmployee.Views
             };
             foreach (var sale in newSale.OnsiteTransaction.OnsiteProductTransactionList)
             {
-                await ProductRepository.SingleInstance.UpdateProductStocks(sale.Product.TotalNumberOfProduct, sale.Product.Product_ID);
+                await ProductRepository.SingleInstance.UpdateProductStocksAsync(sale.Product.TotalNumberOfProduct, sale.Product.Product_ID);
             }
-            await SalesRepository.GetInstance().InsertNewSale(newSale);
+            await SalesRepository.GetInstance().InsertNewSaleAsync(newSale);
         }
         private async void BuildNotification(List<OnsiteProductsTransactionModel> onsiteProducts)
         {
@@ -193,17 +193,17 @@ namespace SoftEngWebEmployee.Views
                 productListString += "|";
             }
             var notification = NotificationRepository.SingleInstance.GenerateNotification(Constants.NotificationType.SoldItem, productListString);
-            await NotificationRepository.SingleInstance.InsertNewNotification(notification);
+            await NotificationRepository.SingleInstance.InsertNewNotificationAsync(notification);
         }
         private async void LoadSales()
         {
-            var salesList = await SalesRepository.GetInstance().FetchAllSales();
+            var salesList = await SalesRepository.GetInstance().FetchAllSalesAsync();
             SalesRepeater.DataSource = salesList;
             SalesRepeater.DataBind();
         }
         private async void LoadProducts()
         {
-            var productsList = await ProductRepository.SingleInstance.FetchAllProducts();
+            var productsList = await ProductRepository.SingleInstance.FetchAllProductsAsync();
             ProductsRepeater.DataSource = productsList;
             ProductsRepeater.DataBind();
         }
@@ -215,7 +215,7 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadCategories()
         {
-            var categories = await ProductRepository.SingleInstance.FetchAllCategories();
+            var categories = await ProductRepository.SingleInstance.FetchAllCategoriesAsync();
             CategoryRepeater.DataSource = categories;
             CategoryRepeater.DataBind();
         }

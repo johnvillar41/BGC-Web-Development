@@ -28,7 +28,7 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
-        public async Task<bool> CheckIfUserIsAdministrator(string username)
+        public async Task<bool> CheckIfUserIsAdministratorAsync(string username)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
@@ -45,7 +45,7 @@ namespace SoftEngWebEmployee.Repository
             }
             return false;
         }
-        public async Task<AdministratorModel> FindAdministrator(int administratorID)
+        public async Task<AdministratorModel> FindAdministratorAsync(int administratorID)
         {
             AdministratorModel administrator = null;
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -67,7 +67,7 @@ namespace SoftEngWebEmployee.Repository
             }
             return administrator;
         }
-        public async Task<AdministratorModel> FindAdministrator(string username)
+        public async Task<AdministratorModel> FindAdministratorAsync(string username)
         {
             AdministratorModel administrator = null;
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -89,7 +89,7 @@ namespace SoftEngWebEmployee.Repository
             }
             return administrator;
         }
-        public async Task<IEnumerable<AdministratorModel>> FetchAdministrators()
+        public async Task<IEnumerable<AdministratorModel>> FetchAdministratorsAsync()
         {
             List<AdministratorModel> Admins = new List<AdministratorModel>();
             AdministratorModel administrator;

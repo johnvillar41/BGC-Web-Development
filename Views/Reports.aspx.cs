@@ -49,14 +49,14 @@ namespace SoftEngWebEmployee.Views
         }
         private async void DisplayProductSalesReport()
         {
-            var productList = await ProductRepository.SingleInstance.FetchAllProducts();
+            var productList = await ProductRepository.SingleInstance.FetchAllProductsAsync();
             List<ProductSalesReportViewModel> ProductSalesList = new List<ProductSalesReportViewModel>();
             foreach (var product in productList)
             {
                 try
                 {
                     var productSalesReport = await ProductSalesReportRepository.SingleInstance.FetchProductSalesReportAsync(product.Product_ID);
-                    var listOfQuantitySold = await ProductSalesReportRepository.SingleInstance.FetchQuantitySoldList(product.Product_ID);
+                    var listOfQuantitySold = await ProductSalesReportRepository.SingleInstance.FetchQuantitySoldListAsync(product.Product_ID);
                     ProductSalesList.Add(
                             new ProductSalesReportViewModel
                             {
@@ -74,14 +74,14 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadTotalSalesAtGivenDate(DateTime date)
         {
-            var orderIds = await SalesIncomeReportRepository.SingleInstance.FetchOrderIds(date);
-            var onsiteIds = await SalesIncomeReportRepository.SingleInstance.FetchOnsiteIds(date);
+            var orderIds = await SalesIncomeReportRepository.SingleInstance.FetchOrderIdsAsync(date);
+            var onsiteIds = await SalesIncomeReportRepository.SingleInstance.FetchOnsiteIdsAsync(date);
 
             var totalSaleOrders = 0;
             var totalSaleOnsite = 0;
             foreach (var id in orderIds)
             {
-                totalSaleOrders += await OrdersRepository.SingleInstance.CalculateTotalSaleOrder(id);
+                totalSaleOrders += await OrdersRepository.SingleInstance.CalculateTotalSaleOrderAsync(id);
             }
             foreach (var id in onsiteIds)
             {
@@ -94,14 +94,14 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadTotalSalesToday()
         {
-            var orderIds = await SalesIncomeReportRepository.SingleInstance.FetchOrderIds(DateTime.Now);
-            var onsiteIds = await SalesIncomeReportRepository.SingleInstance.FetchOnsiteIds(DateTime.Now);
+            var orderIds = await SalesIncomeReportRepository.SingleInstance.FetchOrderIdsAsync(DateTime.Now);
+            var onsiteIds = await SalesIncomeReportRepository.SingleInstance.FetchOnsiteIdsAsync(DateTime.Now);
 
             var totalSaleOrders = 0;
             var totalSaleOnsite = 0;
             foreach (var id in orderIds)
             {
-                totalSaleOrders += await OrdersRepository.SingleInstance.CalculateTotalSaleOrder(id);
+                totalSaleOrders += await OrdersRepository.SingleInstance.CalculateTotalSaleOrderAsync(id);
             }
             foreach (var id in onsiteIds)
             {
@@ -114,13 +114,13 @@ namespace SoftEngWebEmployee.Views
         }
         private async void DisplayListOfAdministrators()
         {
-            var admins = await AdministratorRepository.SingleInstance.FetchAdministrators();
+            var admins = await AdministratorRepository.SingleInstance.FetchAdministratorsAsync();
             List<SalesIncomeReportViewModel> listOfIncomeReports = new List<SalesIncomeReportViewModel>();
             foreach (var admin in admins)
             {
                 try
                 {
-                    var totalSale = await SalesIncomeReportRepository.SingleInstance.FetchTotalSaleOfAdmin(admin.Username);
+                    var totalSale = await SalesIncomeReportRepository.SingleInstance.FetchTotalSaleOfAdminAsync(admin.Username);
                     SalesIncomeReportViewModel salesIncomeReportViewModel = new SalesIncomeReportViewModel
                     {
                         Administrator = admin,

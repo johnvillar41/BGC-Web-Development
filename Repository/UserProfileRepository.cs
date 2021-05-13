@@ -25,7 +25,7 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
-        public async Task UpdateProfilePicture(Stream profilePicture)
+        public async Task UpdateProfilePictureAsync(Stream profilePicture)
         {           
             BinaryReader br = new BinaryReader(profilePicture);
             byte[] bytes = br.ReadBytes((int)profilePicture.Length);
@@ -40,7 +40,7 @@ namespace SoftEngWebEmployee.Repository
             }
         }
         
-        public async Task UpdateProfile(AdministratorModel updateduser)
+        public async Task UpdateProfileAsync(AdministratorModel updateduser)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
@@ -53,7 +53,7 @@ namespace SoftEngWebEmployee.Repository
                 await command.ExecuteNonQueryAsync();
             }
         }
-        public async Task<AdministratorModel> FetchLoggedInModel()
+        public async Task<AdministratorModel> FetchLoggedInModelAsync()
         {
             AdministratorModel administrator = null;
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))

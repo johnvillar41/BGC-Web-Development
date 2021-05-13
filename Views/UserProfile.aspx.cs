@@ -24,7 +24,7 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadUserProfile()
         {
-            var userLoggedIn = await UserProfileRepository.SingleInstance.FetchLoggedInModel();
+            var userLoggedIn = await UserProfileRepository.SingleInstance.FetchLoggedInModelAsync();
             if (userLoggedIn != null)
             {
                 Username.Text = userLoggedIn.Username;
@@ -44,14 +44,14 @@ namespace SoftEngWebEmployee.Views
                 Fullname = Fullname.Text,
                 Password = Password.Text
             };
-            await UserProfileRepository.SingleInstance.UpdateProfile(updatedUser);
+            await UserProfileRepository.SingleInstance.UpdateProfileAsync(updatedUser);
             Response.Redirect(Request.RawUrl, false);
         }
 
         protected async void UploadImage_Click(object sender, EventArgs e)
         {
             Stream fs = ProfileFileUpload.PostedFile.InputStream;           
-            await UserProfileRepository.SingleInstance.UpdateProfilePicture(fs);
+            await UserProfileRepository.SingleInstance.UpdateProfilePictureAsync(fs);
             Response.Redirect(Request.RawUrl, false);
         }
     }

@@ -66,7 +66,7 @@ namespace SoftEngWebEmployee.Views
 
                 AdministratorRepository.SingleInstance.CreateNewAdministrator(administrator);
                 await NotificationRepository.SingleInstance
-                    .InsertNewNotification(NotificationRepository
+                    .InsertNewNotificationAsync(NotificationRepository
                     .SingleInstance
                     .GenerateNotification(NotificationType.CreateUser, username));                
                 Response.Redirect(Request.RawUrl);                
@@ -80,7 +80,7 @@ namespace SoftEngWebEmployee.Views
             {
                 AdministratorRepository.SingleInstance.DeleteAdministrator(int.Parse(AdministratorId_Delete.Text));
                 await NotificationRepository.SingleInstance
-                   .InsertNewNotification(NotificationRepository
+                   .InsertNewNotificationAsync(NotificationRepository
                    .SingleInstance
                    .GenerateNotification(NotificationType.DeleteUser, AdministratorID.Text.ToString()));
                 Response.Redirect(Request.RawUrl);
@@ -91,7 +91,7 @@ namespace SoftEngWebEmployee.Views
         {
             if (!String.IsNullOrWhiteSpace(AdministratorID.Text))
             {
-                AdministratorModel administrator = await AdministratorRepository.SingleInstance.FindAdministrator(int.Parse(AdministratorID.Text));
+                AdministratorModel administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(int.Parse(AdministratorID.Text));
                 if (administrator != null)
                 {
                     UsernameUpdate.Text = administrator.Username;
@@ -120,7 +120,7 @@ namespace SoftEngWebEmployee.Views
                 };
                 AdministratorRepository.SingleInstance.UpdateAdministrator(administrator);
                 await NotificationRepository.SingleInstance
-                   .InsertNewNotification(NotificationRepository
+                   .InsertNewNotificationAsync(NotificationRepository
                    .SingleInstance
                    .GenerateNotification(NotificationType.UpdateUser, username));
                 Response.Redirect(Request.RawUrl);
@@ -129,12 +129,12 @@ namespace SoftEngWebEmployee.Views
 
         private async void LoadAdministrators()
         {
-            var administrators = await AdministratorRepository.SingleInstance.FetchAdministrators();
+            var administrators = await AdministratorRepository.SingleInstance.FetchAdministratorsAsync();
             Admins = (List<AdministratorModel>)administrators;
         }
         private async void LoadIsAdministrator(string username)
         {
-            IsAdminUser = await AdministratorRepository.SingleInstance.CheckIfUserIsAdministrator(username);           
+            IsAdminUser = await AdministratorRepository.SingleInstance.CheckIfUserIsAdministratorAsync(username);           
         }
     }
 }

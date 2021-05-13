@@ -27,7 +27,7 @@ namespace SoftEngWebEmployee.Repository
                 return instance;
             }            
         }
-        public async Task<List<ProductModel>> FetchAllProducts()
+        public async Task<List<ProductModel>> FetchAllProductsAsync()
         {
             List<ProductModel> productList = new List<ProductModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -84,7 +84,7 @@ namespace SoftEngWebEmployee.Repository
         // x Update product
 
 
-        public async Task<List<ProductModel>> FetchGHProducts()
+        public async Task<List<ProductModel>> FetchGHProductsAsync()
         {
             List<ProductModel> productList = new List<ProductModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -112,7 +112,7 @@ namespace SoftEngWebEmployee.Repository
             return productList;
         }
 
-        public async Task<List<ProductModel>> FetchHPProducts()
+        public async Task<List<ProductModel>> FetchHPProductsAsync()
         {
             List<ProductModel> productList = new List<ProductModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -140,7 +140,7 @@ namespace SoftEngWebEmployee.Repository
             return productList;
         }
 
-        public async Task<List<ProductModel>> FetchAllCategories()
+        public async Task<List<ProductModel>> FetchAllCategoriesAsync()
         {
             List<ProductModel> productList = new List<ProductModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -162,7 +162,7 @@ namespace SoftEngWebEmployee.Repository
             return productList;
         }
 
-        public async Task<List<ProductModel>> FetchOnCategory(string category)
+        public async Task<List<ProductModel>> FetchOnCategoryAsync(string category)
         {
             List<ProductModel> productList = new List<ProductModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -191,7 +191,7 @@ namespace SoftEngWebEmployee.Repository
             return productList;
         }
 
-        public async Task<List<ProductModel>> FetchOnSearch(string search)
+        public async Task<List<ProductModel>> FetchOnSearchAsync(string search)
         {
             List<ProductModel> productList = new List<ProductModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -220,7 +220,7 @@ namespace SoftEngWebEmployee.Repository
             return productList;
         }
 
-        public async Task<ProductModel> FetchProductDetails(string productID)
+        public async Task<ProductModel> FetchProductDetailsAsync(string productID)
         {
             ProductModel productModel = null;
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -259,7 +259,7 @@ namespace SoftEngWebEmployee.Repository
             }
         }
 
-        public async Task<ProductModel> GetProducts(int productID)
+        public async Task<ProductModel> GetProductsAsync(int productID)
         {
             ProductModel productModel = null;
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -287,7 +287,7 @@ namespace SoftEngWebEmployee.Repository
             }
             return productModel;
         }
-        public async Task UpdateProductStocks(int stockSold, int productID)
+        public async Task UpdateProductStocksAsync(int stockSold, int productID)
         {
             bool isOk = false;
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))

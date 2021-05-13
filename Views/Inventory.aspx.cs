@@ -27,24 +27,24 @@ namespace SoftEngWebEmployee.Views
 
         private async void LoadCategories()
         {
-            var categories = await ProductRepository.SingleInstance.FetchAllCategories();
+            var categories = await ProductRepository.SingleInstance.FetchAllCategoriesAsync();
             CategoryRepeater.DataSource = categories;
             CategoryRepeater.DataBind();
         }
 
         private async void DisplayInventoryTables()
         {
-            var inventory = await ProductRepository.SingleInstance.FetchAllProducts();            
+            var inventory = await ProductRepository.SingleInstance.FetchAllProductsAsync();            
             SearchRepeater.DataSource = inventory;
             listSearchRepeater = inventory;
             SearchRepeater.DataBind();
 
-            var greenhouse = await ProductRepository.SingleInstance.FetchGHProducts();
+            var greenhouse = await ProductRepository.SingleInstance.FetchGHProductsAsync();
             GHRepeater.DataSource = greenhouse;
             listGHRepeater = greenhouse;
             GHRepeater.DataBind();
 
-            var hydroponics = await ProductRepository.SingleInstance.FetchHPProducts();
+            var hydroponics = await ProductRepository.SingleInstance.FetchHPProductsAsync();
             HPRepeater.DataSource = hydroponics;
             listHPRepeater = hydroponics;
             HPRepeater.DataBind();
@@ -57,14 +57,14 @@ namespace SoftEngWebEmployee.Views
             dropdownMenuReference1.Text = category+" "+caret;
             if (category=="All Products")
             {
-                var newSearch = await ProductRepository.SingleInstance.FetchAllProducts();
+                var newSearch = await ProductRepository.SingleInstance.FetchAllProductsAsync();
                 SearchRepeater.DataSource = newSearch;
                 listSearchRepeater = newSearch;
                 SearchRepeater.DataBind();
             }
             else
             {
-                var newSearch = await ProductRepository.SingleInstance.FetchOnCategory(category);
+                var newSearch = await ProductRepository.SingleInstance.FetchOnCategoryAsync(category);
                 SearchRepeater.DataSource = newSearch;
                 listSearchRepeater = newSearch;
                 SearchRepeater.DataBind();
@@ -74,7 +74,7 @@ namespace SoftEngWebEmployee.Views
         protected async void SearchButton_Click(object sender, EventArgs e)
         {
             string search = searchBox.Text.ToString();
-            var newSearch = await ProductRepository.SingleInstance.FetchOnSearch(search);
+            var newSearch = await ProductRepository.SingleInstance.FetchOnSearchAsync(search);
             SearchRepeater.DataSource = newSearch;
             listSearchRepeater = newSearch;
             SearchRepeater.DataBind();
@@ -93,7 +93,7 @@ namespace SoftEngWebEmployee.Views
         {
             Button button = (Button)sender;
             var productID = button.CommandArgument.ToString();
-            ProductModel Details = await ProductRepository.SingleInstance.FetchProductDetails(productID);
+            ProductModel Details = await ProductRepository.SingleInstance.FetchProductDetailsAsync(productID);
 
             List<ProductModel> ProductDetail = new List<ProductModel>
             {

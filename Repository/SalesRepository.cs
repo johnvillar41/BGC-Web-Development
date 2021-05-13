@@ -24,7 +24,7 @@ namespace SoftEngWebEmployee.Repository
             return instance;
         }
         // Should have no order id
-        public async Task InsertNewSale(SalesModel newSale)
+        public async Task InsertNewSaleAsync(SalesModel newSale)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
@@ -59,7 +59,7 @@ namespace SoftEngWebEmployee.Repository
                 }
             }
         }
-        public async Task<List<SalesModel>> FetchAllSales()
+        public async Task<List<SalesModel>> FetchAllSalesAsync()
         {
             List<SalesModel> listOfSales = new List<SalesModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -76,7 +76,7 @@ namespace SoftEngWebEmployee.Repository
                         sales = new SalesModel()
                         {
                             SalesID = int.Parse(reader["sales_id"].ToString()),
-                            Administrator = await AdministratorRepository.SingleInstance.FindAdministrator(reader["user_username"].ToString()),
+                            Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(reader["user_username"].ToString()),
                             Date = DateTime.Parse(reader["date"].ToString()),
                             SalesType = GenerateSaleType(reader["sale_type"].ToString()),
                             OnsiteTransaction = await OnsiteTransactionRepository.SingleInstance.FetchOnsiteTransaction(int.Parse(reader["onsite_transaction_id"].ToString()))
@@ -88,10 +88,10 @@ namespace SoftEngWebEmployee.Repository
                         sales = new SalesModel()
                         {
                             SalesID = int.Parse(reader["sales_id"].ToString()),
-                            Administrator = await AdministratorRepository.SingleInstance.FindAdministrator(reader["user_username"].ToString()),
+                            Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(reader["user_username"].ToString()),
                             Date = DateTime.Parse(reader["date"].ToString()),
                             SalesType = GenerateSaleType(reader["sale_type"].ToString()),
-                            Orders = await OrdersRepository.SingleInstance.FetchOrder(int.Parse(reader["order_id"].ToString()))
+                            Orders = await OrdersRepository.SingleInstance.FetchOrderAsync(int.Parse(reader["order_id"].ToString()))
                         };
                     }
 

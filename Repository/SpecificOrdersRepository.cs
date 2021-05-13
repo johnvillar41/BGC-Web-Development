@@ -25,7 +25,7 @@ namespace SoftEngWebEmployee.Repository
                 return instance;
             }            
         }
-        public async Task<Dictionary<int, int>> FetchProductIDs(int orderID)
+        public async Task<Dictionary<int, int>> FetchProductIDsAsync(int orderID)
         {
             Dictionary<int, int> productID = new Dictionary<int, int>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -44,7 +44,7 @@ namespace SoftEngWebEmployee.Repository
             }
             return productID;
         }
-        public async Task<List<SpecificOrdersModel>> FetchSpecificOrders(int orderID)
+        public async Task<List<SpecificOrdersModel>> FetchSpecificOrdersAsync(int orderID)
         {
             List<SpecificOrdersModel> specificOrdersModels = new List<SpecificOrdersModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -63,7 +63,7 @@ namespace SoftEngWebEmployee.Repository
                         ProductID = int.Parse(reader["product_id"].ToString()),
                         TotalOrders = int.Parse(reader["total_orders"].ToString()),
                         Administrator = reader["administrator_username"].ToString(),
-                        ProductsModel = await ProductRepository.SingleInstance.GetProducts(int.Parse(reader["product_id"].ToString()))
+                        ProductsModel = await ProductRepository.SingleInstance.GetProductsAsync(int.Parse(reader["product_id"].ToString()))
                     };
                     specificOrdersModels.Add(specificOrdersModel);
                 }

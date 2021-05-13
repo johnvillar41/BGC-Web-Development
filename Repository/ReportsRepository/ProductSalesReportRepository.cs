@@ -56,7 +56,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                 if (await reader.ReadAsync())
                 {
                     ProductSalesReportModel = new ProductSalesReportModel();
-                    ProductSalesReportModel.Product = await ProductRepository.SingleInstance.FetchProductDetails(productID.ToString());
+                    ProductSalesReportModel.Product = await ProductRepository.SingleInstance.FetchProductDetailsAsync(productID.ToString());
                     if (reader["quantitySold"] != DBNull.Value)
                     {
                         ProductSalesReportModel.ProductRevenue = int.Parse(reader["quantitySold"].ToString()) * ProductSalesReportModel.Product.ProductPrice;
@@ -71,7 +71,17 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                 return ProductSalesReportModel;
             }
         }
-        public async Task<List<QuantitySoldModel>> FetchQuantitySoldList(int productID)
+        /// <summary>
+        ///     Fetches a list of products transactions sold.
+        /// </summary>
+        /// <param name="productID">
+        ///     Passes a productID as a parameter
+        /// </param>
+        /// <returns>
+        ///     Returs a list of all the products that are sold
+        ///     Type: List<QuantitySoldModel>
+        /// </returns>
+        public async Task<List<QuantitySoldModel>> FetchQuantitySoldListAsync(int productID)
         {
             List<QuantitySoldModel> quantitySoldModels = new List<QuantitySoldModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))

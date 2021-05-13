@@ -27,7 +27,7 @@ namespace SoftEngWebEmployee.Repository
                 return instance;
             }            
         }
-        public async Task UpdateInformation(InformationModel information)
+        public async Task UpdateInformationAsync(InformationModel information)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
@@ -40,7 +40,7 @@ namespace SoftEngWebEmployee.Repository
             }
         }
 
-        public async Task<InformationModel> FetchInformation(int id)
+        public async Task<InformationModel> FetchInformationAsync(int id)
         {
             InformationModel information = null;
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -60,7 +60,7 @@ namespace SoftEngWebEmployee.Repository
             }
             return information;
         }
-        public async Task<List<InformationModel>> FetchInformations()
+        public async Task<List<InformationModel>> FetchInformationsAsync()
         {
             List<InformationModel> informations = new List<InformationModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -74,7 +74,7 @@ namespace SoftEngWebEmployee.Repository
                     informations.Add(
                             new InformationModel()
                             {
-                                Product = await ProductRepository.SingleInstance.GetProducts(int.Parse(reader["product_id"].ToString())),
+                                Product = await ProductRepository.SingleInstance.GetProductsAsync(int.Parse(reader["product_id"].ToString())),
                                 ProductInformation = reader["product_information"].ToString()
                             }
                         );

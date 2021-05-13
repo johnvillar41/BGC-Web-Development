@@ -89,7 +89,7 @@ namespace SoftEngWebEmployee.Repository
                         TransactionID = int.Parse(reader["transaction_id"].ToString()),
                         //Generate Customer Model
                         TotalSale = int.Parse(reader["total_sale"].ToString()),
-                        OnsiteProductTransactionList = await OnsiteProductsTransactionRepository.SingleInstance.FetchTransactionsGivenByID(int.Parse(reader["transaction_id"].ToString()))
+                        OnsiteProductTransactionList = await OnsiteProductsTransactionRepository.SingleInstance.FetchTransactionsGivenByIDAsync(int.Parse(reader["transaction_id"].ToString()))
                     };
                 }
             }

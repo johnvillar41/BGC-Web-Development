@@ -28,7 +28,7 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadOrders(string id)
         {
-            var orderList = await SpecificOrdersRepository.SingleInstance.FetchSpecificOrders(int.Parse(id));
+            var orderList = await SpecificOrdersRepository.SingleInstance.FetchSpecificOrdersAsync(int.Parse(id));
             if (orderList != null)
             {
                 SpecificOrdersList = orderList;
@@ -36,7 +36,7 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadOnsites(string id)
         {
-            var onsiteProductsList = await OnsiteProductsTransactionRepository.SingleInstance.FetchTransactionsGivenByID(int.Parse(id));
+            var onsiteProductsList = await OnsiteProductsTransactionRepository.SingleInstance.FetchTransactionsGivenByIDAsync(int.Parse(id));
             if (onsiteProductsList != null)
             {
                 OnSiteProducts = onsiteProductsList;

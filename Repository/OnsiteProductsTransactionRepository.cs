@@ -27,7 +27,7 @@ namespace SoftEngWebEmployee.Repository
                 return instance;
             }            
         }
-        public async Task InsertTransactions(OnsiteProductsTransactionModel onsiteProductsTransactionModel)
+        public async Task InsertTransactionsAsync(OnsiteProductsTransactionModel onsiteProductsTransactionModel)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
@@ -43,7 +43,7 @@ namespace SoftEngWebEmployee.Repository
                 await command.ExecuteNonQueryAsync();
             }
         }
-        public async Task<List<OnsiteProductsTransactionModel>> FetchTransactionsGivenByID(int transactionID)
+        public async Task<List<OnsiteProductsTransactionModel>> FetchTransactionsGivenByIDAsync(int transactionID)
         {
             List<OnsiteProductsTransactionModel> onsiteProductList = new List<OnsiteProductsTransactionModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -60,7 +60,7 @@ namespace SoftEngWebEmployee.Repository
                             {
                                 OnsiteProductTransactionID = int.Parse(reader["optt_id"].ToString()),
                                 TransactionID = int.Parse(reader["transaction_id"].ToString()),
-                                Product = await ProductRepository.SingleInstance.GetProducts(int.Parse(reader["product_id"].ToString())),
+                                Product = await ProductRepository.SingleInstance.GetProductsAsync(int.Parse(reader["product_id"].ToString())),
                                 TotalProductsCount = int.Parse(reader["total_product_count"].ToString())
                             }
                         );

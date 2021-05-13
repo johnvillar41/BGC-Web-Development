@@ -31,7 +31,7 @@ namespace SoftEngWebEmployee.Repository.LoginRepository
 
         }
 
-        public async Task<bool> IsLoginSuccessfull(AdministratorModel adminModel)
+        public async Task<bool> IsLoginSuccessfullAsync(AdministratorModel adminModel)
         {
             bool isLoginSuccessfull = false;
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))

@@ -27,7 +27,17 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                 return instance;
             }            
         }
-        public async Task<SalesIncomeReportViewModel> FetchTotalSaleOfAdmin(string administrator)
+        /// <summary>
+        ///     Calculates the total sales sold by a specific administrator
+        /// </summary>
+        /// <param name="administrator">
+        ///     Passes a parameter administrator name
+        /// </param>
+        /// <returns>
+        ///     <para>Returns a model of model containing all the transactions made by the administrator</para>
+        ///     <para>Type: SalesIncomeViewModel</para>
+        /// </returns>
+        public async Task<SalesIncomeReportViewModel> FetchTotalSaleOfAdminAsync(string administrator)
         {
             SalesIncomeReportViewModel salesIncome = new SalesIncomeReportViewModel();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -48,12 +58,22 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                     else
                         salesIncome.TotalSaleOrders = int.Parse(reader["TotalSaleOrder"].ToString());
                     salesIncome.TotalSale = salesIncome.TotalSaleOnsite + salesIncome.TotalSaleOrders;
-                    salesIncome.Administrator = await AdministratorRepository.SingleInstance.FindAdministrator(administrator);
+                    salesIncome.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(administrator);
                 }
             }
             return salesIncome;
         }
-        public async Task<IEnumerable<int>> FetchOrderIds(DateTime date)
+        /// <summary>
+        ///     Fetches all the OrderIds
+        /// </summary>
+        /// <param name="date">
+        ///     Passes a date value format
+        /// </param>
+        /// <returns>
+        ///     <para>Returns an IEnumerable of OrderIds</para>
+        ///     <para>Type: int</para>
+        /// </returns>
+        public async Task<IEnumerable<int>> FetchOrderIdsAsync(DateTime date)
         {
             List<int> orderIds = new List<int>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -74,7 +94,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
             }
             return orderIds;
         }
-        public async Task<IEnumerable<int>> FetchOnsiteIds(DateTime date)
+        public async Task<IEnumerable<int>> FetchOnsiteIdsAsync(DateTime date)
         {
             List<int> onsiteId = new List<int>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))

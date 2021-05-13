@@ -29,7 +29,7 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
-        public async Task<List<NotificationsModel>> FetchNotificationsGivenDate(string date)
+        public async Task<List<NotificationsModel>> FetchNotificationsGivenDateAsync(string date)
         {
             List<NotificationsModel> notificationsList = new List<NotificationsModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -126,7 +126,7 @@ namespace SoftEngWebEmployee.Repository
             return newNotification;
         }
 
-        public async Task InsertNewNotification(NotificationsModel notification)
+        public async Task InsertNewNotificationAsync(NotificationsModel notification)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
@@ -142,7 +142,7 @@ namespace SoftEngWebEmployee.Repository
             }
         }
 
-        public async Task<List<NotificationsModel>> FetchNotifications()
+        public async Task<List<NotificationsModel>> FetchNotificationsAsync()
         {
             List<NotificationsModel> notificationsList = new List<NotificationsModel>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
