@@ -55,7 +55,7 @@ namespace SoftEngWebEmployee.Views
             {
                 try
                 {
-                    var productSalesReport = await ProductSalesReportRepository.SingleInstance.FetchProductSalesReport(product.Product_ID);
+                    var productSalesReport = await ProductSalesReportRepository.SingleInstance.FetchProductSalesReportAsync(product.Product_ID);
                     var listOfQuantitySold = await ProductSalesReportRepository.SingleInstance.FetchQuantitySoldList(product.Product_ID);
                     ProductSalesList.Add(
                             new ProductSalesReportViewModel
@@ -141,9 +141,9 @@ namespace SoftEngWebEmployee.Views
         }
         private async void DisplayDashBoard()
         {
-            var totalSales = await DashboardRepository.SingleInstance.FetchTotalSales();
-            var totalInventory = await DashboardRepository.SingleInstance.FetchTotalInventory();
-            var totalProducts = await DashboardRepository.SingleInstance.FetchTotalProducts();
+            var totalSales = await DashboardRepository.SingleInstance.FetchTotalSalesAsync();
+            var totalInventory = await DashboardRepository.SingleInstance.FetchTotalInventoryAsync();
+            var totalProducts = await DashboardRepository.SingleInstance.FetchTotalProductsAsync();
 
             total_sales.Text = totalSales.ToString();
             total_inventory.Text = totalInventory.ToString();

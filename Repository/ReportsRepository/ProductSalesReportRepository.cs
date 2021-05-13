@@ -25,7 +25,19 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
         {
 
         }
-        public async Task<ProductSalesReportModel> FetchProductSalesReport(int productID)
+        /// <summary>
+        ///     Calculates and Fetches the total number
+        ///     of sales made in a certain product
+        /// </summary>
+        /// <param name="productID">
+        ///     Passes a product id to be searched in 
+        ///     the database
+        /// </param>
+        /// <returns>
+        ///     Returns the total amount os sales for the certain product
+        ///     Type: ProductSalesReportModel
+        /// </returns>
+        public async Task<ProductSalesReportModel> FetchProductSalesReportAsync(int productID)
         {
             ProductSalesReportModel ProductSalesReportModel = null;
 

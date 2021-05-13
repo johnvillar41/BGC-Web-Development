@@ -9,11 +9,7 @@ using System.Web;
 namespace SoftEngWebEmployee.Repository.ReportsRepository
 {
     public class DashboardRepository
-    {
-        //fetch total sales
-        //fetch total inventory
-        //fetch total # products
-
+    {       
         private static DashboardRepository instance = null;
         public static DashboardRepository SingleInstance
         {
@@ -30,9 +26,14 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
         {
 
         }
-
-
-        public async Task<int> FetchTotalSales()
+        /// <summary>
+        ///     Calculates sum of onsite transactions and order transactions
+        /// </summary>
+        /// <returns>
+        ///     Returns the total sum of sales for onsite and order transactions
+        ///     Type: int
+        /// </returns>
+        public async Task<int> FetchTotalSalesAsync()
         {
             int total_sales = 0;
             int total_order_sale = 0;
@@ -74,8 +75,14 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
             }
             return total_sales + total_order_sale;
         }
-
-        public async Task<int> FetchTotalInventory()
+        /// <summary>
+        ///     Fetches Total number products stocks
+        /// </summary>
+        /// <returns>
+        ///     Returns number of total product stocks
+        ///     Type: int
+        /// </returns>
+        public async Task<int> FetchTotalInventoryAsync()
         {
             int total_inventory = 0;
 
@@ -94,14 +101,17 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                     }
                     total_inventory = int.Parse(reader["total_inventory"].ToString());
                 }
-
-
             }
-
             return total_inventory;
         }
-
-        public async Task<int> FetchTotalProducts()
+        /// <summary>
+        ///     Fetches the total number of product count
+        /// </summary>
+        /// <returns>
+        ///     Returns total count of products
+        ///     Type: int
+        /// </returns>
+        public async Task<int> FetchTotalProductsAsync()
         {
             int total_products = 0;
 
@@ -122,11 +132,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                 }
 
             }
-
             return total_products;
         }
-
-
-
     }
 }
