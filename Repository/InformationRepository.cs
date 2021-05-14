@@ -49,7 +49,7 @@ namespace SoftEngWebEmployee.Repository
         ///     Fetches an information regarding a certain product
         /// </summary>
         /// <param name="id">
-        ///     Passes abstract product id as parameter
+        ///     Passes a product id as parameter
         /// </param>
         public async Task<InformationModel> FetchInformationAsync(int id)
         {
@@ -75,7 +75,7 @@ namespace SoftEngWebEmployee.Repository
         ///     Fetches all of the information for all of the products
         /// </summary>
         /// <returns>
-        ///     <para>Returns abstract list of informations</para>
+        ///     <para>Returns the list of all informations for all the product</para>
         ///     <para>Type: List<InformationModel></para>
         /// </returns>
         public async Task<List<InformationModel>> FetchInformationsAsync()
