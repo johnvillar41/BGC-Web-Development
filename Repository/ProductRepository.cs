@@ -164,11 +164,10 @@ namespace SoftEngWebEmployee.Repository
         /// <returns>
         ///     <para>Returns a list of categories</para>
         ///     <para>Type: string</para>
-        /// </returns>
-        // TODO: Fix return type! This should be a string only not an object model
-        public async Task<List<ProductModel>> FetchAllCategoriesAsync()
+        /// </returns>        
+        public async Task<List<string>> FetchAllCategoriesAsync()
         {
-            List<ProductModel> productList = new List<ProductModel>();
+            List<string> categoryList = new List<string>();
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
@@ -177,15 +176,10 @@ namespace SoftEngWebEmployee.Repository
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
                 {
-                    productList.Add(
-                            new ProductModel()
-                            {
-                                ProductCategory = reader["product_category"].ToString(),
-                            }
-                        );
+                    categoryList.Add(reader["product_category"].ToString());
                 }
             }
-            return productList;
+            return categoryList;
         }
         /// <summary>
         ///     Fecthes all the products based on the given paramref name="category"

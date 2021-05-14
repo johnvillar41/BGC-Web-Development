@@ -34,7 +34,7 @@ namespace SoftEngWebEmployee.Repository
         ///     Passes a date as paramter
         /// </param>
         /// <returns>
-        ///     <para>Returns a list of all the notifications for abstract certain date</para>
+        ///     <para>Returns a list of all the notifications for a certain date</para>
         ///     <para>Type: List<NotificationsModel></para>
         /// </returns>
         public async Task<List<NotificationsModel>> FetchNotificationsGivenDateAsync(string date)
@@ -64,7 +64,7 @@ namespace SoftEngWebEmployee.Repository
             return notificationsList;
         }
         /// <summary>
-        ///     Generates a notification for each database transaction done inside the database
+        ///     Generates a notification for each database transaction done inside the program
         /// </summary>
         /// <param name="notificationType">
         ///     Passes an enum of what type the notification is
@@ -148,7 +148,7 @@ namespace SoftEngWebEmployee.Repository
         ///     Inserts a new notification inside the database
         /// </summary>
         /// <param name="notification">
-        ///     Passes abstract notification object as paramater
+        ///     Passes a notification object as paramater
         /// </param>
         public async Task InsertNewNotificationAsync(NotificationsModel notification)
         {
@@ -198,6 +198,16 @@ namespace SoftEngWebEmployee.Repository
             }
             return notificationsList;
         }
+        /// <summary>
+        ///     Generates an enum for the notification
+        /// </summary>
+        /// <param name="notification">
+        ///     Passes a string value of notification to be converted into an enum
+        /// </param>
+        /// <returns>
+        ///     <para>Returns a notification enum</para>
+        ///     <para>Type: NotificationType</para>
+        /// </returns>
         private NotificationType CategorizeNotification(string notification)
         {
             switch (notification)

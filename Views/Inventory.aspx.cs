@@ -57,10 +57,7 @@ namespace SoftEngWebEmployee.Views
             dropdownMenuReference1.Text = category+" "+caret;
             if (category=="All Products")
             {
-                var newSearch = await ProductRepository.SingleInstance.FetchAllProductsAsync();
-                SearchRepeater.DataSource = newSearch;
-                listSearchRepeater = newSearch;
-                SearchRepeater.DataBind();
+                DisplayInventoryTables();
             }
             else
             {
@@ -68,6 +65,16 @@ namespace SoftEngWebEmployee.Views
                 SearchRepeater.DataSource = newSearch;
                 listSearchRepeater = newSearch;
                 SearchRepeater.DataBind();
+
+                var greenhouse = await ProductRepository.SingleInstance.FetchGHProductsAsync();
+                GHRepeater.DataSource = greenhouse;
+                listGHRepeater = greenhouse;
+                GHRepeater.DataBind();
+
+                var hydroponics = await ProductRepository.SingleInstance.FetchHPProductsAsync();
+                HPRepeater.DataSource = hydroponics;
+                listHPRepeater = hydroponics;
+                HPRepeater.DataBind();
             }           
         }
 
@@ -78,6 +85,16 @@ namespace SoftEngWebEmployee.Views
             SearchRepeater.DataSource = newSearch;
             listSearchRepeater = newSearch;
             SearchRepeater.DataBind();
+
+            var greenhouse = await ProductRepository.SingleInstance.FetchGHProductsAsync();
+            GHRepeater.DataSource = greenhouse;
+            listGHRepeater = greenhouse;
+            GHRepeater.DataBind();
+
+            var hydroponics = await ProductRepository.SingleInstance.FetchHPProductsAsync();
+            HPRepeater.DataSource = hydroponics;
+            listHPRepeater = hydroponics;
+            HPRepeater.DataBind();
         }        
 
         protected void CategoryRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)

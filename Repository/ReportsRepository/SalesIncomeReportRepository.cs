@@ -33,7 +33,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
         /// </param>
         /// <returns>
         ///     <para>Returns a model of model containing all the transactions made by the administrator</para>
-        ///     <para>Type: SalesIncomeViewModel</para>
+        ///     <para>Type: SalesIncomeReportViewModel</para>
         /// </returns>
         public async Task<SalesIncomeReportViewModel> FetchTotalSaleOfAdminAsync(string administrator)
         {
@@ -62,14 +62,14 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
             return salesIncome;
         }
         /// <summary>
-        ///     Fetches all the OrderIds
+        ///     Fetches all the OrderIds within a given date
         /// </summary>
         /// <param name="date">
         ///     Passes a date value format
         /// </param>
         /// <returns>
         ///     <para>Returns an IEnumerable of OrderIds</para>
-        ///     <para>Type: int</para>
+        ///     <para>Type: IEnumerable<int></para>
         /// </returns>
         public async Task<IEnumerable<int>> FetchOrderIdsAsync(DateTime date)
         {
@@ -96,7 +96,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
         ///     Fetches all the onsiteIds within a given date
         /// </summary>
         /// <param name="date">
-        ///     Passes a datetime async parameter
+        ///     Passes a datetime parameter
         /// </param>
         /// <returns>
         ///     <para>Returns a list of onsite ids</para>

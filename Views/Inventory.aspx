@@ -40,7 +40,7 @@
                         <asp:Repeater ID="CategoryRepeater" OnItemCreated="CategoryRepeater_ItemCreated" runat="server">
                             <ItemTemplate>
                                 <a runat="server" class="dropdown-item" id="categorySelected">
-                                    <li><asp:Button ID="category" runat="server" CssClass="dropdown-item" Text='<%# DataBinder.Eval(Container.DataItem,"ProductCategory") %>' OnClick="Category_Click" UseSubmitBehavior="false"/></li>                               
+                                    <li><asp:Button ID="category" runat="server" CssClass="dropdown-item" Text='<%#Container.DataItem%>' OnClick="Category_Click" UseSubmitBehavior="false"/></li>                               
                                 </a>
                             </ItemTemplate>
                         </asp:Repeater>

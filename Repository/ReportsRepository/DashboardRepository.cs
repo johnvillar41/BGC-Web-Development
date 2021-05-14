@@ -76,7 +76,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
             return total_sales + total_order_sale;
         }
         /// <summary>
-        ///     Fetches Total number products stocks
+        ///     Fetches Total number of product numbers
         /// </summary>
         /// <returns>
         ///     <para>Returns number of total product stocks</para>
@@ -108,8 +108,8 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
         ///     Fetches the total number of product count
         /// </summary>
         /// <returns>
-        ///     Returns total count of products
-        ///     Type: int
+        ///     <para>Returns total count of products</para>
+        ///     <para>Type: int</para>
         /// </returns>
         public async Task<int> FetchTotalProductsAsync()
         {

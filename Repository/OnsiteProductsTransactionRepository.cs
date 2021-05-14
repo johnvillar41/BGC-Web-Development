@@ -33,7 +33,6 @@ namespace SoftEngWebEmployee.Repository
         /// <param name="onsiteProductsTransactionModel">
         ///     Passes onsiteProductsTransactionModel as parameter
         /// </param>
-
         public async Task InsertTransactionsAsync(OnsiteProductsTransactionModel onsiteProductsTransactionModel)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -50,7 +49,6 @@ namespace SoftEngWebEmployee.Repository
                 await command.ExecuteNonQueryAsync();
             }
         }
-
         /// <summary>
         ///     This function retrieves onsite transaction details
         /// </summary>
@@ -58,8 +56,8 @@ namespace SoftEngWebEmployee.Repository
         ///     Passes a transaction ID as a parameter
         /// </param>
         /// <returns>
-        /// <para>Returns the list of onsite transactions</para>
-        /// <para>Type: List<OnsiteProductsTransactionModel></para>
+        ///     <para>Returns the list of onsite transactions</para>
+        ///     <para>Type: List<OnsiteProductsTransactionModel></para>
         /// </returns>
         public async Task<List<OnsiteProductsTransactionModel>> FetchTransactionsGivenByIDAsync(int transactionID)
         {
