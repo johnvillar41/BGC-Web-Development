@@ -164,8 +164,7 @@ namespace SoftEngWebEmployee.Repository
         /// <returns>
         ///     <para>Returns a list of categories</para>
         ///     <para>Type: string</para>
-        /// </returns>
-        // TODO: Fix return type! This should be a string only not an object model
+        /// </returns>        
         public async Task<List<string>> FetchAllCategoriesAsync()
         {
             List<string> categoryList = new List<string>();
