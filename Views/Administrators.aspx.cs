@@ -64,7 +64,7 @@ namespace SoftEngWebEmployee.Views
                     };
                 }                
 
-                AdministratorRepository.SingleInstance.CreateNewAdministrator(administrator);
+                await AdministratorRepository.SingleInstance.CreateNewAdministrator(administrator);
                 await NotificationRepository.SingleInstance
                     .InsertNewNotificationAsync(NotificationRepository
                     .SingleInstance
@@ -78,7 +78,7 @@ namespace SoftEngWebEmployee.Views
         {
             if (!String.IsNullOrWhiteSpace(AdministratorId_Delete.Text))
             {
-                AdministratorRepository.SingleInstance.DeleteAdministrator(int.Parse(AdministratorId_Delete.Text));
+                await AdministratorRepository.SingleInstance.DeleteAdministrator(int.Parse(AdministratorId_Delete.Text));
                 await NotificationRepository.SingleInstance
                    .InsertNewNotificationAsync(NotificationRepository
                    .SingleInstance
@@ -118,7 +118,7 @@ namespace SoftEngWebEmployee.Views
                     Password = password,
                     Fullname = fullName
                 };
-                AdministratorRepository.SingleInstance.UpdateAdministrator(administrator);
+                await AdministratorRepository.SingleInstance.UpdateAdministrator(administrator);
                 await NotificationRepository.SingleInstance
                    .InsertNewNotificationAsync(NotificationRepository
                    .SingleInstance
