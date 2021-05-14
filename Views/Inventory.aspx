@@ -11,50 +11,62 @@
         }
     </style>
 
-    <p class="fs-2"><b>Inventory</b></p>
-    <a class="btn btn-primary float-end fa fa-plus-circle" data-bs-toggle="modal" href="#addProduct">Add Product</a>
-    <p class="fs-4"><b>Search Inventory</b></p>
+    <!-- Inventory Title + Add Product Button -->
+    <div class="row pt-4">
+        <div class="col-6">
+            <p class="fs-2"><b>Inventory</b></p>
+        </div>
+        <div class="col-6">
+        <button class="btn btn-success float-end" data-bs-toggle="modal" href="#addProduct">
+            <i class="fa fa-plus-circle"></i> Add Product</button>
+        </div>
+    </div>   
 
-    <!-- Search Bar -->
-    <div class="float-left" style="margin-right:5px">
-        <div class="input-group">
-            <div class="form-outline">                   
-                <asp:TextBox ID="searchBox" placeholder="Search" runat="server" CssClass="form-control"></asp:TextBox>
+    <div class="row">
+        <!-- Search Bar -->
+        <div class="col-12 col-xl-3 col-lg-4 col-md-5 col-sm-8">
+            <div class="float-left" style="margin-right:5px">
+                <div class="input-group">
+                    <div class="form-outline">                   
+                        <asp:TextBox ID="searchBox" placeholder="Search" runat="server" CssClass="form-control"></asp:TextBox>
+                    </div>
+                    <asp:LinkButton ID="searchButton" runat="server" OnClick="SearchButton_Click" CssClass="btn btn-small btn-primary"><i class="fa fa-search"></i></asp:LinkButton>
+                </div>
             </div>
-            <asp:LinkButton ID="searchButton" runat="server" OnClick="SearchButton_Click" CssClass="btn btn-small btn-primary"><i class="fa fa-search"></i></asp:LinkButton>
         </div>
-    </div>
               
-    <!-- Category Dropdown -->
-    <div class="float-xl-start float-lg-start float-md-start float-end">
-        <div class="btn-group">
-            <asp:UpdatePanel ID="UpdatePanel_Dropdown" runat="server">
-                <ContentTemplate>
-                    <!-- Dropdown Button -->
-                    <asp:Button ID="dropdownMenuReference1" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Category &#x25BC;" />
-                    <!-- Dropdown List -->
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference1">
-                        <li><asp:Button ID="btnCategoryAll" runat="server" CssClass="dropdown-item" Text="All Products" OnClick="Category_Click" UseSubmitBehavior="false"/></li>
-                        <li><hr class="dropdown-divider"></li>
+        <!-- Category Dropdown -->
+         <div class="col-12 col-xl-3 col-lg-4 col-md-5 col-sm-4">
+            <div class="float-xl-start float-lg-start float-md-start float-sm-end">
+                <div class="btn-group">
+                    <asp:UpdatePanel ID="UpdatePanel_Dropdown" runat="server">
+                        <ContentTemplate>
+                            <!-- Dropdown Button -->
+                            <asp:Button ID="dropdownMenuReference1" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Category &#x25BC;" />
+                            <!-- Dropdown List -->
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference1">
+                                <li><asp:Button ID="btnCategoryAll" runat="server" CssClass="dropdown-item" Text="All Products" OnClick="Category_Click" UseSubmitBehavior="false"/></li>
+                                <li><hr class="dropdown-divider"></li>
 
-                        <asp:Repeater ID="CategoryRepeater" OnItemCreated="CategoryRepeater_ItemCreated" runat="server">
-                            <ItemTemplate>
-                                <a runat="server" class="dropdown-item" id="categorySelected">
-                                    <li><asp:Button ID="category" runat="server" CssClass="dropdown-item" Text='<%#Container.DataItem%>' OnClick="Category_Click" UseSubmitBehavior="false"/></li>                               
-                                </a>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </ul>
-                </ContentTemplate>
+                                <asp:Repeater ID="CategoryRepeater" OnItemCreated="CategoryRepeater_ItemCreated" runat="server">
+                                    <ItemTemplate>
+                                        <a runat="server" class="dropdown-item" id="categorySelected">
+                                            <li><asp:Button ID="category" runat="server" CssClass="dropdown-item" Text='<%#Container.DataItem%>' OnClick="Category_Click" UseSubmitBehavior="false"/></li>                               
+                                        </a>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </ul>
+                        </ContentTemplate>
                     
-                <Triggers>
-                    <asp:AsyncPostBackTrigger ControlID="dropdownMenuReference1" EventName="Click" />
-                </Triggers>
-            </asp:UpdatePanel>                                
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="dropdownMenuReference1" EventName="Click" />
+                        </Triggers>
+                    </asp:UpdatePanel>                                
+                </div>
+            </div>
         </div>
     </div>
-    
-    <br>
+       
     <br>
 
     <!-- Search Repeater -->
@@ -68,16 +80,15 @@
                 <br>
                 <br>
                 <center><h3 style="color:white">No Items Found</h3></center>
-                <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;"loop autoplay></lottie-player></center>
+                <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 150px; height: 150px;"loop autoplay></lottie-player></center>
                 <%} %>
                 <%} %>
                 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
                     <asp:Repeater ID="SearchRepeater" runat="server">
                         <ItemTemplate>
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5 col-9 my-1">
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5 col-9">
                                 <div class="card">
-                                    <!-- Possible change: modify size of picture space -->
-                                    <img class="card-img-top" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="200px" width="100px" alt="Card image cap">
+                                    <img class="card-img-top" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="150px" width="75px" alt="Product picture here">
                                     <div class="card-body">
                                         <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                         <p class="card-text">Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
@@ -98,7 +109,7 @@
 
     <!-- Greenhouse Repeater -->
     <hr />
-    <p class="fs-4"><b>Greenhouse</b></p>
+    <p class="fs-4">Greenhouse</p>
     <!-- Guide Source: https://codepen.io/Temmio/pen/gKGEYV -->
     <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
         <asp:UpdatePanel ID="UpdatePanel_GHRepeater" runat="server">
@@ -110,16 +121,16 @@
                 <br>
                 <br>
                 <center><h3 style="color:white">No Items Found</h3></center>
-                <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;"loop autoplay></lottie-player></center>
+                <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 150px; height: 150px;"loop autoplay></lottie-player></center>
                 <%} %>
                 <%} %>
                 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
                     <asp:Repeater ID="GHRepeater" runat="server">
                         <ItemTemplate>
-                            <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
+                            <div class="col-lg-3 col-md-4 col-sm-5 col-6">
                                 <div class="card">
                                     <!-- Possible change: modify size of picture space -->
-                                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
+                                    <img class="card-img-top" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="150px" width="75px" alt="Product picture here">
                                     <div class="card-body">
                                         <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                         <p class="card-text">Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
@@ -137,7 +148,7 @@
 
     <!-- Hydroponics Repeater -->
     <hr />
-    <p class="fs-4"><b>Hydroponics</b></p>
+    <p class="fs-4">Hydroponics</p>
     <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
         <asp:UpdatePanel ID="UpdatePanel_HPRepeater" runat="server">
             <ContentTemplate>
@@ -148,16 +159,16 @@
                 <br>
                 <br>
                 <center><h3 style="color:white">No Items Found</h3></center>
-                <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;"loop autoplay></lottie-player></center>
+                <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 150px; height: 150px;"loop autoplay></lottie-player></center>
                 <%} %>
                 <%} %>
                 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
                     <asp:Repeater ID="HPRepeater" runat="server">
                         <ItemTemplate>
-                            <div class="col-lg-3 col-md-4 col-sm-5 col-6 my-2">
+                            <div class="col-lg-3 col-md-4 col-sm-5 col-6">
                                 <div class="card">
                                     <!-- Possible change: modify size of picture space -->
-                                    <img class="card-img-top" src="/Images/logo.PNG" alt="Card image cap">
+                                    <img class="card-img-top" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="150px" width="75px" alt="Product picture here">
                                     <div class="card-body">
                                         <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                         <p class="card-text">Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
