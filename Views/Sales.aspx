@@ -111,7 +111,7 @@
                                         <ItemTemplate>
                                             <a runat="server" class="dropdown-item" id="categorySelected">
                                                 <li>
-                                                    <asp:Button ID="CategoryBtn" runat="server" CssClass="dropdown-item" Text='<%# DataBinder.Eval(Container.DataItem,"ProductCategory") %>' OnClick="CategoryBtn_Click" />
+                                                    <asp:Button ID="CategoryBtn" runat="server" CssClass="dropdown-item" Text='<%#Container.DataItem%>' OnClick="CategoryBtn_Click" />
                                                 </li>
                                             </a>
                                         </ItemTemplate>
