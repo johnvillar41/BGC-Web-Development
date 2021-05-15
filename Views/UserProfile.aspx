@@ -40,18 +40,19 @@
             z-index: 99;
         }
     </style>
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+        <ProgressTemplate>
+            <div id="overlayDiv">
+                <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
 
     <div class="container rounded-lg mt-5" style="border: 5px solid orange">
         <div class="row">
             <div class="col-md-4 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
-                        <ProgressTemplate>
-                            <div id="overlayDiv">
-                                <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
-                            </div>
-                        </ProgressTemplate>
-                    </asp:UpdateProgress>
+
 
                     <img alt="" class="rounded-circle mt-5" width="200" height="200" src="data:image/png;base64,<%=ImageString%>" />
                     <div>
@@ -63,8 +64,14 @@
                         <asp:FileUpload type="file" ID="ProfileFileUpload" CssClass="form-control" runat="server" />
                         <asp:Button ID="UploadImage" CssClass="btn btn-info" runat="server" Style="background-color: #eba800; border-color: none" Text="Upload" OnClick="UploadImage_Click" />
                     </div>
-
-                    <asp:Label ID="FullnameLabel" CssClass="font-weight-bold" runat="server" Text="Label"></asp:Label>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <asp:Label ID="FullnameLabel" CssClass="font-weight-bold" runat="server" Text="Label"></asp:Label>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="ButtonSaveProfile" EventName="Click" />
+                        </Triggers>
+                    </asp:UpdatePanel>
                     <%if (EmployeeType == SoftEngWebEmployee.Helpers.Constants.EmployeeType.Administrator)%>
                     <%{%>
                     <span class="badge bg-dark"><%=EmployeeType.ToString() %></span>
@@ -76,6 +83,7 @@
                 </div>
             </div>
             <div class="col-md-8">
+
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
 
@@ -113,11 +121,11 @@
                         <asp:Button ID="ButtonSaveProfile" class="btn btn-primary profile-button" runat="server" Text="Save Profile" OnClick="ButtonSaveProfile_Click" ForeColor="Black" />
                     </div>
                 </div>
+
+
             </div>
+
         </div>
     </div>
-
-
-
-
+    
 </asp:Content>

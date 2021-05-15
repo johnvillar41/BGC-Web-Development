@@ -47,11 +47,9 @@ namespace SoftEngWebEmployee.Views
                 Password = Password.Text
             };
             await UserProfileRepository.SingleInstance.UpdateProfileAsync(updatedUser);
-            
+            FullnameLabel.Text = updatedUser.Fullname;
             Thread.Sleep(5000);
-            UpdateProgress1.Visible = false;
-            Response.Redirect(Request.RawUrl, false);
-
+            UpdateProgress1.Visible = false;          
         }
             
 
