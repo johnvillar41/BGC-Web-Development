@@ -17,7 +17,7 @@
             <p class="fs-2"><b>Inventory</b></p>
         </div>
         <div class="col-6">
-        <button class="btn btn-success float-end" data-bs-toggle="modal" href="#addProduct">
+        <button runat="server" id="btnInventoryAdd" onserverclick="btnInventoryAdd_ServerClick" class="btn btn-success float-end" title="Add Product">
             <i class="fa fa-plus-circle"></i> Add Product</button>
         </div>
     </div>   

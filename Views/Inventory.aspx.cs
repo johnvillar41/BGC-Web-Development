@@ -50,6 +50,19 @@ namespace SoftEngWebEmployee.Views
             HPRepeater.DataBind();
         }
 
+        protected void btnInventoryAdd_ServerClick(object sender, EventArgs e)
+        {
+            Response.Redirect("InventoryAdd.aspx");
+        }
+
+        protected void CategoryRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
+        {
+            Button button = e.Item.FindControl("category") as Button;
+            ScriptManager current = ScriptManager.GetCurrent(Page);
+            if (current != null)
+                current.RegisterAsyncPostBackControl(button);
+        }
+
         protected async void Category_Click(object sender, EventArgs e)
         {
             string category = (sender as Button).Text.ToString();
@@ -95,16 +108,7 @@ namespace SoftEngWebEmployee.Views
             HPRepeater.DataSource = hydroponics;
             listHPRepeater = hydroponics;
             HPRepeater.DataBind();
-        }        
-
-        protected void CategoryRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
-        {
-            Button button = e.Item.FindControl("category") as Button;
-
-            ScriptManager current = ScriptManager.GetCurrent(Page);
-            if (current != null)
-                current.RegisterAsyncPostBackControl(button);
-        }
+        }               
 
         protected async void RetrieveDetails(object sender, EventArgs e)
         {
@@ -147,7 +151,7 @@ namespace SoftEngWebEmployee.Views
         {
 
         }
-
+        
         /* C# code for displaying card details
 
         <p> Are you sure you want to delete this product? </p>
