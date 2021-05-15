@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Administrators.aspx.cs" Inherits="SoftEngWebEmployee.Views.Administrators" Async="true" %>
+
 <%@ Import Namespace="SoftEngWebEmployee.Helpers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
@@ -13,6 +14,15 @@
 
         .bd-callout-warning {
             border-left-color: #f0ad4e;
+        }
+
+        #overlayDiv {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            z-index: 99;
         }
     </style>
     <div class="container">
@@ -62,7 +72,7 @@
                                     <tr>
                                         <td><%=admins.User_ID %></td>
                                         <td>
-                                         <img alt="" height="50px" width="50px" src="data:image/jpeg;base64,<%=admins.ProfilePicture.ToString() %>" /></td>
+                                            <img alt="" height="50px" width="50px" src="data:image/jpeg;base64,<%=admins.ProfilePicture.ToString() %>" /></td>
                                         <td>
                                             <%=admins.Username %>                                       
                                         </td>
@@ -75,11 +85,10 @@
                                         <%{ %>
                                         <td><span class="badge bg-dark"><%=admins.EmployeeType.ToString() %></span></td>
                                         <%}
-                                        else %>
+                                            else %>
                                         <%{ %>
                                         <td><span class="badge bg-secondary text-dark"><%=admins.EmployeeType.ToString() %></span></td>
                                         <%} %>
-                                        
                                     </tr>
                                     <%} %>
                                 </tbody>
@@ -131,6 +140,13 @@
 
                     </div>
                     <hr />
+                    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                        <ProgressTemplate>
+                            <div id="overlayDiv">
+                                <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
+                            </div>
+                        </ProgressTemplate>
+                    </asp:UpdateProgress>
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <div class="mb-3">

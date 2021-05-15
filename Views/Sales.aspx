@@ -29,6 +29,15 @@
                 width: 650px;
                 word-break: break-word;
             }
+
+        #overlayDiv {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            z-index: 99;
+        }
     </style>
     <script type="text/javascript">     
         function isNumber(evt) {
@@ -179,7 +188,9 @@
                         <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
                             <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                                 <ProgressTemplate>
-                                    <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
+                                    <div id="overlayDiv">
+                                        <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
+                                    </div>
                                 </ProgressTemplate>
                             </asp:UpdateProgress>
                             <asp:UpdatePanel ID="UpdatePanel2" runat="server">

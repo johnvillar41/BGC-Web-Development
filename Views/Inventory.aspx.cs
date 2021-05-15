@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using SoftEngWebEmployee.Models;
 using SoftEngWebEmployee.Repository;
 using SoftEngWebEmployee.Helpers;
+using System.Threading;
 
 namespace SoftEngWebEmployee.Views
 {
@@ -129,6 +130,7 @@ namespace SoftEngWebEmployee.Views
 
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
+            UpdateProgress1.Visible = true;
             Button button = (Button)sender;
             var productID = button.CommandArgument.ToString();
             ProductRepository.SingleInstance.DeleteProduct(productID);
@@ -145,6 +147,7 @@ namespace SoftEngWebEmployee.Views
                 AlertPositions = Constants.AlertPositions.CENTER
             };
             sweetAlertBuilder.BuildSweetAlert(this);
+            UpdateProgress1.Visible = false;
         }
 
         protected void UpdateButton_Click(object sender, EventArgs e)

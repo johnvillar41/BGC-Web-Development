@@ -293,23 +293,7 @@ namespace SoftEngWebEmployee.Repository
                 }
             }
             return productModel;
-        }
-        /// <summary>
-        ///     Deletes a product inside the database given a product id
-        /// </summary>
-        /// <param name="productID">
-        ///     Passes a product id as parameter
-        /// </param>
-        public async void DeleteProduct(string productID)
-        {
-            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
-            {
-                await connection.OpenAsync();
-                string queryString = "DELETE FROM products_table WHERE product_id='" + productID + "'";
-                MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.ExecuteNonQuery();
-            }
-        }
+        }        
         /// <summary>
         ///     Fetches a product for a given product id
         /// </summary>
