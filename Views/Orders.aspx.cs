@@ -62,7 +62,7 @@ namespace SoftEngWebEmployee.Views
                     ShowCloseButton = true
                 };
                 sweetAlert.BuildSweetAlert(this);
-                Thread.Sleep(5000);
+
                 UpdateProgress1.Visible = false;
             }
         }
@@ -118,7 +118,7 @@ namespace SoftEngWebEmployee.Views
                     ShowCloseButton = true
                 };
                 sweetAlert.BuildSweetAlert(this);
-                Thread.Sleep(5000);
+
                 UpdateProgress1.Visible = false;
             }
         }
@@ -136,7 +136,7 @@ namespace SoftEngWebEmployee.Views
                     DisplayOrders();
                 }
             }
-            Thread.Sleep(5000);
+
             UpdateProgress1.Visible = false;
         }
 

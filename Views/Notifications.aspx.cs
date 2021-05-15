@@ -28,7 +28,7 @@ namespace SoftEngWebEmployee.Views
             UpdateProgress1.Visible = true;
             var notifications = await NotificationRepository.SingleInstance.FetchNotificationsGivenDateAsync(DateText.Text);
             NotificationsList = notifications;
-            Thread.Sleep(5000);
+
             UpdateProgress1.Visible = false;
         }
     }
