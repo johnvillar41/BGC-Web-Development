@@ -130,24 +130,24 @@ namespace SoftEngWebEmployee.Views
 
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
-            UpdateProgress1.Visible = true;
-            Button button = (Button)sender;
-            var productID = button.CommandArgument.ToString();
-            ProductRepository.SingleInstance.DeleteProduct(productID);
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Pop", "$('#deleteModal').modal('hide');", true);
+            //UpdateProgress1.Visible = true;
+            //Button button = (Button)sender;
+            //var productID = button.CommandArgument.ToString();
+            //ProductRepository.SingleInstance.DeleteProduct(productID);
+            //ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Pop", "$('#deleteModal').modal('hide');", true);
 
-            DisplayInventoryTables();
+            //DisplayInventoryTables();
 
-            SweetAlertBuilder sweetAlertBuilder = new SweetAlertBuilder
-            {
-                HexaBackgroundColor = "#fff",
-                Title = "Product Deleted!",
-                AlertIcons = Constants.AlertStatus.success,
-                ShowCloseButton = true,
-                AlertPositions = Constants.AlertPositions.CENTER
-            };
-            sweetAlertBuilder.BuildSweetAlert(this);
-            UpdateProgress1.Visible = false;
+            //SweetAlertBuilder sweetAlertBuilder = new SweetAlertBuilder
+            //{
+            //    HexaBackgroundColor = "#fff",
+            //    Title = "Product Deleted!",
+            //    AlertIcons = Constants.AlertStatus.success,
+            //    ShowCloseButton = true,
+            //    AlertPositions = Constants.AlertPositions.CENTER
+            //};
+            //sweetAlertBuilder.BuildSweetAlert(this);
+            //UpdateProgress1.Visible = false;
         }
 
         protected void UpdateButton_Click(object sender, EventArgs e)
