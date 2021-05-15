@@ -2,6 +2,7 @@
 using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace SoftEngWebEmployee.Views
 {
@@ -23,9 +24,12 @@ namespace SoftEngWebEmployee.Views
         }
 
         protected async void FindDate_Click(object sender, EventArgs e)
-        {            
+        {
+            UpdateProgress1.Visible = true;
             var notifications = await NotificationRepository.SingleInstance.FetchNotificationsGivenDateAsync(DateText.Text);
             NotificationsList = notifications;
+            Thread.Sleep(5000);
+            UpdateProgress1.Visible = false;
         }
     }
 }

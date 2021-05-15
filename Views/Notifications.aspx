@@ -40,6 +40,11 @@
                         </div>
 
                     </div>
+                    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                        <ProgressTemplate>
+                            <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
+                        </ProgressTemplate>
+                    </asp:UpdateProgress>
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
                             <div class="table-bordered table-condensed table-responsive" style="height: 600px">
@@ -47,7 +52,9 @@
                                     <%if (DisplayNotifications().Count() == 0) %>
                                     <%{ %>
                                     <div>
-                                        <h1><center>No Results Found!</center></h1>
+                                        <h1>
+                                            <center>No Results Found!</center>
+                                        </h1>
                                         <center><img src="/Images/cancell.PNG" style="border-radius: 50%" width="100" height="100" class="d-inline-block align-top" alt="" /></center>
                                     </div>
                                     <%} %>
