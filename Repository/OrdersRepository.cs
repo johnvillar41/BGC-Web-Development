@@ -125,6 +125,7 @@ namespace SoftEngWebEmployee.Repository
                         );
                 }
             }
+            ordersList.Reverse();
             return ordersList;
         }
         /// <summary>
