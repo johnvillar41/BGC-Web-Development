@@ -4,6 +4,7 @@ using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using static SoftEngWebEmployee.Helpers.Constants;
 
 namespace SoftEngWebEmployee.Views
@@ -104,6 +105,7 @@ namespace SoftEngWebEmployee.Views
 
         protected async void ButtonUpdateUser_Click(object sender, EventArgs e)
         {
+            UpdateProgress1.Visible = true;
             var userId = AdministratorID.Text.ToString();
             var username = UsernameUpdate.Text.ToString();
             var password = PasswordUpdate.Text.ToString();
@@ -125,6 +127,10 @@ namespace SoftEngWebEmployee.Views
                    .GenerateNotification(NotificationType.UpdateUser, username));
                 Response.Redirect(Request.RawUrl);
             }
+
+            Thread.Sleep(5000);
+            UpdateProgress1.Visible = false;
+
         }
 
         private async void LoadAdministrators()

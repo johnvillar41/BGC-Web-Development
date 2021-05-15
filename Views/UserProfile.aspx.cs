@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -38,6 +39,7 @@ namespace SoftEngWebEmployee.Views
 
         protected async void ButtonSaveProfile_Click(object sender, EventArgs e)
         {
+            UpdateProgress1.Visible = true;
             var updatedUser = new AdministratorModel()
             {
                 Username = Username.Text,
@@ -45,8 +47,13 @@ namespace SoftEngWebEmployee.Views
                 Password = Password.Text
             };
             await UserProfileRepository.SingleInstance.UpdateProfileAsync(updatedUser);
+            
+            Thread.Sleep(5000);
+            UpdateProgress1.Visible = false;
             Response.Redirect(Request.RawUrl, false);
+
         }
+            
 
         protected async void UploadImage_Click(object sender, EventArgs e)
         {
