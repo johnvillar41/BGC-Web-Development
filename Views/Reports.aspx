@@ -147,7 +147,9 @@
                                             <option value="monthly">Monthly</option>
                                             <option value="annually">Annually</option>
                                         </select>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <p class="card-text">
+
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -203,6 +205,7 @@
                                             <!--See More-->
                                             <li class="list-group-item">Quantity Sold:                                       
                                        <label><%=productSales.ProductReport.QuantitySold %></label>
+                                                <br/>
                                                 <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapse<%=productSales.ProductReport.Product.Product_ID %>" role="button" aria-expanded="false" aria-controls="collapseExample">See More
                                                 </a>
                                                 <div class="collapse mt-2" id="collapse<%=productSales.ProductReport.Product.Product_ID %>">
