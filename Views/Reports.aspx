@@ -152,21 +152,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12">
+                        <div class="row">                            
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
                                 <%if (SalesIncomeDisplay == null) return; %>
                                 <%foreach (var sales in SalesIncomeDisplay) %>
                                 <%{ %>
-                                <div class="card mb-2">
-                                    <center><img src="data:image/jpeg;base64,<%=sales.Administrator.ProfilePicture %>" class="card-img-top" style="height:200px; width:200px"></center>
-                                    <hr />
-                                    <div class="card-body">
-                                        <h5 class="card-title">Username: <%=sales.Administrator.Username %></h5>
-                                        <h5 class="card-title">FullName: <%=sales.Administrator.Fullname %></h5>
-                                        <p class="card-text">Total Sale: <%=sales.TotalSale %></p>
-                                        <p class="card-text">Total Sale On Site: <%=sales.TotalSaleOnsite %></p>
-                                        <p class="card-text">Total Sale Orders: <%=sales.TotalSaleOrders %></p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <div class="col">
+                                    <div class="card mb-2">
+                                        <center><img src="data:image/jpeg;base64,<%=sales.Administrator.ProfilePicture %>" class="card-img-top" style="height:200px;"></center>
+                                        <hr />
+                                        <div class="card-body">
+                                            <h5 class="card-title">Username: <%=sales.Administrator.Username %></h5>
+                                            <h5 class="card-title">FullName: <%=sales.Administrator.Fullname %></h5>
+                                            <p class="card-text">Total Sale: <%=sales.TotalSale %></p>
+                                            <p class="card-text">Total Sale On Site: <%=sales.TotalSaleOnsite %></p>
+                                            <p class="card-text">Total Sale Orders: <%=sales.TotalSaleOrders %></p>
+                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <%} %>
