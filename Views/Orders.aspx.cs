@@ -3,6 +3,7 @@ using SoftEngWebEmployee.Models;
 using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using static SoftEngWebEmployee.Helpers.Constants;
 
 namespace SoftEngWebEmployee.Views
@@ -28,6 +29,7 @@ namespace SoftEngWebEmployee.Views
 
         protected async void btnCancelStatus_Click(object sender, EventArgs e)
         {
+            UpdateProgress1.Visible = true;
             if (!String.IsNullOrWhiteSpace(OrderIDCancel.Text) && IsAllAlphabetic(OrderIDCancel.Text))
             {
                 if (await OrdersRepository.SingleInstance.CheckIfIdExistAsync(int.Parse(OrderIDCancel.Text)) == false)
@@ -59,12 +61,15 @@ namespace SoftEngWebEmployee.Views
                     AlertPositions = Constants.AlertPositions.TOP_END,
                     ShowCloseButton = true
                 };
-                sweetAlert.BuildSweetAlert(this);                
+                sweetAlert.BuildSweetAlert(this);
+                Thread.Sleep(5000);
+                UpdateProgress1.Visible = false;
             }
         }
 
         protected async void btnFinishStatus_Click(object sender, EventArgs e)
         {
+            UpdateProgress1.Visible = true;
             if (!String.IsNullOrWhiteSpace(OrderIDFinish.Text) && IsAllAlphabetic(OrderIDFinish.Text))
             {
                 if (await OrdersRepository.SingleInstance.CheckIfIdExistAsync(int.Parse(OrderIDFinish.Text)) == false)
@@ -112,12 +117,15 @@ namespace SoftEngWebEmployee.Views
                     AlertPositions = Constants.AlertPositions.TOP_END,
                     ShowCloseButton = true
                 };
-                sweetAlert.BuildSweetAlert(this);                
+                sweetAlert.BuildSweetAlert(this);
+                Thread.Sleep(5000);
+                UpdateProgress1.Visible = false;
             }
         }
 
         protected async void BtnSearch_Click(object sender, EventArgs e)
         {
+            UpdateProgress1.Visible = true;
             if (!String.IsNullOrWhiteSpace(OrderIdSearchTextbox.Text) && IsAllAlphabetic(OrderIdSearchTextbox.Text))
             {
                 var order = await OrdersRepository.SingleInstance.FetchOrderAsync(int.Parse(OrderIdSearchTextbox.Text));
@@ -128,6 +136,8 @@ namespace SoftEngWebEmployee.Views
                     DisplayOrders();
                 }
             }
+            Thread.Sleep(5000);
+            UpdateProgress1.Visible = false;
         }
 
         private bool IsAllAlphabetic(string value)
