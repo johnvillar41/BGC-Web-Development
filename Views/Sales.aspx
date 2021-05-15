@@ -4,32 +4,32 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>
-    .scrolling-wrapper {
-        overflow-x: auto;
-    }
-
-    .bd-callout {
-        padding: 1.25rem;
-        border: 1px solid #e9ecef;
-        border-left-width: .25rem;
-        border-radius: .25rem;
-    }
-
-    .bd-callout-warning {
-        border-left-color: #f0ad4e;
-    }
-
-    .card-text {
-        height: 54px;
-        overflow-y: scroll;
-        width: 100%;
-    }
-
-        .card-text p {
-            width: 650px;
-            word-break: break-word;
+        .scrolling-wrapper {
+            overflow-x: auto;
         }
-</style>
+
+        .bd-callout {
+            padding: 1.25rem;
+            border: 1px solid #e9ecef;
+            border-left-width: .25rem;
+            border-radius: .25rem;
+        }
+
+        .bd-callout-warning {
+            border-left-color: #f0ad4e;
+        }
+
+        .card-text {
+            height: 54px;
+            overflow-y: scroll;
+            width: 100%;
+        }
+
+            .card-text p {
+                width: 650px;
+                word-break: break-word;
+            }
+    </style>
     <script type="text/javascript">     
         function isNumber(evt) {
             evt = (evt) ? evt : window.event;
@@ -135,14 +135,14 @@
                                                     <div class="card" style="max-width: 35rem; min-width: 15rem; height: 420px">
                                                         <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
                                                         <div class="card-body">
-                                                            <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>                                                            
+                                                            <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                                             <p class="card-text">
                                                                 <b>Description: </b>
                                                                 <%# DataBinder.Eval(Container.DataItem,"ProductDescription") %>
                                                                 <br />
-                                                                <b>Stocks: </b>                                                                
+                                                                <b>Stocks: </b>
                                                                 <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %>
-                                                            </p>                                                            
+                                                            </p>
                                                         </div>
                                                         <div class="card-footer">
                                                             <div class="col-lg-12">
@@ -177,6 +177,11 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
+                            <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                                <ProgressTemplate>
+                                    <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
                             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                 <ContentTemplate>
                                     <%if (Cart.GetCartItems().Count == 0) %>
@@ -192,14 +197,14 @@
                                                     <div class="card" style="max-width: 35rem; height: 420px">
                                                         <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
                                                         <div class="card-body">
-                                                            <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>                                                            
+                                                            <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
                                                             <p class="card-text">
                                                                 <b>Description: </b>
                                                                 <%# DataBinder.Eval(Container.DataItem,"ProductDescription") %>
                                                                 <br />
-                                                                <b>Total number of items: </b>                                                                
+                                                                <b>Total number of items: </b>
                                                                 <%# DataBinder.Eval(Container.DataItem,"TotalNumberOfProduct") %>
-                                                            </p>                                                               
+                                                            </p>
                                                         </div>
                                                         <div class="card-footer">
                                                             <asp:Button ID="BtnRemoveCartItem" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Remove Item" OnClick="BtnRemoveCartItem_Click" />
@@ -218,7 +223,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-12 mt-3">                            
+                        <div class="col-lg-3 col-md-6 col-sm-12 mt-3">
                             <asp:Button ID="BtnConfirmCartOrder" CssClass="btn btn-success btn-block" runat="server" Text="Confirm" OnClick="BtnConfirmCartOrder_Click" />
                         </div>
                     </div>

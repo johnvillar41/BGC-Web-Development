@@ -3,13 +3,14 @@ using SoftEngWebEmployee.Models;
 using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace SoftEngWebEmployee.Views
 {
     public partial class Sales : System.Web.UI.Page
-    {
+    {       
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -118,6 +119,7 @@ namespace SoftEngWebEmployee.Views
         }
         protected async void BtnConfirmCartOrder_Click(object sender, EventArgs e)
         {
+            UpdateProgress1.Visible = true;
             SweetAlertBuilder sweetAlert;
             if (Cart.GetCartItems().Count == 0)
             {
@@ -154,6 +156,8 @@ namespace SoftEngWebEmployee.Views
             LoadCart();
             LoadSales();
             LoadProducts();
+            Thread.Sleep(5000);
+            UpdateProgress1.Visible = false;
         }
         private async void BuildSale(List<OnsiteProductsTransactionModel> onsiteProducts, int transactionID)
         {
