@@ -13,7 +13,7 @@ namespace SoftEngWebEmployee.Views
 {
     public partial class Inventory : System.Web.UI.Page
     {
-        public List<ProductModel> listSearchRepeater {get; set;}
+        public List<ProductModel> listSearchRepeater { get; set; }
         public List<ProductModel> listGHRepeater { get; set; }
         public List<ProductModel> listHPRepeater { get; set; }
 
@@ -35,7 +35,7 @@ namespace SoftEngWebEmployee.Views
 
         private async void DisplayInventoryTables()
         {
-            var inventory = await ProductRepository.SingleInstance.FetchAllProductsAsync();            
+            var inventory = await ProductRepository.SingleInstance.FetchAllProductsAsync();
             SearchRepeater.DataSource = inventory;
             listSearchRepeater = inventory;
             SearchRepeater.DataBind();
@@ -45,7 +45,7 @@ namespace SoftEngWebEmployee.Views
 
         protected void btnInventoryAdd_ServerClick(object sender, EventArgs e)
         {
-            Response.Redirect("InventoryAdd.aspx");
+            Response.Redirect("InventoryAdd.aspx", false);
         }
 
         protected void CategoryRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
@@ -60,8 +60,8 @@ namespace SoftEngWebEmployee.Views
         {
             string category = (sender as Button).Text.ToString();
             char caret = Convert.ToChar(0x000025BC);
-            dropdownMenuReference1.Text = category+" "+caret;
-            if (category=="All Products")
+            dropdownMenuReference1.Text = category + " " + caret;
+            if (category == "All Products")
             {
                 DisplayInventoryTables();
             }
@@ -73,7 +73,7 @@ namespace SoftEngWebEmployee.Views
                 SearchRepeater.DataBind();
 
                 LoadGreenHouseAndHydroponics();
-            }           
+            }
         }
 
         protected async void SearchButton_Click(object sender, EventArgs e)
@@ -85,7 +85,7 @@ namespace SoftEngWebEmployee.Views
             SearchRepeater.DataBind();
 
             LoadGreenHouseAndHydroponics();
-        }               
+        }
 
         protected async void RetrieveDetails(object sender, EventArgs e)
         {
@@ -144,7 +144,7 @@ namespace SoftEngWebEmployee.Views
             listHPRepeater = hydroponics;
             HPRepeater.DataBind();
         }
-        
+
         /* C# code for displaying card details
 
         <p> Are you sure you want to delete this product? </p>
