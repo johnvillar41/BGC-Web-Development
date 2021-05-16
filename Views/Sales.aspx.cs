@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static SoftEngWebEmployee.Helpers.Constants;
 
 namespace SoftEngWebEmployee.Views
 {
@@ -79,26 +80,17 @@ namespace SoftEngWebEmployee.Views
             try
             {
                 product.TotalNumberOfProduct = int.Parse(totalItem.Text);
-                SweetAlertBuilder sweetAlert = new SweetAlertBuilder
+                if(await ProductRepository.SingleInstance.CheckIfProductIsEnough(product.TotalNumberOfProduct,int.Parse(productID)) == false || product.TotalNumberOfProduct == 0)
                 {
-                    HexaBackgroundColor = "#90EE90",
-                    AlertIcons = Constants.AlertStatus.success,
-                    Title = "Successfull",
-                    Message = "Successfully added to cart: " + product.ProductName,
-                };
-                sweetAlert.BuildSweetAlert(this);
+                    BuildSweetAlert("#ffcccb", AlertStatus.error, "Error!", "Error adding to cart: " + product.ProductName + " due to not enough stocks!");                  
+                    return;
+                }
+                BuildSweetAlert("#90EE90", AlertStatus.success, "Successfull", "Successfully added to cart: " + product.ProductName);               
                 Cart.AddCartItem(product);
             }
             catch (Exception)
             {
-                SweetAlertBuilder sweetAlert = new SweetAlertBuilder
-                {
-                    HexaBackgroundColor = "#ffcccb",
-                    AlertIcons = Constants.AlertStatus.error,
-                    Title = "Error",
-                    Message = "Error Adding to Cart: " + product.ProductName,
-                };
-                sweetAlert.BuildSweetAlert(this);
+                BuildSweetAlert("#ffcccb", AlertStatus.error, "Error", "Error Adding to Cart: " + product.ProductName);               
             }
             LoadCart();
         }
@@ -119,18 +111,10 @@ namespace SoftEngWebEmployee.Views
         }
         protected async void BtnConfirmCartOrder_Click(object sender, EventArgs e)
         {
-            UpdateProgress1.Visible = true;
-            SweetAlertBuilder sweetAlert;
+            UpdateProgress1.Visible = true;          
             if (Cart.GetCartItems().Count == 0)
             {
-                sweetAlert = new SweetAlertBuilder
-                {
-                    HexaBackgroundColor = "#ffcccb",
-                    AlertIcons = Constants.AlertStatus.error,
-                    Title = "Error Processing Request",
-                    Message = "Cart has no items"
-                };
-                sweetAlert.BuildSweetAlert(this);
+                BuildSweetAlert("#ffcccb", AlertStatus.error, "Error Processing Request", "Cart has no items");              
                 return;
             }
             var onSiteTransaction = new OnsiteTransactionModel
@@ -144,20 +128,25 @@ namespace SoftEngWebEmployee.Views
 
             BuildSale(onsiteProducts, transactionID);
             BuildNotification(onsiteProducts);
-
-            sweetAlert = new SweetAlertBuilder
-            {
-                HexaBackgroundColor = "#ffcccb",
-                AlertIcons = Constants.AlertStatus.success,
-                Title = "Successfully Added Sales",
-            };
-            Cart.ClearCartItems();
-            sweetAlert.BuildSweetAlert(this);
+            BuildSweetAlert("#90EE90", AlertStatus.success, "Successfully Added Sales", null);
+           
+            Cart.ClearCartItems();           
             LoadCart();
             LoadSales();
             LoadProducts();
             Thread.Sleep(5000);
             UpdateProgress1.Visible = false;
+        }
+        private void BuildSweetAlert(string hexaBgColor,AlertStatus alertStatus,string title,string message)
+        {
+            SweetAlertBuilder sweetAlertBuilder = new SweetAlertBuilder
+            {
+                HexaBackgroundColor = hexaBgColor,
+                AlertIcons = Constants.AlertStatus.error,
+                Title = title,
+                Message = message,
+            };
+            sweetAlertBuilder.BuildSweetAlert(this);
         }
         private async void BuildSale(List<OnsiteProductsTransactionModel> onsiteProducts, int transactionID)
         {
