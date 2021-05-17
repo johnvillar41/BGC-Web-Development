@@ -293,6 +293,7 @@
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Views\DisplaySales.aspx" />
     <Content Include="Views\InventoryAdd.aspx" />
+    <Content Include="Views\InventoryUpdate.aspx" />
     <Content Include="Views\UpdateInformation.aspx" />
     <Content Include="Views\Administrators.aspx" />
     <Content Include="Views\Information.aspx" />
@@ -381,6 +382,13 @@
     </Compile>
     <Compile Include="Views\InventoryAdd.aspx.designer.cs">
       <DependentUpon>InventoryAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InventoryUpdate.aspx.cs">
+      <DependentUpon>InventoryUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\InventoryUpdate.aspx.designer.cs">
+      <DependentUpon>InventoryUpdate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\UpdateInformation.aspx.cs">
       <DependentUpon>UpdateInformation.aspx</DependentUpon>
