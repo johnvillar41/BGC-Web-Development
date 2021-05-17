@@ -40,7 +40,7 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "SELECT * FROM products_table";
+                string queryString = "SELECT * FROM products_table ORDER BY product_name";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
@@ -197,7 +197,7 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "SELECT * FROM products_table WHERE product_category='" + category + "'";
+                string queryString = "SELECT * FROM products_table WHERE product_category='" + category + "' ORDER BY product_name";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
@@ -235,7 +235,7 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "SELECT * FROM products_table WHERE product_name LIKE '" + search + "%'";
+                string queryString = "SELECT * FROM products_table WHERE product_name LIKE '%" + search + "%' ORDER BY product_name";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 while (await reader.ReadAsync())

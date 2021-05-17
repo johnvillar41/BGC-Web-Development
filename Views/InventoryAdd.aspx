@@ -1,20 +1,40 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" Async="true"  CodeBehind="InventoryAdd.aspx.cs" Inherits="SoftEngWebEmployee.Views.InventoryAdd" %>
 
-
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <style>
+        #count_message {
+          background-color: black;
+          color: white;
+          margin-top: -20px;
+          margin-right: 5px;
+        }
+    </style>
+
+    <script>
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && charCode < 48) || charCode > 57) {
+                return false;
+            }
+            return true;
+        }
+                
+    </script>
 
     <p class="fs-4"><b>Add Product</b></p>
     <br>
-    <br>
     <p class="fs-5">Product Details</p>
-
+    
     <div class="row">
         <div class="col-8">
             <!-- Product Name -->
             <div class="row mb-3">
                 <label><i>Name</i></label>
-                <asp:TextBox ID="addProductName" runat="server" placeholder="Enter product name here" CssClass="form-control text-area" Height="35"></asp:TextBox>
+                <asp:TextBox ID="addProductName" runat="server" placeholder="Enter product name here" CssClass="form-control text-area" Height="35" maxlength="255"></asp:TextBox>               
             </div> 
+
             <!-- Product Category -->
             <div class="row mb-3">
                 <label><i>Category</i></label>
@@ -22,7 +42,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="row">
-                                <asp:TextBox ID="addProductCategory" runat="server" placeholder="Enter product category here" CssClass="form-control text-area" Height="35"></asp:TextBox>
+                                <asp:TextBox ID="addProductCategory" runat="server" placeholder="Enter product category here" CssClass="form-control text-area" Height="35" maxlength="255"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-4">
@@ -38,34 +58,35 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-                
-                            
+                </div>                                            
             </div>
+
             <!-- Product Price+Stocks -->
             <div class="row mb-3">
                 <div class="col-6">
                     <div class="row">
                         <label><i>Price</i></label>
-                        <asp:TextBox ID="addProductPrice" runat="server" placeholder="Enter product price here" CssClass="form-control text-area" Height="35"></asp:TextBox>
+                        <input type="text" class="textfield" value="" id="addProductPrice" name="addProductPrice" placeholder="Enter product price here" maxlength="255" onkeypress="return isNumber(event)" onpaste="return false;"/>
                     </div>                    
                 </div>
                 <div class="col-6">
                     <div class="row">
                         <label><i>Stocks</i></label>
-                        <asp:TextBox ID="addProductStocks" runat="server" placeholder="Enter stock amount here" CssClass="form-control text-area" Height="35"></asp:TextBox>
+                        <input type="text" class="textfield" value="" id="addProductStocks" name="addProductStocks" placeholder="Enter stock amount here" maxlength="255" onkeypress="return isNumber(event)" onpaste="return false;"/>
                     </div>
                 </div>
             </div>
+
             <!-- Product Description -->
             <div class="row mb-3">
                 <div class="form-group">
                     <div class="row">
                      <label for="addProductDescription"><i>Description</i></label>
-                        <textarea class="form-control" rows="3" id="addProductDescription" placeholder="Enter description here"></textarea>
+                        <textarea class="form-control" rows="3" id="addProductDescription" placeholder="Enter description here" maxlength="1000"></textarea>
                     </div>
                 </div>
             </div>
+        
         </div>
 
         <div class="col-4">
