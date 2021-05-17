@@ -50,52 +50,64 @@
                             </button>
                         </div>
                         <%} %>
-
-                        <div class="table-condensed table-responsive table-bordered" style="height: 500px">
-                            <table class="table table-borderless">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">User ID</th>
-                                        <th scope="col">Profile Picture</th>
-                                        <th scope="col">Username</th>
-                                        <%if (IsAdmin()) %>
-                                        <%{ %>
-                                        <th scope="col">Password</th>
-                                        <%} %>
-                                        <th scope="col">FullName</th>
-                                        <th scope="col">Position</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <%foreach (var admins in DisplayAdministrators())%>
-                                    <%{ %>
-                                    <tr>
-                                        <td><%=admins.User_ID %></td>
-                                        <td>
-                                            <img alt="" height="50px" width="50px" src="data:image/jpeg;base64,<%=admins.ProfilePicture.ToString() %>" /></td>
-                                        <td>
-                                            <%=admins.Username %>                                       
-                                        </td>
-                                        <%if (IsAdmin()) %>
-                                        <%{ %>
-                                        <td><%=admins.Password %></td>
-                                        <%} %>
-                                        <td><%=admins.Fullname %></td>
-                                        <%if (admins.EmployeeType == Constants.EmployeeType.Administrator) %>
-                                        <%{ %>
-                                        <td><span class="badge bg-dark"><%=admins.EmployeeType.ToString() %></span></td>
-                                        <%}
-                                            else %>
-                                        <%{ %>
-                                        <td><span class="badge bg-secondary text-dark"><%=admins.EmployeeType.ToString() %></span></td>
-                                        <%} %>
-                                    </tr>
-                                    <%} %>
-                                </tbody>
-
-                            </table>
-
-                        </div>
+                        <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                            <ProgressTemplate>
+                                <div id="overlayDiv">
+                                    <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
+                                </div>
+                            </ProgressTemplate>
+                        </asp:UpdateProgress>
+                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                            <ContentTemplate>
+                                <div class="table-condensed table-responsive table-bordered" style="height: 500px">
+                                    <table class="table table-borderless">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">User ID</th>
+                                                <th scope="col">Profile Picture</th>
+                                                <th scope="col">Username</th>
+                                                <%if (IsAdmin()) %>
+                                                <%{ %>
+                                                <th scope="col">Password</th>
+                                                <%} %>
+                                                <th scope="col">FullName</th>
+                                                <th scope="col">Position</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%foreach (var admins in DisplayAdministrators())%>
+                                            <%{ %>
+                                            <tr>
+                                                <td><%=admins.User_ID %></td>
+                                                <td>
+                                                    <img alt="" height="50px" width="50px" src=" data:image/jpeg;charset=utf-8;base64,<%=admins.ProfilePicture.ToString() %>" /></td>
+                                                <td>
+                                                    <%=admins.Username %>                                       
+                                                </td>
+                                                <%if (IsAdmin()) %>
+                                                <%{ %>
+                                                <td><%=admins.Password %></td>
+                                                <%} %>
+                                                <td><%=admins.Fullname %></td>
+                                                <%if (admins.EmployeeType == Constants.EmployeeType.Administrator) %>
+                                                <%{ %>
+                                                <td><span class="badge bg-dark"><%=admins.EmployeeType.ToString() %></span></td>
+                                                <%}
+                                                    else %>
+                                                <%{ %>
+                                                <td><span class="badge bg-secondary text-dark"><%=admins.EmployeeType.ToString() %></span></td>
+                                                <%} %>
+                                            </tr>
+                                            <%} %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="BtnDelete" EventName="Click" />
+                                <asp:AsyncPostBackTrigger ControlID="ButtonUpdateUser" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
                     </div>
                 </div>
             </div>
@@ -140,13 +152,6 @@
 
                     </div>
                     <hr />
-                    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
-                        <ProgressTemplate>
-                            <div id="overlayDiv">
-                                <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
-                            </div>
-                        </ProgressTemplate>
-                    </asp:UpdateProgress>
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <div class="mb-3">

@@ -13,7 +13,7 @@ namespace SoftEngWebEmployee.Views
 {
     public partial class Inventory : System.Web.UI.Page
     {
-        public List<ProductModel> listSearchRepeater {get; set;}
+        public List<ProductModel> listSearchRepeater { get; set; }
         public List<ProductModel> listGHRepeater { get; set; }
         public List<ProductModel> listHPRepeater { get; set; }
 
@@ -35,25 +35,17 @@ namespace SoftEngWebEmployee.Views
 
         private async void DisplayInventoryTables()
         {
-            var inventory = await ProductRepository.SingleInstance.FetchAllProductsAsync();            
+            var inventory = await ProductRepository.SingleInstance.FetchAllProductsAsync();
             SearchRepeater.DataSource = inventory;
             listSearchRepeater = inventory;
             SearchRepeater.DataBind();
 
-            var greenhouse = await ProductRepository.SingleInstance.FetchGHProductsAsync();
-            GHRepeater.DataSource = greenhouse;
-            listGHRepeater = greenhouse;
-            GHRepeater.DataBind();
-
-            var hydroponics = await ProductRepository.SingleInstance.FetchHPProductsAsync();
-            HPRepeater.DataSource = hydroponics;
-            listHPRepeater = hydroponics;
-            HPRepeater.DataBind();
+            LoadGreenHouseAndHydroponics();
         }
 
         protected void btnInventoryAdd_ServerClick(object sender, EventArgs e)
         {
-            Response.Redirect("InventoryAdd.aspx");
+            Response.Redirect("InventoryAdd.aspx", false);
         }
 
         protected void CategoryRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
@@ -68,8 +60,8 @@ namespace SoftEngWebEmployee.Views
         {
             string category = (sender as Button).Text.ToString();
             char caret = Convert.ToChar(0x000025BC);
-            dropdownMenuReference1.Text = category+" "+caret;
-            if (category=="All Products")
+            dropdownMenuReference1.Text = category + " " + caret;
+            if (category == "All Products")
             {
                 DisplayInventoryTables();
             }
@@ -80,16 +72,8 @@ namespace SoftEngWebEmployee.Views
                 listSearchRepeater = newSearch;
                 SearchRepeater.DataBind();
 
-                var greenhouse = await ProductRepository.SingleInstance.FetchGHProductsAsync();
-                GHRepeater.DataSource = greenhouse;
-                listGHRepeater = greenhouse;
-                GHRepeater.DataBind();
-
-                var hydroponics = await ProductRepository.SingleInstance.FetchHPProductsAsync();
-                HPRepeater.DataSource = hydroponics;
-                listHPRepeater = hydroponics;
-                HPRepeater.DataBind();
-            }           
+                LoadGreenHouseAndHydroponics();
+            }
         }
 
         protected async void SearchButton_Click(object sender, EventArgs e)
@@ -100,16 +84,8 @@ namespace SoftEngWebEmployee.Views
             listSearchRepeater = newSearch;
             SearchRepeater.DataBind();
 
-            var greenhouse = await ProductRepository.SingleInstance.FetchGHProductsAsync();
-            GHRepeater.DataSource = greenhouse;
-            listGHRepeater = greenhouse;
-            GHRepeater.DataBind();
-
-            var hydroponics = await ProductRepository.SingleInstance.FetchHPProductsAsync();
-            HPRepeater.DataSource = hydroponics;
-            listHPRepeater = hydroponics;
-            HPRepeater.DataBind();
-        }               
+            LoadGreenHouseAndHydroponics();
+        }
 
         protected async void RetrieveDetails(object sender, EventArgs e)
         {
@@ -126,35 +102,49 @@ namespace SoftEngWebEmployee.Views
             DetailsRepeater.DataBind();
             DeleteRepeater.DataSource = ProductDetail;
             DeleteRepeater.DataBind();
+
+            LoadGreenHouseAndHydroponics();
         }
 
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
-            UpdateProgress1.Visible = true;
-            Button button = (Button)sender;
-            var productID = button.CommandArgument.ToString();
-            // ProductRepository.SingleInstance.DeleteProduct(productID);
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Pop", "$('#deleteModal').modal('hide');", true);
+            //UpdateProgress1.Visible = true;
+            //Button button = (Button)sender;
+            //var productID = button.CommandArgument.ToString();
+            //ProductRepository.SingleInstance.DeleteProduct(productID);
+            //ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Pop", "$('#deleteModal').modal('hide');", true);
 
-            DisplayInventoryTables();
+            //DisplayInventoryTables();
 
-            SweetAlertBuilder sweetAlertBuilder = new SweetAlertBuilder
-            {
-                HexaBackgroundColor = "#fff",
-                Title = "Product Deleted!",
-                AlertIcons = Constants.AlertStatus.success,
-                ShowCloseButton = true,
-                AlertPositions = Constants.AlertPositions.CENTER
-            };
-            sweetAlertBuilder.BuildSweetAlert(this);
-            UpdateProgress1.Visible = false;
+            //SweetAlertBuilder sweetAlertBuilder = new SweetAlertBuilder
+            //{
+            //    HexaBackgroundColor = "#fff",
+            //    Title = "Product Deleted!",
+            //    AlertIcons = Constants.AlertStatus.success,
+            //    ShowCloseButton = true,
+            //    AlertPositions = Constants.AlertPositions.CENTER
+            //};
+            //sweetAlertBuilder.BuildSweetAlert(this);
+            //UpdateProgress1.Visible = false;
         }
 
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
 
         }
-        
+        private async void LoadGreenHouseAndHydroponics()
+        {
+            var greenhouse = await ProductRepository.SingleInstance.FetchGHProductsAsync();
+            GHRepeater.DataSource = greenhouse;
+            listGHRepeater = greenhouse;
+            GHRepeater.DataBind();
+
+            var hydroponics = await ProductRepository.SingleInstance.FetchHPProductsAsync();
+            HPRepeater.DataSource = hydroponics;
+            listHPRepeater = hydroponics;
+            HPRepeater.DataBind();
+        }
+
         /* C# code for displaying card details
 
         <p> Are you sure you want to delete this product? </p>

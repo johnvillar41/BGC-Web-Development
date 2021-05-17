@@ -140,7 +140,7 @@
                                     <div class="scrolling-wrapper row flex-row flex-nowrap mt-1 pb-4 pt-2">
                                         <asp:Repeater ID="ProductsRepeater" runat="server" OnItemCreated="ProductsRepeater_ItemCreated">
                                             <ItemTemplate>
-                                                <div class="col-lg-3 col-md-6 col-sm-12 my-2">
+                                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-8 col-xs-12 my-2">
                                                     <div class="card" style="max-width: 35rem; min-width: 15rem; height: 420px">
                                                         <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
                                                         <div class="card-body">
@@ -204,7 +204,7 @@
                                     <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
                                         <asp:Repeater ID="CartRepeater" runat="server" OnItemCreated="CartRepeater_ItemCreated">
                                             <ItemTemplate>
-                                                <div class="col-lg-3 col-md-6 col-sm-12 my-2">
+                                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-8 col-xs-12 my-2">
                                                     <div class="card" style="max-width: 35rem; height: 420px">
                                                         <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
                                                         <div class="card-body">

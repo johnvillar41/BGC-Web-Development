@@ -40,8 +40,7 @@ namespace SoftEngWebEmployee.Views
                 Stream fs = ImageUpload.PostedFile.InputStream;
                 BinaryReader br = new System.IO.BinaryReader(fs);
                 byte[] bytes = br.ReadBytes((int)fs.Length);
-                //string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
-                //var imageString = base64String;
+               
                 if (RadioButtonPosition.SelectedValue == "E")
                 {
                     administrator = new AdministratorModel()
@@ -70,13 +69,14 @@ namespace SoftEngWebEmployee.Views
                     .InsertNewNotificationAsync(NotificationRepository
                     .SingleInstance
                     .GenerateNotification(NotificationType.CreateUser, username));                
-                Response.Redirect(Request.RawUrl);                
+                Response.Redirect(Request.RawUrl,false);                
             }
 
         }
 
         protected async void BtnDelete_Click(object sender, EventArgs e)
         {
+            UpdateProgress1.Visible = true;
             if (!String.IsNullOrWhiteSpace(AdministratorId_Delete.Text))
             {
                 await AdministratorRepository.SingleInstance.DeleteAdministrator(int.Parse(AdministratorId_Delete.Text));
@@ -84,12 +84,16 @@ namespace SoftEngWebEmployee.Views
                    .InsertNewNotificationAsync(NotificationRepository
                    .SingleInstance
                    .GenerateNotification(NotificationType.DeleteUser, AdministratorID.Text.ToString()));
-                Response.Redirect(Request.RawUrl);
+                
             }
+            Thread.Sleep(5000);
+            LoadAdministrators();
+            UpdateProgress1.Visible = false;
         }
 
         protected async void ButtonFindID_Click(object sender, EventArgs e)
         {
+            UpdateProgress1.Visible = true;
             if (!String.IsNullOrWhiteSpace(AdministratorID.Text))
             {
                 AdministratorModel administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(int.Parse(AdministratorID.Text));
@@ -101,6 +105,7 @@ namespace SoftEngWebEmployee.Views
                 }
             }
             UpdatePanel1.Update();
+            UpdateProgress1.Visible = false;
         }
 
         protected async void ButtonUpdateUser_Click(object sender, EventArgs e)
@@ -124,11 +129,10 @@ namespace SoftEngWebEmployee.Views
                 await NotificationRepository.SingleInstance
                    .InsertNewNotificationAsync(NotificationRepository
                    .SingleInstance
-                   .GenerateNotification(NotificationType.UpdateUser, username));
-                Response.Redirect(Request.RawUrl);
+                   .GenerateNotification(NotificationType.UpdateUser, username));              
             }
-
             Thread.Sleep(5000);
+            LoadAdministrators();
             UpdateProgress1.Visible = false;
 
         }

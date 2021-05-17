@@ -343,18 +343,7 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryCheckProduct = "SELECT product_stocks FROM products_table WHERE product_id=@productID";
-                MySqlCommand commandCheck = new MySqlCommand(queryCheckProduct, connection);
-                commandCheck.Parameters.AddWithValue("@productID", productID);
-                MySqlDataReader reader = (MySqlDataReader)await commandCheck.ExecuteReaderAsync();
-                if (await reader.ReadAsync())
-                {
-                    if (stockSold < int.Parse(reader["product_stocks"].ToString()))
-                    {
-                        isOk = true;
-                    }
-                }
-                reader.Close();
+                isOk = await CheckIfProductIsEnough(stockSold, productID);               
                 if (isOk)
                 {
                     string queryString = "UPDATE products_table SET product_stocks = (product_stocks - @stockSold) WHERE product_id=@productID";
@@ -364,6 +353,41 @@ namespace SoftEngWebEmployee.Repository
                     await command.ExecuteNonQueryAsync();
                 }
             }
+        }
+        /// <summary>
+        ///     Checks the database if the product to be sold has enough number of stocks
+        /// </summary>
+        /// <param name="stockToBeSold">
+        ///     Number of stocks that is about to be sold
+        /// </param>
+        /// <param name="productID">
+        ///     The product to be checked
+        /// </param>
+        /// <returns>
+        ///     <para>Returns whether the product is enough or not</para>
+        ///     <para>Type: bool</para>
+        /// </returns>
+        public async Task<bool> CheckIfProductIsEnough(int stockToBeSold,int productID)
+        {
+            bool isOk = false;
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryCheckProduct = "SELECT product_stocks FROM products_table WHERE product_id=@productID";
+                MySqlCommand commandCheck = new MySqlCommand(queryCheckProduct, connection);
+                commandCheck.Parameters.AddWithValue("@productID", productID);
+                using (MySqlDataReader reader = (MySqlDataReader)await commandCheck.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        if (stockToBeSold <= int.Parse(reader["product_stocks"].ToString()))
+                        {
+                            isOk = true;
+                        }
+                    }
+                }                    
+            }
+            return isOk;
         }
     }
 }
