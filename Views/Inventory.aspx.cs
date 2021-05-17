@@ -133,7 +133,7 @@ namespace SoftEngWebEmployee.Views
             UpdateProgress1.Visible = true;
             Button button = (Button)sender;
             var productID = button.CommandArgument.ToString();
-            ProductRepository.SingleInstance.DeleteProduct(productID);
+            // ProductRepository.SingleInstance.DeleteProduct(productID);
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Pop", "$('#deleteModal').modal('hide');", true);
 
             DisplayInventoryTables();
