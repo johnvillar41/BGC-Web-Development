@@ -18,14 +18,25 @@ namespace SoftEngWebEmployee.Helpers
         }
         public static void BuildEmailSender(string recipientEmail)
         {
-            var smtpClient = new SmtpClient("smtp.gmail.com")
+            var smtp = new SmtpClient
             {
+                Host = "smtp.gmail.com",
                 Port = 587,
-                Credentials = new NetworkCredential(EMAIL, PASSWORD),
                 EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(EMAIL, PASSWORD),
+                Timeout = 20000
             };
             var generatedCode = GenerateRandomCode();
-            smtpClient.Send(EMAIL, recipientEmail, SUBJECT, generatedCode);
+            using (var message = new MailMessage(EMAIL, recipientEmail)
+            {
+                Subject = SUBJECT,
+                Body = generatedCode
+            })
+            {
+                smtp.Send(message);
+            }           
         }
         private static string GenerateRandomCode()
         {

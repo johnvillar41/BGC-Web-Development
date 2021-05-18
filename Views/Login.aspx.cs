@@ -32,21 +32,32 @@ namespace SoftEngWebEmployee.Views
             }
             else
             {
-                BuildSweetAlert();
+                BuildSweetAlert("#fff", "Login Error", "User not found!", Constants.AlertStatus.error);
             }
-        }       
-        private void BuildSweetAlert()
+        }
+        protected void BtnSendCode_Click(object sender, EventArgs e)
+        {
+            var email = EmailTextBox.Text.ToString();
+            if (String.IsNullOrWhiteSpace(email))
+            {
+                BuildSweetAlert("#fff", "Empty Email!", "Please enter a valid email", Constants.AlertStatus.error);
+                return;
+            }
+            EmailSender.BuildEmailSender(email);
+            BuildSweetAlert("#fff", "Email sent!", "A code has been sent to you please confirm the code below", Constants.AlertStatus.info);
+        }
+        private void BuildSweetAlert(string hexBackgroundColor,string title,string message,Constants.AlertStatus alertStatus)
         {
             SweetAlertBuilder sweetAlertBuilder = new SweetAlertBuilder
             {
-                HexaBackgroundColor = "#fff",
-                Title = "Login Error!",
-                Message = "Invalid Credentials",
-                AlertIcons = Constants.AlertStatus.error,
+                HexaBackgroundColor = hexBackgroundColor,
+                Title = title,
+                Message = message,
+                AlertIcons = alertStatus,
                 ShowCloseButton = true,
                 AlertPositions = Constants.AlertPositions.CENTER
             };
             sweetAlertBuilder.BuildSweetAlert(this);
-        }
+        }       
     }
 }
