@@ -50,6 +50,9 @@
                                     <div class="row mt-5">
                                         <asp:Button ID="btn_login" runat="server" Text="Login" Style="font-family: 'Arial Rounded MT'" CssClass="btn btn-success form-control" OnClick="btn_login_Click" />
                                     </div>
+                                    <div class="row">
+                                        <asp:Button ID="Btn_ForgotPassword" runat="server" Text="Forgot Password" Style="font-family: 'Arial Rounded MT'" CssClass="btn btn-error form-control" OnClick="Btn_ForgotPassword_Click" />
+                                    </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </form>

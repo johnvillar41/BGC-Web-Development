@@ -311,6 +311,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Helpers\Cart.cs" />
+    <Compile Include="Helpers\EmailSender.cs" />
     <Compile Include="Helpers\SweetAlertBuilder.cs" />
     <Compile Include="Models\AdministratorModel.cs" />
     <Compile Include="Helpers\Constants.cs" />

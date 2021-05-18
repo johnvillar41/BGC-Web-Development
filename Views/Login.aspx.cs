@@ -13,7 +13,6 @@ namespace SoftEngWebEmployee.Views
         {
 
         }
-
         protected async void btn_login_Click(object sender, EventArgs e)
         {
             string username = txtbox_username.Text;
@@ -33,17 +32,25 @@ namespace SoftEngWebEmployee.Views
             }
             else
             {
-                SweetAlertBuilder sweetAlertBuilder = new SweetAlertBuilder
-                {
-                    HexaBackgroundColor = "#fff",
-                    Title = "Login Error!",
-                    Message = "Invalid Credentials",
-                    AlertIcons = Constants.AlertStatus.error,
-                    ShowCloseButton = true,
-                    AlertPositions = Constants.AlertPositions.CENTER
-                };
-                sweetAlertBuilder.BuildSweetAlert(this);
+                BuildSweetAlert();
             }
+        }
+        protected void Btn_ForgotPassword_Click(object sender, EventArgs e)
+        {
+            //TODO 
+        }
+        private void BuildSweetAlert()
+        {
+            SweetAlertBuilder sweetAlertBuilder = new SweetAlertBuilder
+            {
+                HexaBackgroundColor = "#fff",
+                Title = "Login Error!",
+                Message = "Invalid Credentials",
+                AlertIcons = Constants.AlertStatus.error,
+                ShowCloseButton = true,
+                AlertPositions = Constants.AlertPositions.CENTER
+            };
+            sweetAlertBuilder.BuildSweetAlert(this);
         }
     }
 }
