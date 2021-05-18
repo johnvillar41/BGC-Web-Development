@@ -61,6 +61,7 @@ namespace SoftEngWebEmployee.Repository
                     notificationsList.Add(notifications);
                 }
             }
+            notificationsList.Reverse();
             return notificationsList;
         }
         /// <summary>
@@ -196,6 +197,7 @@ namespace SoftEngWebEmployee.Repository
                     notificationsList.Add(notifications);
                 }
             }
+            notificationsList.Reverse();
             return notificationsList;
         }
         /// <summary>

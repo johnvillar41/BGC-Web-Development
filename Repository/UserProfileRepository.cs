@@ -58,11 +58,15 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "UPDATE login_table SET user_username=@username,user_name=@fullname,user_password=@password WHERE user_username=@username";
+                string queryString = "UPDATE login_table SET user_username=@username," +
+                    "user_name=@fullname," +
+                    "user_password=@password," +
+                    "email=@email WHERE user_username=@username";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@username", updateduser.Username);
                 command.Parameters.AddWithValue("@fullname", updateduser.Fullname);
                 command.Parameters.AddWithValue("@password", updateduser.Password);
+                command.Parameters.AddWithValue("@email", updateduser.Email);
                 await command.ExecuteNonQueryAsync();
             }
         }

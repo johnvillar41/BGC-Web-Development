@@ -147,6 +147,7 @@ namespace SoftEngWebEmployee.Repository
                             User_ID = int.Parse(reader["user_id"].ToString()),
                             Username = reader["user_username"].ToString(),
                             Password = reader["user_password"].ToString(),
+                            Email = reader["email"].ToString(),
                             Fullname = reader["user_name"].ToString(),
                             ProfilePicture = base64String
                         };
@@ -159,6 +160,7 @@ namespace SoftEngWebEmployee.Repository
                             User_ID = int.Parse(reader["user_id"].ToString()),
                             Username = reader["user_username"].ToString(),
                             Password = reader["user_password"].ToString(),
+                            Email = reader["email"].ToString(),
                             Fullname = reader["user_name"].ToString(),
                             ProfilePicture = base64String
                         };

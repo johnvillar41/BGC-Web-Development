@@ -70,6 +70,7 @@
                                                 <%{ %>
                                                 <th scope="col">Password</th>
                                                 <%} %>
+                                                <th scope="col">Email</th>
                                                 <th scope="col">FullName</th>
                                                 <th scope="col">Position</th>
                                             </tr>
@@ -88,6 +89,7 @@
                                                 <%{ %>
                                                 <td><%=admins.Password %></td>
                                                 <%} %>
+                                                <td><%=admins.Email %></td>
                                                 <td><%=admins.Fullname %></td>
                                                 <%if (admins.EmployeeType == Constants.EmployeeType.Administrator) %>
                                                 <%{ %>
