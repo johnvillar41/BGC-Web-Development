@@ -46,7 +46,7 @@ namespace SoftEngWebEmployee.Repository.LoginRepository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string loginString = "SELECT * FROM login_table WHERE user_username=@Username AND user_password=@Password";
+                string loginString = "SELECT * FROM login_table WHERE user_username LIKE BINARY @Username AND user_password LIKE BINARY @Password";
                 MySqlCommand command = new MySqlCommand(loginString, connection);
                 command.Parameters.AddWithValue("@Username", adminModel.Username);
                 command.Parameters.AddWithValue("@Password", adminModel.Password);

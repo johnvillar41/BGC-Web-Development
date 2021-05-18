@@ -41,9 +41,9 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "SELECT (SELECT SUM(onsite_products_transaction_table.subtotal_price) FROM onsite_products_transaction_table WHERE onsite_products_transaction_table.administrator_username = 'sample') as TotalSaleOnSite, (SELECT SUM(specific_orders_table.subtotal_price) FROM specific_orders_table WHERE specific_orders_table.administrator_username = 'sample') AS TotalSaleOrder";
+                string queryString = "SELECT (SELECT SUM(onsite_products_transaction_table.subtotal_price) FROM onsite_products_transaction_table WHERE onsite_products_transaction_table.administrator_username = @username) as TotalSaleOnSite, (SELECT SUM(specific_orders_table.subtotal_price) FROM specific_orders_table WHERE specific_orders_table.administrator_username = @username) AS TotalSaleOrder";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@administrator", administrator);
+                command.Parameters.AddWithValue("@username", administrator);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 if(await reader.ReadAsync())
                 {
