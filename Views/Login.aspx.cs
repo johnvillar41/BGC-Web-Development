@@ -34,11 +34,7 @@ namespace SoftEngWebEmployee.Views
             {
                 BuildSweetAlert();
             }
-        }
-        protected void Btn_ForgotPassword_Click(object sender, EventArgs e)
-        {
-            //TODO 
-        }
+        }       
         private void BuildSweetAlert()
         {
             SweetAlertBuilder sweetAlertBuilder = new SweetAlertBuilder

@@ -2,35 +2,35 @@
 
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <head>
     <title>Login 04</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../Content/LoginCss.css" />
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
-    <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
-        <div class="card card0 border-0">
-            <div class="row d-flex">
-                <div class="col-lg-6">
-                    <div class="card1 pb-5">
-                        <div class="row">
-                            <img src="../Images/logo.png" class="logo">
-                        </div>
-                        <div class="row px-3 justify-content-center mt-4 mb-5 border-line">
-                            <img src="https://i.imgur.com/uNGdWHi.png" class="image">
+    <form runat="server">
+        <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+            <div class="card card0 border-0">
+                <div class="row d-flex">
+                    <div class="col-lg-6">
+                        <div class="card1 pb-5">
+                            <div class="row">
+                                <img src="../Images/logo.png" class="logo">
+                            </div>
+                            <div class="row px-3 justify-content-center mt-4 mb-5 border-line">
+                                <img src="https://i.imgur.com/uNGdWHi.png" class="image">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card2 card border-0 px-4 py-5">
-                        <form runat="server">
+                    <div class="col-lg-6">
+                        <div class="card2 card border-0 px-4 py-5">
+
                             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                 <ContentTemplate>
@@ -50,22 +50,46 @@
                                     <div class="row mt-5">
                                         <asp:Button ID="btn_login" runat="server" Text="Login" Style="font-family: 'Arial Rounded MT'" CssClass="btn btn-success form-control" OnClick="btn_login_Click" />
                                     </div>
-                                    <div class="row">
-                                        <asp:Button ID="Btn_ForgotPassword" runat="server" Text="Forgot Password" Style="font-family: 'Arial Rounded MT'" CssClass="btn btn-error form-control" OnClick="Btn_ForgotPassword_Click" />
-                                    </div>
+
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-                        </form>
+                            <div class="row">
+                                <button type="button" class="btn btn-danger form-control" style="font-family: 'Arial Rounded MT'" data-bs-toggle="modal" data-bs-target="#codeModal">
+                                    Forgot Password
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-orange py-4">
+                    <div class="row px-3">
+                        <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2021. All rights reserved.</small>
+                        <div class="social-contact ml-4 ml-sm-auto"><span class="fa fa-facebook mr-4 text-sm"></span><span class="fa fa-google-plus mr-4 text-sm"></span><span class="fa fa-linkedin mr-4 text-sm"></span><span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span></div>
                     </div>
                 </div>
             </div>
-            <div class="bg-orange py-4">
-                <div class="row px-3">
-                    <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2021. All rights reserved.</small>
-                    <div class="social-contact ml-4 ml-sm-auto"><span class="fa fa-facebook mr-4 text-sm"></span><span class="fa fa-google-plus mr-4 text-sm"></span><span class="fa fa-linkedin mr-4 text-sm"></span><span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span></div>
+        </div>
+
+        <!--Modal Here-->
+        <div class="modal fade" id="codeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Enter Email</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <asp:TextBox ID="EmailTextBox" placeholder="Enter your email here!" runat="server"></asp:TextBox>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Send Code</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </body>
 </html>
