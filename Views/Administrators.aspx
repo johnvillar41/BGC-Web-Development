@@ -22,7 +22,7 @@
             top: 50%;
             -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
-            z-index: 99;
+            z-index: 1000;
         }
     </style>
     <div class="container">
@@ -140,6 +140,13 @@
 
     <!-- Modal Update User -->
     <div class="modal fade" id="UpdateUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <asp:UpdateProgress ID="UpdateProgress2" runat="server">
+            <ProgressTemplate>
+                <div id="overlayDiv">
+                    <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
+                </div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header btn btn-info">

@@ -111,7 +111,7 @@ namespace SoftEngWebEmployee.Views
 
         protected async void ButtonUpdateUser_Click(object sender, EventArgs e)
         {
-            UpdateProgress1.Visible = true;
+            UpdateProgress2.Visible = true;
             var userId = AdministratorID.Text.ToString();
             var username = UsernameUpdate.Text.ToString();
             var password = PasswordUpdate.Text.ToString();
@@ -136,10 +136,21 @@ namespace SoftEngWebEmployee.Views
             }
             Thread.Sleep(5000);
             LoadAdministrators();
-            UpdateProgress1.Visible = false;
-
+            UpdateProgress2.Visible = false;
+            BuildSweetAlert(username);
         }
-
+        private void BuildSweetAlert(string administratorName)
+        {
+            var sweetAlert = new SweetAlertBuilder
+            {
+                HexaBackgroundColor = "#fff",
+                Title = "Successfully Updated",
+                Message = "Successfully Update Profile: " + administratorName,
+                AlertIcons = Constants.AlertStatus.success,
+                ShowConfirmationDialog = true,
+            };
+            sweetAlert.BuildSweetAlert(this);
+        }
         private async void LoadAdministrators()
         {
             var administrators = await AdministratorRepository.SingleInstance.FetchAdministratorsAsync();
