@@ -15,13 +15,13 @@ namespace SoftEngWebEmployee.Views
     {
 
         /// <summary>
-        /// UpdateProgress1 control.
+        /// UpdateProgress_Main control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+        protected global::System.Web.UI.UpdateProgress UpdateProgress_Main;
 
         /// <summary>
         /// UpdatePanel2 control.
@@ -31,6 +31,15 @@ namespace SoftEngWebEmployee.Views
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+
+        /// <summary>
+        /// UpdateProgress_Delete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress_Delete;
 
         /// <summary>
         /// AdministratorId_Delete control.
@@ -51,13 +60,13 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.WebControls.Button BtnDelete;
 
         /// <summary>
-        /// UpdateProgress2 control.
+        /// UpdateProgress_Update control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress2;
+        protected global::System.Web.UI.UpdateProgress UpdateProgress_Update;
 
         /// <summary>
         /// AdministratorID control.
@@ -157,6 +166,15 @@ namespace SoftEngWebEmployee.Views
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Password;
+
+        /// <summary>
+        /// Email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Email;
 
         /// <summary>
         /// ImageUpload control.

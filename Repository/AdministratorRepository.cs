@@ -114,7 +114,8 @@ namespace SoftEngWebEmployee.Repository
                     {
                         Username = reader["user_username"].ToString(),
                         Password = reader["user_password"].ToString(),
-                        Fullname = reader["user_name"].ToString()
+                        Fullname = reader["user_name"].ToString(),
+                        Email = reader["email"].ToString()
                     };
                 }
             }
@@ -139,34 +140,25 @@ namespace SoftEngWebEmployee.Repository
                 MySqlCommand command = new MySqlCommand(queryString,connection);
                 MySqlDataReader reader = command.ExecuteReader();
                 while(await reader.ReadAsync())
-                {
+                {                   
                     string base64String = Convert.ToBase64String((byte[])(reader["user_image"]));
-                    if (reader["position"].ToString().Equals("Employee"))
+                    administrator = new AdministratorModel()
                     {
-                        administrator = new AdministratorModel()
-                        {
-                            User_ID = int.Parse(reader["user_id"].ToString()),
-                            Username = reader["user_username"].ToString(),
-                            Password = reader["user_password"].ToString(),
-                            Email = reader["email"].ToString(),
-                            Fullname = reader["user_name"].ToString(),
-                            ProfilePicture = base64String
-                        };
+                        User_ID = int.Parse(reader["user_id"].ToString()),
+                        Username = reader["user_username"].ToString(),
+                        Password = reader["user_password"].ToString(),
+                        Email = reader["email"].ToString(),
+                        Fullname = reader["user_name"].ToString(),
+                        ProfilePicture = base64String
+                    };
+                    if (reader["position"].ToString().Equals("Employee"))
+                    {                        
                         administrator.EmployeeType = EmployeeType.Employee;
                     }
                     else
-                    {
-                        administrator = new AdministratorModel()
-                        {
-                            User_ID = int.Parse(reader["user_id"].ToString()),
-                            Username = reader["user_username"].ToString(),
-                            Password = reader["user_password"].ToString(),
-                            Email = reader["email"].ToString(),
-                            Fullname = reader["user_name"].ToString(),
-                            ProfilePicture = base64String
-                        };
+                    {                       
                         administrator.EmployeeType = EmployeeType.Administrator;
-                    }
+                    }                    
                     Admins.Add(administrator);
                 }
             }
@@ -200,12 +192,13 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "INSERT INTO login_table(user_username,user_password,user_name,position,user_image)" +
-                    "VALUES(@Username,@Passowrd,@name,@position,@user_image)";
+                string queryString = "INSERT INTO login_table(user_username,user_password,user_name,email,position,user_image)" +
+                    "VALUES(@Username,@Password,@name,@email,@position,@user_image)";
                 MySqlCommand command = new MySqlCommand(queryString, connection);                
                 command.Parameters.AddWithValue("@Username", administrator.Username);
-                command.Parameters.AddWithValue("@Passowrd", administrator.Password);
-                command.Parameters.AddWithValue("@name", administrator.Fullname);                
+                command.Parameters.AddWithValue("@Password", administrator.Password);
+                command.Parameters.AddWithValue("@name", administrator.Fullname);
+                command.Parameters.AddWithValue("@email", administrator.Email);
                 command.Parameters.AddWithValue("@position", administrator.EmployeeType.ToString());             
                 command.Parameters.Add("@user_image", MySqlDbType.MediumBlob).Value = administrator.ProfilePictureUpload;                
                

@@ -50,7 +50,7 @@
                             </button>
                         </div>
                         <%} %>
-                        <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                        <asp:UpdateProgress ID="UpdateProgress_Main" runat="server">
                             <ProgressTemplate>
                                 <div id="overlayDiv">
                                     <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
@@ -117,6 +117,13 @@
     </div>
     <!--Delete Modal-->
     <div class="modal fade" id="DeleteUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <asp:UpdateProgress ID="UpdateProgress_Delete" runat="server">
+            <ProgressTemplate>
+                <div id="overlayDiv">
+                    <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
+                </div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header btn btn-danger">
@@ -140,7 +147,7 @@
 
     <!-- Modal Update User -->
     <div class="modal fade" id="UpdateUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <asp:UpdateProgress ID="UpdateProgress2" runat="server">
+        <asp:UpdateProgress ID="UpdateProgress_Update" runat="server">
             <ProgressTemplate>
                 <div id="overlayDiv">
                     <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
@@ -232,16 +239,20 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Username</label>
+                        <label for="Username" class="form-label">Username</label>
                         <asp:TextBox ID="Username" runat="server" type="text" class="form-control" required></asp:TextBox>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Fullname</label>
+                        <label for="FullName" class="form-label">Fullname</label>
                         <asp:TextBox ID="FullName" runat="server" type="text" class="form-control" required></asp:TextBox>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <label for="Password" class="form-label">Password</label>
                         <asp:TextBox ID="Password" runat="server" type="password" class="form-control" required></asp:TextBox>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Email</label>
+                        <asp:TextBox ID="Email" runat="server" type="email" class="form-control" required></asp:TextBox>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="customFile">Upload Picture</label>

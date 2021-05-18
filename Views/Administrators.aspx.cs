@@ -18,7 +18,6 @@ namespace SoftEngWebEmployee.Views
             LoadAdministrators();
             LoadIsAdministrator(UserSession.GetLoggedInUser());
         }
-
         public List<AdministratorModel> DisplayAdministrators()
         {
             return Admins;
@@ -26,57 +25,60 @@ namespace SoftEngWebEmployee.Views
         public bool IsAdmin()
         {
             return IsAdminUser;
-        }       
-
+        }
         protected async void BtnSave_Click(object sender, EventArgs e)
         {
             var username = Username.Text.ToString();
             var password = Password.Text.ToString();
             var fullName = FullName.Text.ToString();
-
+            var email = Email.Text.ToString();
             if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) && !String.IsNullOrWhiteSpace(fullName))
-            {                
+            {
                 AdministratorModel administrator = null;
                 Stream fs = ImageUpload.PostedFile.InputStream;
                 BinaryReader br = new System.IO.BinaryReader(fs);
                 byte[] bytes = br.ReadBytes((int)fs.Length);
-               
+
+                administrator = new AdministratorModel()
+                {
+                    Username = username,
+                    Password = password,
+                    Fullname = fullName,
+                    Email = email,
+                    ProfilePictureUpload = bytes,
+                };
                 if (RadioButtonPosition.SelectedValue == "E")
                 {
-                    administrator = new AdministratorModel()
-                    {
-                        Username = username,
-                        Password = password,
-                        Fullname = fullName,
-                        ProfilePictureUpload = bytes,
-                        EmployeeType = EmployeeType.Employee
-                    };
+                    administrator.EmployeeType = EmployeeType.Employee;
                 }
                 else
                 {
-                    administrator = new AdministratorModel()
+                    administrator.EmployeeType = EmployeeType.Administrator;
+                }
+                try
+                {
+                    await AdministratorRepository.SingleInstance.CreateNewAdministrator(administrator);
+                }
+                catch (MySql.Data.MySqlClient.MySqlException ex)
+                {
+                    if (ex.Message.Equals($"Duplicate entry '{administrator.Username}' for key 'user_username'"))
                     {
-                        Username = username,
-                        Password = password,
-                        Fullname = fullName,
-                        ProfilePictureUpload = bytes,
-                        EmployeeType = EmployeeType.Administrator
-                    };
-                }                
+                        BuildSweetAlert("#fff", "Duplicate Username", $"Duplicate Username for {administrator.Username} try another one", AlertStatus.error);
+                        return;
+                    }
+                }
 
-                await AdministratorRepository.SingleInstance.CreateNewAdministrator(administrator);
                 await NotificationRepository.SingleInstance
                     .InsertNewNotificationAsync(NotificationRepository
                     .SingleInstance
-                    .GenerateNotification(NotificationType.CreateUser, username));                
-                Response.Redirect(Request.RawUrl,false);                
+                    .GenerateNotification(NotificationType.CreateUser, username));
+                BuildSweetAlert("#fff", "Successfull!", $"Successfully Added {administrator.Username} as {administrator.EmployeeType.ToString()}", AlertStatus.success);
+                Response.Redirect(Request.RawUrl, false);               
             }
-
         }
-
         protected async void BtnDelete_Click(object sender, EventArgs e)
         {
-            UpdateProgress1.Visible = true;
+            UpdateProgress_Delete.Visible = true;
             if (!String.IsNullOrWhiteSpace(AdministratorId_Delete.Text))
             {
                 await AdministratorRepository.SingleInstance.DeleteAdministrator(int.Parse(AdministratorId_Delete.Text));
@@ -84,16 +86,15 @@ namespace SoftEngWebEmployee.Views
                    .InsertNewNotificationAsync(NotificationRepository
                    .SingleInstance
                    .GenerateNotification(NotificationType.DeleteUser, AdministratorID.Text.ToString()));
-                
             }
             Thread.Sleep(5000);
             LoadAdministrators();
-            UpdateProgress1.Visible = false;
+            UpdateProgress_Delete.Visible = false;
         }
 
         protected async void ButtonFindID_Click(object sender, EventArgs e)
         {
-            UpdateProgress1.Visible = true;
+            UpdateProgress_Main.Visible = true;
             if (!String.IsNullOrWhiteSpace(AdministratorID.Text))
             {
                 AdministratorModel administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(int.Parse(AdministratorID.Text));
@@ -106,12 +107,12 @@ namespace SoftEngWebEmployee.Views
                 }
             }
             UpdatePanel1.Update();
-            UpdateProgress1.Visible = false;
+            UpdateProgress_Main.Visible = false;
         }
 
         protected async void ButtonUpdateUser_Click(object sender, EventArgs e)
         {
-            UpdateProgress2.Visible = true;
+            UpdateProgress_Update.Visible = true;
             var userId = AdministratorID.Text.ToString();
             var username = UsernameUpdate.Text.ToString();
             var password = PasswordUpdate.Text.ToString();
@@ -132,21 +133,21 @@ namespace SoftEngWebEmployee.Views
                 await NotificationRepository.SingleInstance
                    .InsertNewNotificationAsync(NotificationRepository
                    .SingleInstance
-                   .GenerateNotification(NotificationType.UpdateUser, username));              
+                   .GenerateNotification(NotificationType.UpdateUser, username));
             }
             Thread.Sleep(5000);
             LoadAdministrators();
-            UpdateProgress2.Visible = false;
-            BuildSweetAlert(username);
+            UpdateProgress_Update.Visible = false;
+            BuildSweetAlert("#fff", "Successfull", $"Successfully Updated User:{username}", AlertStatus.success);
         }
-        private void BuildSweetAlert(string administratorName)
+        private void BuildSweetAlert(string hexbgColor, string title, string message, Constants.AlertStatus alertStatus)
         {
             var sweetAlert = new SweetAlertBuilder
             {
-                HexaBackgroundColor = "#fff",
-                Title = "Successfully Updated",
-                Message = "Successfully Update Profile: " + administratorName,
-                AlertIcons = Constants.AlertStatus.success,
+                HexaBackgroundColor = hexbgColor,
+                Title = title,
+                Message = message,
+                AlertIcons = alertStatus,
                 ShowConfirmationDialog = true,
             };
             sweetAlert.BuildSweetAlert(this);
@@ -158,7 +159,7 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadIsAdministrator(string username)
         {
-            IsAdminUser = await AdministratorRepository.SingleInstance.CheckIfUserIsAdministratorAsync(username);           
+            IsAdminUser = await AdministratorRepository.SingleInstance.CheckIfUserIsAdministratorAsync(username);
         }
     }
 }
