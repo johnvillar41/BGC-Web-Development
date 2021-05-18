@@ -189,6 +189,17 @@
                                 <asp:TextBox ID="PasswordUpdate" runat="server" type="password" class="form-control" required></asp:TextBox>
                                 <%} %>
                             </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Email</label>
+                                <%if (String.IsNullOrEmpty(EmailUpdate.Text)) %>
+                                <%{ %>
+                                <asp:TextBox runat="server" type="text" disabled class="form-control" required></asp:TextBox>
+                                <%} %>
+                                <%else %>
+                                <%{ %>
+                                <asp:TextBox ID="EmailUpdate" runat="server" type="text" class="form-control" required></asp:TextBox>
+                                <%} %>
+                            </div>
                         </ContentTemplate>
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="ButtonFindID" EventName="Click" />

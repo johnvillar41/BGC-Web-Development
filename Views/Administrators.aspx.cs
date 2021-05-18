@@ -102,6 +102,7 @@ namespace SoftEngWebEmployee.Views
                     UsernameUpdate.Text = administrator.Username;
                     FullnameUpdate.Text = administrator.Fullname;
                     PasswordUpdate.Text = administrator.Password;
+                    EmailUpdate.Text = administrator.Email;
                 }
             }
             UpdatePanel1.Update();
@@ -115,6 +116,7 @@ namespace SoftEngWebEmployee.Views
             var username = UsernameUpdate.Text.ToString();
             var password = PasswordUpdate.Text.ToString();
             var fullName = FullnameUpdate.Text.ToString();
+            var email = EmailUpdate.Text.ToString();
 
             if (!String.IsNullOrWhiteSpace(username) || !String.IsNullOrWhiteSpace(password) || !String.IsNullOrWhiteSpace(fullName))
             {
@@ -123,7 +125,8 @@ namespace SoftEngWebEmployee.Views
                     User_ID = int.Parse(userId),
                     Username = username,
                     Password = password,
-                    Fullname = fullName
+                    Fullname = fullName,
+                    Email = email
                 };
                 await AdministratorRepository.SingleInstance.UpdateAdministrator(administrator);
                 await NotificationRepository.SingleInstance

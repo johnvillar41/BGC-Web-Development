@@ -81,7 +81,8 @@ namespace SoftEngWebEmployee.Repository
                     {                        
                         Username = reader["user_username"].ToString(),
                         Password = reader["user_password"].ToString(),
-                        Fullname = reader["user_name"].ToString()                        
+                        Fullname = reader["user_name"].ToString(),
+                        Email = reader["email"].ToString()
                     };
                 }
             }
@@ -222,12 +223,16 @@ namespace SoftEngWebEmployee.Repository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "UPDATE login_table SET user_username=@username,user_password=@password,user_name=@fullname WHERE user_id=@userID";
+                string queryString = "UPDATE login_table SET user_username=@username," +
+                    "user_password=@password," +
+                    "user_name=@fullname," +
+                    "email=@email WHERE user_id=@userID";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@userID", administrator.User_ID);
                 command.Parameters.AddWithValue("@username", administrator.Username);
                 command.Parameters.AddWithValue("@password", administrator.Password);
                 command.Parameters.AddWithValue("@fullname", administrator.Fullname);
+                command.Parameters.AddWithValue("@email", administrator.Email);
                 await command.ExecuteNonQueryAsync();
             }
         }       
