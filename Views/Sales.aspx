@@ -78,6 +78,7 @@
                                             <th scope="col">Username</th>
                                             <th scope="col">Type Of Sale</th>
                                             <th scope="col">Date</th>
+                                            <th scope="col">Total Sale</th>
                                             <th scope="col">Details</th>
                                         </tr>
                                     </thead>
@@ -88,6 +89,7 @@
                                 <td><%# DataBinder.Eval(Container.DataItem, "Administrator.Username") %></td>
                                 <td><span class="badge bg-dark"><%# Eval("SalesType")%></span> </td>
                                 <td><%# DataBinder.Eval(Container.DataItem, "Date") %></td>
+                                <td><%# DataBinder.Eval(Container.DataItem, "TotalSales") %></td>
                                 <td>
                                     <asp:Button OnClick="IDS_Click" ID="IDS" CommandName="SalesCommand" CommandArgument='<%# Eval("Orders.Order_ID") +";"+Eval("OnsiteTransaction.TransactionID") %>' CssClass="btn btn-primary" runat="server" Text="View All Details" />
                                 </td>

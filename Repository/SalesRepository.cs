@@ -89,25 +89,28 @@ namespace SoftEngWebEmployee.Repository
                     SalesModel sales = null;
                     if (reader["sale_type"].ToString().Equals("Onsite"))
                     {
+                        var onsiteModel = await OnsiteTransactionRepository.SingleInstance.FetchOnsiteTransaction(int.Parse(reader["onsite_transaction_id"].ToString()));
                         sales = new SalesModel()
                         {
                             SalesID = int.Parse(reader["sales_id"].ToString()),
                             Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(reader["user_username"].ToString()),
                             Date = DateTime.Parse(reader["date"].ToString()),
-                            SalesType = GenerateSaleType(reader["sale_type"].ToString()),
-                            OnsiteTransaction = await OnsiteTransactionRepository.SingleInstance.FetchOnsiteTransaction(int.Parse(reader["onsite_transaction_id"].ToString()))
-
+                            SalesType = GenerateSaleType(reader["sale_type"].ToString()),     
+                            TotalSales = onsiteModel.TotalSale,
+                            OnsiteTransaction = onsiteModel
                         };
                     }
                     else if (reader["sale_type"].ToString().Equals("Order"))
                     {
+                        var orderModel = await OrdersRepository.SingleInstance.FetchOrderAsync(int.Parse(reader["order_id"].ToString()));
                         sales = new SalesModel()
                         {
                             SalesID = int.Parse(reader["sales_id"].ToString()),
                             Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(reader["user_username"].ToString()),
                             Date = DateTime.Parse(reader["date"].ToString()),
                             SalesType = GenerateSaleType(reader["sale_type"].ToString()),
-                            Orders = await OrdersRepository.SingleInstance.FetchOrderAsync(int.Parse(reader["order_id"].ToString()))
+                            TotalSales = orderModel.OrderTotalPrice,
+                            Orders = orderModel
                         };
                     }
 

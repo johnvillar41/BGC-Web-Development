@@ -9,6 +9,7 @@ namespace SoftEngWebEmployee.Models
         public SalesType SalesType { get; set; }
         public AdministratorModel Administrator { get; set; }
         public DateTime Date { get; set; }
+        public int TotalSales { get; set; }
         public OrdersModel Orders { get; set; }
         public OnsiteTransactionModel OnsiteTransaction { get; set; }
     }
