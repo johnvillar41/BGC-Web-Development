@@ -34,35 +34,16 @@ namespace SoftEngWebEmployee.Views
             {
                 if (await OrdersRepository.SingleInstance.CheckIfIdExistAsync(int.Parse(OrderIDCancel.Text)) == false)
                 {
-                    SweetAlertBuilder alert = new SweetAlertBuilder
-                    {
-                        HexaBackgroundColor = "#fff",
-                        Title = "ID Not Found!",
-                        Message = "ID not found for: " + OrderIDCancel.Text,
-                        AlertIcons = Constants.AlertStatus.error,
-                        AlertPositions = Constants.AlertPositions.TOP_END,
-                        ShowCloseButton = true
-                    };
-                    alert.BuildSweetAlert(this);
+                    BuildSweetAlert("#fff", "ID Not Found!", $"ID not found for: {OrderIDCancel.Text}", Constants.AlertStatus.warning);                    
                     return;
                 }
-                await OrdersRepository .SingleInstance.ChangeStatusOfOrderToCancelledAsync(int.Parse(OrderIDCancel.Text));
+                await OrdersRepository.SingleInstance.ChangeStatusOfOrderToCancelledAsync(int.Parse(OrderIDCancel.Text));
                 var generatedNotification = await NotificationRepository
                     .SingleInstance
                     .GenerateNotification(NotificationType.CancelledOrder, OrderIDCancel.Text);
                 await NotificationRepository.SingleInstance.InsertNewNotificationAsync(generatedNotification);
                 LoadOrders();
-                SweetAlertBuilder sweetAlert = new SweetAlertBuilder
-                {
-                    HexaBackgroundColor = "#fff",
-                    Title = "Cancelled Order",
-                    Message = "Cancelled Order for: " + OrderIDCancel.Text,
-                    AlertIcons = Constants.AlertStatus.warning,
-                    AlertPositions = Constants.AlertPositions.TOP_END,
-                    ShowCloseButton = true
-                };
-                sweetAlert.BuildSweetAlert(this);
-
+                BuildSweetAlert("#fff", "Cancelled Order", $"Cancelled Order for: {OrderIDCancel.Text}", Constants.AlertStatus.warning);               
                 UpdateProgress1.Visible = false;
             }
         }
@@ -74,21 +55,12 @@ namespace SoftEngWebEmployee.Views
             {
                 if (await OrdersRepository.SingleInstance.CheckIfIdExistAsync(int.Parse(OrderIDFinish.Text)) == false)
                 {
-                    SweetAlertBuilder alert = new SweetAlertBuilder
-                    {
-                        HexaBackgroundColor = "#fff",
-                        Title = "ID Not Found!",
-                        Message = "ID not found for: " + OrderIDFinish.Text,
-                        AlertIcons = Constants.AlertStatus.error,
-                        AlertPositions = Constants.AlertPositions.TOP_END,
-                        ShowCloseButton = true
-                    };
-                    alert.BuildSweetAlert(this);
+                    BuildSweetAlert("#fff", "ID Not Found!", $"ID not found for: {OrderIDFinish.Text}", Constants.AlertStatus.error);                    
                     return;
                 }
                 var productIds = await SpecificOrdersRepository.SingleInstance.FetchProductIDsAsync(int.Parse(OrderIDFinish.Text));
-                foreach(KeyValuePair<int, int> productId in productIds)
-                {                    
+                foreach (KeyValuePair<int, int> productId in productIds)
+                {
                     await ProductRepository.SingleInstance.UpdateProductStocksAsync(productId.Value, productId.Key);
                 }
                 await OrdersRepository.SingleInstance.ChangeStatusOfOrderToFinishedAsync(int.Parse(OrderIDFinish.Text));
@@ -104,21 +76,10 @@ namespace SoftEngWebEmployee.Views
                     Date = DateTime.Now,
                     Orders = await OrdersRepository.SingleInstance.FetchOrderAsync(int.Parse(OrderIDFinish.Text)),
                     OnsiteTransaction = null
-                };
-                //TODO FIX THIS
+                };                
                 await SalesRepository.GetInstance().InsertNewSaleAsync(salesModel);
-                
-                SweetAlertBuilder sweetAlert = new SweetAlertBuilder
-                {
-                    HexaBackgroundColor = "#fff",
-                    Title = "Finished Order",
-                    Message = "Finished Order for: " + OrderIDFinish.Text,
-                    AlertIcons = Constants.AlertStatus.success,
-                    AlertPositions = Constants.AlertPositions.TOP_END,
-                    ShowCloseButton = true
-                };
-                sweetAlert.BuildSweetAlert(this);
 
+                BuildSweetAlert("#fff", "Finished Order", $"Finished Order for:{OrderIDFinish.Text}", Constants.AlertStatus.success);
                 UpdateProgress1.Visible = false;
             }
         }
@@ -139,7 +100,19 @@ namespace SoftEngWebEmployee.Views
 
             UpdateProgress1.Visible = false;
         }
-
+        private void BuildSweetAlert(string hexaColor, string title, string message, Constants.AlertStatus alertStatus)
+        {
+            SweetAlertBuilder sweetAlert = new SweetAlertBuilder
+            {
+                HexaBackgroundColor = hexaColor,
+                Title = title,
+                Message = message,
+                AlertIcons = alertStatus,
+                AlertPositions = Constants.AlertPositions.TOP_END,
+                ShowCloseButton = true
+            };
+            sweetAlert.BuildSweetAlert(this);
+        }
         private bool IsAllAlphabetic(string value)
         {
             foreach (char c in value)
