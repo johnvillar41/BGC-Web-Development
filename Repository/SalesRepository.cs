@@ -23,6 +23,52 @@ namespace SoftEngWebEmployee.Repository
             }
             return instance;
         }
+        public async Task<IEnumerable<SalesModel>> FetchSalesByEmployee(string employee)
+        {
+            List<SalesModel> salesList = new List<SalesModel>();
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT * FROM sales_table WHERE user_username=@employee";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@employee", employee);
+                using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        SalesModel sales = null;
+                        if (reader["sale_type"].ToString().Equals("Onsite"))
+                        {
+                            var onsiteModel = await OnsiteTransactionRepository.SingleInstance.FetchOnsiteTransaction(int.Parse(reader["onsite_transaction_id"].ToString()));
+                            sales = new SalesModel()
+                            {
+                                SalesID = int.Parse(reader["sales_id"].ToString()),
+                                Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(reader["user_username"].ToString()),
+                                Date = DateTime.Parse(reader["date"].ToString()),
+                                SalesType = GenerateSaleType(reader["sale_type"].ToString()),
+                                TotalSales = onsiteModel.TotalSale,
+                                OnsiteTransaction = onsiteModel
+                            };
+                        }
+                        else if (reader["sale_type"].ToString().Equals("Order"))
+                        {
+                            var orderModel = await OrdersRepository.SingleInstance.FetchOrderAsync(int.Parse(reader["order_id"].ToString()));
+                            sales = new SalesModel()
+                            {
+                                SalesID = int.Parse(reader["sales_id"].ToString()),
+                                Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(reader["user_username"].ToString()),
+                                Date = DateTime.Parse(reader["date"].ToString()),
+                                SalesType = GenerateSaleType(reader["sale_type"].ToString()),
+                                TotalSales = orderModel.OrderTotalPrice,
+                                Orders = orderModel
+                            };
+                        }
+                        salesList.Add(sales);
+                    }
+                }
+                return salesList;
+            }
+        }
         // Should have no order id
 
         /// <summary>
@@ -53,11 +99,11 @@ namespace SoftEngWebEmployee.Repository
                 }
                 else
                 {
-                   string queryString = "INSERT INTO sales_table(" +
-                  "user_username," +
-                  "sale_type," +
-                  "date,onsite_transaction_id)" +
-                  "VALUES(@username,@saleType,@date,@onsite_transaction_id)";
+                    string queryString = "INSERT INTO sales_table(" +
+                   "user_username," +
+                   "sale_type," +
+                   "date,onsite_transaction_id)" +
+                   "VALUES(@username,@saleType,@date,@onsite_transaction_id)";
                     MySqlCommand command = new MySqlCommand(queryString, connection);
                     command.Parameters.AddWithValue("@username", newSale.Administrator.Username);
                     command.Parameters.AddWithValue("@saleType", newSale.SalesType.ToString());
@@ -95,7 +141,7 @@ namespace SoftEngWebEmployee.Repository
                             SalesID = int.Parse(reader["sales_id"].ToString()),
                             Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(reader["user_username"].ToString()),
                             Date = DateTime.Parse(reader["date"].ToString()),
-                            SalesType = GenerateSaleType(reader["sale_type"].ToString()),     
+                            SalesType = GenerateSaleType(reader["sale_type"].ToString()),
                             TotalSales = onsiteModel.TotalSale,
                             OnsiteTransaction = onsiteModel
                         };

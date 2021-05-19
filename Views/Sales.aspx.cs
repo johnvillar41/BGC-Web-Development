@@ -20,6 +20,7 @@ namespace SoftEngWebEmployee.Views
                 LoadProducts();
                 LoadCategories();
                 LoadCart();
+                LoadEmployeesOnDropDown();
             }
         }
         protected void IDS_Click(object sender, EventArgs e)
@@ -55,6 +56,14 @@ namespace SoftEngWebEmployee.Views
             if (current != null)
                 current.RegisterAsyncPostBackControl(button);
         }
+        protected void EmployeeFullnameRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
+        {
+            Button button = e.Item.FindControl("EmployeeFullnameCategory") as Button;
+
+            ScriptManager current = ScriptManager.GetCurrent(Page);
+            if (current != null)
+                current.RegisterAsyncPostBackControl(button);
+        }
         protected void ProductsRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
             Button button = e.Item.FindControl("BtnAddToCart") as Button;
@@ -68,6 +77,20 @@ namespace SoftEngWebEmployee.Views
             var newSearch = await ProductRepository.SingleInstance.FetchAllProductsAsync();
             ProductsRepeater.DataSource = newSearch;
             ProductsRepeater.DataBind();
+        }
+        protected void EmployeeFullnameCategory_Click(object sender, EventArgs e)
+        {
+            var employee = (sender as Button).Text.ToString();            
+            char caret = Convert.ToChar(0x000025BC);
+            dropdownMenuReference1.Text = employee + " " + caret;
+            if (employee == "All Employee")
+            {
+                LoadSales();
+            }
+            else
+            {
+                LoadSalesByEmployee(employee);
+            }
         }
         protected async void BtnAddToCart_Click(object sender, EventArgs e)
         {
@@ -101,6 +124,7 @@ namespace SoftEngWebEmployee.Views
             Cart.RemoveCartItem(int.Parse(productID));
             LoadCart();
         }
+        
         protected void CartRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
             Button button = e.Item.FindControl("BtnRemoveCartItem") as Button;
@@ -194,6 +218,12 @@ namespace SoftEngWebEmployee.Views
             SalesRepeater.DataSource = salesList;
             SalesRepeater.DataBind();
         }
+        private async void LoadSalesByEmployee(string employee)
+        {
+            var searchedEmployee = await SalesRepository.GetInstance().FetchSalesByEmployee(employee);
+            SalesRepeater.DataSource = searchedEmployee;
+            SalesRepeater.DataBind();
+        }
         private async void LoadProducts()
         {
             var productsList = await ProductRepository.SingleInstance.FetchAllProductsAsync();
@@ -212,5 +242,11 @@ namespace SoftEngWebEmployee.Views
             CategoryRepeater.DataSource = categories;
             CategoryRepeater.DataBind();
         }
+        private async void LoadEmployeesOnDropDown()
+        {
+            var employeeModelList = await AdministratorRepository.SingleInstance.FetchAdministratorsAsync();
+            EmployeeFullnameRepeater.DataSource = employeeModelList;
+            EmployeeFullnameRepeater.DataBind();
+        }        
     }
 }

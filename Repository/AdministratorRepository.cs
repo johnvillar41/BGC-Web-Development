@@ -129,7 +129,7 @@ namespace SoftEngWebEmployee.Repository
         ///     <para>Returns Administrators and Employees Details</para>
         ///     <para>Type: Administratot Model</para>
         /// </returns>
-        public async Task<IEnumerable<AdministratorModel>> FetchAdministratorsAsync()
+        public async Task<List<AdministratorModel>> FetchAdministratorsAsync()
         {
             List<AdministratorModel> Admins = new List<AdministratorModel>();
             AdministratorModel administrator;

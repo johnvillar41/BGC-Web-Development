@@ -27,6 +27,36 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
+        //TODO to be used on Notifications settings
+        public async Task<List<NotificationsModel>> FetchNotificationsByEmployee(string employee)
+        {
+            List<NotificationsModel> notificationsList = new List<NotificationsModel>();
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT * FROM notifications_table WHERE user_name=@employee";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@employee", employee);
+                using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
+                {
+                    while(await reader.ReadAsync())
+                    {
+                        notificationsList.Add(
+                           new NotificationsModel
+                           {
+                               Notifications_ID = int.Parse(reader["notif_id"].ToString()),
+                               NotificationTitle = reader["notif_title"].ToString(),
+                               NotificationContent = reader["notif_content"].ToString(),
+                               NotificationDate = DateTime.Parse(reader["notif_date"].ToString()),
+                               Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(reader["user_name"].ToString()),
+                               TypeOfNotification = CategorizeNotification(reader["notif_title"].ToString())
+                           }
+                       );
+                    }                   
+                }
+            }
+            return notificationsList;
+        }
         /// <summary>
         ///     Fetches a list of notifications on a certain date
         /// </summary>
@@ -63,7 +93,7 @@ namespace SoftEngWebEmployee.Repository
             }
             notificationsList.Reverse();
             return notificationsList;
-        }
+        }       
         /// <summary>
         ///     Generates a notification for each database transaction done inside the program
         /// </summary>
