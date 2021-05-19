@@ -161,6 +161,7 @@
     <Content Include="Images\cancell.png" />
     <Content Include="Images\check.png" />
     <Content Include="Images\delete_logo.png" />
+    <Content Include="Images\LoginImage.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\money-tree.gif" />
     <Content Include="Images\update_icon_order.png" />

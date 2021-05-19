@@ -6,6 +6,8 @@
 <head>
     <title>Login 04</title>
     <meta charset="utf-8">
+    <link rel="icon" href="<%= ResolveUrl("~/Images/logo.png") %>" type="image/png" />
+    <link rel="shortcut icon" href="<%= ResolveUrl("~/Images/logo.png") %>" type="image/png" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;display=swap" rel="stylesheet">
@@ -23,8 +25,8 @@
                             <div class="row">
                                 <img src="../Images/logo.png" class="logo">
                             </div>
-                            <div class="row px-3 justify-content-center mt-4 mb-5 border-line">
-                                <img src="https://i.imgur.com/uNGdWHi.png" class="image">
+                            <div class="row px-3 justify-content-center mt-4 mb-5 border-line">                                
+                                <img src="../Images/LoginImage.png" class="image">
                             </div>
                         </div>
                     </div>
