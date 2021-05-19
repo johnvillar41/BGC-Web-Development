@@ -10,7 +10,8 @@
           margin-right: 5px;
         }
     </style>
-
+    
+    <!-- Script: Check if price+stocks input is number -->
     <script>
         function isNumber(evt) {
             evt = (evt) ? evt : window.event;
@@ -20,13 +21,21 @@
             }
             return true;
         }
-                
+    </script>
+
+    <!-- Script: Character counter -->
+    <script src="http://code.jquery.com/jquery-1.5.js"></script>
+    <script>
+
     </script>
 
     <p class="fs-4"><b>Add Product</b></p>
     <br>
     <p class="fs-5">Product Details</p>
     
+
+    
+
     <div class="row">
         <div class="col-8">
             <!-- Product Name -->
@@ -82,16 +91,18 @@
                 <div class="form-group">
                     <div class="row">
                      <label for="addProductDescription"><i>Description</i></label>
+                        <!--
                         <textarea class="form-control" rows="3" id="addProductDescription" placeholder="Enter description here" maxlength="1000"></textarea>
+                        -->
                     </div>
                 </div>
             </div>
         
         </div>
-
+    
         <div class="col-4">
 
         </div>
     </div>
-
+    
 </asp:Content>
