@@ -66,41 +66,75 @@
         <div class="tab-content" id="myTabContent">
             <!-- View Transactions list -->
             <div class="tab-pane fade show active" id="view" role="tabpanel" aria-labelledby="view-transactions">
+                <asp:UpdatePanel ID="UpdatePanel_Dropdown" runat="server">
+                    <ContentTemplate>
+                        <div class="row">
+                            <h3><b>Search by Employee Name</b></h3>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="btn-group">
 
-                <div class="table-bordered table-condensed table-responsive" style="height: 500px">
-                    <asp:Repeater ID="SalesRepeater" runat="server">
-                        <HeaderTemplate>
-                            <div class="table-condensed table-responsive table-borderless" style="height: 500px">
-                                <table border="1" class="table table-striped">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">Sales ID</th>
-                                            <th scope="col">Username</th>
-                                            <th scope="col">Type Of Sale</th>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Total Sale</th>
-                                            <th scope="col">Details</th>
-                                        </tr>
-                                    </thead>
-                        </HeaderTemplate>
-                        <ItemTemplate>
-                            <tr>
-                                <td><%# DataBinder.Eval(Container.DataItem, "SalesID") %></td>
-                                <td><%# DataBinder.Eval(Container.DataItem, "Administrator.Username") %></td>
-                                <td><span class="badge bg-dark"><%# Eval("SalesType")%></span> </td>
-                                <td><%# DataBinder.Eval(Container.DataItem, "Date") %></td>
-                                <td><%# DataBinder.Eval(Container.DataItem, "TotalSales") %></td>
-                                <td>
-                                    <asp:Button OnClick="IDS_Click" ID="IDS" CommandName="SalesCommand" CommandArgument='<%# Eval("Orders.Order_ID") +";"+Eval("OnsiteTransaction.TransactionID") %>' CssClass="btn btn-primary" runat="server" Text="View All Details" />
-                                </td>
-                            </tr>
-                        </ItemTemplate>
-                        <FooterTemplate>
-                            </table>
+                                <!-- Dropdown Button -->
+                                <asp:Button ID="dropdownMenuReference1" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Employee &#x25BC;" />
+                                <!-- Dropdown List -->
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference1">
+                                    <li>
+                                        <asp:Button ID="btnCategoryAll" runat="server" CssClass="dropdown-item" Text="All Employee" UseSubmitBehavior="false" /></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+
+                                    <asp:Repeater ID="EmployeeFullnameRepeater" OnItemCreated="EmployeeFullnameRepeater_ItemCreated" runat="server">
+                                        <ItemTemplate>
+                                            <a runat="server" class="dropdown-item" id="categorySelected">
+                                                <li>
+                                                    <asp:Button ID="EmployeeFullnameCategory" runat="server" CssClass="dropdown-item" Text='<%#DataBinder.Eval(Container.DataItem,"Username")%>' UseSubmitBehavior="false" OnClick="EmployeeFullnameCategory_Click" />
+                                                </li>
+                                            </a>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="table-responsive" style="height: 500px">
+                            <asp:Repeater ID="SalesRepeater" runat="server">
+                                <HeaderTemplate>
+                                    <div class="table-condensed table-responsive table-borderless" style="height: 500px">
+                                        <table border="1" class="table table-striped">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th scope="col">Sales ID</th>
+                                                    <th scope="col">Username</th>
+                                                    <th scope="col">Type Of Sale</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Total Sale</th>
+                                                    <th scope="col">Details</th>
+                                                </tr>
+                                            </thead>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <tr>
+                                        <td><%# DataBinder.Eval(Container.DataItem, "SalesID") %></td>
+                                        <td><%# DataBinder.Eval(Container.DataItem, "Administrator.Username") %></td>
+                                        <td><span class="badge bg-dark"><%# Eval("SalesType")%></span> </td>
+                                        <td><%# DataBinder.Eval(Container.DataItem, "Date") %></td>
+                                        <td><%# DataBinder.Eval(Container.DataItem, "TotalSales") %></td>
+                                        <td>
+                                            <asp:Button OnClick="IDS_Click" ID="IDS" CommandName="SalesCommand" CommandArgument='<%# Eval("Orders.Order_ID") +";"+Eval("OnsiteTransaction.TransactionID") %>' CssClass="btn btn-primary" runat="server" Text="View All Details" />
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                                <FooterTemplate>
+                                    </table>
                          </div>
-                        </FooterTemplate>
-                    </asp:Repeater>
-                </div>
+                                </FooterTemplate>
+                            </asp:Repeater>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="dropdownMenuReference1" EventName="Click" />
+                    </Triggers>
+                </asp:UpdatePanel>
             </div>
 
             <!-- Create Transaction tab -->
