@@ -4,10 +4,12 @@
 
     <style>
         #count_message {
-          background-color: black;
+          background-color: #4b4444;
           color: white;
           margin-top: -20px;
           margin-right: 5px;
+          font-family: Arial, Helvetica, sans-serif;
+          border-radius: 7px;
         }
     </style>
     
@@ -21,18 +23,40 @@
             }
             return true;
         }
+
+        var text_max = 200;
+        $('#count_message').html('0 / ' + text_max);
+        function charCount() {            
+            $('#textCount').keyup(function () {
+                var text_length = $('#textCount').val().length;
+                var text_remaining = text_max - text_length;
+
+                $('#count_message').html(text_length + ' / ' + text_max);
+            });
+        }
+        
     </script>
 
     <!-- Script: Character counter -->
-    <script src="http://code.jquery.com/jquery-1.5.js"></script>
-    <script>
-
-    </script>
 
     <p class="fs-4"><b>Add Product</b></p>
     <br>
     <p class="fs-5">Product Details</p>
     
+
+    <!-- Possible sources for character counter
+        https://www.codeply.com/go/s0F9Iz38yn/bootstrap-textarea-with-character-count-_-bootstrap-3
+        https://jsfiddle.net/djibe89/knv43w6t
+        https://stackoverflow.com/questions/5371089/count-characters-in-textarea
+        https://dev.to/websolutionstuff/character-count-in-textarea-48p3
+
+    -->
+
+        <textarea class="form-control" id="textCount" name="textCount" 
+      	    maxlength="200" placeholder="Type in your message" rows="5" onkeypress="return charCount()">            
+        </textarea>
+        <label class="pull-right label label-default" id="count_message" for="textCount"></label>
+            
 
     
 
@@ -91,9 +115,7 @@
                 <div class="form-group">
                     <div class="row">
                      <label for="addProductDescription"><i>Description</i></label>
-                        <!--
                         <textarea class="form-control" rows="3" id="addProductDescription" placeholder="Enter description here" maxlength="1000"></textarea>
-                        -->
                     </div>
                 </div>
             </div>
