@@ -16,7 +16,7 @@ namespace SoftEngWebEmployee.Helpers
         {
 
         }
-        public static void BuildEmailSender(string recipientEmail)
+        public static void BuildEmailSender(string recipientEmail,string generatedCode)
         {
             var smtp = new SmtpClient
             {
@@ -28,7 +28,7 @@ namespace SoftEngWebEmployee.Helpers
                 Credentials = new NetworkCredential(EMAIL, PASSWORD),
                 Timeout = 20000
             };
-            var generatedCode = GenerateRandomCode();
+            
             using (var message = new MailMessage(EMAIL, recipientEmail)
             {
                 Subject = SUBJECT,
@@ -38,7 +38,7 @@ namespace SoftEngWebEmployee.Helpers
                 smtp.Send(message);
             }           
         }
-        private static string GenerateRandomCode()
+        public static string GenerateRandomCode()
         {
             Random random = new Random();
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

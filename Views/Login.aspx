@@ -30,7 +30,6 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="card2 card border-0 px-4 py-5">
-
                             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                 <ContentTemplate>
@@ -52,13 +51,15 @@
                                     </div>
 
                                 </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="BtnSendCode" EventName="Click" />
+                                </Triggers>
                             </asp:UpdatePanel>
                             <div class="row">
-                                <button type="button" class="btn btn-danger form-control" style="font-family: 'Arial Rounded MT'" data-bs-toggle="modal" data-bs-target="#codeModal">
+                                <button type="button" class="btn btn-danger form-control" style="font-family: 'Arial Rounded MT'" data-bs-toggle="modal" data-bs-target="#emailModal">
                                     Forgot Password
                                 </button>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -72,7 +73,9 @@
         </div>
 
         <!--Modal Here-->
-        <div class="modal fade" id="codeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!--Modal Enter Email-->
+
+        <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
 
@@ -85,10 +88,38 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <asp:Button ID="BtnSendCode" CssClass="btn btn-primary" runat="server" Text="Send Code" OnClick="BtnSendCode_Click"/>                        
+                        <asp:Button ID="BtnSendCode" CssClass="btn btn-primary" runat="server" Text="Send Code" OnClick="BtnSendCode_Click" data-bs-toggle="modal" data-bs-target="#codeModal" />
                     </div>
                 </div>
             </div>
+        </div>
+        <!--Modal Enter Code and New Password-->
+        <div class="modal fade" id="codeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                <ContentTemplate>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Enter Code</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <asp:TextBox ID="CodeConfirmation" placeholder="Enter code confirmation here!" runat="server"></asp:TextBox>
+                                <%if (IsCodeConfirmed) %>
+                                <%{ %>
+                                <asp:TextBox ID="NewPassword" placeholder="Enter new Password!" runat="server"></asp:TextBox>
+                                <%} %>
+                            </div>
+                            <div class="modal-footer">
+                                <asp:Button ID="BtnConfirmCode" CssClass="btn btn-primary" runat="server" Text="Send Code" OnClick="BtnConfirmCode_Click" />
+                            </div>
+                        </div>
+                    </div>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="BtnConfirmCode" EventName="Click" />
+                </Triggers>
+            </asp:UpdatePanel>
         </div>
     </form>
 </body>
