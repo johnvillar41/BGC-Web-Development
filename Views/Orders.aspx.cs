@@ -47,7 +47,7 @@ namespace SoftEngWebEmployee.Views
                     return;
                 }
                 await OrdersRepository .SingleInstance.ChangeStatusOfOrderToCancelledAsync(int.Parse(OrderIDCancel.Text));
-                var generatedNotification = NotificationRepository
+                var generatedNotification = await NotificationRepository
                     .SingleInstance
                     .GenerateNotification(NotificationType.CancelledOrder, OrderIDCancel.Text);
                 await NotificationRepository.SingleInstance.InsertNewNotificationAsync(generatedNotification);
@@ -92,7 +92,7 @@ namespace SoftEngWebEmployee.Views
                     await ProductRepository.SingleInstance.UpdateProductStocksAsync(productId.Value, productId.Key);
                 }
                 await OrdersRepository.SingleInstance.ChangeStatusOfOrderToFinishedAsync(int.Parse(OrderIDFinish.Text));
-                var generatedNotification = NotificationRepository
+                var generatedNotification = await NotificationRepository
                     .SingleInstance
                     .GenerateNotification(NotificationType.FinishedOrder, OrderIDFinish.Text);
                 await NotificationRepository.SingleInstance.InsertNewNotificationAsync(generatedNotification);

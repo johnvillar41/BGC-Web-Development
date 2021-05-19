@@ -55,7 +55,7 @@ namespace SoftEngWebEmployee.Repository
                         NotificationTitle = reader["notif_title"].ToString(),
                         NotificationContent = reader["notif_content"].ToString(),
                         NotificationDate = DateTime.Parse(reader["notif_date"].ToString()),
-                        Username = reader["user_name"].ToString(),
+                        Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(reader["user_name"].ToString()),
                         TypeOfNotification = CategorizeNotification(reader["notif_title"].ToString())
                     };
                     notificationsList.Add(notifications);
@@ -77,7 +77,7 @@ namespace SoftEngWebEmployee.Repository
         ///     <para>Returns a new generated notification</para>
         ///     <para>Type: NotificationsModel</para>
         /// </returns>
-        public NotificationsModel GenerateNotification(NotificationType notificationType, string itemAction)
+        public async Task<NotificationsModel> GenerateNotification(NotificationType notificationType, string itemAction)
         {
             NotificationsModel newNotification = null;
             switch (notificationType)
@@ -87,50 +87,51 @@ namespace SoftEngWebEmployee.Repository
                     {
                         NotificationTitle = "Deleted User",
                         NotificationContent = "Deleted User: " + itemAction,
-                        NotificationDate = DateTime.Today,
-                        Username = UserSession.GetLoggedInUser(),
+                        NotificationDate = DateTime.Today,                        
                         TypeOfNotification = NotificationType.DeleteUser
                     };
+                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser().ToString());
+                    
                     break;
                 case NotificationType.CreateUser:
                     newNotification = new NotificationsModel()
                     {
                         NotificationTitle = "Created New User",
                         NotificationContent = "Created User: " + itemAction,
-                        NotificationDate = DateTime.Today,
-                        Username = UserSession.GetLoggedInUser(),
+                        NotificationDate = DateTime.Today,                        
                         TypeOfNotification = NotificationType.CreateUser
                     };
+                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser().ToString());
                     break;
                 case NotificationType.UpdateUser:
                     newNotification = new NotificationsModel()
                     {
                         NotificationTitle = "Updated User",
                         NotificationContent = "Updated User: " + itemAction,
-                        NotificationDate = DateTime.Today,
-                        Username = UserSession.GetLoggedInUser(),
+                        NotificationDate = DateTime.Today,                        
                         TypeOfNotification = NotificationType.UpdateUser
                     };
+                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser().ToString());
                     break;
                 case NotificationType.CancelledOrder:
                     newNotification = new NotificationsModel()
                     {
                         NotificationTitle = "Cancelled Order",
                         NotificationContent = "Cancelled Order for OrderID: " + itemAction,
-                        NotificationDate = DateTime.Today,
-                        Username = UserSession.GetLoggedInUser(),
+                        NotificationDate = DateTime.Today,                        
                         TypeOfNotification = NotificationType.CancelledOrder
                     };
+                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser().ToString());
                     break;
                 case NotificationType.FinishedOrder:
                     newNotification = new NotificationsModel()
                     {
                         NotificationTitle = "Finished Order",
                         NotificationContent = "Finished Order for Order ID: " + itemAction,
-                        NotificationDate = DateTime.Today,
-                        Username = UserSession.GetLoggedInUser(),
+                        NotificationDate = DateTime.Today,                        
                         TypeOfNotification = NotificationType.FinishedOrder
                     };
+                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser().ToString());
                     break;
                 case NotificationType.SoldItem:
                     newNotification = new NotificationsModel
@@ -138,9 +139,10 @@ namespace SoftEngWebEmployee.Repository
                         NotificationTitle = "Sold Item",
                         NotificationContent = "Sold Item: " + itemAction,
                         NotificationDate = DateTime.Today,
-                        Username = UserSession.GetLoggedInUser(),
+                        
                         TypeOfNotification = NotificationType.SoldItem
                     };
+                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser().ToString());
                     break;
             }
             return newNotification;
@@ -162,7 +164,7 @@ namespace SoftEngWebEmployee.Repository
                 command.Parameters.AddWithValue("@title", notification.NotificationTitle);
                 command.Parameters.AddWithValue("@content", notification.NotificationContent);
                 command.Parameters.AddWithValue("@date", notification.NotificationDate);
-                command.Parameters.AddWithValue("@username", notification.Username);
+                command.Parameters.AddWithValue("@username", notification.Administrator.Username);
                 await command.ExecuteNonQueryAsync();
             }
         }
@@ -190,7 +192,7 @@ namespace SoftEngWebEmployee.Repository
                         NotificationTitle = reader["notif_title"].ToString(),
                         NotificationContent = reader["notif_content"].ToString(),
                         NotificationDate = DateTime.Parse(reader["notif_date"].ToString()),
-                        Username = reader["user_name"].ToString(),
+                        Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(reader["user_name"].ToString()),
                         TypeOfNotification = CategorizeNotification(reader["notif_title"].ToString())
                     };
 

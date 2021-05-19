@@ -67,11 +67,11 @@ namespace SoftEngWebEmployee.Views
                         return;
                     }
                 }
-
-                await NotificationRepository.SingleInstance
-                    .InsertNewNotificationAsync(NotificationRepository
+                var generatedNotification = await NotificationRepository
                     .SingleInstance
-                    .GenerateNotification(NotificationType.CreateUser, username));
+                    .GenerateNotification(NotificationType.CreateUser, username);
+                await NotificationRepository.SingleInstance
+                    .InsertNewNotificationAsync(generatedNotification);
                 BuildSweetAlert("#fff", "Successfull!", $"Successfully Added {administrator.Username} as {administrator.EmployeeType.ToString()}", AlertStatus.success);
                 Response.Redirect(Request.RawUrl, false);               
             }
@@ -82,10 +82,11 @@ namespace SoftEngWebEmployee.Views
             if (!String.IsNullOrWhiteSpace(AdministratorId_Delete.Text))
             {
                 await AdministratorRepository.SingleInstance.DeleteAdministrator(int.Parse(AdministratorId_Delete.Text));
-                await NotificationRepository.SingleInstance
-                   .InsertNewNotificationAsync(NotificationRepository
+                var generatedNotification = await NotificationRepository
                    .SingleInstance
-                   .GenerateNotification(NotificationType.DeleteUser, AdministratorID.Text.ToString()));
+                   .GenerateNotification(NotificationType.DeleteUser, AdministratorID.Text.ToString());
+                await NotificationRepository.SingleInstance
+                   .InsertNewNotificationAsync(generatedNotification);
             }
             Thread.Sleep(5000);
             LoadAdministrators();
@@ -130,10 +131,11 @@ namespace SoftEngWebEmployee.Views
                     Email = email
                 };
                 await AdministratorRepository.SingleInstance.UpdateAdministrator(administrator);
-                await NotificationRepository.SingleInstance
-                   .InsertNewNotificationAsync(NotificationRepository
+                var generatedNotification = await NotificationRepository
                    .SingleInstance
-                   .GenerateNotification(NotificationType.UpdateUser, username));
+                   .GenerateNotification(NotificationType.UpdateUser, username);
+                await NotificationRepository.SingleInstance
+                   .InsertNewNotificationAsync(generatedNotification);
             }
             Thread.Sleep(5000);
             LoadAdministrators();

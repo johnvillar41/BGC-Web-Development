@@ -185,7 +185,7 @@ namespace SoftEngWebEmployee.Views
                 }
                 productListString += "|";
             }
-            var notification = NotificationRepository.SingleInstance.GenerateNotification(Constants.NotificationType.SoldItem, productListString);
+            var notification = await NotificationRepository.SingleInstance.GenerateNotification(Constants.NotificationType.SoldItem, productListString);
             await NotificationRepository.SingleInstance.InsertNewNotificationAsync(notification);
         }
         private async void LoadSales()

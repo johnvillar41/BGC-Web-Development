@@ -126,7 +126,7 @@
                                             <%} %>
                                             <td><%=notification.NotificationTitle %></td>
                                             <td><%=notification.NotificationContent %></td>
-                                            <td><%=notification.Username %></td>
+                                            <td><%=notification.Administrator.Fullname %></td>
                                             <td><%=notification.NotificationDate %></td>
                                         </tr>
                                         <%} %>
