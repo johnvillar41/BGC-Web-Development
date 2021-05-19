@@ -38,7 +38,7 @@ namespace SoftEngWebEmployee.Views
                 Session["onsiteID"] = onsiteID;
             }
             Response.Redirect("DisplaySales", false);
-        }
+        }        
         protected async void CategoryBtn_Click(object sender, EventArgs e)
         {
             string category = (sender as Button).Text.ToString();
@@ -80,6 +80,8 @@ namespace SoftEngWebEmployee.Views
         }
         protected void EmployeeFullnameCategory_Click(object sender, EventArgs e)
         {
+            UpdateProgress2.Visible = true;
+            Thread.Sleep(2000);
             var employee = (sender as Button).Text.ToString();            
             char caret = Convert.ToChar(0x000025BC);
             dropdownMenuReference1.Text = employee + " " + caret;
@@ -91,6 +93,7 @@ namespace SoftEngWebEmployee.Views
             {
                 LoadSalesByEmployee(employee);
             }
+            UpdateProgress2.Visible = false;
         }
         protected async void BtnAddToCart_Click(object sender, EventArgs e)
         {
@@ -135,7 +138,7 @@ namespace SoftEngWebEmployee.Views
         }
         protected async void BtnConfirmCartOrder_Click(object sender, EventArgs e)
         {
-            UpdateProgress1.Visible = true;          
+            UpdateProgress2.Visible = true;          
             if (Cart.GetCartItems().Count == 0)
             {
                 BuildSweetAlert("#ffcccb", AlertStatus.error, "Error Processing Request", "Cart has no items");              
@@ -159,7 +162,7 @@ namespace SoftEngWebEmployee.Views
             LoadSales();
             LoadProducts();
             Thread.Sleep(5000);
-            UpdateProgress1.Visible = false;
+            UpdateProgress2.Visible = false;
         }
         private void BuildSweetAlert(string hexaBgColor,AlertStatus alertStatus,string title,string message)
         {
