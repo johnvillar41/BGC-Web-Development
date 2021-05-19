@@ -148,13 +148,12 @@
                                             <option value="annually">Annually</option>
                                         </select>
                                         <p class="card-text">
-
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">                            
+                        <div class="row">
                             <div class="row row-cols-1 row-cols-md-3 g-4">
                                 <%if (SalesIncomeDisplay == null) return; %>
                                 <%foreach (var sales in SalesIncomeDisplay) %>
@@ -181,7 +180,7 @@
 
                     </div>
                     <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">
-                        <!-- Products -->
+                        <!-- Product sales report -->
                         <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 g-4">
                             <%if (ProductSalesListDisplay == null) return; %>
                             <%foreach (var productSales in ProductSalesListDisplay) %>
@@ -205,41 +204,58 @@
                                             <!--See More-->
                                             <li class="list-group-item">Quantity Sold:                                       
                                        <label><%=productSales.ProductReport.QuantitySold %></label>
-                                                <br/>
-                                                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapse<%=productSales.ProductReport.Product.Product_ID %>" role="button" aria-expanded="false" aria-controls="collapseExample">See More
+                                                <br />
+                                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal<%=productSales.ProductReport.Product.Product_ID %>" role="button">
+                                                    See More
                                                 </a>
-                                                <div class="collapse mt-2" id="collapse<%=productSales.ProductReport.Product.Product_ID %>">
-                                                    <div class="card card-body table table-striped table-hover table-responsive">
-                                                        <table>
-                                                            <thead>
-                                                                <tr>
-                                                                    <th scope="col">ProductName</th>
-                                                                    <th scope="col">ProductPrice</th>
-                                                                    <th scope="col">ProductID</th>
-                                                                    <th scope="col">SaleType</th>
-                                                                    <th scope="col">Date</th>
-                                                                    <th scope="col">Administrator</th>
-                                                                    <th scope="col">TotalSale</th>
-                                                                    <th scope="col">ProductCount</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <%foreach (var quantitySold in productSales.QuantitySold) %>
-                                                            <%{ %>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td><%=quantitySold.ProductName %></td>
-                                                                    <td><%=quantitySold.ProductPrice %></td>
-                                                                    <td><%=quantitySold.ProductID %></td>
-                                                                    <td><%=quantitySold.SaleType %></td>
-                                                                    <td><%=quantitySold.Date %></td>
-                                                                    <td><%=quantitySold.Administrator %></td>
-                                                                    <td><%=quantitySold.TotalSale %></td>
-                                                                    <td><%=quantitySold.ProductCount %></td>
-                                                                </tr>
-                                                            </tbody>
-                                                            <%} %>
-                                                        </table>
+                                                <!-- Modals -->
+                                                <div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="modal<%=productSales.ProductReport.Product.Product_ID %>">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="card card-body table table-striped table-hover table-responsive">
+                                                                    <table>
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th scope="col">ProductName</th>
+                                                                                <th scope="col">ProductPrice</th>
+                                                                                <th scope="col">ProductID</th>
+                                                                                <th scope="col">SaleType</th>
+                                                                                <th scope="col">Date</th>
+                                                                                <th scope="col">Administrator</th>
+                                                                                <th scope="col">TotalSale</th>
+                                                                                <th scope="col">ProductCount</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <%foreach (var quantitySold in productSales.QuantitySold) %>
+                                                                        <%{ %>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td><%=quantitySold.ProductName %></td>
+                                                                                <td><%=quantitySold.ProductPrice %></td>
+                                                                                <td><%=quantitySold.ProductID %></td>
+                                                                                <td><%=quantitySold.SaleType %></td>
+                                                                                <td><%=quantitySold.Date %></td>
+                                                                                <td><%=quantitySold.Administrator %></td>
+                                                                                <td><%=quantitySold.TotalSale %></td>
+                                                                                <td><%=quantitySold.ProductCount %></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                        <%} %>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                                                                
+                                                            </div>
+                                                        </div>
                                                     </div>
+
+
                                                 </div>
                                             </li>
                                         </ul>
@@ -252,4 +268,6 @@
                 </div>
             </div>
         </div>
+    </div>
+
 </asp:Content>
