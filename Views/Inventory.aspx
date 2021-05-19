@@ -105,7 +105,9 @@
                                     <img class="card-img-top" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="150px" width="75px" alt="Product picture here">
                                     <div class="card-body">
                                         <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
-                                        <p class="card-text">Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
+                                        <asp:Label ID="StocksLabel" CssClass="card-text" runat="server" Text="" OnDataBinding="StocksLabel_DataBinding"></asp:Label>                                       
+                                    </div>
+                                    <div class="card-footer">
                                         <asp:Button ID="detailsButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-primary" Text="Details" data-bs-toggle="modal" href="#detailsModal" OnClick="RetrieveDetails" runat="server" />
                                         <asp:Button ID="deleteProduct" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-danger float-right" Text="Delete" data-bs-toggle="modal" href="#deleteModal" OnClick="RetrieveDetails" runat="server" />
                                     </div>

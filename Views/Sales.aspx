@@ -61,7 +61,13 @@
             <a class="nav-link" id="cart-transactions" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">Cart Transaction</a>
         </li>
     </ul>
-
+    <asp:UpdateProgress ID="UpdateProgress2" runat="server">
+        <ProgressTemplate>
+            <div id="overlayDiv">
+                <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
     <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
         <div class="tab-content" id="myTabContent">
             <!-- View Transactions list -->
@@ -221,14 +227,7 @@
             <div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="cart-transactions">
                 <div class="col-12">
                     <div class="row">
-                        <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
-                            <asp:UpdateProgress ID="UpdateProgress1" runat="server">
-                                <ProgressTemplate>
-                                    <div id="overlayDiv">
-                                        <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
-                                    </div>
-                                </ProgressTemplate>
-                            </asp:UpdateProgress>
+                        <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">                            
                             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                 <ContentTemplate>
                                     <%if (Cart.GetCartItems().Count == 0) %>

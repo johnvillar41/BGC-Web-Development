@@ -15,6 +15,15 @@ namespace SoftEngWebEmployee.Views
     {
 
         /// <summary>
+        /// UpdateProgress2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress2;
+
+        /// <summary>
         /// UpdatePanel_Dropdown control.
         /// </summary>
         /// <remarks>
@@ -94,15 +103,6 @@ namespace SoftEngWebEmployee.Views
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater ProductsRepeater;
-
-        /// <summary>
-        /// UpdateProgress1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
 
         /// <summary>
         /// UpdatePanel2 control.

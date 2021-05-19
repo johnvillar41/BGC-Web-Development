@@ -145,6 +145,20 @@ namespace SoftEngWebEmployee.Views
             HPRepeater.DataBind();
         }
 
+        protected void StocksLabel_DataBinding(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            int stocksNumber = (int)Eval("ProductStocks");
+            lbl.Text = $"Stocks: {stocksNumber}";
+            if(stocksNumber > 50)
+                lbl.ForeColor = System.Drawing.Color.Green;
+            if (stocksNumber < 50)            
+                lbl.ForeColor = System.Drawing.Color.Blue;            
+            if(stocksNumber < 20)            
+                lbl.ForeColor = System.Drawing.Color.Red;
+            
+        }
+
         /* C# code for displaying card details
 
         <p> Are you sure you want to delete this product? </p>
