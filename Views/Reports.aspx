@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" Async="true" CodeBehind="Reports.aspx.cs" Inherits="SoftEngWebEmployee.Views.Reports" %>
 
+<%@ Import Namespace="SoftEngWebEmployee.Helpers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <p><b><u>REPORTS</u></b></p>
     <div class="row">
@@ -15,6 +16,8 @@
             <div class="tab-content" id="v-pills-tabContent">
                 <!--Dashboard-->
                 <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel" aria-labelledby="v-pills-dashboard-tab">
+                    <%if (UserSession.IsAdministrator()) %>
+                    <%{ %>
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
                             <div class="card">
@@ -53,11 +56,18 @@
                             </div>
                         </div>
                     </div>
+                    <%} %>
+                    <%else %>
+                    <%{ %>
+                    <center><lottie-player src="https://assets1.lottiefiles.com/packages/lf20_LlRvIg.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player></center>
+                    <center><h3><b>Sorry you are not allowed to view this.</b></h3></center>
+                    <%} %>
                 </div>
 
                 <div class="tab-pane fade" id="v-pills-sales" role="tabpanel" aria-labelledby="v-pills-sales-tab">
                     <!--Sales Income-->
-
+                    <%if (UserSession.IsAdministrator()) %>
+                    <%{ %>
                     <div class="row">
                         <!--1st card-->
                         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -179,6 +189,7 @@
 
 
                     </div>
+
                     <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">
                         <!-- Product sales report -->
                         <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 g-4">
@@ -216,7 +227,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div class="card card-body table table-striped table-hover table-responsive"style="height: 600px">
+                                                                <div class="card card-body table table-striped table-hover table-responsive" style="height: 600px">
                                                                     <table>
                                                                         <thead>
                                                                             <tr>
@@ -262,6 +273,12 @@
                             <%} %>
                         </div>
                     </div>
+                    <%} %>
+                    <%else %>
+                    <%{ %>
+                    <center><lottie-player src="https://assets1.lottiefiles.com/packages/lf20_LlRvIg.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player></center>
+                    <center><h3><b>Sorry you are not allowed to view this.</b></h3></center>
+                    <%} %>
                 </div>
             </div>
         </div>
