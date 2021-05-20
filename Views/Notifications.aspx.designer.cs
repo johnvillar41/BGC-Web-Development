@@ -33,6 +33,33 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.WebControls.Button FindDate;
 
         /// <summary>
+        /// DropDownEmployee control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DropDownEmployee;
+
+        /// <summary>
+        /// BtnEmployeeAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnEmployeeAll;
+
+        /// <summary>
+        /// EmployeeFullnameRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater EmployeeFullnameRepeater;
+
+        /// <summary>
         /// UpdateProgress1 control.
         /// </summary>
         /// <remarks>

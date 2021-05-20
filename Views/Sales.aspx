@@ -145,32 +145,35 @@
 
             <!-- Create Transaction tab -->
             <div class="tab-pane fade" id="create" role="tabpanel" aria-labelledby="create-transactions">
-                <div class="col-4 col-xl-4 col-lg-4 col-md-6 col-sm-5">
+                <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="row">
-                        <div class="col-lg-6 col-sm-12">
-                            <div class="btn-group" style="margin-bottom: 10px; margin-top: 10px">
-                                <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Select Category
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference">
-                                    <li>
-                                        <asp:Button ID="CategoryBtnAllProducts" runat="server" CssClass="dropdown-item" Text="All Products" OnClick="CategoryBtnAllProducts_Click" /></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <asp:Repeater ID="CategoryRepeater" runat="server" OnItemCreated="CategoryRepeater_ItemCreated">
-                                        <ItemTemplate>
-                                            <a runat="server" class="dropdown-item" id="categorySelected">
-                                                <li>
-                                                    <asp:Button ID="CategoryBtn" runat="server" CssClass="dropdown-item" Text='<%#Container.DataItem%>' OnClick="CategoryBtn_Click" />
-                                                </li>
-                                            </a>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </ul>
-                            </div>
+                        <h3><b>Search by Category</b></h3>
+                    </div>
+                    <div class="row">
+                        <div class="btn-group" style="margin-bottom: 10px; margin-top: 10px">
+                            <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Category
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference">
+                                <li>
+                                    <asp:Button ID="CategoryBtnAllProducts" runat="server" CssClass="dropdown-item" Text="All Products" OnClick="CategoryBtnAllProducts_Click" /></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <asp:Repeater ID="CategoryRepeater" runat="server" OnItemCreated="CategoryRepeater_ItemCreated">
+                                    <ItemTemplate>
+                                        <a runat="server" class="dropdown-item" id="categorySelected">
+                                            <li>
+                                                <asp:Button ID="CategoryBtn" runat="server" CssClass="dropdown-item" Text='<%#Container.DataItem%>' OnClick="CategoryBtn_Click" />
+                                            </li>
+                                        </a>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </ul>
                         </div>
                     </div>
+
+
 
                 </div>
                 <div class="col-12">
@@ -227,7 +230,7 @@
             <div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="cart-transactions">
                 <div class="col-12">
                     <div class="row">
-                        <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">                            
+                        <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
                             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                 <ContentTemplate>
                                     <%if (Cart.GetCartItems().Count == 0) %>
