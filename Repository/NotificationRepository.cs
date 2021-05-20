@@ -55,6 +55,7 @@ namespace SoftEngWebEmployee.Repository
                     }                   
                 }
             }
+            notificationsList.Reverse();
             return notificationsList;
         }
         /// <summary>
@@ -93,7 +94,35 @@ namespace SoftEngWebEmployee.Repository
             }
             notificationsList.Reverse();
             return notificationsList;
-        }       
+        }
+        public async Task<List<NotificationsModel>> FetchNotificationsGivenDateAsyncByLoggedInEmployee(string date)
+        {
+            List<NotificationsModel> notificationsList = new List<NotificationsModel>();
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT * FROM notifications_table WHERE notif_date LIKE  @date AND user_name=@username";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@date", "%" + date + "%");
+                command.Parameters.AddWithValue("@username", UserSession.GetLoggedInUser());
+                MySqlDataReader reader = command.ExecuteReader();
+                while (await reader.ReadAsync())
+                {
+                    NotificationsModel notifications = new NotificationsModel()
+                    {
+                        Notifications_ID = int.Parse(reader["notif_id"].ToString()),
+                        NotificationTitle = reader["notif_title"].ToString(),
+                        NotificationContent = reader["notif_content"].ToString(),
+                        NotificationDate = DateTime.Parse(reader["notif_date"].ToString()),
+                        Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(reader["user_name"].ToString()),
+                        TypeOfNotification = CategorizeNotification(reader["notif_title"].ToString())
+                    };
+                    notificationsList.Add(notifications);
+                }
+            }
+            notificationsList.Reverse();
+            return notificationsList;
+        }
         /// <summary>
         ///     Generates a notification for each database transaction done inside the program
         /// </summary>
@@ -226,6 +255,33 @@ namespace SoftEngWebEmployee.Repository
                         TypeOfNotification = CategorizeNotification(reader["notif_title"].ToString())
                     };
 
+                    notificationsList.Add(notifications);
+                }
+            }
+            notificationsList.Reverse();
+            return notificationsList;
+        }
+        public async Task<List<NotificationsModel>> FetchEmployeeLoggedInNotifications()
+        {
+            List<NotificationsModel> notificationsList = new List<NotificationsModel>();
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT * FROM notifications_table WHERE user_name=@username";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@username",UserSession.GetLoggedInUser());
+                MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                {
+                    NotificationsModel notifications = new NotificationsModel()
+                    {
+                        Notifications_ID = int.Parse(reader["notif_id"].ToString()),
+                        NotificationTitle = reader["notif_title"].ToString(),
+                        NotificationContent = reader["notif_content"].ToString(),
+                        NotificationDate = DateTime.Parse(reader["notif_date"].ToString()),
+                        Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(reader["user_name"].ToString()),
+                        TypeOfNotification = CategorizeNotification(reader["notif_title"].ToString())
+                    };
                     notificationsList.Add(notifications);
                 }
             }

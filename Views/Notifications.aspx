@@ -60,7 +60,7 @@
                         <ContentTemplate>
                             <div class="table-bordered table-condensed table-responsive" style="height: 600px">
                                 <table class="table table-borderless table-hover">
-                                    <%if (DisplayNotifications().Count() == 0) %>
+                                    <%if (NotificationsList.Count() == 0) %>
                                     <%{ %>
                                     <div>
                                         <h1>
@@ -82,9 +82,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
-
-                                        <%foreach (var notification in DisplayNotifications()) %>
+                                        <%foreach (var notification in NotificationsList) %>
                                         <%{ %>
                                         <tr>
                                             <td><%=notification.Notifications_ID%></td>
