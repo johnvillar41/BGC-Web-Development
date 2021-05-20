@@ -168,7 +168,7 @@
                                             <p class="card-text">Total Sale: <%=sales.TotalSale %></p>
                                             <p class="card-text">Total Sale On Site: <%=sales.TotalSaleOnsite %></p>
                                             <p class="card-text">Total Sale Orders: <%=sales.TotalSaleOrders %></p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                            <a href="#" class="btn btn-primary">See more</a>
                                         </div>
                                     </div>
                                 </div>
@@ -216,7 +216,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div class="card card-body table table-striped table-hover table-responsive">
+                                                                <div class="card card-body table table-striped table-hover table-responsive"style="height: 600px">
                                                                     <table>
                                                                         <thead>
                                                                             <tr>

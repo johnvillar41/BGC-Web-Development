@@ -15,7 +15,7 @@ namespace SoftEngWebEmployee.Views
     public partial class Reports : System.Web.UI.Page
     {
         public List<ProductSalesReportViewModel> ProductSalesListDisplay { get; set; }
-        public List<SalesIncomeReportViewModel> SalesIncomeDisplay { get; set; }
+        public List<SalesIncomeReportViewModel> SalesIncomeDisplay { get; set; }        
         public int TotalSaleOnsite { get; set; }
         public int TotalSaleOrder { get; set; }
         public int TotalSaleOnsite_GivenDate { get; set; }

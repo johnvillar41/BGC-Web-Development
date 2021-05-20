@@ -66,6 +66,7 @@ namespace SoftEngWebEmployee.Repository
                         salesList.Add(sales);
                     }
                 }
+                salesList.Reverse();
                 return salesList;
             }
         }
@@ -158,11 +159,11 @@ namespace SoftEngWebEmployee.Repository
                             TotalSales = orderModel.OrderTotalPrice,
                             Orders = orderModel
                         };
-                    }
-
+                    }                    
                     listOfSales.Add(sales);
                 }
             }
+            listOfSales.Reverse();
             return listOfSales;
         }
 

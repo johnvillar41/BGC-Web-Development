@@ -199,7 +199,7 @@
                                                             <div class="col-lg-12">
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-sm-12">
-                                                                        <asp:TextBox ID="TotalItems" runat="server" CssClass="form-control mb-1" placeholder="Enter number of items" onkeypress="return isNumber(event)" onpaste="return false;"></asp:TextBox>
+                                                                        <asp:TextBox ID="TotalItems" runat="server" CssClass="form-control mb-1" placeholder="Quantity" onkeypress="return isNumber(event)" onpaste="return false;"></asp:TextBox>
                                                                     </div>
                                                                     <div class="col-lg-6 col-sm-12">
                                                                         <asp:Button ID="BtnAddToCart" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Add To Cart" OnClick="BtnAddToCart_Click" />
