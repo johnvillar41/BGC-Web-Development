@@ -30,24 +30,54 @@
             <div class="col-12" style="margin: 5px">
                 <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
                     <div class="row">
-                        <div class="col-3">
-                            <h3 class="float-left">Notifications</h3>
-                        </div>
-                        <div class="col-3">
-                            <!--Empty Div-->
-                        </div>
-                        <div class="col-6 ">
+                        <h3 class="float-left">Notifications</h3>
+                    </div>
+                    <div class="row m-1">
+                        <div class="col-md-3 col-sm-12">
+                            <div class="row mb-1">
+                                <h5><b>Search by Date</b></h5>
+                            </div>
+                            <div class="row mb-1">
+                                <asp:TextBox class="form-control" ID="DateText" runat="server" type="date"></asp:TextBox>
+                            </div>
                             <div class="row">
-                                <div class="col-lg-6 col-sm-12">
-                                    <asp:TextBox class="form-control" ID="DateText" runat="server" type="date"></asp:TextBox>
-                                </div>
-                                <div class="col-lg-6 col-sm-12">
-                                    <asp:Button ID="FindDate" runat="server" Text="Search" CssClass="btn btn-info form-control" OnClick="FindDate_Click" />
+                                <asp:Button ID="FindDate" runat="server" Text="Search" CssClass="btn btn-info form-control" OnClick="FindDate_Click" />
+                            </div>
+                        </div>
+                        <%if (UserSession.IsAdministrator()) %>
+                        <%{ %>
+                        <div class="col-md-3 col-sm-12">
+                            <div class="row mb-1">
+                                <h5><b>Search by Employees</b></h5>
+                            </div>
+                            <div class="row">
+                            </div>
+                            <div class="row">
+                                <div class="btn-group">
+                                    <!-- Dropdown Button -->
+                                    <asp:Button ID="DropDownEmployee" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Employee &#x25BC;" />
+                                    <!-- Dropdown List -->
+                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference1">
+                                        <li>
+                                            <asp:Button ID="BtnEmployeeAll" runat="server" CssClass="dropdown-item" Text="All Employee" UseSubmitBehavior="false" OnClick="BtnEmployeeAll_Click"/></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+
+                                        <asp:Repeater ID="EmployeeFullnameRepeater" OnItemCreated="EmployeeFullnameRepeater_ItemCreated1" runat="server">
+                                            <ItemTemplate>
+                                                <a runat="server" class="dropdown-item" id="categorySelected">
+                                                    <li>
+                                                        <asp:Button ID="EmployeeFullnameCategory" runat="server" CssClass="dropdown-item" Text='<%#DataBinder.Eval(Container.DataItem,"Username")%>' UseSubmitBehavior="false" OnClick="EmployeeFullnameCategory_Click" />
+                                                    </li>
+                                                </a>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </ul>
                                 </div>
                             </div>
-
                         </div>
-
+                        <%} %>
                     </div>
                     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                         <ProgressTemplate>
@@ -60,6 +90,7 @@
                         <ContentTemplate>
                             <div class="table-bordered table-condensed table-responsive" style="height: 600px">
                                 <table class="table table-borderless table-hover">
+                                    <%if (NotificationsList == null) return; %>
                                     <%if (NotificationsList.Count() == 0) %>
                                     <%{ %>
                                     <div>
@@ -135,6 +166,8 @@
                         </ContentTemplate>
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="FindDate" EventName="Click" />
+                            <asp:AsyncPostBackTrigger ControlID="DropDownEmployee" EventName="Click" />
+                            <asp:AsyncPostBackTrigger ControlID="BtnEmployeeAll" EventName="Click" />
                         </Triggers>
                     </asp:UpdatePanel>
                 </div>
