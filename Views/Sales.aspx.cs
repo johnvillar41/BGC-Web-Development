@@ -91,6 +91,12 @@ namespace SoftEngWebEmployee.Views
             }
             else
             {
+                if (!UserSession.IsAdministrator())
+                {
+                    LoadSalesByEmployee(UserSession.GetLoggedInUser());
+                    UpdateProgress2.Visible = false;
+                    return;
+                }
                 LoadSalesByEmployee(employee);
             }
             UpdateProgress2.Visible = false;
@@ -217,9 +223,12 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadSales()
         {
-            var salesList = await SalesRepository.GetInstance().FetchAllSalesAsync();
-            SalesRepeater.DataSource = salesList;
-            SalesRepeater.DataBind();
+            if (UserSession.IsAdministrator())
+            {
+                var salesList = await SalesRepository.GetInstance().FetchAllSalesAsync();
+                SalesRepeater.DataSource = salesList;
+                SalesRepeater.DataBind();
+            }            
         }
         private async void LoadSalesByEmployee(string employee)
         {
@@ -247,9 +256,12 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadEmployeesOnDropDown()
         {
-            var employeeModelList = await AdministratorRepository.SingleInstance.FetchAdministratorsAsync();
-            EmployeeFullnameRepeater.DataSource = employeeModelList;
-            EmployeeFullnameRepeater.DataBind();
+            if (UserSession.IsAdministrator())
+            {
+                var employeeModelList = await AdministratorRepository.SingleInstance.FetchAdministratorsAsync();
+                EmployeeFullnameRepeater.DataSource = employeeModelList;
+                EmployeeFullnameRepeater.DataBind();
+            }            
         }        
     }
 }
