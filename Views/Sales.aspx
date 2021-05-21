@@ -203,6 +203,9 @@
                                                                 <br />
                                                                 <b>Stocks: </b>
                                                                 <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %>
+                                                                <br />
+                                                                <b>Price: </b>                                                                
+                                                                <%# DataBinder.Eval(Container.DataItem,"ProductPrice") %>
                                                             </p>
                                                         </div>
                                                         <div class="card-footer">
@@ -260,6 +263,9 @@
                                                                 <br />
                                                                 <b>Total number of items: </b>
                                                                 <%# DataBinder.Eval(Container.DataItem,"TotalNumberOfProduct") %>
+                                                                <br />
+                                                                <b>Subtotal Price: </b>
+                                                                <%# DataBinder.Eval(Container.DataItem,"SubTotalPrice") %>
                                                             </p>
                                                         </div>
                                                         <div class="card-footer">

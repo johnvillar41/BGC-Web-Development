@@ -112,6 +112,7 @@ namespace SoftEngWebEmployee.Views
             try
             {
                 product.TotalNumberOfProduct = int.Parse(totalItem.Text);
+                product.SubTotalPrice = product.TotalNumberOfProduct * product.ProductPrice;
                 if (await ProductRepository.SingleInstance.CheckIfProductIsEnough(product.TotalNumberOfProduct, int.Parse(productID)) == false || product.TotalNumberOfProduct == 0)
                 {
                     BuildSweetAlert("#ffcccb", AlertStatus.error, "Error!", "Error adding to cart: " + product.ProductName + " due to not enough stocks!");

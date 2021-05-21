@@ -19,7 +19,7 @@ namespace SoftEngWebEmployee.Helpers
             {
                 if(product.Product_ID == cartProduct.Product_ID)
                 {
-                    product.TotalNumberOfProduct = cartProduct.TotalNumberOfProduct;
+                    product.TotalNumberOfProduct = cartProduct.TotalNumberOfProduct;                   
                     return;
                 }
             }         
