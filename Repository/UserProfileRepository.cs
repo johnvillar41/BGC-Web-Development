@@ -53,17 +53,19 @@ namespace SoftEngWebEmployee.Repository
         ///     Passes updateduser as a parameter
         /// </param>
 
-        public async Task UpdateProfileAsync(AdministratorModel updateduser)
+        public async Task UpdateProfileAsync(AdministratorModel updateduser,string username)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "UPDATE login_table SET user_username=@username," +
+                string queryString = "UPDATE login_table SET " +
+                    "user_username=@username," +
                     "user_name=@fullname," +
                     "user_password=@password," +
-                    "email=@email WHERE user_username=@username";
+                    "email=@email WHERE user_username=@usernameSearched";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@username", updateduser.Username);
+                command.Parameters.AddWithValue("@usernameSearched", username);
                 command.Parameters.AddWithValue("@fullname", updateduser.Fullname);
                 command.Parameters.AddWithValue("@password", updateduser.Password);
                 command.Parameters.AddWithValue("@email", updateduser.Email);

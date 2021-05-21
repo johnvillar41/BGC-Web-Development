@@ -1,4 +1,5 @@
-﻿using SoftEngWebEmployee.Models;
+﻿using SoftEngWebEmployee.Helpers;
+using SoftEngWebEmployee.Models;
 using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
@@ -39,16 +40,33 @@ namespace SoftEngWebEmployee.Views
 
         protected async void ButtonSaveProfile_Click(object sender, EventArgs e)
         {
-            UpdateProgress1.Visible = true;
+            UpdateProgress1.Visible = true;            
             var updatedUser = new AdministratorModel()
             {
                 Username = Username.Text,
                 Fullname = Fullname.Text,
                 Password = Password.Text
             };
-            await UserProfileRepository.SingleInstance.UpdateProfileAsync(updatedUser);
-            FullnameLabel.Text = updatedUser.Fullname;
-            Thread.Sleep(5000);
+            try
+            {
+                await UserProfileRepository.SingleInstance.UpdateProfileAsync(updatedUser, UserSession.SingleInstance.GetLoggedInUser());
+            }
+            catch(MySql.Data.MySqlClient.MySqlException ex)
+            {//$"Duplicate entry '{administrator.Username}' for key 'user_username'"
+                if (ex.Message.Equals($"Duplicate entry '{updatedUser.Username}' for key 'user_username'"))
+                {
+                    var alert = new SweetAlertBuilder
+                    {
+                        HexaBackgroundColor = "#fff",
+                        Title = "Duplicate Name!",
+                        Message = $"Duplicate name for:{updatedUser.Username}",
+                        AlertIcons = Constants.AlertStatus.warning
+                    };
+                    alert.BuildSweetAlert(this);
+                    return;
+                }
+            }
+            FullnameLabel.Text = updatedUser.Fullname;            
             UpdateProgress1.Visible = false;          
         }
             
