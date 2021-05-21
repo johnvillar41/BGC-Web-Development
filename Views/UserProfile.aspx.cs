@@ -52,25 +52,27 @@ namespace SoftEngWebEmployee.Views
                 await UserProfileRepository.SingleInstance.UpdateProfileAsync(updatedUser, UserSession.SingleInstance.GetLoggedInUser());
             }
             catch(MySql.Data.MySqlClient.MySqlException ex)
-            {//$"Duplicate entry '{administrator.Username}' for key 'user_username'"
+            {
                 if (ex.Message.Equals($"Duplicate entry '{updatedUser.Username}' for key 'user_username'"))
                 {
-                    var alert = new SweetAlertBuilder
-                    {
-                        HexaBackgroundColor = "#fff",
-                        Title = "Duplicate Name!",
-                        Message = $"Duplicate name for:{updatedUser.Username}",
-                        AlertIcons = Constants.AlertStatus.warning
-                    };
-                    alert.BuildSweetAlert(this);
+                    BuildSweetAlert(updatedUser.Username);
                     return;
                 }
             }
             FullnameLabel.Text = updatedUser.Fullname;            
             UpdateProgress1.Visible = false;          
         }
-            
-
+        private void BuildSweetAlert(string username)
+        {
+            var alert = new SweetAlertBuilder
+            {
+                HexaBackgroundColor = "#fff",
+                Title = "Duplicate Name!",
+                Message = $"Duplicate name for:{username}",
+                AlertIcons = Constants.AlertStatus.warning
+            };
+            alert.BuildSweetAlert(this);
+        }
         protected async void UploadImage_Click(object sender, EventArgs e)
         {
             Stream fs = ProfileFileUpload.PostedFile.InputStream;           

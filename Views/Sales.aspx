@@ -115,6 +115,7 @@
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th scope="col">Sales ID</th>
+                                                    <th scope="col">FullName</th>
                                                     <th scope="col">Username</th>
                                                     <th scope="col">Type Of Sale</th>
                                                     <th scope="col">Date</th>
@@ -126,6 +127,7 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td><%# DataBinder.Eval(Container.DataItem, "SalesID") %></td>
+                                        <td><%# DataBinder.Eval(Container.DataItem, "Administrator.Fullname") %></td>
                                         <td><%# DataBinder.Eval(Container.DataItem, "Administrator.Username") %></td>
                                         <td><span class="badge bg-dark"><%# Eval("SalesType")%></span> </td>
                                         <td><%# DataBinder.Eval(Container.DataItem, "Date") %></td>

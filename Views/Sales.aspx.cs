@@ -11,7 +11,7 @@ using static SoftEngWebEmployee.Helpers.Constants;
 namespace SoftEngWebEmployee.Views
 {
     public partial class Sales : System.Web.UI.Page
-    {       
+    {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -38,7 +38,7 @@ namespace SoftEngWebEmployee.Views
                 Session["onsiteID"] = onsiteID;
             }
             Response.Redirect("DisplaySales", false);
-        }        
+        }
         protected async void CategoryBtn_Click(object sender, EventArgs e)
         {
             string category = (sender as Button).Text.ToString();
@@ -82,7 +82,7 @@ namespace SoftEngWebEmployee.Views
         {
             UpdateProgress2.Visible = true;
             Thread.Sleep(2000);
-            var employee = (sender as Button).Text.ToString();            
+            var employee = (sender as Button).Text.ToString();
             char caret = Convert.ToChar(0x000025BC);
             dropdownMenuReference1.Text = employee + " " + caret;
             if (employee == "All Employee")
@@ -112,17 +112,17 @@ namespace SoftEngWebEmployee.Views
             try
             {
                 product.TotalNumberOfProduct = int.Parse(totalItem.Text);
-                if(await ProductRepository.SingleInstance.CheckIfProductIsEnough(product.TotalNumberOfProduct,int.Parse(productID)) == false || product.TotalNumberOfProduct == 0)
+                if (await ProductRepository.SingleInstance.CheckIfProductIsEnough(product.TotalNumberOfProduct, int.Parse(productID)) == false || product.TotalNumberOfProduct == 0)
                 {
-                    BuildSweetAlert("#ffcccb", AlertStatus.error, "Error!", "Error adding to cart: " + product.ProductName + " due to not enough stocks!");                  
+                    BuildSweetAlert("#ffcccb", AlertStatus.error, "Error!", "Error adding to cart: " + product.ProductName + " due to not enough stocks!");
                     return;
                 }
-                BuildSweetAlert("#90EE90", AlertStatus.success, "Successfull", "Successfully added to cart: " + product.ProductName);               
+                BuildSweetAlert("#fff", AlertStatus.success, "Successfull", "Successfully added to cart: " + product.ProductName);
                 Cart.AddCartItem(product);
             }
             catch (Exception)
             {
-                BuildSweetAlert("#ffcccb", AlertStatus.error, "Error", "Error Adding to Cart: " + product.ProductName);               
+                BuildSweetAlert("#ffcccb", AlertStatus.error, "Error", "Error Adding to Cart: " + product.ProductName);
             }
             LoadCart();
         }
@@ -133,7 +133,7 @@ namespace SoftEngWebEmployee.Views
             Cart.RemoveCartItem(int.Parse(productID));
             LoadCart();
         }
-        
+
         protected void CartRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
             Button button = e.Item.FindControl("BtnRemoveCartItem") as Button;
@@ -144,10 +144,10 @@ namespace SoftEngWebEmployee.Views
         }
         protected async void BtnConfirmCartOrder_Click(object sender, EventArgs e)
         {
-            UpdateProgress2.Visible = true;          
+            UpdateProgress2.Visible = true;
             if (Cart.GetCartItems().Count == 0)
             {
-                BuildSweetAlert("#ffcccb", AlertStatus.error, "Error Processing Request", "Cart has no items");              
+                BuildSweetAlert("#ffcccb", AlertStatus.error, "Error Processing Request", "Cart has no items");
                 return;
             }
             var onSiteTransaction = new OnsiteTransactionModel
@@ -162,20 +162,20 @@ namespace SoftEngWebEmployee.Views
             BuildSale(onsiteProducts, transactionID);
             BuildNotification(onsiteProducts);
             BuildSweetAlert("#90EE90", AlertStatus.success, "Successfully Added Sales", null);
-           
-            Cart.ClearCartItems();           
+
+            Cart.ClearCartItems();
             LoadCart();
             LoadSales();
             LoadProducts();
             Thread.Sleep(5000);
             UpdateProgress2.Visible = false;
         }
-        private void BuildSweetAlert(string hexaBgColor,AlertStatus alertStatus,string title,string message)
+        private void BuildSweetAlert(string hexaBgColor, AlertStatus alertStatus, string title, string message)
         {
             SweetAlertBuilder sweetAlertBuilder = new SweetAlertBuilder
             {
                 HexaBackgroundColor = hexaBgColor,
-                AlertIcons = Constants.AlertStatus.error,
+                AlertIcons = alertStatus,
                 Title = title,
                 Message = message,
             };
@@ -228,7 +228,7 @@ namespace SoftEngWebEmployee.Views
                 var salesList = await SalesRepository.GetInstance().FetchAllSalesAsync();
                 SalesRepeater.DataSource = salesList;
                 SalesRepeater.DataBind();
-            }            
+            }
         }
         private async void LoadSalesByEmployee(string employee)
         {
@@ -261,7 +261,7 @@ namespace SoftEngWebEmployee.Views
                 var employeeModelList = await AdministratorRepository.SingleInstance.FetchAdministratorsAsync();
                 EmployeeFullnameRepeater.DataSource = employeeModelList;
                 EmployeeFullnameRepeater.DataBind();
-            }            
-        }        
+            }
+        }
     }
 }
