@@ -48,7 +48,7 @@ namespace SoftEngWebEmployee.Views
         {
             UpdateProgress1.Visible = true;           
             List<NotificationsModel> notifications = null;
-            if (UserSession.IsAdministrator())
+            if (UserSession.SingleInstance.IsAdministrator())
             {
                 notifications = await NotificationRepository.SingleInstance.FetchNotificationsGivenDateAsync(DateText.Text);
             }
@@ -62,7 +62,7 @@ namespace SoftEngWebEmployee.Views
         private async void LoadNotifications()
         {
             List<NotificationsModel> notifications = null;
-            if (UserSession.IsAdministrator())
+            if (UserSession.SingleInstance.IsAdministrator())
             {
                 notifications = await NotificationRepository.SingleInstance.FetchNotificationsAsync();
             }

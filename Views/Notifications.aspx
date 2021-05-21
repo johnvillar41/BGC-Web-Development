@@ -44,7 +44,7 @@
                                 <asp:Button ID="FindDate" runat="server" Text="Search" CssClass="btn btn-info form-control" OnClick="FindDate_Click" />
                             </div>
                         </div>
-                        <%if (UserSession.IsAdministrator()) %>
+                        <%if (UserSession.SingleInstance.IsAdministrator()) %>
                         <%{ %>
                         <div class="col-md-3 col-sm-12">
                             <div class="row mb-1">

@@ -41,7 +41,7 @@ namespace SoftEngWebEmployee.Repository
                 await connection.OpenAsync();
                 string queryString = "UPDATE login_table SET user_image=@image WHERE user_username=@username";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@username", UserSession.GetLoggedInUser());
+                command.Parameters.AddWithValue("@username", UserSession.SingleInstance.GetLoggedInUser());
                 command.Parameters.AddWithValue("@image", bytes);
                 await command.ExecuteNonQueryAsync();
             }
@@ -86,7 +86,7 @@ namespace SoftEngWebEmployee.Repository
                 await connection.OpenAsync();
                 string queryString = "SELECT * FROM login_table WHERE user_username=@usernameLoggedIn";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@usernameLoggedIn", UserSession.GetLoggedInUser());
+                command.Parameters.AddWithValue("@usernameLoggedIn", UserSession.SingleInstance.GetLoggedInUser());
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 while(await reader.ReadAsync())
                 {

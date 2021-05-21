@@ -27,13 +27,11 @@ namespace SoftEngWebEmployee.Views
 
             if (await LoginRepository.SingleInstance.IsLoginSuccessfullAsync(administratorModel) == true)
             {
-                UserSession.SetLoginStatus(true);
-                UserSession.SetLoginUser(username);
-                bool isAdmin = await AdministratorRepository.SingleInstance.CheckIfUserIsAdministratorAsync(username);
+                bool isAdmin = await AdministratorRepository.SingleInstance.CheckIfUserIsAdministratorAsync(username);               
                 if (isAdmin)
-                    UserSession.SetAdministrator(isAdmin);
+                    UserSession.SingleInstance.SetLoginUser(username,Constants.EmployeeType.Administrator);
                 else
-                    UserSession.SetAdministrator(false);
+                    UserSession.SingleInstance.SetLoginUser(username, Constants.EmployeeType.Employee);
                 Response.Redirect("~/Views/Inventory.aspx", false);
             }
             else

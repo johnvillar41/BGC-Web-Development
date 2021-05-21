@@ -104,7 +104,7 @@ namespace SoftEngWebEmployee.Repository
                 string queryString = "SELECT * FROM notifications_table WHERE notif_date LIKE  @date AND user_name=@username";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@date", "%" + date + "%");
-                command.Parameters.AddWithValue("@username", UserSession.GetLoggedInUser());
+                command.Parameters.AddWithValue("@username", UserSession.SingleInstance.GetLoggedInUser());
                 MySqlDataReader reader = command.ExecuteReader();
                 while (await reader.ReadAsync())
                 {
@@ -149,7 +149,7 @@ namespace SoftEngWebEmployee.Repository
                         NotificationDate = DateTime.Today,                        
                         TypeOfNotification = NotificationType.DeleteUser
                     };
-                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser().ToString());
+                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser().ToString());
                     
                     break;
                 case NotificationType.CreateUser:
@@ -160,7 +160,7 @@ namespace SoftEngWebEmployee.Repository
                         NotificationDate = DateTime.Today,                        
                         TypeOfNotification = NotificationType.CreateUser
                     };
-                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser().ToString());
+                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser().ToString());
                     break;
                 case NotificationType.UpdateUser:
                     newNotification = new NotificationsModel()
@@ -170,7 +170,7 @@ namespace SoftEngWebEmployee.Repository
                         NotificationDate = DateTime.Today,                        
                         TypeOfNotification = NotificationType.UpdateUser
                     };
-                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser().ToString());
+                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser().ToString());
                     break;
                 case NotificationType.CancelledOrder:
                     newNotification = new NotificationsModel()
@@ -180,7 +180,7 @@ namespace SoftEngWebEmployee.Repository
                         NotificationDate = DateTime.Today,                        
                         TypeOfNotification = NotificationType.CancelledOrder
                     };
-                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser().ToString());
+                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser().ToString());
                     break;
                 case NotificationType.FinishedOrder:
                     newNotification = new NotificationsModel()
@@ -190,7 +190,7 @@ namespace SoftEngWebEmployee.Repository
                         NotificationDate = DateTime.Today,                        
                         TypeOfNotification = NotificationType.FinishedOrder
                     };
-                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser().ToString());
+                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser().ToString());
                     break;
                 case NotificationType.SoldItem:
                     newNotification = new NotificationsModel
@@ -201,7 +201,7 @@ namespace SoftEngWebEmployee.Repository
                         
                         TypeOfNotification = NotificationType.SoldItem
                     };
-                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser().ToString());
+                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser().ToString());
                     break;
             }
             return newNotification;
@@ -269,7 +269,7 @@ namespace SoftEngWebEmployee.Repository
                 await connection.OpenAsync();
                 string queryString = "SELECT * FROM notifications_table WHERE user_name=@username";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@username",UserSession.GetLoggedInUser());
+                command.Parameters.AddWithValue("@username",UserSession.SingleInstance.GetLoggedInUser());
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
                 {

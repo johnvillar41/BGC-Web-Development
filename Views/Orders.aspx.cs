@@ -72,7 +72,7 @@ namespace SoftEngWebEmployee.Views
                 var salesModel = new SalesModel()
                 {
                     SalesType = Constants.SalesType.Order,
-                    Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser()),
+                    Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser()),
                     Date = DateTime.Now,
                     Orders = await OrdersRepository.SingleInstance.FetchOrderAsync(int.Parse(OrderIDFinish.Text)),
                     OnsiteTransaction = null

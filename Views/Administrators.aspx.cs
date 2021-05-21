@@ -16,7 +16,7 @@ namespace SoftEngWebEmployee.Views
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadAdministrators();
-            LoadIsAdministrator(UserSession.GetLoggedInUser());
+            LoadIsAdministrator(UserSession.SingleInstance.GetLoggedInUser());
         }
         public List<AdministratorModel> DisplayAdministrators()
         {

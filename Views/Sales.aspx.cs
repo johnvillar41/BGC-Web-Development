@@ -91,9 +91,9 @@ namespace SoftEngWebEmployee.Views
             }
             else
             {
-                if (!UserSession.IsAdministrator())
+                if (!UserSession.SingleInstance.IsAdministrator())
                 {
-                    LoadSalesByEmployee(UserSession.GetLoggedInUser());
+                    LoadSalesByEmployee(UserSession.SingleInstance.GetLoggedInUser());
                     UpdateProgress2.Visible = false;
                     return;
                 }
@@ -190,7 +190,7 @@ namespace SoftEngWebEmployee.Views
             var newSale = new SalesModel
             {
                 SalesType = Constants.SalesType.Onsite,
-                Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.GetLoggedInUser()),
+                Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser()),
                 Date = DateTime.Now,
                 OnsiteTransaction = new OnsiteTransactionModel
                 {
@@ -223,7 +223,7 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadSales()
         {
-            if (UserSession.IsAdministrator())
+            if (UserSession.SingleInstance.IsAdministrator())
             {
                 var salesList = await SalesRepository.GetInstance().FetchAllSalesAsync();
                 SalesRepeater.DataSource = salesList;
@@ -256,7 +256,7 @@ namespace SoftEngWebEmployee.Views
         }
         private async void LoadEmployeesOnDropDown()
         {
-            if (UserSession.IsAdministrator())
+            if (UserSession.SingleInstance.IsAdministrator())
             {
                 var employeeModelList = await AdministratorRepository.SingleInstance.FetchAdministratorsAsync();
                 EmployeeFullnameRepeater.DataSource = employeeModelList;

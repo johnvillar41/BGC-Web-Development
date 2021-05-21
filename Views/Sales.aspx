@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <div class="table-responsive" style="height: 500px">
-                            <%if (!UserSession.IsAdministrator()) %>
+                            <%if (!UserSession.SingleInstance.IsAdministrator()) %>
                             <%{ %>
                             <center><lottie-player src="https://assets1.lottiefiles.com/packages/lf20_LlRvIg.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player></center>
                             <center><h3><b>Sorry you are not allowed to view this.</b></h3></center>

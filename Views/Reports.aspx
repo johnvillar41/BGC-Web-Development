@@ -16,7 +16,7 @@
             <div class="tab-content" id="v-pills-tabContent">
                 <!--Dashboard-->
                 <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel" aria-labelledby="v-pills-dashboard-tab">
-                    <%if (UserSession.IsAdministrator()) %>
+                    <%if (UserSession.SingleInstance.IsAdministrator()) %>
                     <%{ %>
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
@@ -66,7 +66,7 @@
 
                 <div class="tab-pane fade" id="v-pills-sales" role="tabpanel" aria-labelledby="v-pills-sales-tab">
                     <!--Sales Income-->
-                    <%if (UserSession.IsAdministrator()) %>
+                    <%if (UserSession.SingleInstance.IsAdministrator()) %>
                     <%{ %>
                     <div class="row">
                         <!--1st card-->
