@@ -50,6 +50,11 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div class="row">
+                    <%if (DisplayOrders().Count() == 0) %>
+                    <%{ %>
+                    <center><lottie-player src="https://assets1.lottiefiles.com/packages/lf20_qlwqp9xi.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player></center>
+                    <center><h4><b style="color:#000000;">No orders found!</b></h4></center>
+                    <%} %>
                     <%foreach (var orders in DisplayOrders()) %>
                     <%{%>
                     <div class="row" style="margin-bottom: 5px">
