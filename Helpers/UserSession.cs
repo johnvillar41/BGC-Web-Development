@@ -54,6 +54,7 @@ namespace SoftEngWebEmployee.Helpers
             {
                 cookie.Expires = DateTime.Now.AddDays(-1d);
                 HttpContext.Current.Response.Cookies.Add(cookie);
+                HttpContext.Current.Session.Abandon();
             }
         }
         public string GetLoggedInUser()
