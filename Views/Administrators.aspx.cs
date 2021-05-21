@@ -79,16 +79,16 @@ namespace SoftEngWebEmployee.Views
         protected async void BtnDelete_Click(object sender, EventArgs e)
         {
             UpdateProgress_Delete.Visible = true;
-            if (!String.IsNullOrWhiteSpace(AdministratorId_Delete.Text))
+            var adminID = AdministratorId_Delete.Text.ToString();
+            if (!String.IsNullOrWhiteSpace(adminID))
             {
-                await AdministratorRepository.SingleInstance.DeleteAdministrator(int.Parse(AdministratorId_Delete.Text));
+                await AdministratorRepository.SingleInstance.DeleteAdministrator(int.Parse(adminID));
                 var generatedNotification = await NotificationRepository
                    .SingleInstance
-                   .GenerateNotification(NotificationType.DeleteUser, AdministratorID.Text.ToString());
+                   .GenerateNotification(NotificationType.DeleteUser, adminID);
                 await NotificationRepository.SingleInstance
                    .InsertNewNotificationAsync(generatedNotification);
-            }
-            Thread.Sleep(5000);
+            }            
             LoadAdministrators();
             UpdateProgress_Delete.Visible = false;
         }

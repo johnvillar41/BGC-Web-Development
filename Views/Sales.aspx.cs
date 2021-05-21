@@ -167,8 +167,7 @@ namespace SoftEngWebEmployee.Views
             Cart.ClearCartItems();
             LoadCart();
             LoadSales();
-            LoadProducts();
-            Thread.Sleep(5000);
+            LoadProducts();            
             UpdateProgress2.Visible = false;
         }
         private void BuildSweetAlert(string hexaBgColor, AlertStatus alertStatus, string title, string message)
@@ -211,13 +210,13 @@ namespace SoftEngWebEmployee.Views
             int counter = 0;
             foreach (var onsite in onsiteProducts)
             {
-                productListString += onsite.Product.ProductName;
+                productListString += onsite.Product.ProductName+$"[{onsite.TotalProductsCount}x]";
                 counter++;
                 if (counter == onsiteProducts.Count)
                 {
                     break;
                 }
-                productListString += "|";
+                productListString += ", ";
             }
             var notification = await NotificationRepository.SingleInstance.GenerateNotification(Constants.NotificationType.SoldItem, productListString);
             await NotificationRepository.SingleInstance.InsertNewNotificationAsync(notification);
