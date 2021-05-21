@@ -157,7 +157,7 @@ namespace SoftEngWebEmployee.Repository
                     {
                         NotificationTitle = "Created New User",
                         NotificationContent = "Created User: " + itemAction,
-                        NotificationDate = DateTime.Today,                        
+                        NotificationDate = DateTime.Now,                        
                         TypeOfNotification = NotificationType.CreateUser
                     };
                     newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser().ToString());
@@ -167,7 +167,7 @@ namespace SoftEngWebEmployee.Repository
                     {
                         NotificationTitle = "Updated User",
                         NotificationContent = "Updated User: " + itemAction,
-                        NotificationDate = DateTime.Today,                        
+                        NotificationDate = DateTime.Now,                        
                         TypeOfNotification = NotificationType.UpdateUser
                     };
                     newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser().ToString());
@@ -177,7 +177,7 @@ namespace SoftEngWebEmployee.Repository
                     {
                         NotificationTitle = "Cancelled Order",
                         NotificationContent = "Cancelled Order for OrderID: " + itemAction,
-                        NotificationDate = DateTime.Today,                        
+                        NotificationDate = DateTime.Now,                        
                         TypeOfNotification = NotificationType.CancelledOrder
                     };
                     newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser().ToString());
@@ -187,7 +187,7 @@ namespace SoftEngWebEmployee.Repository
                     {
                         NotificationTitle = "Finished Order",
                         NotificationContent = "Finished Order for Order ID: " + itemAction,
-                        NotificationDate = DateTime.Today,                        
+                        NotificationDate = DateTime.Now,                        
                         TypeOfNotification = NotificationType.FinishedOrder
                     };
                     newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser().ToString());
@@ -197,7 +197,7 @@ namespace SoftEngWebEmployee.Repository
                     {
                         NotificationTitle = "Sold Item",
                         NotificationContent = "Sold Item: " + itemAction,
-                        NotificationDate = DateTime.Today,
+                        NotificationDate = DateTime.Now,
                         
                         TypeOfNotification = NotificationType.SoldItem
                     };

@@ -24,8 +24,8 @@ namespace SoftEngWebEmployee.Views
                 Username = username,
                 Password = password
             };
-
-            if (await LoginRepository.SingleInstance.IsLoginSuccessfullAsync(administratorModel) == true)
+            var isLoginSuccesfull = await LoginRepository.SingleInstance.IsLoginSuccessfullAsync(administratorModel);
+            if (isLoginSuccesfull)
             {
                 bool isAdmin = await AdministratorRepository.SingleInstance.CheckIfUserIsAdministratorAsync(username);               
                 if (isAdmin)
