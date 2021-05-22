@@ -11,7 +11,7 @@ namespace SoftEngWebEmployee.Helpers
     {
         private const string EMAIL = "jwca.mcl2020@gmail.com";
         private const string PASSWORD = "passwordmcl";
-        private const string SUBJECT = "Code for AGT Confirmation Account";
+        private const string SUBJECT = "Code for BGC Confirmation Account";
         private EmailSender()
         {
 
