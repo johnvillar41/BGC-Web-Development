@@ -58,11 +58,13 @@
             <a class="nav-link" id="create-transactions" data-toggle="tab" href="#create" role="tab" aria-controls="profile" aria-selected="false">Create Transaction</a>
         </li>
         <li class="nav-item">
-            <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <a class="nav-link" id="cart-transactions" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">Cart Transaction <span class="badge bg-warning text-dark"><%=Cart.GetCartItems().Count() %></span></a>
-                </ContentTemplate>               
-            </asp:UpdatePanel>
+            <a class="nav-link" id="cart-transactions" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">
+                        <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                Cart Transaction <span class="badge bg-warning text-dark"><%=Cart.GetCartItems().Count() %></span>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+            </a>
         </li>
     </ul>
     <asp:UpdateProgress ID="UpdateProgress2" runat="server">
