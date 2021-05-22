@@ -99,7 +99,8 @@ namespace SoftEngWebEmployee.Repository
                         Username = reader["user_username"].ToString(),
                         Password = reader["user_password"].ToString(),
                         Fullname = reader["user_name"].ToString(),
-                        ProfilePicture = base64String
+                        ProfilePicture = base64String,
+                        Email = reader["email"].ToString()
                     };
                 }                
             }

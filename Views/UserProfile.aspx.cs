@@ -35,6 +35,7 @@ namespace SoftEngWebEmployee.Views
                 ImageString = userLoggedIn.ProfilePicture;
                 EmployeeType = userLoggedIn.EmployeeType;
                 FullnameLabel.Text = userLoggedIn.Fullname;
+                Email.Text = userLoggedIn.Email;
             }            
         }
 
@@ -45,7 +46,8 @@ namespace SoftEngWebEmployee.Views
             {
                 Username = Username.Text,
                 Fullname = Fullname.Text,
-                Password = Password.Text
+                Password = Password.Text,
+                Email = Email.Text
             };
             try
             {
