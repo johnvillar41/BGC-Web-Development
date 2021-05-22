@@ -88,7 +88,7 @@
      
 
         <!--Body Content-->
-        <div class="container body-content" style="margin-top: 50px">
+        <div class="container body-content" style="margin-top: 100px">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />

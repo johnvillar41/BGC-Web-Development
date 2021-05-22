@@ -4,7 +4,7 @@
 
     <style>
         .scrolling-wrapper {
-            overflow-x: auto;
+            overflow-y: auto;
         }
 
         .modal-body {
@@ -97,11 +97,10 @@
                 <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 150px; height: 150px;"loop autoplay></lottie-player></center>
                 <%} %>
                 <%} %>
-                <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+                <div class="row row-cols-1 row-cols-md-4 scrolling-wrapper" style="height:600px;">                    
                     <asp:Repeater ID="SearchRepeater" runat="server">
-                        <ItemTemplate>
-                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 col-9">
-                                <div class="card">
+                        <ItemTemplate>                            
+                                <div class="card" style="height:300px;">
                                     <img class="card-img-top" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="150px" width="75px" alt="Product picture here">
                                     <div class="card-body">
                                         <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
@@ -111,8 +110,7 @@
                                         <asp:Button ID="detailsButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-primary" Text="Details" data-bs-toggle="modal" href="#detailsModal" OnClick="RetrieveDetails" runat="server" />
                                         <asp:Button ID="deleteProduct" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-danger float-right" Text="Delete" data-bs-toggle="modal" href="#deleteModal" OnClick="RetrieveDetails" runat="server" />
                                     </div>
-                                </div>
-                            </div>
+                                </div>                            
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
