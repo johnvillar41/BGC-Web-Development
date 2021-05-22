@@ -204,7 +204,7 @@
                                                                 <b>Stocks: </b>
                                                                 <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %>
                                                                 <br />
-                                                                <b>Price: </b>                                                                
+                                                                <b>Price: </b>
                                                                 <%# DataBinder.Eval(Container.DataItem,"ProductPrice") %>
                                                             </p>
                                                         </div>
@@ -238,55 +238,94 @@
 
             <!-- Cart transaction tab-->
             <div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="cart-transactions">
-                <div class="col-12">
-                    <div class="row">
-                        <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
-                            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                <ContentTemplate>
-                                    <%if (Cart.GetCartItems().Count == 0) %>
-                                    <%{ %>
-                                    <center><h3 class="text-light">No Items found</h3></center>
-                                    <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="        width: 300px;
+                <div class="row">
+                    <div class="col-lg-9 col-md-7">
+                        <div class="row">
+                            <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
+                                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                    <ContentTemplate>
+                                        <%if (Cart.GetCartItems().Count == 0) %>
+                                        <%{ %>
+                                        <center><h3 class="text-light">No Items found</h3></center>
+                                        <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="        width: 300px;
         height: 300px;"loop autoplay></lottie-player></center>
-                                    <%} %>
-                                    <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
-                                        <asp:Repeater ID="CartRepeater" runat="server" OnItemCreated="CartRepeater_ItemCreated">
-                                            <ItemTemplate>
-                                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-8 col-xs-12 my-2">
-                                                    <div class="card" style="max-width: 35rem; height: 420px">
-                                                        <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
-                                                        <div class="card-body">
-                                                            <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
-                                                            <p class="card-text">
-                                                                <b>Description: </b>
-                                                                <%# DataBinder.Eval(Container.DataItem,"ProductDescription") %>
-                                                                <br />
-                                                                <b>Total number of items: </b>
-                                                                <%# DataBinder.Eval(Container.DataItem,"TotalNumberOfProduct") %>
-                                                                <br />
-                                                                <b>Subtotal Price: </b>
-                                                                <%# DataBinder.Eval(Container.DataItem,"SubTotalPrice") %>
-                                                            </p>
-                                                        </div>
-                                                        <div class="card-footer">
-                                                            <asp:Button ID="BtnRemoveCartItem" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Remove Item" OnClick="BtnRemoveCartItem_Click" />
+                                        <%} %>
+                                        <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+                                            <asp:Repeater ID="CartRepeater" runat="server" OnItemCreated="CartRepeater_ItemCreated">
+                                                <ItemTemplate>
+                                                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-8 col-xs-12 my-2">
+                                                        <div class="card" style="max-width: 35rem; height: 420px">
+                                                            <img class="card-img-top" alt="Card image cap" height="200px" width="100px" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" />
+                                                            <div class="card-body">
+                                                                <h5 class="card-title"><b>Product Name: </b><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
+                                                                <p class="card-text">
+                                                                    <b>Description: </b>
+                                                                    <%# DataBinder.Eval(Container.DataItem,"ProductDescription") %>
+                                                                    <br />
+                                                                    <b>Total number of items: </b>
+                                                                    <%# DataBinder.Eval(Container.DataItem,"TotalNumberOfProduct") %>
+                                                                    <br />
+                                                                    <b>Subtotal Price: </b>
+                                                                    <%# DataBinder.Eval(Container.DataItem,"SubTotalPrice") %>
+                                                                </p>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <asp:Button ID="BtnRemoveCartItem" CommandArgument='<%#Eval("Product_ID") %>' CssClass="btn btn-primary" runat="server" Text="Remove Item" OnClick="BtnRemoveCartItem_Click" />
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </div>
-                                </ContentTemplate>
-                                <Triggers>
-                                    <asp:AsyncPostBackTrigger ControlID="BtnConfirmCartOrder" EventName="Click" />
-                                </Triggers>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </div>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="BtnConfirmCartOrder" EventName="Click" />
+                                    </Triggers>
 
-                            </asp:UpdatePanel>
+                                </asp:UpdatePanel>
+                            </div>
                         </div>
+
                     </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-12 mt-3">
-                            <asp:Button ID="BtnConfirmCartOrder" CssClass="btn btn-success btn-block" runat="server" Text="Confirm" OnClick="BtnConfirmCartOrder_Click" />
+                    <div class="col-lg-3 col-md-5">
+                        <div class="row">
+                            <div class="card ml-1 mt-1">
+                                <div class="card-body">
+                                    <h5 class="card-title"><b>List of orders</b></h5>                                    
+                                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                        <ContentTemplate>
+                                            <h6>Item Count: <%=Cart.GetCartItems().Count() %></h6>
+                                            <table class="table" style="height:300px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Product Name</th>
+                                                        <th scope="col">Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <%foreach (var productItem in Cart.GetCartItems()) %>
+                                                    <%{ %>
+                                                    <tr>
+                                                        <td><%=productItem.ProductName%>[<%=productItem.TotalNumberOfProduct %>x]</td>
+                                                        <td><%=productItem.ProductPrice * productItem.TotalNumberOfProduct %></td>
+                                                    </tr>
+                                                    <%} %>
+                                                </tbody>
+                                            </table>
+                                            <h6>Total Amount: PHP <%=Cart.CalculateTotalSales() %></h6>
+                                        </ContentTemplate>
+                                        <Triggers>
+                                            <asp:AsyncPostBackTrigger ControlID="BtnConfirmCartOrder" EventName="Click" />
+                                        </Triggers>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mt-3">
+                                <center><asp:Button ID="BtnConfirmCartOrder" CssClass="btn btn-success btn-block" runat="server" Text="Confirm" OnClick="BtnConfirmCartOrder_Click" /></center>
+                            </div>
                         </div>
                     </div>
                 </div>

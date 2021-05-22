@@ -11,7 +11,7 @@ using static SoftEngWebEmployee.Helpers.Constants;
 namespace SoftEngWebEmployee.Views
 {
     public partial class Sales : System.Web.UI.Page
-    {
+    {       
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
