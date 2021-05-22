@@ -247,6 +247,7 @@ namespace SoftEngWebEmployee.Views
             var cartList = Cart.GetCartItems();
             CartRepeater.DataSource = cartList;
             CartRepeater.DataBind();
+            UpdatePanel4.Update();
         }
         private async void LoadCategories()
         {

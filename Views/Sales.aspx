@@ -58,7 +58,11 @@
             <a class="nav-link" id="create-transactions" data-toggle="tab" href="#create" role="tab" aria-controls="profile" aria-selected="false">Create Transaction</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="cart-transactions" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">Cart Transaction</a>
+            <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <a class="nav-link" id="cart-transactions" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">Cart Transaction <span class="badge bg-warning text-dark"><%=Cart.GetCartItems().Count() %></span></a>
+                </ContentTemplate>               
+            </asp:UpdatePanel>
         </li>
     </ul>
     <asp:UpdateProgress ID="UpdateProgress2" runat="server">
@@ -289,13 +293,13 @@
                     </div>
                     <div class="col-lg-3 col-md-5">
                         <div class="row">
-                            <div class="card ml-1 mt-1">
+                            <div class="card ml-1 mt-1" style="border-color: #000000;">
                                 <div class="card-body">
-                                    <h5 class="card-title"><b>List of orders</b></h5>                                    
+                                    <h5 class="card-title"><b>List of orders</b></h5>
                                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                         <ContentTemplate>
                                             <h6>Item Count: <%=Cart.GetCartItems().Count() %></h6>
-                                            <table class="table" style="height:300px;">
+                                            <table class="table" style="height: 300px;">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Product Name</th>

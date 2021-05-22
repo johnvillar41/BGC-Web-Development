@@ -7,15 +7,7 @@ namespace SoftEngWebEmployee
 {
     public partial class SiteMaster : MasterPage
     {
-        public Constants.EmployeeType EmployeeType { get; set; }
-        protected void Page_Init(object sender, EventArgs e)
-        {
-            if (UserSession.SingleInstance.GetLoginStatus() == false)
-            {
-                Response.Redirect("~/Views/Login.aspx");
-                return;
-            }
-        }
+        public Constants.EmployeeType EmployeeType { get; set; }        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (UserSession.SingleInstance.GetLoginStatus() == false)
