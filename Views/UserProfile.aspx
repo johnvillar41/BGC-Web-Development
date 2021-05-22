@@ -117,6 +117,16 @@
                         <div class="col-md-6">
                         </div>
                     </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <asp:TextBox type="text" ID="Email" class="form-control" placeholder="Email" runat="server"></asp:TextBox>
+                                <label for="floatingInput">Email</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
                     <div class="mt-5">
                         <asp:Button ID="ButtonSaveProfile" class="btn btn-primary profile-button" runat="server" Text="Save Profile" OnClick="ButtonSaveProfile_Click" ForeColor="Black" />
                     </div>

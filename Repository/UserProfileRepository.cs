@@ -41,7 +41,7 @@ namespace SoftEngWebEmployee.Repository
                 await connection.OpenAsync();
                 string queryString = "UPDATE login_table SET user_image=@image WHERE user_username=@username";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@username", UserSession.GetLoggedInUser());
+                command.Parameters.AddWithValue("@username", UserSession.SingleInstance.GetLoggedInUser());
                 command.Parameters.AddWithValue("@image", bytes);
                 await command.ExecuteNonQueryAsync();
             }
@@ -53,17 +53,19 @@ namespace SoftEngWebEmployee.Repository
         ///     Passes updateduser as a parameter
         /// </param>
 
-        public async Task UpdateProfileAsync(AdministratorModel updateduser)
+        public async Task UpdateProfileAsync(AdministratorModel updateduser,string username)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "UPDATE login_table SET user_username=@username," +
+                string queryString = "UPDATE login_table SET " +
+                    "user_username=@username," +
                     "user_name=@fullname," +
                     "user_password=@password," +
-                    "email=@email WHERE user_username=@username";
+                    "email=@email WHERE user_username=@usernameSearched";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@username", updateduser.Username);
+                command.Parameters.AddWithValue("@usernameSearched", username);
                 command.Parameters.AddWithValue("@fullname", updateduser.Fullname);
                 command.Parameters.AddWithValue("@password", updateduser.Password);
                 command.Parameters.AddWithValue("@email", updateduser.Email);
@@ -86,7 +88,7 @@ namespace SoftEngWebEmployee.Repository
                 await connection.OpenAsync();
                 string queryString = "SELECT * FROM login_table WHERE user_username=@usernameLoggedIn";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@usernameLoggedIn", UserSession.GetLoggedInUser());
+                command.Parameters.AddWithValue("@usernameLoggedIn", UserSession.SingleInstance.GetLoggedInUser());
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 while(await reader.ReadAsync())
                 {
@@ -97,7 +99,8 @@ namespace SoftEngWebEmployee.Repository
                         Username = reader["user_username"].ToString(),
                         Password = reader["user_password"].ToString(),
                         Fullname = reader["user_name"].ToString(),
-                        ProfilePicture = base64String
+                        ProfilePicture = base64String,
+                        Email = reader["email"].ToString()
                     };
                 }                
             }

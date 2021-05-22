@@ -19,7 +19,7 @@ namespace SoftEngWebEmployee.Helpers
             {
                 if(product.Product_ID == cartProduct.Product_ID)
                 {
-                    product.TotalNumberOfProduct = cartProduct.TotalNumberOfProduct;
+                    product.TotalNumberOfProduct = cartProduct.TotalNumberOfProduct;                   
                     return;
                 }
             }         
@@ -60,7 +60,7 @@ namespace SoftEngWebEmployee.Helpers
                             TransactionID = transactionID,                         
                             Product = product,
                             TotalProductsCount = product.TotalNumberOfProduct,
-                            Administrator = UserSession.GetLoggedInUser(),
+                            Administrator = UserSession.SingleInstance.GetLoggedInUser(),
                             SubTotalPrice = product.TotalNumberOfProduct * product.ProductPrice
                         }
                     );

@@ -62,7 +62,7 @@
                     <div class="nav-item dropdown d-flex">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                              <a class="nav-link" runat="server"  href="~/Views/UserProfile">Welcome! <%=UserSession.GetLoggedInUser()%></a>
+                              <a class="nav-link" runat="server"  href="~/Views/UserProfile">Welcome! <%=UserSession.SingleInstance.GetLoggedInUser()%><br /><span class="badge bg-info text-dark"><%=EmployeeType.ToString() %></span></a>
                             </li>
                         </ul>
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu

@@ -24,16 +24,14 @@ namespace SoftEngWebEmployee.Views
                 Username = username,
                 Password = password
             };
-
-            if (await LoginRepository.SingleInstance.IsLoginSuccessfullAsync(administratorModel) == true)
+            var isLoginSuccesfull = await LoginRepository.SingleInstance.IsLoginSuccessfullAsync(administratorModel);
+            if (isLoginSuccesfull)
             {
-                UserSession.SetLoginStatus(true);
-                UserSession.SetLoginUser(username);
-                bool isAdmin = await AdministratorRepository.SingleInstance.CheckIfUserIsAdministratorAsync(username);
+                bool isAdmin = await AdministratorRepository.SingleInstance.CheckIfUserIsAdministratorAsync(username);               
                 if (isAdmin)
-                    UserSession.SetAdministrator(isAdmin);
+                    UserSession.SingleInstance.SetLoginUser(username,Constants.EmployeeType.Administrator);
                 else
-                    UserSession.SetAdministrator(false);
+                    UserSession.SingleInstance.SetLoginUser(username, Constants.EmployeeType.Employee);
                 Response.Redirect("~/Views/Inventory.aspx", false);
             }
             else

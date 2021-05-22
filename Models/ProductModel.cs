@@ -14,6 +14,7 @@
         ///     This will consider the total number of products
         ///     inside the cart.
         /// </summary>
-        public int TotalNumberOfProduct { get; set; }       
+        public int TotalNumberOfProduct { get; set; }
+        public int SubTotalPrice { get; set; }     
     }
 }

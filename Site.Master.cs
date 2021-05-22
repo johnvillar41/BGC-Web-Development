@@ -7,18 +7,23 @@ namespace SoftEngWebEmployee
 {
     public partial class SiteMaster : MasterPage
     {
+        public Constants.EmployeeType EmployeeType { get; set; }        
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (UserSession.GetLoginStatus() == false)
+            if (UserSession.SingleInstance.GetLoginStatus() == false)
             {
-                Response.Redirect("Login", false);
+                Response.Redirect("~/Views/Login.aspx");
+                return;
             }
+            if (UserSession.SingleInstance.IsAdministrator())
+                EmployeeType = Constants.EmployeeType.Administrator;
+            else
+                EmployeeType = Constants.EmployeeType.Employee;
         }
 
         protected void LogoutButton_Click(object sender, EventArgs e)
         {
-            UserSession.SetLoginStatus(false);
-            UserSession.RemoveLoggedinUser();            
+            UserSession.SingleInstance.RemoveLoggedinUser();                    
             Response.Redirect("~/Views/Login.aspx", false);
         }
     }

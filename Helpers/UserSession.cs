@@ -2,41 +2,65 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
 
 namespace SoftEngWebEmployee.Helpers
 {
     public class UserSession
     {
-        private static bool isLoggedIn;
-        private static string userLoggedIn;
-        private static bool isAdministrator;
-        public static bool GetLoginStatus()
+        private static UserSession instance = null;
+        private UserSession()
         {
-            return isLoggedIn;
+
         }
-        public static bool IsAdministrator()
+        public static UserSession SingleInstance
         {
-            return isAdministrator;
+            get
+            {
+                if(instance == null)
+                {
+                    instance = new UserSession();
+                }
+                return instance;
+            }
+        }       
+        public bool GetLoginStatus()
+        {
+            HttpCookie cookie = HttpContext.Current.Request.Cookies["UserInfo"];
+            if (cookie == null)
+                return false;
+            else
+                return true;            
         }
-        public static void SetAdministrator(bool isAdmin)
+        public bool IsAdministrator()
         {
-            isAdministrator = isAdmin;
+            HttpCookie cookie = HttpContext.Current.Request.Cookies["UserInfo"];
+            if (cookie["employeeType"].Equals(Constants.EmployeeType.Administrator.ToString()))
+                return true;
+            else
+                return false;
+        }               
+        public void SetLoginUser(string user,Constants.EmployeeType employeeType)
+        {
+            HttpCookie cookie = new HttpCookie("UserInfo");
+            cookie["username"] = user;
+            cookie["employeeType"] = employeeType.ToString();
+            HttpContext.Current.Response.Cookies.Add(cookie);
         }
-        public static void SetLoginStatus(bool loginStatus)
+        public void RemoveLoggedinUser()
         {
-            isLoggedIn = loginStatus;
+            HttpCookie cookie = HttpContext.Current.Request.Cookies["UserInfo"];
+            if (cookie != null)
+            {
+                cookie.Expires = DateTime.Now.AddDays(-1d);
+                HttpContext.Current.Response.Cookies.Add(cookie);
+                HttpContext.Current.Session.Abandon();
+            }
         }
-        public static void SetLoginUser(string user)
+        public string GetLoggedInUser()
         {
-            userLoggedIn = user;
-        }
-        public static void RemoveLoggedinUser()
-        {
-            userLoggedIn = null;
-        }
-        public static string GetLoggedInUser()
-        {
-            return userLoggedIn;
+            HttpCookie cookie = HttpContext.Current.Request.Cookies["UserInfo"];
+            return cookie["username"];
         }
     }
 }
