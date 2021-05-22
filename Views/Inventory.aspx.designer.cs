@@ -96,42 +96,6 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.WebControls.Repeater SearchRepeater;
 
         /// <summary>
-        /// UpdatePanel_GHRepeater control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel_GHRepeater;
-
-        /// <summary>
-        /// GHRepeater control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater GHRepeater;
-
-        /// <summary>
-        /// UpdatePanel_HPRepeater control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel_HPRepeater;
-
-        /// <summary>
-        /// HPRepeater control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater HPRepeater;
-
-        /// <summary>
         /// UpdateProgress1 control.
         /// </summary>
         /// <remarks>

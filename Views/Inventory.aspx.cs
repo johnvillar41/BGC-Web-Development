@@ -14,8 +14,6 @@ namespace SoftEngWebEmployee.Views
     public partial class Inventory : System.Web.UI.Page
     {
         public List<ProductModel> listSearchRepeater { get; set; }
-        public List<ProductModel> listGHRepeater { get; set; }
-        public List<ProductModel> listHPRepeater { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,9 +36,7 @@ namespace SoftEngWebEmployee.Views
             var inventory = await ProductRepository.SingleInstance.FetchAllProductsAsync();
             SearchRepeater.DataSource = inventory;
             listSearchRepeater = inventory;
-            SearchRepeater.DataBind();
-
-            LoadGreenHouseAndHydroponics();
+            SearchRepeater.DataBind();            
         }
 
         protected void btnInventoryAdd_ServerClick(object sender, EventArgs e)
@@ -72,7 +68,7 @@ namespace SoftEngWebEmployee.Views
                 listSearchRepeater = newSearch;
                 SearchRepeater.DataBind();
 
-                LoadGreenHouseAndHydroponics();
+               
             }
         }
 
@@ -84,7 +80,7 @@ namespace SoftEngWebEmployee.Views
             listSearchRepeater = newSearch;
             SearchRepeater.DataBind();
 
-            LoadGreenHouseAndHydroponics();
+            
         }
 
         protected async void RetrieveDetails(object sender, EventArgs e)
@@ -103,7 +99,7 @@ namespace SoftEngWebEmployee.Views
             DeleteRepeater.DataSource = ProductDetail;
             DeleteRepeater.DataBind();
 
-            LoadGreenHouseAndHydroponics();
+           
         }
 
         protected void DeleteButton_Click(object sender, EventArgs e)
@@ -131,19 +127,7 @@ namespace SoftEngWebEmployee.Views
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
 
-        }
-        private async void LoadGreenHouseAndHydroponics()
-        {
-            var greenhouse = await ProductRepository.SingleInstance.FetchGHProductsAsync();
-            GHRepeater.DataSource = greenhouse;
-            listGHRepeater = greenhouse;
-            GHRepeater.DataBind();
-
-            var hydroponics = await ProductRepository.SingleInstance.FetchHPProductsAsync();
-            HPRepeater.DataSource = hydroponics;
-            listHPRepeater = hydroponics;
-            HPRepeater.DataBind();
-        }
+        }       
 
         protected void StocksLabel_DataBinding(object sender, EventArgs e)
         {

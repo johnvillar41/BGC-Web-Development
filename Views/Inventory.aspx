@@ -100,7 +100,7 @@
                 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
                     <asp:Repeater ID="SearchRepeater" runat="server">
                         <ItemTemplate>
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5 col-9">
+                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 col-9">
                                 <div class="card">
                                     <img class="card-img-top" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="150px" width="75px" alt="Product picture here">
                                     <div class="card-body">
@@ -121,85 +121,7 @@
                 <asp:AsyncPostBackTrigger ControlID="btnCategoryAll" EventName="Click" />
             </Triggers>
         </asp:UpdatePanel>
-    </div>
-
-    <!-- Greenhouse Repeater -->
-    <hr />
-    <p class="fs-4">Greenhouse</p>
-    <!-- Guide Source: https://codepen.io/Temmio/pen/gKGEYV -->
-    <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
-        <asp:UpdatePanel ID="UpdatePanel_GHRepeater" runat="server">
-            <ContentTemplate>
-                <%if (listGHRepeater != null)%>
-                <%{ %>
-                <%if (listGHRepeater.Count == 0) %>
-                <%{ %>
-                <br>
-                <br>
-                <center><h3 style="color:white">No Items Found</h3></center>
-                <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 150px; height: 150px;"loop autoplay></lottie-player></center>
-                <%} %>
-                <%} %>
-                <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
-                    <asp:Repeater ID="GHRepeater" runat="server">
-                        <ItemTemplate>
-                            <div class="col-lg-3 col-md-4 col-sm-5 col-6">
-                                <div class="card">
-                                    <!-- Possible change: modify size of picture space -->
-                                    <img class="card-img-top" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="150px" width="75px" alt="Product picture here">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
-                                        <p class="card-text">Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
-                                        <asp:Button ID="detailsButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-primary" Text="Details" data-bs-toggle="modal" href="#detailsModal" OnClick="RetrieveDetails" runat="server" />
-                                        <asp:Button ID="deleteProduct" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-danger float-right" Text="Delete" data-bs-toggle="modal" href="#deleteModal" OnClick="RetrieveDetails" runat="server" />
-                                    </div>
-                                </div>
-                            </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-    </div>
-
-    <!-- Hydroponics Repeater -->
-    <hr />
-    <p class="fs-4">Hydroponics</p>
-    <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
-        <asp:UpdatePanel ID="UpdatePanel_HPRepeater" runat="server">
-            <ContentTemplate>
-                <%if (listHPRepeater != null)%>
-                <%{ %>
-                <%if (listHPRepeater.Count == 0) %>
-                <%{ %>
-                <br>
-                <br>
-                <center><h3 style="color:white">No Items Found</h3></center>
-                <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 150px; height: 150px;"loop autoplay></lottie-player></center>
-                <%} %>
-                <%} %>
-                <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
-                    <asp:Repeater ID="HPRepeater" runat="server">
-                        <ItemTemplate>
-                            <div class="col-lg-3 col-md-4 col-sm-5 col-6">
-                                <div class="card">
-                                    <!-- Possible change: modify size of picture space -->
-                                    <img class="card-img-top" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="150px" width="75px" alt="Product picture here">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
-                                        <p class="card-text">Stocks: <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %></p>
-                                        <asp:Button ID="detailsButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-primary" Text="Details" data-bs-toggle="modal" href="#detailsModal" OnClick="RetrieveDetails" runat="server" />
-                                        <asp:Button ID="deleteProduct" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-danger float-right" Text="Delete" data-bs-toggle="modal" href="#deleteModal" OnClick="RetrieveDetails" runat="server" />
-                                    </div>
-                                </div>
-                            </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-    </div>
-
+    </div>  
 
     <!-- Modals -->
 
