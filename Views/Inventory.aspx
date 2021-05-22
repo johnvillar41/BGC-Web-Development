@@ -97,7 +97,7 @@
                 <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 150px; height: 150px;"loop autoplay></lottie-player></center>
                 <%} %>
                 <%} %>
-                <div class="row row-cols-1 row-cols-md-4 scrolling-wrapper" style="height:600px;">                    
+                <div class="row row-cols-1 row-cols-md-3 row-cols-xl-5 row-cols-sm-2 row-cols-lg-4 scrolling-wrapper p-1" style="height:600px;">                    
                     <asp:Repeater ID="SearchRepeater" runat="server">
                         <ItemTemplate>                            
                                 <div class="card" style="height:300px;">
