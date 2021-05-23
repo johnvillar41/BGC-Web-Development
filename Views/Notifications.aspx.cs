@@ -64,7 +64,8 @@ namespace SoftEngWebEmployee.Views
             List<NotificationsModel> notifications = null;
             if (UserSession.SingleInstance.IsAdministrator())
             {
-                notifications = await NotificationRepository.SingleInstance.FetchNotificationsAsync();
+                var dateToday = DateTime.Now.ToString("yyyy-MM-dd");
+                notifications = await NotificationRepository.SingleInstance.FetchNotificationsGivenDateAsync(dateToday);
             }
             else
             {

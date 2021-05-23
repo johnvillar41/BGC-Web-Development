@@ -1,8 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="SoftEngWebEmployee.Views.Login" Async="true" EnableEventValidation="false" %>
-
+<%@ Import Namespace="SoftEngWebEmployee.Helpers" %>
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <title>Login 04</title>
     <meta charset="utf-8">
@@ -36,7 +37,7 @@
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                 <ContentTemplate>
                                     <div class="row">
-                                        <h1 class="mb-3"><b>Welcome to BGC Seedlings Supply</b></h1>
+                                        <h1 class="mb-3"><b>Welcome to <%=Constants.BGC %> Seedlings Supply</b></h1>
                                     </div>
                                     <div class="row">
                                         <label><b>Username</b></label>

@@ -7,6 +7,7 @@ namespace SoftEngWebEmployee.Helpers
 {
     public class Constants
     {
+        public const string BGC = "BGC";
         public enum NotificationType
         {
             DeleteUser,

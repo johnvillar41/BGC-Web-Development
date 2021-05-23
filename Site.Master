@@ -94,7 +94,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - AGT Seedling Supply</p>
+                <p>&copy; <%: DateTime.Now.Year %> - <%=Constants.BGC %> Seedling Supply</p>
             </footer>
         </div>
 
