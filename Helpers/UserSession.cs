@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 
@@ -62,5 +64,24 @@ namespace SoftEngWebEmployee.Helpers
             HttpCookie cookie = HttpContext.Current.Request.Cookies["UserInfo"];
             return cookie["username"];
         }
+        public int FetchTotalNumberOfNotificationsToday()
+        {
+            int totalCount = 0;
+            using(MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                connection.Open();
+                string queryString = "SELECT COUNT(*) FROM notifications_table WHERE notif_date LIKE @date AND user_name=@username";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@date", "%" + DateTime.Now.ToString("yyyy-MM-dd") + "%");
+                command.Parameters.AddWithValue("@username", UserSession.SingleInstance.GetLoggedInUser());
+                MySqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    totalCount = int.Parse(reader[0].ToString());
+                }
+            }
+            return totalCount;
+        }
+
     }
 }

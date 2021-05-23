@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SoftEngWebEmployee.SiteMaster"%>
 <%@ Import Namespace="SoftEngWebEmployee.Helpers" %>
+<%@ Import Namespace="SoftEngWebEmployee.Repository" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -70,7 +71,7 @@
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
                             <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Inventory">Inventory<i class="fa fa-cubes" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
                             <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Sales">Sales<i class="fa fa fa-dollar" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
-                            <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Notifications">Notifications<i class="fa fa-bell" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
+                            <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Notifications"><span class="badge badge-warning"><%=UserSession.SingleInstance.FetchTotalNumberOfNotificationsToday() %></span>&nbsp;Notifications<i class="fa fa-bell" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
                             <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Information">Information<i class="fa fa-info" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
                             <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Reports">Reports<i class="fa fa-bar-chart" style="margin-left: 10px; width: 10px; color: black"></i></a></li>
                             <li style="text-align: right"><a runat="server" class="dropdown-item" href="~/Views/Administrators">Administrators<i class="fa fa-address-card-o" style="margin-left: 10px; width: 10px; color: black"></i></a></li>

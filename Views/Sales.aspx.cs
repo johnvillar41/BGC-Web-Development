@@ -80,8 +80,7 @@ namespace SoftEngWebEmployee.Views
         }
         protected void EmployeeFullnameCategory_Click(object sender, EventArgs e)
         {
-            UpdateProgress2.Visible = true;
-            Thread.Sleep(2000);
+            UpdateProgress2.Visible = true;            
             var employee = (sender as Button).Text.ToString();
             char caret = Convert.ToChar(0x000025BC);
             dropdownMenuReference1.Text = employee + " " + caret;
