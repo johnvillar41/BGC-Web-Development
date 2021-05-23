@@ -19,20 +19,20 @@ namespace SoftEngWebEmployee.Helpers
         {
             get
             {
-                if(instance == null)
+                if (instance == null)
                 {
                     instance = new UserSession();
                 }
                 return instance;
             }
-        }       
+        }
         public bool GetLoginStatus()
         {
             HttpCookie cookie = HttpContext.Current.Request.Cookies["UserInfo"];
             if (cookie == null)
                 return false;
             else
-                return true;            
+                return true;
         }
         public bool IsAdministrator()
         {
@@ -41,8 +41,8 @@ namespace SoftEngWebEmployee.Helpers
                 return true;
             else
                 return false;
-        }               
-        public void SetLoginUser(string user,Constants.EmployeeType employeeType)
+        }
+        public void SetLoginUser(string user, Constants.EmployeeType employeeType)
         {
             HttpCookie cookie = new HttpCookie("UserInfo");
             cookie["username"] = user;
@@ -67,13 +67,19 @@ namespace SoftEngWebEmployee.Helpers
         public int FetchTotalNumberOfNotificationsToday()
         {
             int totalCount = 0;
-            using(MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 connection.Open();
-                string queryString = "SELECT COUNT(*) FROM notifications_table WHERE notif_date LIKE @date AND user_name=@username";
+                string queryString = null;
+                var isAdmin = UserSession.SingleInstance.IsAdministrator();
+                if (isAdmin)
+                    queryString = "SELECT COUNT(*) FROM notifications_table WHERE notif_date LIKE @date";               
+                else
+                    queryString = "SELECT COUNT(*) FROM notifications_table WHERE notif_date LIKE @date AND user_name=@username";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@date", "%" + DateTime.Now.ToString("yyyy-MM-dd") + "%");
-                command.Parameters.AddWithValue("@username", UserSession.SingleInstance.GetLoggedInUser());
+                if(!isAdmin)
+                    command.Parameters.AddWithValue("@username", UserSession.SingleInstance.GetLoggedInUser());
                 MySqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {

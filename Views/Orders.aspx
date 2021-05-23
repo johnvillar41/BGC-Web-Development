@@ -101,12 +101,12 @@
                                     </div>
                                 </div>
 
-                                <div class="table-bordered table-condensed table-responsive" style="height: 200px">
-                                    <table class="table table-striped">
+                                <div class="table-responsive table-hover" style="height: 200px">
+                                    <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Order ID</th>
                                                 <th scope="col">Product ID</th>
+                                                <th scope="col">Product Count</th>                                                
                                                 <th scope="col">Product Name</th>
                                                 <th scope="col">Product Price</th>
                                                 <th scope="col">Product Picture</th>
@@ -116,8 +116,8 @@
                                             <%for (int i = 0; i < orders.SpecificOrdersModel.Count(); i++) %>
                                             <%{ %>
                                             <tr>
-                                                <th scope="row"><%=orders.SpecificOrdersModel[i].OrdersID %></th>
                                                 <td><%=orders.SpecificOrdersModel[i].ProductID %></td>
+                                                <th scope="row"><%=orders.SpecificOrdersModel[i].TotalOrders %></th>                                                
                                                 <td><%=orders.SpecificOrdersModel[i].ProductsModel.ProductName %></td>
                                                 <td><%=orders.SpecificOrdersModel[i].ProductsModel.ProductPrice %></td>
                                                 <td>
