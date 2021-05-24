@@ -15,7 +15,7 @@ namespace SoftEngWebEmployee.Views
     public partial class Reports : System.Web.UI.Page
     {
         public List<ProductSalesReportViewModel> ProductSalesListDisplay { get; set; }
-        public List<SalesIncomeReportViewModel> SalesIncomeDisplay { get; set; }        
+        public List<SalesIncomeReportViewModel> SalesIncomeDisplay { get; set; }
         public int TotalSaleOnsite { get; set; }
         public int TotalSaleOrder { get; set; }
         public int TotalSaleOnsite_GivenDate { get; set; }
@@ -45,7 +45,7 @@ namespace SoftEngWebEmployee.Views
                 return;
             }
             DateTime date = DateTime.Parse(Date.Text.ToString());
-            LoadTotalSalesAtGivenDate(date);           
+            LoadTotalSalesAtGivenDate(date);
         }
         private async void DisplayProductSalesReport()
         {
@@ -53,22 +53,17 @@ namespace SoftEngWebEmployee.Views
             List<ProductSalesReportViewModel> ProductSalesList = new List<ProductSalesReportViewModel>();
             foreach (var product in productList)
             {
-                try
-                {
-                    var productSalesReport = await ProductSalesReportRepository.SingleInstance.FetchProductSalesReportAsync(product.Product_ID);
-                    var listOfQuantitySold = await ProductSalesReportRepository.SingleInstance.FetchQuantitySoldListAsync(product.Product_ID);
-                    ProductSalesList.Add(
-                            new ProductSalesReportViewModel
-                            {
-                                ProductReport = productSalesReport,
-                                QuantitySold = listOfQuantitySold
-                            }
-                        );
-                }
-                catch (Exception)
-                {
+                var productSalesReport = await ProductSalesReportRepository.SingleInstance.FetchProductSalesReportAsync(product.Product_ID);
+                var listOfQuantitySold = await ProductSalesReportRepository.SingleInstance.FetchQuantitySoldOnsiteAsync(product.Product_ID);
+                ProductSalesList.Add(
+                        new ProductSalesReportViewModel
+                        {
+                            ProductReport = productSalesReport,
+                            QuantitySold_Onsite = listOfQuantitySold,
+                            QuantitySold_Order = new List<QuantitySoldModel>()
+                        }
+                    );
 
-                }
             }
             ProductSalesListDisplay = ProductSalesList;
         }
