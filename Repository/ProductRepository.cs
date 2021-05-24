@@ -3,6 +3,7 @@ using SoftEngWebEmployee.Helpers;
 using SoftEngWebEmployee.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -333,6 +334,21 @@ namespace SoftEngWebEmployee.Repository
                 }                    
             }
             return isOk;
+        }
+
+        public async Task UpdateProductPictureAsync(Stream profilePicture)
+        {
+            BinaryReader br = new BinaryReader(profilePicture);
+            byte[] bytes = br.ReadBytes((int)profilePicture.Length);
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "UPDATE login_table SET user_image=@image WHERE user_username=@username";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@username", UserSession.SingleInstance.GetLoggedInUser());
+                command.Parameters.AddWithValue("@image", bytes);
+                await command.ExecuteNonQueryAsync();
+            }
         }
     }
 }

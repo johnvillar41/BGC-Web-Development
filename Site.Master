@@ -55,7 +55,7 @@
             <div class="container">
                
                     <a class="navbar-brand" href="#">
-                        <img src="/Images/logo.PNG" width="35" height="35" class="d-inline-block align-top" alt="">
+                        <img src="<%= ResolveUrl("~/Images/logo.png") %>" width="35" height="35" class="d-inline-block align-top" alt="">
                         Bgc Seedlings Supply
                     </a>           
                     

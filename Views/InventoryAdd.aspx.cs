@@ -7,11 +7,13 @@ using System.Web.UI.WebControls;
 using SoftEngWebEmployee.Models;
 using SoftEngWebEmployee.Repository;
 using SoftEngWebEmployee.Helpers;
+using System.IO;
 
 namespace SoftEngWebEmployee.Views
 {
     public partial class InventoryAdd : System.Web.UI.Page
     {
+        public string ImageString { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -41,6 +43,13 @@ namespace SoftEngWebEmployee.Views
             char caret = Convert.ToChar(0x000025BC);
             addProductDropdown.Text = category + " " + caret;
             addProductCategory.Text = category;
+        }
+
+        protected async void UploadImage_Click(object sender, EventArgs e)
+        {
+            Stream fs = ProfileFileUpload.PostedFile.InputStream;
+            await ProductRepository.SingleInstance.UpdateProductPictureAsync(fs);
+            Response.Redirect(Request.RawUrl, false);
         }
     }
 }
