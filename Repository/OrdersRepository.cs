@@ -23,7 +23,7 @@ namespace SoftEngWebEmployee.Repository
                     instance = new OrdersRepository();
                 }
                 return instance;
-            }            
+            }
         }
         private OrdersRepository()
         {
@@ -45,8 +45,8 @@ namespace SoftEngWebEmployee.Repository
             {
                 await connection.OpenAsync();
                 string queryCheckId = "SELECT order_id FROM customer_orders_table WHERE order_id=@orderID";
-                MySqlCommand command = new MySqlCommand(queryCheckId,connection);
-                command.Parameters.AddWithValue("@orderID",orderID);
+                MySqlCommand command = new MySqlCommand(queryCheckId, connection);
+                command.Parameters.AddWithValue("@orderID", orderID);
                 using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
                 {
                     if (await reader.ReadAsync())
@@ -139,15 +139,11 @@ namespace SoftEngWebEmployee.Repository
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
-                await connection.OpenAsync();
-                var isOk = await CheckOrderStatusAsync(connection);
-                if (isOk)
-                {
-                    string queryString = "UPDATE customer_orders_table SET order_status='Cancelled' WHERE order_id=@orderID";
-                    MySqlCommand command = new MySqlCommand(queryString, connection);
-                    command.Parameters.AddWithValue("@orderID", orderID);
-                    await command.ExecuteNonQueryAsync();
-                }                
+                await connection.OpenAsync();                
+                string queryString = "UPDATE customer_orders_table SET order_status='Cancelled' WHERE order_id=@orderID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@orderID", orderID);
+                await command.ExecuteNonQueryAsync();                
             }
         }
         /// <summary>
@@ -161,16 +157,11 @@ namespace SoftEngWebEmployee.Repository
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
-                
-                await connection.OpenAsync();
-                var isOk = await CheckOrderStatusAsync(connection);
-                if (isOk)
-                {
-                    string queryString = "UPDATE customer_orders_table SET order_status='Finished' WHERE order_id=@orderID";
-                    MySqlCommand command = new MySqlCommand(queryString, connection);
-                    command.Parameters.AddWithValue("@orderID", orderID);
-                    await command.ExecuteNonQueryAsync();
-                }                
+                await connection.OpenAsync();                
+                string queryString = "UPDATE customer_orders_table SET order_status='Finished' WHERE order_id=@orderID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@orderID", orderID);
+                await command.ExecuteNonQueryAsync();                
             }
         }
 
@@ -195,9 +186,9 @@ namespace SoftEngWebEmployee.Repository
                 command.Parameters.AddWithValue("@orderID", orderID);
                 using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
                 {
-                    if(await reader.ReadAsync())
+                    if (await reader.ReadAsync())
                     {
-                        if(reader["TotalSale"] != DBNull.Value)
+                        if (reader["TotalSale"] != DBNull.Value)
                         {
                             totalOrderSale = int.Parse(reader["TotalSale"].ToString());
                         }
@@ -205,8 +196,8 @@ namespace SoftEngWebEmployee.Repository
                 }
             }
             return totalOrderSale;
-        }  
-        
+        }
+
         /// <summary>
         ///     This function checks the status of customer orders
         /// </summary>
@@ -217,23 +208,28 @@ namespace SoftEngWebEmployee.Repository
         /// <para>Returns the status of customer orders</para>
         /// <para>Type: Bool</para>
         /// </returns>
-        private async Task<bool> CheckOrderStatusAsync(MySqlConnection connection)
-        {
-            bool isOk = false;
-            string queryCheck = "SELECT order_status FROM customer_orders_table";
-            MySqlCommand commandCheck = new MySqlCommand(queryCheck, connection);
-            using (MySqlDataReader reader = (MySqlDataReader)await commandCheck.ExecuteReaderAsync())
-            {
-                if (await reader.ReadAsync())
-                {
-                    var orderStatus = reader["order_status"].ToString();
-                    if (!orderStatus.Equals("Finished") || !orderStatus.Equals("Cancelled"))
-                    {
-                        isOk = true;
-                    }
-                }
-            }
-            return isOk;
-        }
+        //public async Task<bool> CheckOrderStatusAsync(int orderID)
+        //{
+        //    bool isOk = false;
+        //    using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+        //    {
+        //        connection.OpenAsync();
+        //        string queryCheck = "SELECT order_status FROM customer_orders_table WHERE order_id=@orderID";
+        //        MySqlCommand commandCheck = new MySqlCommand(queryCheck, connection);
+        //        commandCheck.Parameters.AddWithValue("@orderID", orderID);
+        //        using (MySqlDataReader reader = (MySqlDataReader)await commandCheck.ExecuteReaderAsync())
+        //        {
+        //            if (await reader.ReadAsync())
+        //            {
+        //                var orderStatus = reader["order_status"].ToString();
+        //                if (orderStatus.Equals("Pending"))
+        //                {
+        //                    isOk = true;
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return isOk;
+        //}
     }
 }

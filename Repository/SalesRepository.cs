@@ -166,7 +166,35 @@ namespace SoftEngWebEmployee.Repository
             listOfSales.Reverse();
             return listOfSales;
         }
-
+        public async Task RemoveSale(int orderID)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "DELETE FROM sales_table WHERE order_id=@orderID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("orderID", orderID);
+                await command.ExecuteNonQueryAsync();
+            }
+        }
+        public async Task<bool> CheckIfSaleExist(int orderID)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT sales_id FROM sales_table WHERE order_id=@orderID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("orderID", orderID);
+                using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
+                {
+                    if(await reader.ReadAsync())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
         /// <summary>
         ///     
         /// </summary>

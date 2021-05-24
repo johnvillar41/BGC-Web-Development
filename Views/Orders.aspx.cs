@@ -19,69 +19,31 @@ namespace SoftEngWebEmployee.Views
         public List<OrdersModel> DisplayOrders()
         {
             return OrdersList;
-        }
+        }        
 
-        private async void LoadOrders()
-        {
-            var listOfOrders = await OrdersRepository.SingleInstance.FetchAllOrdersAsync();
-            OrdersList = (List<OrdersModel>)listOfOrders;
-        }
-
-        protected async void btnCancelStatus_Click(object sender, EventArgs e)
+        protected void btnCancelStatus_Click(object sender, EventArgs e)
         {
             UpdateProgress1.Visible = true;
             if (!String.IsNullOrWhiteSpace(OrderIDCancel.Text) && IsAllAlphabetic(OrderIDCancel.Text))
             {
-                if (await OrdersRepository.SingleInstance.CheckIfIdExistAsync(int.Parse(OrderIDCancel.Text)) == false)
-                {
-                    BuildSweetAlert("#fff", "ID Not Found!", $"ID not found for: {OrderIDCancel.Text}", Constants.AlertStatus.warning);                    
-                    return;
-                }
-                await OrdersRepository.SingleInstance.ChangeStatusOfOrderToCancelledAsync(int.Parse(OrderIDCancel.Text));
-                var generatedNotification = await NotificationRepository
-                    .SingleInstance
-                    .GenerateNotification(NotificationType.CancelledOrder, OrderIDCancel.Text);
-                await NotificationRepository.SingleInstance.InsertNewNotificationAsync(generatedNotification);
+                ProcessCancelOrder();
                 LoadOrders();
                 BuildSweetAlert("#fff", "Cancelled Order", $"Cancelled Order for: {OrderIDCancel.Text}", Constants.AlertStatus.warning);               
-                UpdateProgress1.Visible = false;
             }
+            UpdateProgress1.Visible = false;
         }
 
-        protected async void btnFinishStatus_Click(object sender, EventArgs e)
+        protected void btnFinishStatus_Click(object sender, EventArgs e)
         {
             UpdateProgress1.Visible = true;
             if (!String.IsNullOrWhiteSpace(OrderIDFinish.Text) && IsAllAlphabetic(OrderIDFinish.Text))
             {
-                if (await OrdersRepository.SingleInstance.CheckIfIdExistAsync(int.Parse(OrderIDFinish.Text)) == false)
-                {
-                    BuildSweetAlert("#fff", "ID Not Found!", $"ID not found for: {OrderIDFinish.Text}", Constants.AlertStatus.error);                    
-                    return;
-                }
-                var productIds = await SpecificOrdersRepository.SingleInstance.FetchProductIDsAsync(int.Parse(OrderIDFinish.Text));
-                foreach (KeyValuePair<int, int> productId in productIds)
-                {
-                    await ProductRepository.SingleInstance.UpdateProductStocksAsync(productId.Value, productId.Key);
-                }
-                await OrdersRepository.SingleInstance.ChangeStatusOfOrderToFinishedAsync(int.Parse(OrderIDFinish.Text));
-                var generatedNotification = await NotificationRepository
-                    .SingleInstance
-                    .GenerateNotification(NotificationType.FinishedOrder, OrderIDFinish.Text);
-                await NotificationRepository.SingleInstance.InsertNewNotificationAsync(generatedNotification);
+                ProcessFinishOrder();                
                 LoadOrders();
-                var salesModel = new SalesModel()
-                {
-                    SalesType = Constants.SalesType.Order,
-                    Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser()),
-                    Date = DateTime.Now,
-                    Orders = await OrdersRepository.SingleInstance.FetchOrderAsync(int.Parse(OrderIDFinish.Text)),
-                    OnsiteTransaction = null
-                };                
-                await SalesRepository.GetInstance().InsertNewSaleAsync(salesModel);
-
-                BuildSweetAlert("#fff", "Finished Order", $"Finished Order for:{OrderIDFinish.Text}", Constants.AlertStatus.success);
-                UpdateProgress1.Visible = false;
+                InsertNewSale();
+                BuildSweetAlert("#fff", "Finished Order", $"Finished Order for:{OrderIDFinish.Text}", Constants.AlertStatus.success);                
             }
+            UpdateProgress1.Visible = false;
         }
 
         protected async void BtnSearch_Click(object sender, EventArgs e)
@@ -97,8 +59,60 @@ namespace SoftEngWebEmployee.Views
                     DisplayOrders();
                 }
             }
-
             UpdateProgress1.Visible = false;
+        }
+        private async void ProcessCancelOrder()
+        {
+            if (await OrdersRepository.SingleInstance.CheckIfIdExistAsync(int.Parse(OrderIDCancel.Text)) == false)
+            {
+                BuildSweetAlert("#fff", "ID Not Found!", $"ID not found for: {OrderIDCancel.Text}", Constants.AlertStatus.warning);
+                return;
+            }
+            await OrdersRepository.SingleInstance.ChangeStatusOfOrderToCancelledAsync(int.Parse(OrderIDCancel.Text));
+            var doesSalesExist = await SalesRepository.GetInstance().CheckIfSaleExist(int.Parse(OrderIDCancel.Text));
+            if (doesSalesExist)
+            {
+                await SalesRepository.GetInstance().RemoveSale(int.Parse(OrderIDCancel.Text));
+                var productIds = await SpecificOrdersRepository.SingleInstance.FetchProductIDsAsync(int.Parse(OrderIDCancel.Text));
+                foreach (KeyValuePair<int, int> productId in productIds)
+                {
+                    await ProductRepository.SingleInstance.AddProductStocksAsync(productId.Value, productId.Key);                    
+                }                
+            }            
+            var generatedNotification = await NotificationRepository
+                .SingleInstance
+                .GenerateNotification(NotificationType.CancelledOrder, OrderIDCancel.Text);
+            await NotificationRepository.SingleInstance.InsertNewNotificationAsync(generatedNotification);
+        }
+        private async void ProcessFinishOrder()
+        {
+            if (await OrdersRepository.SingleInstance.CheckIfIdExistAsync(int.Parse(OrderIDFinish.Text)) == false)
+            {
+                BuildSweetAlert("#fff", "ID Not Found!", $"ID not found for: {OrderIDFinish.Text}", Constants.AlertStatus.error);
+                return;
+            }
+            var productIds = await SpecificOrdersRepository.SingleInstance.FetchProductIDsAsync(int.Parse(OrderIDFinish.Text));
+            foreach (KeyValuePair<int, int> productId in productIds)
+            {
+                await ProductRepository.SingleInstance.SubtractProductStocksAsync(productId.Value, productId.Key);
+            }            
+            await OrdersRepository.SingleInstance.ChangeStatusOfOrderToFinishedAsync(int.Parse(OrderIDFinish.Text));
+            var generatedNotification = await NotificationRepository
+                .SingleInstance
+                .GenerateNotification(NotificationType.FinishedOrder, OrderIDFinish.Text);
+            await NotificationRepository.SingleInstance.InsertNewNotificationAsync(generatedNotification);
+        }
+        private async void InsertNewSale()
+        {
+            var salesModel = new SalesModel()
+            {
+                SalesType = Constants.SalesType.Order,
+                Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser()),
+                Date = DateTime.Now,
+                Orders = await OrdersRepository.SingleInstance.FetchOrderAsync(int.Parse(OrderIDFinish.Text)),
+                OnsiteTransaction = null
+            };
+            await SalesRepository.GetInstance().InsertNewSaleAsync(salesModel);
         }
         private void BuildSweetAlert(string hexaColor, string title, string message, Constants.AlertStatus alertStatus)
         {
@@ -122,6 +136,10 @@ namespace SoftEngWebEmployee.Views
             }
             return true;
         }
-
+        private async void LoadOrders()
+        {
+            var listOfOrders = await OrdersRepository.SingleInstance.FetchAllOrdersAsync();
+            OrdersList = (List<OrdersModel>)listOfOrders;
+        }
     }
 }

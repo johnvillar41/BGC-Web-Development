@@ -90,74 +90,7 @@ namespace SoftEngWebEmployee.Repository
         // x Add Product
         // x Update product
 
-        /// <summary>
-        ///     Fetches all the products inside the database with a Greenhouse category
-        /// </summary>
-        /// <returns>
-        ///     <para>Returns a list of products with greenhouse category</para>
-        ///     <para>Type: List<ProductModel></para>
-        /// </returns>
-        public async Task<List<ProductModel>> FetchGHProductsAsync()
-        {
-            List<ProductModel> productList = new List<ProductModel>();
-            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
-            {
-                await connection.OpenAsync();
-                string queryString = "SELECT * FROM products_table WHERE product_category='Greenhouse'";
-                MySqlCommand command = new MySqlCommand(queryString, connection);
-                MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
-                while (await reader.ReadAsync())
-                {
-                    productList.Add(
-                            new ProductModel()
-                            {
-                                Product_ID = int.Parse(reader["product_id"].ToString()),
-                                ProductName = reader["product_name"].ToString(),
-                                ProductDescription = reader["product_description"].ToString(),
-                                ProductPicture = reader["product_picture"].ToString(),
-                                ProductStocks = int.Parse(reader["product_stocks"].ToString()),
-                                ProductCategory = reader["product_category"].ToString(),
-                                ProductPrice = int.Parse(reader["product_price"].ToString())
-                            }
-                        );
-                }
-            }
-            return productList;
-        }
-        /// <summary>
-        ///     Fetches all the products inside the database with a Hydroponics category
-        /// </summary>
-        /// <returns>
-        ///     <para>Returns a list of products with Hydroponics category</para>
-        ///     <para>Type: List<ProductModel></para>
-        /// </returns>
-        public async Task<List<ProductModel>> FetchHPProductsAsync()
-        {
-            List<ProductModel> productList = new List<ProductModel>();
-            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
-            {
-                await connection.OpenAsync();
-                string queryString = "SELECT * FROM products_table WHERE product_category='Hydroponics'";
-                MySqlCommand command = new MySqlCommand(queryString, connection);
-                MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
-                while (await reader.ReadAsync())
-                {
-                    productList.Add(
-                            new ProductModel()
-                            {
-                                Product_ID = int.Parse(reader["product_id"].ToString()),
-                                ProductName = reader["product_name"].ToString(),
-                                ProductDescription = reader["product_description"].ToString(),
-                                ProductPicture = reader["product_picture"].ToString(),
-                                ProductStocks = int.Parse(reader["product_stocks"].ToString()),
-                                ProductCategory = reader["product_category"].ToString(),
-                                ProductPrice = int.Parse(reader["product_price"].ToString())
-                            }
-                        );
-                }
-            }
-            return productList;
-        }
+      
         /// <summary>
         ///     Fetches all the categories from the database
         /// </summary>
@@ -337,7 +270,7 @@ namespace SoftEngWebEmployee.Repository
         /// <param name="productID">
         ///     The product id that should have their product stocks subtracted 
         /// </param>
-        public async Task UpdateProductStocksAsync(int stockSold, int productID)
+        public async Task SubtractProductStocksAsync(int stockSold, int productID)
         {
             bool isOk = false;
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
@@ -352,6 +285,18 @@ namespace SoftEngWebEmployee.Repository
                     command.Parameters.AddWithValue("@productID", productID);
                     await command.ExecuteNonQueryAsync();
                 }
+            }
+        }
+        public async Task AddProductStocksAsync(int stocks, int productID)
+        {            
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();                    
+                string queryString = "UPDATE products_table SET product_stocks = (product_stocks + @stocks) WHERE product_id=@productID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@stocks", stocks);
+                command.Parameters.AddWithValue("@productID", productID);
+                await command.ExecuteNonQueryAsync();                
             }
         }
         /// <summary>

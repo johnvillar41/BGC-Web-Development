@@ -199,7 +199,7 @@ namespace SoftEngWebEmployee.Views
             };
             foreach (var sale in newSale.OnsiteTransaction.OnsiteProductTransactionList)
             {
-                await ProductRepository.SingleInstance.UpdateProductStocksAsync(sale.Product.TotalNumberOfProduct, sale.Product.Product_ID);
+                await ProductRepository.SingleInstance.SubtractProductStocksAsync(sale.Product.TotalNumberOfProduct, sale.Product.Product_ID);
             }
             await SalesRepository.GetInstance().InsertNewSaleAsync(newSale);
         }
