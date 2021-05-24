@@ -73,7 +73,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                         ProductSalesReportModel.QuantitySold = 0;
                         return ProductSalesReportModel;
                     }
-                    ProductSalesReportModel.ProductRevenue = (int)quantitySoldOnsite + (int)quantitySoldOrder;
+                    ProductSalesReportModel.ProductRevenue = quantitySoldOnsite + quantitySoldOrder;
                     ProductSalesReportModel.QuantitySold = total;
                 }
                 return ProductSalesReportModel;

@@ -265,7 +265,7 @@
                                                                                         <td><%=quantitySold.SaleType %></td>
                                                                                         <td><%=quantitySold.Date %></td>
                                                                                         <td><%=quantitySold.Administrator %></td>
-                                                                                        <td><%=quantitySold.TotalSale %></td>
+                                                                                        <td><%=quantitySold.ProductCount * quantitySold.ProductPrice %></td>
                                                                                         <td><%=quantitySold.ProductCount %></td>
                                                                                     </tr>
                                                                                 </tbody>
@@ -298,7 +298,7 @@
                                                                                         <td><%=quantitySold_Order.SaleType %></td>
                                                                                         <td><%=quantitySold_Order.Date %></td>
                                                                                         <td><%=quantitySold_Order.Administrator %></td>
-                                                                                        <td><%=quantitySold_Order.TotalSale %></td>
+                                                                                        <td><%=quantitySold_Order.ProductCount * quantitySold_Order.ProductPrice %></td>
                                                                                         <td><%=quantitySold_Order.ProductCount %></td>
                                                                                     </tr>
                                                                                 </tbody>
