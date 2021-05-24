@@ -54,13 +54,14 @@ namespace SoftEngWebEmployee.Views
             foreach (var product in productList)
             {
                 var productSalesReport = await ProductSalesReportRepository.SingleInstance.FetchProductSalesReportAsync(product.Product_ID);
-                var listOfQuantitySold = await ProductSalesReportRepository.SingleInstance.FetchQuantitySoldOnsiteAsync(product.Product_ID);
+                var listOfQuantitySold_Onsite = await ProductSalesReportRepository.SingleInstance.FetchQuantitySoldOnsiteAsync(product.Product_ID);
+                var listOfQuantitySold_Order = await ProductSalesReportRepository.SingleInstance.FetchQuantitySoldOrderAsync(product.Product_ID);
                 ProductSalesList.Add(
                         new ProductSalesReportViewModel
                         {
                             ProductReport = productSalesReport,
-                            QuantitySold_Onsite = listOfQuantitySold,
-                            QuantitySold_Order = new List<QuantitySoldModel>()
+                            QuantitySold_Onsite = listOfQuantitySold_Onsite,
+                            QuantitySold_Order = listOfQuantitySold_Order
                         }
                     );
 
