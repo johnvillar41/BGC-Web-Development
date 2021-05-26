@@ -123,7 +123,7 @@
                                                     <th scope="col">Sales ID</th>
                                                     <th scope="col">FullName</th>                                                    
                                                     <th scope="col">Type Of Sale</th>
-                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Date of Transaction</th>
                                                     <th scope="col">Total Sale</th>
                                                     <th scope="col">Details</th>
                                                 </tr>

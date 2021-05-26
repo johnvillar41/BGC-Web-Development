@@ -6,6 +6,13 @@
             border-left: 1px solid black;
             height: 200px;
         }
+
+        @media only screen and (max-width: 768px) {
+            .invisible {
+                clear: both;
+                visibility: hidden;
+            }
+        }
     </style>
 
 
@@ -23,7 +30,7 @@
                     <div class="col-3">
                         <center><img alt="" height="200px" width="200px" src="data:image/jpeg;base64,<%=product.ProductsModel.ProductPicture%>" /></td></center>
                     </div>
-                    <div class="vl col-1"></div>
+                    <div class="vl col-1 invisible"></div>
                     <div class="col-8">
                         <h5 class="card-title"><b>Product ID:</b> <%=product.ProductID%></h5>
                         <hr />
@@ -57,10 +64,9 @@
                     <div class="col-3">
                         <center><img alt="" height="200px" width="200px" src="data:image/jpeg;base64,<%=product.Product.ProductPicture%>" /></td></center>
                     </div>
-                    <div class="vl col-1"></div>
-                    <div class="col-8">
+                    <div class="vl col-1 invisible"></div>                   
                         <h5 class="card-title"><b>Product ID:</b> <%=product.Product.Product_ID %></h5>
-                        <hr />
+                        <hr class="invisible" />
                         <p class="card-text"><b>Total Orders:</b> <%=product.TotalProductsCount%></p>
                         <p class="card-text"><b>Product Name: </b><%=product.Product.ProductName%></p>
                         <p class="card-text"><b>Category: </b><%=product.Product.ProductCategory%></p>
