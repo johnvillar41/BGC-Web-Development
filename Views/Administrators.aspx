@@ -29,6 +29,8 @@
         <div class="row">
             <div class="col-12" style="margin: 5px">
                 <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
+                    <%if (UserSession.SingleInstance.IsAdministrator()) %>
+                    <%{ %>
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-12">
                             <h3 class="float-left">User Information</h3>
@@ -36,8 +38,6 @@
                         <div class="col-lg-4 col-md-3">
                             <!--Empty Div-->
                         </div>
-                        <%if (IsAdmin()) %>
-                        <%{ %>
                         <div class="col-lg-5 col-md-6 col-sm-12">
                             <button type="button" class="btn btn-success float-end" style="margin: 2px;" data-bs-toggle="modal" data-bs-target="#AddNewUserModal">
                                 Add New User
@@ -49,7 +49,6 @@
                                 Update User
                             </button>
                         </div>
-                        <%} %>
                         <asp:UpdateProgress ID="UpdateProgress_Main" runat="server">
                             <ProgressTemplate>
                                 <div id="overlayDiv">
@@ -66,10 +65,7 @@
                                                 <th scope="col">User ID</th>
                                                 <th scope="col">Profile Picture</th>
                                                 <th scope="col">Username</th>
-                                                <%if (IsAdmin()) %>
-                                                <%{ %>
                                                 <th scope="col">Password</th>
-                                                <%} %>
                                                 <th scope="col">Email</th>
                                                 <th scope="col">FullName</th>
                                                 <th scope="col">Position</th>
@@ -85,10 +81,9 @@
                                                 <td>
                                                     <%=admins.Username %>                                       
                                                 </td>
-                                                <%if (IsAdmin()) %>
-                                                <%{ %>
+
                                                 <td><%=admins.Password %></td>
-                                                <%} %>
+
                                                 <td><%=admins.Email %></td>
                                                 <td><%=admins.Fullname %></td>
                                                 <%if (admins.EmployeeType == Constants.EmployeeType.Administrator) %>
@@ -111,6 +106,12 @@
                             </Triggers>
                         </asp:UpdatePanel>
                     </div>
+                    <%} %>
+                    <%else %>
+                    <%{ %>
+                    <center><lottie-player src="https://assets1.lottiefiles.com/packages/lf20_LlRvIg.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player></center>
+                    <center><h3><b>Sorry you are not allowed to view this.</b></h3></center>
+                    <%} %>
                 </div>
             </div>
         </div>
