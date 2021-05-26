@@ -17,6 +17,15 @@ namespace SoftEngWebEmployee.Helpers
             FinishedOrder,
             SoldItem
         }
+        public static class NotificationTypeDefinitions
+        {
+            public const string DELETE_USER = "Deleted User";
+            public const string CREATED_NEW_USER = "Created New User";
+            public const string UPDATED_USER = "Updated User";
+            public const string CANCELLED_ORDER = "Cancelled Order";
+            public const string FINISHED_ORDER = "Finished Order";
+            public const string SOLD_ITEM = "Sold Item";
+        }
         public enum SalesType { Onsite, Order }
         public enum EmployeeType { Administrator, Employee }
         public enum UserStatus { Active, InActive }

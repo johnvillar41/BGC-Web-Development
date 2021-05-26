@@ -121,12 +121,12 @@ namespace SoftEngWebEmployee.Views
         {
             List<string> NotificationTypes = new List<string>
             {
-                "Deleted User",
-                "Created New User",
-                "Updated User",
-                "Cancelled Order",
-                "Finished Order",
-                "Sold Item"
+                Constants.NotificationTypeDefinitions.DELETE_USER,
+                Constants.NotificationTypeDefinitions.CREATED_NEW_USER,
+                Constants.NotificationTypeDefinitions.UPDATED_USER,
+                Constants.NotificationTypeDefinitions.CANCELLED_ORDER,
+                Constants.NotificationTypeDefinitions.FINISHED_ORDER,
+                Constants.NotificationTypeDefinitions.SOLD_ITEM
             };
             CategoryRepeater.DataSource = NotificationTypes;
             CategoryRepeater.DataBind();

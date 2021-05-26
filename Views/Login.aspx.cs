@@ -48,7 +48,7 @@ namespace SoftEngWebEmployee.Views
                 return;
             }
             var generatedCode = EmailSender.GenerateRandomCode();
-            EmailSender.BuildEmailSender(email, generatedCode);
+            EmailSender.BuildEmailSender(email, generatedCode,this);
             await LoginRepository.SingleInstance.UpdateCode(email, generatedCode);
             BuildSweetAlert("#fff", "Email sent!", "A code has been sent to you please confirm the code below", Constants.AlertStatus.info);
         }

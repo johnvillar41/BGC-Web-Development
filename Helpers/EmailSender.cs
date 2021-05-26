@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
+using System.Web.UI;
 
 namespace SoftEngWebEmployee.Helpers
 {
@@ -16,7 +17,7 @@ namespace SoftEngWebEmployee.Helpers
         {
 
         }
-        public static void BuildEmailSender(string recipientEmail,string generatedCode)
+        public static void BuildEmailSender(string recipientEmail,string generatedCode, Page page)
         {
             var smtp = new SmtpClient
             {
@@ -28,15 +29,30 @@ namespace SoftEngWebEmployee.Helpers
                 Credentials = new NetworkCredential(EMAIL, PASSWORD),
                 Timeout = 20000
             };
-            
-            using (var message = new MailMessage(EMAIL, recipientEmail)
+            try
             {
-                Subject = SUBJECT,
-                Body = generatedCode
-            })
+                using (var message = new MailMessage(EMAIL, recipientEmail)
+                {
+                    Subject = SUBJECT,
+                    Body = generatedCode
+                })
+                {
+                    smtp.Send(message);
+                }
+            }
+            catch (System.FormatException)
             {
-                smtp.Send(message);
-            }           
+                SweetAlertBuilder alertBuilder = new SweetAlertBuilder
+                {
+                    HexaBackgroundColor = "#fff",
+                    Title = "Email not in correct format",
+                    Message = "Please fix the email format",
+                    AlertIcons = Constants.AlertStatus.info,
+                    AlertPositions = Constants.AlertPositions.TOP_END
+                };
+                alertBuilder.BuildSweetAlert(page);
+            }
+                   
         }
         public static string GenerateRandomCode()
         {
