@@ -27,11 +27,11 @@
                     <div class="col-8">
                         <h5 class="card-title"><b>Product ID:</b> <%=product.ProductID%></h5>
                         <hr />
-                        <p class="card-text"><b>Total Orders:</b> <%=product.TotalOrders%></p>
+                        <p class="card-text"><b>Total Orders:</b> <%=String.Format("{0:n0}",product.TotalOrders)%></p>
                         <p class="card-text"><b>Product Name:</b> <%=product.ProductsModel.ProductName%></p>
                         <p class="card-text"><b>Category:</b> <%=product.ProductsModel.ProductCategory%></p>
                         <p class="card-text"><b>Description:</b> <%=product.ProductsModel.ProductDescription%></p>
-                        <p class="card-text"><b>Price: </b><%=product.ProductsModel.ProductPrice%></p>
+                        <p class="card-text"><b>Price: </b><%=String.Format("{0:n0}",product.ProductsModel.ProductPrice)%></p>
                     </div>
                 </div>
             </div>

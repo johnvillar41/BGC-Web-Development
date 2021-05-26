@@ -84,7 +84,7 @@ namespace SoftEngWebEmployee.Views
                 totalSaleOnsite += await OnsiteTransactionRepository.SingleInstance.CalculateTotalSaleOnsite(id);
             }
             int totalSale = totalSaleOrders + totalSaleOnsite;
-            TotalSaleGivenDate.Text = totalSale.ToString();
+            TotalSaleGivenDate.Text = String.Format("{0:n0}", totalSale);
             TotalSaleOnsite_GivenDate = totalSaleOnsite;
             TotalSaleOrder_GivenDate = totalSaleOrders;
         }
@@ -106,7 +106,7 @@ namespace SoftEngWebEmployee.Views
             int totalSale = totalSaleOrders + totalSaleOnsite;
             TotalSaleOnsite = totalSaleOnsite;
             TotalSaleOrder = totalSaleOrders;
-            TotalSale.Text = totalSale.ToString();
+            TotalSale.Text = String.Format("{0:n0}", totalSale);
         }
         private async void DisplayListOfAdministrators()
         {
@@ -141,9 +141,10 @@ namespace SoftEngWebEmployee.Views
             var totalInventory = await DashboardRepository.SingleInstance.FetchTotalInventoryAsync();
             var totalProducts = await DashboardRepository.SingleInstance.FetchTotalProductsAsync();
 
-            total_sales.Text = totalSales.ToString();
-            total_inventory.Text = totalInventory.ToString();
-            total_products.Text = totalProducts.ToString();
+            
+            total_sales.Text = String.Format("{0:n0}",totalSales);
+            total_inventory.Text = String.Format("{0:n0}",totalInventory);
+            total_products.Text = String.Format("{0:n0}", totalProducts);
         }
 
 

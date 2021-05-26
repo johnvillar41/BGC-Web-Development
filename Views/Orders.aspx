@@ -77,6 +77,7 @@
                         </Triggers>
                     </asp:UpdatePanel>
                 </div>
+                <br />
                 <div class="row">
                     <%if (OrdersList.Count() == 0) %>
                     <%{ %>
@@ -115,9 +116,9 @@
                                 <div class="card-body">
                                     <p class="card-text">Customer ID: <%=orders.CustomerID %></p>
                                     <p class="card-text">Order Date: <%=orders.OrderDate %></p>
-                                    <p class="card-text">Total Number Of Orders: <%=orders.TotalNumberOfOrders %></p>
+                                    <p class="card-text">Total Number Of Orders: <%=String.Format("{0:n0}",orders.TotalNumberOfOrders) %></p>
                                 </div>
-                                <div class="card-footer">Total Price: <%=orders.OrderTotalPrice %></div>
+                                <div class="card-footer">Total Price: <%=String.Format("{0:n0}",orders.OrderTotalPrice) %></div>
                             </div>
                         </div>
 
@@ -147,7 +148,7 @@
                                                 <td><%=orders.SpecificOrdersModel[i].ProductID %></td>
                                                 <th scope="row"><%=orders.SpecificOrdersModel[i].TotalOrders %></th>
                                                 <td><%=orders.SpecificOrdersModel[i].ProductsModel.ProductName %></td>
-                                                <td><%=orders.SpecificOrdersModel[i].ProductsModel.ProductPrice %></td>
+                                                <td><%=String.Format("{0:n0}",orders.SpecificOrdersModel[i].ProductsModel.ProductPrice) %></td>
                                                 <td>
                                                     <img alt="" height="100px" width="100px" src="data:image/png;base64,<%=orders.SpecificOrdersModel[i].ProductsModel.ProductPicture%>" /></td>
                                             </tr>
