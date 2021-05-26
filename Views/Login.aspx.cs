@@ -42,9 +42,15 @@ namespace SoftEngWebEmployee.Views
         protected async void BtnSendCode_Click(object sender, EventArgs e)
         {
             var email = EmailTextBox.Text.ToString();
+            var isEmailExisting = await UserSession.SingleInstance.CheckIfEmailExist(email);
             if (String.IsNullOrWhiteSpace(email))
             {
                 BuildSweetAlert("#fff", "Empty Email!", "Please enter a valid email", Constants.AlertStatus.error);
+                return;
+            }
+            if (!isEmailExisting)
+            {
+                BuildSweetAlert("#fff", "Email Doesnt Exist!", "Please existing email", Constants.AlertStatus.error);
                 return;
             }
             var generatedCode = EmailSender.GenerateRandomCode();

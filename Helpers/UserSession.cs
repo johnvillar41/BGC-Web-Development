@@ -73,6 +73,24 @@ namespace SoftEngWebEmployee.Helpers
             if (cookie != null)
                 return cookie["username"];
             return null;
+        }      
+        public async Task<bool> CheckIfEmailExist(string email)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string query = "SELECT email FROM login_table WHERE email=@email";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@email", email);
+                using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
+                {
+                    if(await reader.ReadAsync())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
         public int FetchTotalNumberOfNotificationsToday()
         {
