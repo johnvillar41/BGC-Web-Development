@@ -38,7 +38,7 @@
             <div class="float-left" style="margin-right: 5px">
                 <div class="input-group">
                     <div class="form-outline">
-                        <asp:TextBox ID="searchBox" placeholder="Search" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="searchBox" placeholder="Search" runat="server" CssClass="form-control" maxlength="255"></asp:TextBox>
                     </div>
                     <asp:LinkButton ID="searchButton" runat="server" OnClick="SearchButton_Click" CssClass="btn btn-small btn-primary"><i class="fa fa-search"></i></asp:LinkButton>
                 </div>
