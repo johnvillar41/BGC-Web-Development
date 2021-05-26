@@ -49,9 +49,7 @@
                         <div class="col-md-3 col-sm-12">
                             <div class="row mb-1">
                                 <h5><b>Search by Employees</b></h5>
-                            </div>
-                            <div class="row">
-                            </div>
+                            </div>                            
                             <div class="row">
                                 <div class="btn-group">
                                     <!-- Dropdown Button -->
@@ -78,6 +76,32 @@
                             </div>
                         </div>
                         <%} %>
+                        <div class="col-md-3 col-sm-12">
+                            <div class="row mb-1">
+                                <h5><b>Search by Categories</b></h5>
+                            </div>
+                            <div class="row">
+                                <!--Input Categories here-->
+                                 <div class="row">
+                                <div class="btn-group">
+                                    <!-- Dropdown Button -->
+                                    <asp:Button ID="Button1" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Category &#x25BC;" />
+                                    <!-- Dropdown List -->
+                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference1">                                        
+                                        <asp:Repeater ID="CategoryRepeater" OnItemCreated="CategoryRepeater_ItemCreated" runat="server">
+                                            <ItemTemplate>
+                                                <a runat="server" class="dropdown-item" id="categorySelected">
+                                                    <li>
+                                                        <asp:Button ID="NotificationCategory" runat="server" CssClass="dropdown-item" Text='<%#Container.DataItem%>' UseSubmitBehavior="false" OnClick="NotificationCategory_Click" />
+                                                    </li>
+                                                </a>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                     </div>
                     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                         <ProgressTemplate>

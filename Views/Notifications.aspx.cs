@@ -18,7 +18,33 @@ namespace SoftEngWebEmployee.Views
             {
                 LoadNotifications();
                 LoadEmployeesOnDropDown();
+                LoadCategories();
             }            
+        }
+        protected void NotificationCategory_Click(object sender, EventArgs e)
+        {
+            UpdateProgress1.Visible = true;
+            var category = (sender as Button).Text.ToString();
+            char caret = Convert.ToChar(0x000025BC);
+            DropDownEmployee.Text = category + " " + caret;
+            if (category == "Select All Categories")
+            {
+                LoadNotifications();
+            }
+            else
+            {
+                var notificationType = NotificationRepository.SingleInstance.GenerateNotificationType(category);
+                LoadNotificationsByCategory((Constants.NotificationType)notificationType);
+            }
+            UpdateProgress1.Visible = false;
+        }        
+        protected void CategoryRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
+        {
+            Button button = e.Item.FindControl("NotificationCategory") as Button;
+
+            ScriptManager current = ScriptManager.GetCurrent(Page);
+            if (current != null)
+                current.RegisterAsyncPostBackControl(button);
         }
         protected void EmployeeFullnameRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
@@ -82,11 +108,28 @@ namespace SoftEngWebEmployee.Views
                 current.RegisterAsyncPostBackControl(button);
         }
         private async void LoadNotificationByEmployee(string employee)
-        {
-            UpdateProgress1.Visible = true;
+        {            
             var notifications = await NotificationRepository.SingleInstance.FetchNotificationsByEmployee(employee);
+            NotificationsList = notifications;           
+        }
+        private async void LoadNotificationsByCategory(Constants.NotificationType notificationType)
+        {
+            var notifications = await NotificationRepository.SingleInstance.FetchNotificationsByCategory(notificationType);
             NotificationsList = notifications;
-            UpdateProgress1.Visible = false;
+        }
+        private void LoadCategories()
+        {
+            List<string> NotificationTypes = new List<string>
+            {
+                "Deleted User",
+                "Created New User",
+                "Updated User",
+                "Cancelled Order",
+                "Finished Order",
+                "Sold Item"
+            };
+            CategoryRepeater.DataSource = NotificationTypes;
+            CategoryRepeater.DataBind();
         }
         private async void LoadEmployeesOnDropDown()
         {
@@ -101,5 +144,7 @@ namespace SoftEngWebEmployee.Views
             LoadNotifications();
             UpdateProgress1.Visible = false;
         }
+
+        
     }
 }
