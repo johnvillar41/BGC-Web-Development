@@ -29,6 +29,37 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
+        public async Task<List<OrdersModel>> FetchCategorizedOrders(string orderStatus)
+        {
+            List<OrdersModel> orderList = new List<OrdersModel>();
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "SELECT * FROM customer_orders_table WHERE order_status=@orderStatus";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@orderStatus", orderStatus);
+                using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
+                {
+                    while(await reader.ReadAsync())
+                    {
+                        orderList.Add(
+                                new OrdersModel 
+                                {
+                                    Order_ID = int.Parse(reader["order_id"].ToString()),
+                                    CustomerID = int.Parse(reader["user_id"].ToString()),
+                                    OrderTotalPrice = int.Parse(reader["order_total_price"].ToString()),
+                                    OrderStatus = reader["order_status"].ToString(),
+                                    OrderDate = reader["order_date"].ToString(),
+                                    TotalNumberOfOrders = int.Parse(reader["total_number_of_orders"].ToString()),
+                                    SpecificOrdersModel = await SpecificOrdersRepository.SingleInstance.FetchSpecificOrdersAsync(int.Parse(reader["order_id"].ToString()))
+                                }
+
+                            );
+                    }
+                }
+                return orderList;
+            }
+        }
         /// <summary>
         ///     This function checks if the order ID exists
         /// </summary>

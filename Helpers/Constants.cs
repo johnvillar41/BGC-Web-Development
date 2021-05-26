@@ -21,6 +21,7 @@ namespace SoftEngWebEmployee.Helpers
         public enum EmployeeType { Administrator, Employee }
         public enum UserStatus { Active, InActive }
         public enum AlertStatus { success, error, warning, info, question }
+        public enum OrderStatus { Pending, Cancelled, Finished }
         public static class AlertPositions
         {
             public const string TOP = "top";

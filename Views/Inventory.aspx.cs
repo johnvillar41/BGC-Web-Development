@@ -51,7 +51,6 @@ namespace SoftEngWebEmployee.Views
             if (current != null)
                 current.RegisterAsyncPostBackControl(button);
         }
-
         protected async void Category_Click(object sender, EventArgs e)
         {
             string category = (sender as Button).Text.ToString();
@@ -66,9 +65,7 @@ namespace SoftEngWebEmployee.Views
                 var newSearch = await ProductRepository.SingleInstance.FetchOnCategoryAsync(category);
                 SearchRepeater.DataSource = newSearch;
                 listSearchRepeater = newSearch;
-                SearchRepeater.DataBind();
-
-               
+                SearchRepeater.DataBind();               
             }
         }
 

@@ -4,22 +4,20 @@ using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using static SoftEngWebEmployee.Helpers.Constants;
 
 namespace SoftEngWebEmployee.Views
 {
     public partial class Orders : System.Web.UI.Page
     {
-        private List<OrdersModel> OrdersList = new List<OrdersModel>();
+        public List<OrdersModel> OrdersList = new List<OrdersModel>();
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {            
             LoadOrders();
-        }
-
-        public List<OrdersModel> DisplayOrders()
-        {
-            return OrdersList;
-        }        
+            LoadCategories();
+        }       
 
         protected void btnCancelStatus_Click(object sender, EventArgs e)
         {
@@ -45,7 +43,27 @@ namespace SoftEngWebEmployee.Views
             }
             UpdateProgress1.Visible = false;
         }
-
+        protected void CategoryRepeater_ItemCreated(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
+        {
+            Button button = e.Item.FindControl("Category") as Button;
+            ScriptManager current = ScriptManager.GetCurrent(Page);
+            if (current != null)
+                current.RegisterAsyncPostBackControl(button);
+        }
+        protected void Category_Click(object sender, EventArgs e)
+        {
+            string category = (sender as Button).Text.ToString();
+            char caret = Convert.ToChar(0x000025BC);
+            dropdownMenuReference1.Text = category + " " + caret;
+            if (category == "All Orders")
+            {
+                LoadOrders();
+            }
+            else
+            {                
+                LoadCategorizedOrders(category);                
+            }
+        }
         protected async void BtnSearch_Click(object sender, EventArgs e)
         {
             UpdateProgress1.Visible = true;
@@ -55,8 +73,7 @@ namespace SoftEngWebEmployee.Views
                 if (order != null)
                 {
                     OrdersList.Clear();
-                    OrdersList.Add(order);
-                    DisplayOrders();
+                    OrdersList.Add(order);                    
                 }
             }
             UpdateProgress1.Visible = false;
@@ -136,10 +153,27 @@ namespace SoftEngWebEmployee.Views
             }
             return true;
         }
+        private void LoadCategories()
+        {
+            List<string> CategoryList = new List<string>
+                {
+                    Constants.OrderStatus.Pending.ToString(),
+                    Constants.OrderStatus.Cancelled.ToString(),
+                    Constants.OrderStatus.Finished.ToString()
+                };
+            var categories = CategoryList;
+            CategoryRepeater.DataSource = categories;
+            CategoryRepeater.DataBind();
+        }
         private async void LoadOrders()
         {
             var listOfOrders = await OrdersRepository.SingleInstance.FetchAllOrdersAsync();
             OrdersList = (List<OrdersModel>)listOfOrders;
         }
+        private async void LoadCategorizedOrders(string orderStatus)
+        {
+            var listOfOrders = await OrdersRepository.SingleInstance.FetchCategorizedOrders(orderStatus);
+            OrdersList = listOfOrders;
+        }        
     }
 }

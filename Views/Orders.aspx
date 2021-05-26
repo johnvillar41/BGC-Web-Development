@@ -50,12 +50,40 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div class="row">
-                    <%if (DisplayOrders().Count() == 0) %>
+                    <asp:UpdatePanel ID="UpdatePanel_Dropdown" runat="server">
+                        <ContentTemplate>
+                            <!-- Dropdown Button -->
+                            <asp:Button ID="dropdownMenuReference1" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Category &#x25BC;" />
+                            <!-- Dropdown List -->
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference1">
+                                <li>
+                                    <asp:Button ID="btnCategoryAll" runat="server" CssClass="dropdown-item" Text="All Orders" OnClick="Category_Click" UseSubmitBehavior="false" /></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <asp:Repeater ID="CategoryRepeater" OnItemCreated="CategoryRepeater_ItemCreated" runat="server">
+                                    <ItemTemplate>
+                                        <a runat="server" class="dropdown-item" id="categorySelected">
+                                            <li>
+                                                <asp:Button ID="Category" runat="server" CssClass="dropdown-item" Text='<%#Container.DataItem%>' OnClick="Category_Click" UseSubmitBehavior="false" /></li>
+                                        </a>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </ul>
+                        </ContentTemplate>
+
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="dropdownMenuReference1" EventName="Click" />
+                        </Triggers>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="row">
+                    <%if (OrdersList.Count() == 0) %>
                     <%{ %>
                     <center><lottie-player src="https://assets1.lottiefiles.com/packages/lf20_qlwqp9xi.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player></center>
                     <center><h4><b style="color:#000000;">No orders found!</b></h4></center>
                     <%} %>
-                    <%foreach (var orders in DisplayOrders()) %>
+                    <%foreach (var orders in OrdersList) %>
                     <%{%>
                     <div class="row" style="margin-bottom: 5px">
                         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -106,7 +134,7 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">Product ID</th>
-                                                <th scope="col">Product Count</th>                                                
+                                                <th scope="col">Product Count</th>
                                                 <th scope="col">Product Name</th>
                                                 <th scope="col">Product Price</th>
                                                 <th scope="col">Product Picture</th>
@@ -117,7 +145,7 @@
                                             <%{ %>
                                             <tr>
                                                 <td><%=orders.SpecificOrdersModel[i].ProductID %></td>
-                                                <th scope="row"><%=orders.SpecificOrdersModel[i].TotalOrders %></th>                                                
+                                                <th scope="row"><%=orders.SpecificOrdersModel[i].TotalOrders %></th>
                                                 <td><%=orders.SpecificOrdersModel[i].ProductsModel.ProductName %></td>
                                                 <td><%=orders.SpecificOrdersModel[i].ProductsModel.ProductPrice %></td>
                                                 <td>
