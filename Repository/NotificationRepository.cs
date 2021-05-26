@@ -238,26 +238,7 @@ namespace SoftEngWebEmployee.Repository
                     break;
             }
             return newNotification;
-        }
-        public Constants.NotificationType? GenerateNotificationType(string notification)
-        {            
-            switch (notification)
-            {
-                case "Deleted User":
-                    return Constants.NotificationType.DeleteUser;
-                case "Created New User":
-                    return Constants.NotificationType.CreateUser;
-                case "Updated User":
-                    return Constants.NotificationType.UpdateUser;
-                case "Cancelled Order":
-                    return Constants.NotificationType.CancelledOrder;
-                case "Finished Order":
-                    return Constants.NotificationType.FinishedOrder;
-                case "Sold Item":
-                    return Constants.NotificationType.SoldItem;
-            }
-            return null;
-        }
+        }        
         /// <summary>
         ///     Inserts a new notification inside the database
         /// </summary>
@@ -350,7 +331,7 @@ namespace SoftEngWebEmployee.Repository
         ///     <para>Returns a notification enum</para>
         ///     <para>Type: NotificationType</para>
         /// </returns>
-        private NotificationType CategorizeNotification(string notification)
+        public NotificationType CategorizeNotification(string notification)
         {
             switch (notification)
             {
@@ -364,6 +345,8 @@ namespace SoftEngWebEmployee.Repository
                     return NotificationType.CancelledOrder;
                 case "Finished Order":
                     return NotificationType.FinishedOrder;
+                case "Sold Item":
+                    return NotificationType.SoldItem;
             }
             return NotificationType.FinishedOrder;
         }

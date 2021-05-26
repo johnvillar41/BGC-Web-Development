@@ -164,6 +164,7 @@
     <Content Include="Images\LoginImage.png" />
     <Content Include="Images\logo.PNG" />
     <Content Include="Images\money-tree.gif" />
+    <Content Include="Images\sold.png" />
     <Content Include="Images\update_icon_order.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

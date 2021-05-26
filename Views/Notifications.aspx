@@ -177,6 +177,13 @@
                                                 <img src="/Images/update_icon_order.PNG" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
                                             </span></td>
                                             <%} %>
+                                            <%else if (notification.TypeOfNotification == Constants.NotificationType.SoldItem) %>
+                                            <%{ %>
+                                            <td><span class="badge bg-info">
+                                                <center>Sold</center>
+                                                <img src="/Images/sold.PNG" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
+                                            </span></td>
+                                            <%} %>
                                             <td><%=notification.NotificationTitle %></td>
                                             <td><%=notification.NotificationContent %></td>
                                             <td><%=notification.Administrator.Fullname %></td>

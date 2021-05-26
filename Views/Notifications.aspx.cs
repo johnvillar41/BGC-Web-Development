@@ -33,7 +33,7 @@ namespace SoftEngWebEmployee.Views
             }
             else
             {
-                var notificationType = NotificationRepository.SingleInstance.GenerateNotificationType(category);
+                var notificationType = NotificationRepository.SingleInstance.CategorizeNotification(category);
                 LoadNotificationsByCategory((Constants.NotificationType)notificationType);
             }
             UpdateProgress1.Visible = false;
