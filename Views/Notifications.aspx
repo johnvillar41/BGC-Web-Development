@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                        <%} %>
+                        
                         <div class="col-md-3 col-sm-12">
                             <div class="row mb-1">
                                 <h5><b>Search by Categories</b></h5>
@@ -102,6 +102,7 @@
                             </div>
                             </div>
                         </div>
+                        <%} %>
                     </div>
                     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                         <ProgressTemplate>
