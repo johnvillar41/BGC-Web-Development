@@ -123,7 +123,7 @@
                                                     <th scope="col">Sales ID</th>
                                                     <th scope="col">FullName</th>                                                    
                                                     <th scope="col">Type Of Sale</th>
-                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Date of Transaction</th>
                                                     <th scope="col">Total Sale</th>
                                                     <th scope="col">Details</th>
                                                 </tr>
@@ -135,7 +135,7 @@
                                         <td><%# DataBinder.Eval(Container.DataItem, "Administrator.Fullname") %></td>                                        
                                         <td><span class="badge bg-dark"><%# Eval("SalesType")%></span> </td>
                                         <td><%# DataBinder.Eval(Container.DataItem, "Date") %></td>
-                                        <td><%# DataBinder.Eval(Container.DataItem, "TotalSales") %></td>
+                                        <td><%# String.Format("{0:n0}",DataBinder.Eval(Container.DataItem, "TotalSales")) %></td>
                                         <td>
                                             <asp:Button OnClick="IDS_Click" ID="IDS" CommandName="SalesCommand" CommandArgument='<%# Eval("Orders.Order_ID") +";"+Eval("OnsiteTransaction.TransactionID") %>' CssClass="btn btn-primary" runat="server" Text="View All Details" />
                                         </td>
@@ -206,10 +206,10 @@
                                                                 <%# DataBinder.Eval(Container.DataItem,"ProductDescription") %>
                                                                 <br />
                                                                 <b>Stocks: </b>
-                                                                <%# DataBinder.Eval(Container.DataItem,"ProductStocks") %>
+                                                                <%# String.Format("{0:n0}",DataBinder.Eval(Container.DataItem,"ProductStocks")) %>
                                                                 <br />
                                                                 <b>Price: </b>
-                                                                <%# DataBinder.Eval(Container.DataItem,"ProductPrice") %>
+                                                                <%# String.Format("{0:n0}",DataBinder.Eval(Container.DataItem,"ProductPrice")) %>
                                                             </p>
                                                         </div>
                                                         <div class="card-footer">
@@ -267,10 +267,10 @@
                                                                     <%# DataBinder.Eval(Container.DataItem,"ProductDescription") %>
                                                                     <br />
                                                                     <b>Total number of items: </b>
-                                                                    <%# DataBinder.Eval(Container.DataItem,"TotalNumberOfProduct") %>
+                                                                    <%# String.Format("{0:n0}",DataBinder.Eval(Container.DataItem,"TotalNumberOfProduct")) %>
                                                                     <br />
                                                                     <b>Subtotal Price: </b>
-                                                                    <%# DataBinder.Eval(Container.DataItem,"SubTotalPrice") %>
+                                                                    <%# String.Format("{0:n0}",DataBinder.Eval(Container.DataItem,"SubTotalPrice")) %>
                                                                 </p>
                                                             </div>
                                                             <div class="card-footer">
@@ -298,7 +298,7 @@
                                     <h5 class="card-title"><b>List of orders</b></h5>
                                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                         <ContentTemplate>
-                                            <h6>Item Count: <%=Cart.GetCartItems().Count() %></h6>
+                                            <h6>Item Count: <%=String.Format("{0:n0}",Cart.GetCartItems().Count()) %></h6>
                                             <table class="table" style="height: 300px;">
                                                 <thead>
                                                     <tr>
@@ -311,12 +311,12 @@
                                                     <%{ %>
                                                     <tr>
                                                         <td><%=productItem.ProductName%>[<%=productItem.TotalNumberOfProduct %>x]</td>
-                                                        <td><%=productItem.ProductPrice * productItem.TotalNumberOfProduct %></td>
+                                                        <td><%=String.Format("{0:n0}",productItem.ProductPrice * productItem.TotalNumberOfProduct) %></td>
                                                     </tr>
                                                     <%} %>
                                                 </tbody>
                                             </table>
-                                            <h6>Total Amount: PHP <%=Cart.CalculateTotalSales() %></h6>
+                                            <h6>Total Amount: PHP <%=String.Format("{0:n0}",Cart.CalculateTotalSales()) %></h6>
                                         </ContentTemplate>
                                         <Triggers>
                                             <asp:AsyncPostBackTrigger ControlID="BtnConfirmCartOrder" EventName="Click" />

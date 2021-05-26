@@ -7,8 +7,8 @@
         <div class="col-lg-2 col-md-12 col-sm-12 mb-3">
             <div class="list-group" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <button class="list-group-item list-group-item-action active" id="v-pills-dashboard-tab" data-bs-toggle="pill" data-bs-target="#v-pills-dashboard" type="button" role="tab" aria-controls="v-pills-dashboard" aria-selected="true">Dashboard</button>
-                <button class="list-group-item list-group-item-action" id="v-pills-products-tab" data-bs-toggle="pill" data-bs-target="#v-pills-products" type="button" role="tab" aria-controls="v-pills-products" aria-selected="false">Product Sales Report</button>
-                <button class="list-group-item list-group-item-action" id="v-pills-sales-tab" data-bs-toggle="pill" data-bs-target="#v-pills-sales" type="button" role="tab" aria-controls="v-pills-sales" aria-selected="false">Sales Income Report</button>
+                <button class="list-group-item list-group-item-action" id="v-pills-products-tab" data-bs-toggle="pill" data-bs-target="#v-pills-products" type="button" role="tab" aria-controls="v-pills-products" aria-selected="false">Inventory Report</button>
+                <button class="list-group-item list-group-item-action" id="v-pills-sales-tab" data-bs-toggle="pill" data-bs-target="#v-pills-sales" type="button" role="tab" aria-controls="v-pills-sales" aria-selected="false">Sales Report</button>
             </div>
         </div>
 
@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="tab-pane fade" id="v-pills-sales" role="tabpanel" aria-labelledby="v-pills-sales-tab">
-                    <!--Sales Income-->
+                    <!--Sales Report-->
                     <%if (UserSession.SingleInstance.IsAdministrator()) %>
                     <%{ %>
                     <div class="row">
@@ -86,12 +86,12 @@
                                         <div class="card card-body">
                                             <asp:Label ID="Label1" runat="server" Text="Onsite Orders"></asp:Label>
                                             <div class="row">
-                                                <p><%=TotalSaleOnsite.ToString() %></p>
+                                                <p><%=String.Format("{0:n0}",TotalSaleOnsite) %></p>
                                             </div>
                                             <br />
                                             <asp:Label ID="Label2" runat="server" Text="Online Orders"></asp:Label>
                                             <div class="row">
-                                                <p><%=TotalSaleOrder.ToString() %></p>
+                                                <p><%=String.Format("{0:n0}",TotalSaleOrder) %></p>
                                             </div>
                                         </div>
                                     </div>
@@ -129,12 +129,12 @@
                                                 <div class="card card-body">
                                                     <asp:Label ID="Label5" runat="server" Text="Onsite Orders"></asp:Label>
                                                     <div class="row">
-                                                        <p><%=TotalSaleOnsite_GivenDate.ToString() %></p>
+                                                        <p><%=String.Format("{0:n0}",TotalSaleOnsite_GivenDate) %></p>
                                                     </div>
                                                     <br />
                                                     <asp:Label ID="Label3" runat="server" Text="Online Orders"></asp:Label>
                                                     <div class="row">
-                                                        <p><%=TotalSaleOrder_GivenDate.ToString() %></p>
+                                                        <p><%=String.Format("{0:n0}",TotalSaleOrder_GivenDate) %></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -148,7 +148,7 @@
                             </div>
                             <div class="col-lg-4 col-md-12 col-sm-12">
                                 <div class="card border-success mb-3" style="min-height: 16rem;">
-                                    <div class="card-header"><b>Average Sales</b></div>
+                                    <div class="card-header"><b>Sales</b></div>
                                     <div class="card-body text-success">
                                         <label for="term"><b>Term: &nbsp;</b></label>
                                         <select name="term" id="term">
@@ -175,9 +175,9 @@
                                         <div class="card-body">
                                             <h5 class="card-title">Username: <%=sales.Administrator.Username %></h5>
                                             <h5 class="card-title">FullName: <%=sales.Administrator.Fullname %></h5>
-                                            <p class="card-text">Total Sale: <%=sales.TotalSale %></p>
-                                            <p class="card-text">Total Sale On Site: <%=sales.TotalSaleOnsite %></p>
-                                            <p class="card-text">Total Sale Orders: <%=sales.TotalSaleOrders %></p>
+                                            <p class="card-text">Total Sale: <%=String.Format("{0:n0}",sales.TotalSale) %></p>
+                                            <p class="card-text">Total Sale On Site: <%=String.Format("{0:n0}",sales.TotalSaleOnsite) %></p>
+                                            <p class="card-text">Total Sale Orders: <%=String.Format("{0:n0}",sales.TotalSaleOrders) %></p>
                                             <a href="#" class="btn btn-primary">See more</a>
                                         </div>
                                     </div>
@@ -185,13 +185,10 @@
                                 <%} %>
                             </div>
                         </div>
-
-
-
                     </div>
 
                     <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">
-                        <!-- Product sales report -->
+                        <!-- Inventory report -->
                         <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 g-4">
                             <%if (ProductSalesListDisplay == null) return; %>
                             <%foreach (var productSales in ProductSalesListDisplay) %>
@@ -202,19 +199,19 @@
                                 <div class="card">
                                     <img src="data:image/jpeg;base64,<%=productSales.ProductReport.Product.ProductPicture%>" class="card-img-top img-thumbnail" style="min-width: 200px; height: 300px">
                                     <div class="card-body">
-                                        <h5 class="card-title">Product ID: <%=productSales.ProductReport.Product.Product_ID%></h5>
-                                        <p class="card-text"><b><%=productSales.ProductReport.Product.ProductName %></b></p>
+                                         <h6 class="card-title">&emsp;Product ID: <%=productSales.ProductReport.Product.Product_ID%></h6>
+                                         <h5 class="card-text"><b>&emsp;<%=productSales.ProductReport.Product.ProductName %></b></h5>
                                         <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">Unit Price:
-                                        <label><%=productSales.ProductReport.Product.ProductPrice%></label>
+                                            <li class="list-group-item">Selling Price:
+                                        <label><%=String.Format("{0:n0}",productSales.ProductReport.Product.ProductPrice)%></label>
                                             </li>
                                             <li class="list-group-item">Product Revenue:
-                                         <label><%=productSales.ProductReport.ProductRevenue %></label>
+                                         <label><%=String.Format("{0:n0}",productSales.ProductReport.ProductRevenue) %></label>
 
                                             </li>
                                             <!--See More-->
-                                            <li class="list-group-item">Quantity Sold:                                       
-                                       <label><%=productSales.ProductReport.QuantitySold %></label>
+                                            <li class="list-group-item">Total Quantity Sold:                                       
+                                       <label><%=String.Format("{0:n0}",productSales.ProductReport.QuantitySold) %></label>
                                                 <br />
                                                 <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal<%=productSales.ProductReport.Product.Product_ID %>" role="button">See More
                                                 </a>
