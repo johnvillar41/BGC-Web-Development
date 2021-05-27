@@ -48,19 +48,78 @@ namespace SoftEngWebEmployee.Views
         protected async void btnAddProduct_Click(object sender, EventArgs e)
         {
             // SQL to add to database
-            Stream fs = addProductPicture.PostedFile.InputStream;
-            ProductModel addProductInfo = new ProductModel
+            
+            try
             {
-                ProductName = addProductName.Text,
-                ProductCategory = addProductCategory.Text,
-                ProductDescription = addProductDescription.Text,
-                ProductPrice = int.Parse(addProductPrice.Text),
-                ProductStocks = int.Parse(addProductStocks.Text),
-                ProductPicture_Upload = fs
+                ValidateFields();
+                Stream fs = addProductPicture.PostedFile.InputStream;
+                ProductModel addProductInfo = new ProductModel
+                {
+                    ProductName = addProductName.Text,
+                    ProductCategory = addProductCategory.Text,
+                    ProductDescription = addProductDescription.Text,
+                    ProductPrice = int.Parse(addProductPrice.Text),
+                    ProductStocks = int.Parse(addProductStocks.Text),
+                    ProductPicture_Upload = fs
+                };                
+                await ProductRepository.SingleInstance.AddNewProductAsync(addProductInfo);                
+                Response.Redirect("InventoryAdd.aspx", false);
+                BuildSweetAlert("Product Successfully Added!", $"Product {addProductInfo.ProductName} has been added!", Constants.AlertStatus.success);
+            }
+            catch (System.FormatException)
+            {
+                BuildSweetAlert("Missing Fields!", "Some fields are missing, please fill them up!", Constants.AlertStatus.warning);
+                return;
+            }
+            catch (MySql.Data.MySqlClient.MySqlException)
+            {
+                BuildSweetAlert("Same Product Name!", "Please Change Product Name!", Constants.AlertStatus.warning);
+                return;
+            }
+
+            /* List of possible SweetAlert situations
+             - Any empty fields
+             - Prohibits products with duplicate names
+             - NOTE: Lack of product picture is still allowed
+             - Success
+             */
+            
+            
+        }
+        private void ValidateFields()
+        {
+            if (int.Parse(addProductPrice.Text) <= 0)
+            {
+                BuildSweetAlert("Price Error!", "Price cannot be below zero!", Constants.AlertStatus.warning);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(addProductName.Text))
+            {
+                BuildSweetAlert("Empty Field!", "Empty Product Name", Constants.AlertStatus.warning);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(addProductCategory.Text))
+            {
+                BuildSweetAlert("Empty Field!", "Empty Product Category", Constants.AlertStatus.warning);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(addProductDescription.Text))
+            {
+                BuildSweetAlert("Empty Field!", "Empty Product Description", Constants.AlertStatus.warning);
+                return;
+            }
+        }
+        private void BuildSweetAlert(string title,string message, Constants.AlertStatus alertStatus)
+        {
+            var sweetAlert = new SweetAlertBuilder
+            {
+                HexaBackgroundColor = "#fff",
+                Title = title,
+                Message = message,
+                AlertIcons = alertStatus,
+                AlertPositions = Constants.AlertPositions.CENTER
             };
-            await ProductRepository.SingleInstance.AddNewProductAsync(addProductInfo);
-            // SweetAlert prompt
-            Response.Redirect("InventoryAdd.aspx", false);
+            sweetAlert.BuildSweetAlert(this);
         }
     }
 }
