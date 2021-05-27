@@ -46,25 +46,27 @@ namespace SoftEngWebEmployee.Views
         }
 
         protected async void btnAddProduct_Click(object sender, EventArgs e)
-        {
-            // SQL to add to database
-            
+        {          
             try
             {
-                ValidateFields();
-                Stream fs = addProductPicture.PostedFile.InputStream;
-                ProductModel addProductInfo = new ProductModel
+                var isValid = ValidateFields();
+                if (isValid)
                 {
-                    ProductName = addProductName.Text,
-                    ProductCategory = addProductCategory.Text,
-                    ProductDescription = addProductDescription.Text,
-                    ProductPrice = int.Parse(addProductPrice.Text),
-                    ProductStocks = int.Parse(addProductStocks.Text),
-                    ProductPicture_Upload = fs
-                };                
-                await ProductRepository.SingleInstance.AddNewProductAsync(addProductInfo);                
-                Response.Redirect("InventoryAdd.aspx", false);
-                BuildSweetAlert("Product Successfully Added!", $"Product {addProductInfo.ProductName} has been added!", Constants.AlertStatus.success);
+                    Stream fs = addProductPicture.PostedFile.InputStream;
+                    ProductModel addProductInfo = new ProductModel
+                    {
+                        ProductName = addProductName.Text,
+                        ProductCategory = addProductCategory.Text,
+                        ProductDescription = addProductDescription.Text,
+                        ProductPrice = int.Parse(addProductPrice.Text),
+                        ProductStocks = int.Parse(addProductStocks.Text),
+                        ProductPicture_Upload = fs
+                    };
+                    await ProductRepository.SingleInstance.AddNewProductAsync(addProductInfo);
+                    Response.Redirect("InventoryAdd.aspx", false);
+                    BuildSweetAlert("Product Successfully Added!", $"Product {addProductInfo.ProductName} has been added!", Constants.AlertStatus.success);
+
+                }
             }
             catch (System.FormatException)
             {
@@ -75,39 +77,31 @@ namespace SoftEngWebEmployee.Views
             {
                 BuildSweetAlert("Same Product Name!", "Please Change Product Name!", Constants.AlertStatus.warning);
                 return;
-            }
-
-            /* List of possible SweetAlert situations
-             - Any empty fields
-             - Prohibits products with duplicate names
-             - NOTE: Lack of product picture is still allowed
-             - Success
-             */
-            
-            
+            }           
         }
-        private void ValidateFields()
+        private bool ValidateFields()
         {
             if (int.Parse(addProductPrice.Text) <= 0)
             {
                 BuildSweetAlert("Price Error!", "Price cannot be below zero!", Constants.AlertStatus.warning);
-                return;
+                return false;
             }
             if (string.IsNullOrWhiteSpace(addProductName.Text))
             {
                 BuildSweetAlert("Empty Field!", "Empty Product Name", Constants.AlertStatus.warning);
-                return;
+                return false;
             }
             if (string.IsNullOrWhiteSpace(addProductCategory.Text))
             {
                 BuildSweetAlert("Empty Field!", "Empty Product Category", Constants.AlertStatus.warning);
-                return;
+                return false;
             }
             if (string.IsNullOrWhiteSpace(addProductDescription.Text))
             {
                 BuildSweetAlert("Empty Field!", "Empty Product Description", Constants.AlertStatus.warning);
-                return;
+                return false;
             }
+            return true;
         }
         private void BuildSweetAlert(string title,string message, Constants.AlertStatus alertStatus)
         {
