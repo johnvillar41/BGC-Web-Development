@@ -11,6 +11,7 @@ namespace SoftEngWebEmployee.Views
     public partial class InventoryUpdate : System.Web.UI.Page
     {
         public string ProductID { get; set; }
+        public string ImageString { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             ProductID = Request.QueryString["id"];
@@ -57,6 +58,7 @@ namespace SoftEngWebEmployee.Views
                 ProductPrice.Text = productModel.ProductPrice.ToString();
                 ProductStocks.Text = productModel.ProductStocks.ToString();
                 ProductDescription.Text = productModel.ProductDescription.ToString();
+                ImageString = productModel.ProductPicture;
             }            
         }
     }
