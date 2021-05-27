@@ -1,6 +1,8 @@
-﻿using SoftEngWebEmployee.Repository;
+﻿using SoftEngWebEmployee.Models;
+using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -38,9 +40,23 @@ namespace SoftEngWebEmployee.Views
             ProductCategory.Text = category;
         }
 
-        protected void BtnUpdateProduct_Click(object sender, EventArgs e)
+        protected async void BtnUpdateProduct_Click(object sender, EventArgs e)
         {
-
+            if (ProductID != null)
+            {
+                Stream fs = ProductPicture.PostedFile.InputStream;
+                var product = new ProductModel
+                {
+                    ProductName = ProductName.Text,
+                    ProductCategory = ProductCategory.Text,
+                    ProductPrice = int.Parse(ProductPrice.Text),
+                    ProductStocks = int.Parse(ProductStocks.Text),
+                    ProductDescription = ProductDescription.Text,
+                    ProductPicture_Upload = fs
+                };
+                await ProductRepository.SingleInstance.UpdateProductAsync(product, int.Parse(ProductID));
+                Response.Redirect("Inventory.aspx",false);
+            }            
         }
         private async void LoadCategories()
         {
