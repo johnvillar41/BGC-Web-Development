@@ -90,8 +90,49 @@ namespace SoftEngWebEmployee.Repository
 
         // x Add Product
         // x Update product
-
-      
+        public async Task AddNewProductAsync(ProductModel newProduct)
+        {
+            BinaryReader br = new BinaryReader(newProduct.ProductPicture_Upload);
+            byte[] bytes = br.ReadBytes((int)newProduct.ProductPicture_Upload.Length);
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "INSERT INTO products_table(product_name,product_description,product_price,product_picture,product_stocks,product_category)" +
+                    "VALUES(@productName,@productDescription,@productPrice,@productPicture,@productStocks,@productCategory)";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@productName",newProduct.ProductName);
+                command.Parameters.AddWithValue("@productDescription", newProduct.ProductDescription);
+                command.Parameters.AddWithValue("@productPrice", newProduct.ProductPrice);
+                command.Parameters.AddWithValue("@productPicture", bytes);
+                command.Parameters.AddWithValue("@productStocks", newProduct.ProductStocks);
+                command.Parameters.AddWithValue("@productCategory", newProduct.ProductCategory);
+                await command.ExecuteNonQueryAsync();
+            }
+        }
+        public async Task UpdateProductAsync(ProductModel updatedProduct,int productID)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "UPDATE products_table SET " +
+                    "product_name=@productName," +
+                    "product_description=@productDescription," +
+                    "product_price=@productPrice," +
+                    "product_picture=@productPicture," +
+                    "product_stocks=@productStocks," +
+                    "product_category=@productCategory" +
+                    "WHERE product_id=@productID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@productName", updatedProduct.ProductName);
+                command.Parameters.AddWithValue("@productDescription", updatedProduct.ProductDescription);
+                command.Parameters.AddWithValue("@productPrice", updatedProduct.ProductPrice);
+                command.Parameters.AddWithValue("@productPicture", updatedProduct.ProductPicture);
+                command.Parameters.AddWithValue("@productStocks", updatedProduct.ProductStocks);
+                command.Parameters.AddWithValue("@productCategory", updatedProduct.ProductCategory);
+                command.Parameters.AddWithValue("@productID", productID);
+                await command.ExecuteNonQueryAsync();
+            }
+        }      
         /// <summary>
         ///     Fetches all the categories from the database
         /// </summary>

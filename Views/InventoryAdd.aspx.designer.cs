@@ -78,21 +78,30 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.WebControls.TextBox addProductStocks;
 
         /// <summary>
-        /// ProfileFileUpload control.
+        /// addProductDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload ProfileFileUpload;
+        protected global::System.Web.UI.WebControls.TextBox addProductDescription;
 
         /// <summary>
-        /// UploadImage control.
+        /// addProductPicture control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button UploadImage;
+        protected global::System.Web.UI.WebControls.FileUpload addProductPicture;
+
+        /// <summary>
+        /// btnAddProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddProduct;
     }
 }

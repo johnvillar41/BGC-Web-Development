@@ -45,11 +45,22 @@ namespace SoftEngWebEmployee.Views
             addProductCategory.Text = category;
         }
 
-        protected async void UploadImage_Click(object sender, EventArgs e)
+        protected async void btnAddProduct_Click(object sender, EventArgs e)
         {
-            Stream fs = ProfileFileUpload.PostedFile.InputStream;
-            await ProductRepository.SingleInstance.UpdateProductPictureAsync(fs);
-            Response.Redirect(Request.RawUrl, false);
+            // SQL to add to database
+            Stream fs = addProductPicture.PostedFile.InputStream;
+            ProductModel addProductInfo = new ProductModel
+            {
+                ProductName = addProductName.Text,
+                ProductCategory = addProductCategory.Text,
+                ProductDescription = addProductDescription.Text,
+                ProductPrice = int.Parse(addProductPrice.Text),
+                ProductStocks = int.Parse(addProductStocks.Text),
+                ProductPicture_Upload = fs
+            };
+            await ProductRepository.SingleInstance.AddNewProductAsync(addProductInfo);
+            // SweetAlert prompt
+            Response.Redirect("InventoryAdd.aspx", false);
         }
     }
 }

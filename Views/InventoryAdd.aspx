@@ -84,8 +84,8 @@
                         <!-- Product Description -->
                         <div class="input-group mb-3">
                             <span class="input-group-text col-12 my-0" id="addLabelDesc"><i>Description</i></span>
-                            <textarea class="form-control col-12 my-0" rows="4" id="addProductDescription" placeholder="Enter description here" 
-                                maxlength="1000" aria-describedby="addLabelDesc"></textarea>
+                            <asp:TextBox TextMode="MultiLine" ID="addProductDescription" CssClass="form-control col-12 my-0" runat="server"
+                                placeholder="Enter description here" maxlength="1000" rows="4" aria-describedby="addLabelDesc"></asp:TextBox>
                         </div>
                     </div>
                     
@@ -99,28 +99,9 @@
                                 <img alt="" class="rounded-circle" width="200" height="200" src="data:image/png;base64,<%=ImageString%>" />
                             </div>            
                             <div class="row">
-
                                 <div class="input-group mb-3">
-                                    <asp:FileUpload type="file" ID="ProfileFileUpload" CssClass="form-control" runat="server" />
-                                    <asp:Button ID="UploadImage" CssClass="btn btn-info justify-content-center" runat="server" Style="background-color: #eba800; border-color: none" Text="Upload" OnClick="UploadImage_Click" />
+                                    <asp:FileUpload type="file" ID="addProductPicture" CssClass="form-control" runat="server" />
                                 </div>
-
-                                <form class="md-form">
-                                  <div class="file-field justify-content-center">
-                                    <div class="mb-4">
-                                      <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                                        class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar"
-                                          style="width: 150px; height: 150px;">
-                                    </div>
-                                    <div class="d-flex justify-content-center">
-                                      <div class="btn btn-mdb-color btn-rounded float-left">
-                                        <span>Add photo</span>
-                                        <input type="file">
-                                      </div>
-                                    </div>
-                                  </div>
-                                </form>
-
                             </div>
                         </div>                    
                     </div>
@@ -133,6 +114,7 @@
                     <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2021. All rights reserved.</small>
                     <div class="social-contact ml-4 ml-sm-auto"><span class="fa fa-facebook mr-4 text-sm"></span><span class="fa fa-google-plus mr-4 text-sm"></span><span class="fa fa-linkedin mr-4 text-sm"></span><span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span></div>
                 </div>
+                <asp:Button ID="btnAddProduct" CssClass="btn btn-success" Text="Add Product" OnClick="btnAddProduct_Click" runat="server" />
             </div>
 
         </div>

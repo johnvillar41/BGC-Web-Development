@@ -1,4 +1,6 @@
-﻿namespace SoftEngWebEmployee.Models
+﻿using System.IO;
+
+namespace SoftEngWebEmployee.Models
 {
     public class ProductModel
     {
@@ -15,6 +17,7 @@
         ///     inside the cart.
         /// </summary>
         public int TotalNumberOfProduct { get; set; }
-        public int SubTotalPrice { get; set; }     
+        public int SubTotalPrice { get; set; }
+        public Stream ProductPicture_Upload { get; set; }
     }
 }
