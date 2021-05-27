@@ -15,31 +15,40 @@ namespace SoftEngWebEmployee.Views
     {
 
         /// <summary>
-        /// addProductName control.
+        /// ProductName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox addProductName;
+        protected global::System.Web.UI.WebControls.TextBox ProductName;
 
         /// <summary>
-        /// addProductCategory control.
+        /// UpdatePanel_UpdateCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox addProductCategory;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel_UpdateCategory;
 
         /// <summary>
-        /// addProductDropdown control.
+        /// ProductCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addProductDropdown;
+        protected global::System.Web.UI.WebControls.TextBox ProductCategory;
+
+        /// <summary>
+        /// ProductDropdown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ProductDropdown;
 
         /// <summary>
         /// AddCategoryRepeater control.
@@ -51,21 +60,48 @@ namespace SoftEngWebEmployee.Views
         protected global::System.Web.UI.WebControls.Repeater AddCategoryRepeater;
 
         /// <summary>
-        /// addProductPrice control.
+        /// ProductPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox addProductPrice;
+        protected global::System.Web.UI.WebControls.TextBox ProductPrice;
 
         /// <summary>
-        /// addProductStocks control.
+        /// ProductStocks control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox addProductStocks;
+        protected global::System.Web.UI.WebControls.TextBox ProductStocks;
+
+        /// <summary>
+        /// ProductDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ProductDescription;
+
+        /// <summary>
+        /// ProductPicture control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload ProductPicture;
+
+        /// <summary>
+        /// BtnUpdateProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnUpdateProduct;
     }
 }

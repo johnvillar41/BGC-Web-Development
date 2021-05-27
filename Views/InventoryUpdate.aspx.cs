@@ -14,7 +14,7 @@ namespace SoftEngWebEmployee.Views
         {
             if (!IsPostBack)
             {
-
+                LoadCategories();
             }
         }
 
@@ -25,7 +25,7 @@ namespace SoftEngWebEmployee.Views
             AddCategoryRepeater.DataBind();
         }
 
-        protected void AddCategoryRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
+        protected void UpdateCategoryRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
             Button button = e.Item.FindControl("category") as Button;
             ScriptManager current = ScriptManager.GetCurrent(Page);
@@ -37,8 +37,13 @@ namespace SoftEngWebEmployee.Views
         {
             string category = (sender as Button).Text.ToString();
             char caret = Convert.ToChar(0x000025BC);
-            addProductDropdown.Text = category + " " + caret;
-            addProductCategory.Text = category;
+            ProductDropdown.Text = category + " " + caret;
+            ProductCategory.Text = category;
+        }
+
+        protected void BtnUpdateProduct_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
