@@ -27,8 +27,8 @@
             <p class="fs-2"><b>Inventory</b></p>
         </div>
         <div class="col-6">
-        <button runat="server" id="btnInventoryAdd" onserverclick="btnInventoryAdd_ServerClick" class="btn btn-success float-end" title="Add Product">
-            <i class="fa fa-plus-circle"></i> Add Product</button>
+            <button runat="server" id="btnInventoryAdd" onserverclick="btnInventoryAdd_ServerClick" class="btn btn-success float-end" title="Add Product">
+                <i class="fa fa-plus-circle"></i>Add Product</button>
         </div>
     </div>
 
@@ -38,7 +38,7 @@
             <div class="float-left" style="margin-right: 5px">
                 <div class="input-group">
                     <div class="form-outline">
-                        <asp:TextBox ID="searchBox" placeholder="Search" runat="server" CssClass="form-control" maxlength="255"></asp:TextBox>
+                        <asp:TextBox ID="searchBox" placeholder="Search" runat="server" CssClass="form-control" MaxLength="255"></asp:TextBox>
                     </div>
                     <asp:LinkButton ID="searchButton" runat="server" OnClick="SearchButton_Click" CssClass="btn btn-small btn-primary"><i class="fa fa-search"></i></asp:LinkButton>
                 </div>
@@ -97,20 +97,20 @@
                 <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 150px; height: 150px;"loop autoplay></lottie-player></center>
                 <%} %>
                 <%} %>
-                <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 row-cols-sm-2 row-cols-lg-4 scrolling-wrapper p-1" style="height:600px;">                    
+                <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 row-cols-sm-2 row-cols-lg-4 scrolling-wrapper p-1" style="height: 600px;">
                     <asp:Repeater ID="SearchRepeater" runat="server">
-                        <ItemTemplate>                            
-                                <div class="card" style="height:300px;">
-                                    <img class="card-img-top" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="150px" width="75px" alt="Product picture here">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
-                                        <asp:Label ID="StocksLabel" CssClass="card-text" runat="server" Text="" OnDataBinding="StocksLabel_DataBinding"></asp:Label>                                       
-                                    </div>
-                                    <div class="card-footer">
-                                        <asp:Button ID="detailsButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-primary" Text="Details" data-bs-toggle="modal" href="#detailsModal" OnClick="RetrieveDetails" runat="server" />
-                                        <asp:Button ID="deleteProduct" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-danger float-right" Text="Delete" data-bs-toggle="modal" href="#deleteModal" OnClick="RetrieveDetails" runat="server" />
-                                    </div>
-                                </div>                            
+                        <ItemTemplate>
+                            <div class="card" style="height: 300px;">
+                                <img class="card-img-top" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="150px" width="75px" alt="Product picture here">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
+                                    <asp:Label ID="StocksLabel" CssClass="card-text" runat="server" Text="" OnDataBinding="StocksLabel_DataBinding"></asp:Label>
+                                </div>
+                                <div class="card-footer">
+                                    <asp:Button ID="detailsButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-primary" Text="Details" data-bs-toggle="modal" href="#detailsModal" OnClick="RetrieveDetails" runat="server" />
+                                    <asp:Button ID="UpdateButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-danger float-right" Text="Update" data-bs-toggle="modal" OnClick="UpdateButton_Click" runat="server" />
+                                </div>
+                            </div>
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
@@ -119,7 +119,7 @@
                 <asp:AsyncPostBackTrigger ControlID="btnCategoryAll" EventName="Click" />
             </Triggers>
         </asp:UpdatePanel>
-    </div>  
+    </div>
 
     <!-- Modals -->
 
@@ -188,68 +188,5 @@
         </div>
     </div>
 
-    <!-- Delete Confirm -->
-    <div class="modal fade" id="deleteModal" aria-hidden="true" aria-labelledby="..." tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h5 class="modal-title">Delete Product</h5>
-                    <button type="button" class="close" onclick="$('#deleteModal').modal('hide');" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <asp:UpdatePanel ID="UpdatePanel_DeleteModal" runat="server">
-                    <ContentTemplate>
-                        <asp:Repeater ID="DeleteRepeater" runat="server">
-                            <ItemTemplate>
-                                <div class="modal-body" style="word-wrap">
-                                    <p>Are you sure you want to delete this product? </p>
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <img src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" class="img-fluid"></img>
-                                        </div>
-                                        <div class="col-8">
-                                            <b style="font-size: 20px"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></b><br />
-                                            <br />
-                                            <b style="font-size: 15px">Price: </b>Php <%# DataBinder.Eval(Container.DataItem,"ProductPrice") %><br />
-                                            <b style="font-size: 15px">Stocks: </b><%# DataBinder.Eval(Container.DataItem,"ProductStocks") %>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="card">
-                                        <div class="card-header" id="deleteHeading">
-                                            <h5 class="my-0">
-                                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#deleteCollapse" aria-expanded="false" aria-controls="deleteCollapse">
-                                                    <u style="font-size: 15px">View Details</u>
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="deleteCollapse" class="collapse" aria-labelledby="deleteHeading" data-parent="#deleteModal">
-                                            <div class="card-body">
-                                                <b style="font-size: 15px">Category: </b><%# DataBinder.Eval(Container.DataItem,"ProductCategory") %><br />
-                                                <b style="font-size: 15px">ID: </b><%# DataBinder.Eval(Container.DataItem,"Product_ID") %><br />
-                                                <b style="font-size: 15px">Description: </b>
-                                                <br />
-                                                <i style="font-size: 15px"><%# DataBinder.Eval(Container.DataItem,"ProductDescription") %></i>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" onclick="$('#deleteModal').modal('hide');">No</button>
-                                    <asp:Button ID="DeleteButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-danger float-right" Text="Yes" OnClick="DeleteButton_Click" runat="server" />
-                                </div>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-
-            </div>
-        </div>
-    </div>
-
+   
 </asp:Content>

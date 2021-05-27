@@ -23,14 +23,12 @@ namespace SoftEngWebEmployee.Views
                 DisplayInventoryTables();
             }
         }
-
         private async void LoadCategories()
         {
             var categories = await ProductRepository.SingleInstance.FetchAllCategoriesAsync();
             CategoryRepeater.DataSource = categories;
             CategoryRepeater.DataBind();
         }
-
         private async void DisplayInventoryTables()
         {
             var inventory = await ProductRepository.SingleInstance.FetchAllProductsAsync();
@@ -38,12 +36,10 @@ namespace SoftEngWebEmployee.Views
             listSearchRepeater = inventory;
             SearchRepeater.DataBind();            
         }
-
         protected void btnInventoryAdd_ServerClick(object sender, EventArgs e)
         {
             Response.Redirect("InventoryAdd.aspx", false);
         }
-
         protected void CategoryRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
             Button button = e.Item.FindControl("category") as Button;
@@ -68,18 +64,14 @@ namespace SoftEngWebEmployee.Views
                 SearchRepeater.DataBind();               
             }
         }
-
         protected async void SearchButton_Click(object sender, EventArgs e)
         {
             string search = searchBox.Text.ToString();
             var newSearch = await ProductRepository.SingleInstance.FetchOnSearchAsync(search);
             SearchRepeater.DataSource = newSearch;
             listSearchRepeater = newSearch;
-            SearchRepeater.DataBind();
-
-            
+            SearchRepeater.DataBind();            
         }
-
         protected async void RetrieveDetails(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -92,38 +84,13 @@ namespace SoftEngWebEmployee.Views
             };
 
             DetailsRepeater.DataSource = ProductDetail;
-            DetailsRepeater.DataBind();
-            DeleteRepeater.DataSource = ProductDetail;
-            DeleteRepeater.DataBind();
-
-           
-        }
-
-        protected void DeleteButton_Click(object sender, EventArgs e)
-        {
-            //UpdateProgress1.Visible = true;
-            //Button button = (Button)sender;
-            //var productID = button.CommandArgument.ToString();
-            //ProductRepository.SingleInstance.DeleteProduct(productID);
-            //ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Pop", "$('#deleteModal').modal('hide');", true);
-
-            //DisplayInventoryTables();
-
-            //SweetAlertBuilder sweetAlertBuilder = new SweetAlertBuilder
-            //{
-            //    HexaBackgroundColor = "#fff",
-            //    Title = "Product Deleted!",
-            //    AlertIcons = Constants.AlertStatus.success,
-            //    ShowCloseButton = true,
-            //    AlertPositions = Constants.AlertPositions.CENTER
-            //};
-            //sweetAlertBuilder.BuildSweetAlert(this);
-            //UpdateProgress1.Visible = false;
-        }
-
+            DetailsRepeater.DataBind();                 
+        }        
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
-
+            Button button = (Button)sender;
+            var productID = button.CommandArgument.ToString();
+            Response.Redirect($"InventoryUpdate.aspx?id={productID}",false);            
         }       
 
         protected void StocksLabel_DataBinding(object sender, EventArgs e)
@@ -139,25 +106,6 @@ namespace SoftEngWebEmployee.Views
                 lbl.ForeColor = System.Drawing.Color.Red;
             
         }
-
-        /* C# code for displaying card details
-
-        <p> Are you sure you want to delete this product? </p>
-        <p> Name: <%if (Details != null){%> <%=Details.ProductName %> <%}%> </p>
-        <asp:Label runat="server" ID="modalID"> <%if (Details != null){%> <%=Details.Product_ID %> <%}%></asp:Label>
-        <p> ID: <%if (Details != null){%> <%=Details.Product_ID %> <%}%> </p>
-        <p> Description: <%if (Details != null){%> <%=Details.ProductDescription %> <%}%> </p>
-        <p> Category: <%if (Details != null){%> <%=Details.ProductCategory %> <%}%> </p>
-        <p> Picture: <%if (Details != null){%> <%=Details.ProductPicture %> <%}%> </p>
-        <p> Number of Stocks: <%if (Details != null){%> <%=Details.ProductStocks %> <%}%> </p>
-        <p> Price: Php <%if (Details != null){%> <%=Details.ProductPrice %> <%}%> </p>
-
-        Code for Lottie
-        <%if (SearchRepeater.DataBind() == "") %>
-                <%{ %>
-                <center><h3 style="color:white">No Items Found</h3></center>
-                <center><lottie-player src="https://assets4.lottiefiles.com/temp/lf20_Celp8h.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;"loop autoplay></lottie-player></center>
-                <%} %>
-        */
+        
     }
 }

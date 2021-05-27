@@ -10,20 +10,16 @@ namespace SoftEngWebEmployee.Views
 {
     public partial class InventoryUpdate : System.Web.UI.Page
     {
+        public string ProductID { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            ProductID = Request.QueryString["id"];
             if (!IsPostBack)
             {
                 LoadCategories();
+                LoadProductData();
             }
-        }
-
-        private async void LoadCategories()
-        {
-            var categories = await ProductRepository.SingleInstance.FetchAllCategoriesAsync();
-            AddCategoryRepeater.DataSource = categories;
-            AddCategoryRepeater.DataBind();
-        }
+        }       
 
         protected void UpdateCategoryRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
@@ -44,6 +40,24 @@ namespace SoftEngWebEmployee.Views
         protected void BtnUpdateProduct_Click(object sender, EventArgs e)
         {
 
+        }
+        private async void LoadCategories()
+        {
+            var categories = await ProductRepository.SingleInstance.FetchAllCategoriesAsync();
+            AddCategoryRepeater.DataSource = categories;
+            AddCategoryRepeater.DataBind();
+        }
+        private async void LoadProductData()
+        {
+            var productModel = await ProductRepository.SingleInstance.FetchProductDetailsAsync(ProductID);
+            if (productModel != null)
+            {
+                ProductName.Text = productModel.ProductName;
+                ProductCategory.Text = productModel.ProductCategory;
+                ProductPrice.Text = productModel.ProductPrice.ToString();
+                ProductStocks.Text = productModel.ProductStocks.ToString();
+                ProductDescription.Text = productModel.ProductDescription.ToString();
+            }            
         }
     }
 }
