@@ -15,8 +15,7 @@ namespace SoftEngWebEmployee.Views
 {
     public partial class UserProfile : System.Web.UI.Page
     {
-        public string ImageString { get; set; }
-        public EmployeeType EmployeeType { get; set; }
+        public string ImageString { get; set; }      
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -32,8 +31,7 @@ namespace SoftEngWebEmployee.Views
                 Username.Text = userLoggedIn.Username;
                 Fullname.Text = userLoggedIn.Fullname;
                 Password.Text = userLoggedIn.Password;
-                ImageString = userLoggedIn.ProfilePicture;
-                EmployeeType = userLoggedIn.EmployeeType;
+                ImageString = userLoggedIn.ProfilePicture;                
                 FullnameLabel.Text = userLoggedIn.Fullname;
                 Email.Text = userLoggedIn.Email;
             }            

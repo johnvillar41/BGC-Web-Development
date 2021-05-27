@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="UserProfile.aspx.cs" Inherits="SoftEngWebEmployee.Views.UserProfile" %>
-
+<%@ Import Namespace = "SoftEngWebEmployee.Helpers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
         body {
@@ -72,13 +72,13 @@
                             <asp:AsyncPostBackTrigger ControlID="ButtonSaveProfile" EventName="Click" />
                         </Triggers>
                     </asp:UpdatePanel>
-                    <%if (EmployeeType == SoftEngWebEmployee.Helpers.Constants.EmployeeType.Administrator)%>
+                    <%if (UserSession.SingleInstance.IsAdministrator())%>
                     <%{%>
-                    <span class="badge bg-dark"><%=EmployeeType.ToString() %></span>
+                    <span class="badge bg-dark">Administrator</span>
                     <%}%>
                     <%else %>
                     <%{ %>
-                    <span class="badge bg-secondary text-dark"><%=EmployeeType.ToString()  %></span>
+                    <span class="badge bg-secondary text-dark">Employee</span>
                     <%} %>
                 </div>
             </div>
