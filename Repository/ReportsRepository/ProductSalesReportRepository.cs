@@ -44,7 +44,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "SELECT SUM(specific_orders_table.total_orders) as OrderTotal, SUM(onsite_products_transaction_table.total_product_count) as OnsiteTotal FROM specific_orders_table LEFT JOIN onsite_products_transaction_table ON specific_orders_table.product_id = onsite_products_transaction_table.product_id WHERE specific_orders_table.product_id = @productID";
+                string queryString = "SELECT (SELECT SUM(onsite_products_transaction_table.total_product_count) FROM onsite_products_transaction_table WHERE onsite_products_transaction_table.product_id = @productID) as OnsiteTotal , (SELECT SUM(specific_orders_table.total_orders) FROM specific_orders_table WHERE specific_orders_table.product_id = @productID)as OrderTotal";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@productID", productID);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
@@ -100,12 +100,11 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                 "products_table.product_id as ProductID, " +
                 "sales_table.sale_type as SaleType, " +
                 "sales_table.date as Date, " +
-                "sales_table.user_username as Administrator, " +
-                "SUM(onsite_products_transaction_table.subtotal_price) as TotalSaleOnsite, " +
+                "sales_table.user_username as Administrator, " +               
                 "onsite_products_transaction_table.total_product_count as ProductCount " +
                 "FROM products_table " +
                 "INNER JOIN onsite_products_transaction_table ON onsite_products_transaction_table.product_id = products_table.product_id " +
-                "INNER JOIN sales_table WHERE products_table.product_id = @productID";
+                "INNER JOIN sales_table WHERE products_table.product_id = @productID AND sales_table.sale_type = 'Onsite'";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@productID", productID);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
@@ -131,8 +130,8 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                         quantitySoldModel.Date = DateTime.Parse(reader["Date"].ToString());
                     if (reader["Administrator"] != DBNull.Value)
                         quantitySoldModel.Administrator = reader["Administrator"].ToString();
-                    if (reader["TotalSaleOnsite"] != DBNull.Value)
-                        quantitySoldModel.TotalSale = int.Parse(reader["TotalSaleOnsite"].ToString());
+                    //if (reader["TotalSaleOnsite"] != DBNull.Value)
+                    //    quantitySoldModel.TotalSale = int.Parse(reader["TotalSaleOnsite"].ToString());
                     if (reader["SaleType"] != DBNull.Value)
                         quantitySoldModel.SaleType = reader["SaleType"].ToString();
                     if (reader["ProductCount"] != DBNull.Value)
@@ -153,12 +152,11 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                 "products_table.product_id as ProductID," +
                 "sales_table.sale_type as SaleType," +
                 "sales_table.date as Date," +
-                "sales_table.user_username as Administrator," +
-                "SUM(specific_orders_table.subtotal_price) as TotalSaleOrder," +
+                "sales_table.user_username as Administrator," +                
                 "specific_orders_table.total_orders as ProductCount " +
                 "FROM products_table  " +
                 "INNER JOIN specific_orders_table ON specific_orders_table.product_id = products_table.product_id " +
-                "INNER JOIN sales_table WHERE products_table.product_id = @productID";
+                "INNER JOIN sales_table WHERE products_table.product_id = @productID AND sales_table.sale_type = 'Order'";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@productID", productID);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
@@ -184,8 +182,8 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
                         quantitySoldModel.Date = DateTime.Parse(reader["Date"].ToString());
                     if (reader["Administrator"] != DBNull.Value)
                         quantitySoldModel.Administrator = reader["Administrator"].ToString();
-                    if (reader["TotalSaleOrder"] != DBNull.Value)
-                        quantitySoldModel.TotalSale = int.Parse(reader["TotalSaleOrder"].ToString());
+                    //if (reader["TotalSaleOrder"] != DBNull.Value)
+                    //    quantitySoldModel.TotalSale = int.Parse(reader["TotalSaleOrder"].ToString());
                     if (reader["SaleType"] != DBNull.Value)
                         quantitySoldModel.SaleType = reader["SaleType"].ToString();
                     if (reader["ProductCount"] != DBNull.Value)
