@@ -109,12 +109,8 @@
 
             </div>
 
-            <div class="bg-orange py-4">
-                <div class="row px-3">
-                    <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2021. All rights reserved.</small>
-                    <div class="social-contact ml-4 ml-sm-auto"><span class="fa fa-facebook mr-4 text-sm"></span><span class="fa fa-google-plus mr-4 text-sm"></span><span class="fa fa-linkedin mr-4 text-sm"></span><span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span></div>
-                </div>
-                <asp:Button ID="BtnUpdateProduct" CssClass="btn btn-success" Text="Add Product" OnClick="BtnUpdateProduct_Click" runat="server" />
+            <div class="bg-dark py-4">                
+                <asp:Button ID="BtnUpdateProduct" CssClass="btn btn-warning ml-1" Text="Save Product" OnClick="BtnUpdateProduct_Click" runat="server" />
             </div>
 
         </div>
