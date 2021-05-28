@@ -17,6 +17,11 @@ namespace SoftEngWebEmployee.Views
         protected void Page_Load(object sender, EventArgs e)
         {
             ProductID = Request.QueryString["id"];
+            if(ProductID == null)
+            {
+                Response.Redirect("InventoryAdd", false);
+                return;
+            }
             if (!IsPostBack)
             {
                 LoadCategories();
