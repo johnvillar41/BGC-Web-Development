@@ -101,16 +101,16 @@
             <div class="modal-dialog">
                 <div class="modal-content">
 
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Enter Email</h5>
+                    <div class="modal-header bg-dark">
+                        <h5 class="modal-title text-warning" id="exampleModalLabel">Enter Email</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <asp:TextBox ID="EmailTextBox" placeholder="Enter your email here!" runat="server"></asp:TextBox>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <asp:Button ID="BtnSendCode" CssClass="btn btn-primary" runat="server" Text="Send Code" OnClick="BtnSendCode_Click" data-bs-toggle="modal" data-bs-target="#codeModal" />
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                        <asp:Button ID="BtnSendCode" CssClass="btn btn-warning" runat="server" Text="Send Code" OnClick="BtnSendCode_Click" data-bs-toggle="modal" data-bs-target="#codeModal" />
                     </div>
                 </div>
             </div>
@@ -121,9 +121,9 @@
                 <ContentTemplate>
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Enter Code</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-header bg-dark">
+                                <h5 class="modal-title text-warning">Enter Code</h5>
+                                <button type="button" class="btn-dark" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <asp:TextBox ID="CodeConfirmation" placeholder="Enter code confirmation here!" runat="server"></asp:TextBox>
@@ -133,7 +133,7 @@
                                 <%} %>
                             </div>
                             <div class="modal-footer">
-                                <asp:Button ID="BtnConfirmCode" CssClass="btn btn-primary" runat="server" Text="Send Code" OnClick="BtnConfirmCode_Click" />
+                                <asp:Button ID="BtnConfirmCode" CssClass="btn btn-warning" runat="server" Text="Send Code" OnClick="BtnConfirmCode_Click" />
                             </div>
                         </div>
                     </div>

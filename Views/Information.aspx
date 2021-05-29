@@ -11,6 +11,11 @@
             border-radius: .25rem;
         }
 
+        .card0 {
+            box-shadow: 0px 4px 8px 0px #757575;
+            border-radius: 5px
+        }
+
         .bd-callout-warning {
             border-left-color: #f0ad4e;
         }
@@ -21,7 +26,7 @@
 
             <div class="col-12">
 
-                <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
+                <div class="card card0 bd-callout bd-callout-warning" style="border-radius: .25rem">
                     <h3>Information</h3>
                     <asp:Repeater ID="InformationRepeater" runat="server" OnItemCommand="InformationRepeater_ItemCommand">
                         <HeaderTemplate>

@@ -25,10 +25,15 @@
             width: 100%;
         }
 
-            .card-text p {
-                width: 650px;
-                word-break: break-word;
-            }
+        .card0 {
+            box-shadow: 0px 4px 8px 0px #757575;
+            border-radius: 5px
+        }
+
+        .card-text p {
+            width: 650px;
+            word-break: break-word;
+        }
 
         #overlayDiv {
             position: fixed;
@@ -50,20 +55,20 @@
         }
     </script>
 
-    <ul class="nav nav-tabs" id="trans" role="tablist">
+    <ul class="nav nav-tabs card0 bg-dark" id="trans" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="view-transactions" data-toggle="tab" href="#view" role="tab" aria-controls="home" aria-selected="true">View Transactions List</a>
+            <a class="nav-link active text-warning" id="view-transactions" data-toggle="tab" href="#view" role="tab" aria-controls="home" aria-selected="true">View Transactions List</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="create-transactions" data-toggle="tab" href="#create" role="tab" aria-controls="profile" aria-selected="false">Create Transaction</a>
+            <a class="nav-link text-warning" id="create-transactions" data-toggle="tab" href="#create" role="tab" aria-controls="profile" aria-selected="false">Create Transaction</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="cart-transactions" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">
-                        <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">
-                            <ContentTemplate>
-                                Cart Transaction <span class="badge bg-warning text-dark"><%=Cart.GetCartItems().Count() %></span>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
+            <a class="nav-link text-warning" id="cart-transactions" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">
+                <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        Cart Transaction <span class="badge bg-warning text-dark"><%=Cart.GetCartItems().Count() %></span>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </a>
         </li>
     </ul>
@@ -74,7 +79,7 @@
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-    <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
+    <div class="card card0 bd-callout bd-callout-warning" style="border-radius: .25rem">
         <div class="tab-content" id="myTabContent">
             <!-- View Transactions list -->
             <div class="tab-pane fade show active" id="view" role="tabpanel" aria-labelledby="view-transactions">
@@ -121,7 +126,7 @@
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th scope="col">Sales ID</th>
-                                                    <th scope="col">FullName</th>                                                    
+                                                    <th scope="col">FullName</th>
                                                     <th scope="col">Type Of Sale</th>
                                                     <th scope="col">Date of Transaction</th>
                                                     <th scope="col">Total Sale</th>
@@ -132,7 +137,7 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td><%# DataBinder.Eval(Container.DataItem, "SalesID") %></td>
-                                        <td><%# DataBinder.Eval(Container.DataItem, "Administrator.Fullname") %></td>                                        
+                                        <td><%# DataBinder.Eval(Container.DataItem, "Administrator.Fullname") %></td>
                                         <td><span class="badge bg-dark"><%# Eval("SalesType")%></span> </td>
                                         <td><%# DataBinder.Eval(Container.DataItem, "Date") %></td>
                                         <td><%# String.Format("{0:n0}",DataBinder.Eval(Container.DataItem, "TotalSales")) %></td>

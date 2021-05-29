@@ -12,6 +12,11 @@
             border-radius: .25rem;
         }
 
+        .card0 {
+            box-shadow: 0px 4px 8px 0px #757575;
+            border-radius: 5px
+        }
+
         .bd-callout-warning {
             border-left-color: #f0ad4e;
         }
@@ -28,7 +33,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12" style="margin: 5px">
-                <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
+                <div class="card card0 bd-callout bd-callout-warning" style="border-radius: .25rem">
                     <%if (UserSession.SingleInstance.IsAdministrator()) %>
                     <%{ %>
                     <div class="row">
@@ -39,13 +44,13 @@
                             <!--Empty Div-->
                         </div>
                         <div class="col-lg-5 col-md-6 col-sm-12">
-                            <button type="button" class="btn btn-success float-end" style="margin: 2px;" data-bs-toggle="modal" data-bs-target="#AddNewUserModal">
+                            <button type="button" class="btn btn-warning float-end" style="margin: 2px;" data-bs-toggle="modal" data-bs-target="#AddNewUserModal">
                                 Add New User
                             </button>
-                            <button type="button" class="btn btn-danger float-end" style="margin: 2px;" data-bs-toggle="modal" data-bs-target="#DeleteUserModal">
+                            <button type="button" class="btn btn-dark float-end" style="margin: 2px;" data-bs-toggle="modal" data-bs-target="#DeleteUserModal">
                                 Delete User
                             </button>
-                            <button type="button" class="btn btn-info float-end" style="margin: 2px;" data-bs-toggle="modal" data-bs-target="#UpdateUserModal">
+                            <button type="button" class="btn btn-warning float-end" style="margin: 2px;" data-bs-toggle="modal" data-bs-target="#UpdateUserModal">
                                 Update User
                             </button>
                         </div>
