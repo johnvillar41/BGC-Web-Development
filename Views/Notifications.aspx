@@ -35,14 +35,14 @@
         <div class="row">
             <div class="col-12" style="margin: 5px">
                 <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
-                    <div class="card card0 border-0 mb-2">
+                    <div class="card card0 border-0 mb-2 bg-dark">
                         <div class="row m-1">
-                            <h3 class="float-left">Notifications</h3>
+                            <h3 class="float-left text-warning">Notifications</h3>
                         </div>
                         <div class="row m-2">
                             <div class="col-md-3 col-sm-12">
                                 <div class="row mb-1">
-                                    <h5><b>Search by Date</b></h5>
+                                    <h5 class="text-warning"><b>Search by Date</b></h5>
                                 </div>
                                 <div class="row mb-1">
                                     <asp:TextBox class="form-control" ID="DateText" runat="server" type="date"></asp:TextBox>
@@ -55,7 +55,7 @@
                             <%{ %>
                             <div class="col-md-3 col-sm-12">
                                 <div class="row mb-1">
-                                    <h5><b>Search by Employees</b></h5>
+                                    <h5 class="text-warning"><b>Search by Employees</b></h5>
                                 </div>
                                 <div class="row">
                                     <div class="btn-group">
@@ -85,7 +85,7 @@
 
                             <div class="col-md-3 col-sm-12">
                                 <div class="row mb-1">
-                                    <h5><b>Search by Categories</b></h5>
+                                    <h5 class="text-warning"><b>Search by Categories</b></h5>
                                 </div>
                                 <div class="row">
                                     <!--Input Categories here-->

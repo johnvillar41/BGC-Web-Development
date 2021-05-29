@@ -28,12 +28,12 @@
 
     <!-- Inventory Title + Add Product Button -->
 
-    <div class="card card0 border-0">
+    <div class="card card0 border-0 bg-dark">
         <div class="row d-flex">
 
             <div class="row pt-4 m-1">
                 <div class="col-6">
-                    <p class="fs-2"><b>Inventory</b></p>
+                    <p class="fs-2 text-warning"><b>Inventory</b></p>
                 </div>
                 <div class="col-6">
                     <button runat="server" id="btnInventoryAdd" onserverclick="btnInventoryAdd_ServerClick" class="btn btn-primary float-end" title="Add Product">

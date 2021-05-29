@@ -31,15 +31,15 @@
     <div class="row" style="margin-bottom: 5px">
         <div class="col-lg-9 col-md-7"></div>
         <div class="btn-group col-lg-3 col-md-5" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#CancelModal">Cancel Order</button>
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#FinishModal">Finish Order</button>
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#CancelModal">Cancel Order</button>
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#FinishModal">Finish Order</button>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-9 col-md-7"></div>
         <div class="btn-group col-lg-3 col-md-5" role="group" aria-label="Basic example">
             <asp:TextBox ID="OrderIdSearchTextbox" runat="server" CssClass="form-control" placeholder="Enter Order Id here"></asp:TextBox>
-            <asp:Button ID="BtnSearch" runat="server" CssClass="btn btn-info" Text="Search" OnClick="BtnSearch_Click" UseSubmitBehavior="false" />
+            <asp:Button ID="BtnSearch" runat="server" CssClass="btn btn-warning" Text="Search" OnClick="BtnSearch_Click" UseSubmitBehavior="false" />
         </div>
 
     </div>
