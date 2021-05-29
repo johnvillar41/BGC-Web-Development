@@ -11,6 +11,11 @@
             word-wrap: break-word;
         }
 
+        .card0 {
+            box-shadow: 0px 4px 8px 0px #757575;
+            border-radius: 0px
+        }
+
         #overlayDiv {
             position: fixed;
             left: 50%;
@@ -22,66 +27,71 @@
     </style>
 
     <!-- Inventory Title + Add Product Button -->
-    <div class="row pt-4">
-        <div class="col-6">
-            <p class="fs-2"><b>Inventory</b></p>
-        </div>
-        <div class="col-6">
-            <button runat="server" id="btnInventoryAdd" onserverclick="btnInventoryAdd_ServerClick" class="btn btn-success float-end" title="Add Product">
-                <i class="fa fa-plus-circle"></i>Add Product</button>
-        </div>
-    </div>
 
-    <div class="row">
-        <!-- Search Bar -->
-        <div class="col-12 col-xl-3 col-lg-4 col-md-5 col-sm-8">
-            <div class="float-left" style="margin-right: 5px">
-                <div class="input-group">
-                    <div class="form-outline">
-                        <asp:TextBox ID="searchBox" placeholder="Search" runat="server" CssClass="form-control" MaxLength="255"></asp:TextBox>
+    <div class="card card0 border-0">
+        <div class="row d-flex">
+
+            <div class="row pt-4 m-1">
+                <div class="col-6">
+                    <p class="fs-2"><b>Inventory</b></p>
+                </div>
+                <div class="col-6">
+                    <button runat="server" id="btnInventoryAdd" onserverclick="btnInventoryAdd_ServerClick" class="btn btn-success float-end" title="Add Product">
+                        <i class="fa fa-plus-circle"></i>Add Product</button>
+                </div>
+            </div>
+
+            <div class="row m-1 ">
+                <!-- Search Bar -->
+                <div class="col-12 col-xl-3 col-lg-4 col-md-5 col-sm-8">
+                    <div class="float-left" style="margin-right: 5px">
+                        <div class="input-group">
+                            <div class="form-outline">
+                                <asp:TextBox ID="searchBox" placeholder="Search" runat="server" CssClass="form-control" MaxLength="255"></asp:TextBox>
+                            </div>
+                            <asp:LinkButton ID="searchButton" runat="server" OnClick="SearchButton_Click" CssClass="btn btn-small btn-primary"><i class="fa fa-search"></i></asp:LinkButton>
+                        </div>
                     </div>
-                    <asp:LinkButton ID="searchButton" runat="server" OnClick="SearchButton_Click" CssClass="btn btn-small btn-primary"><i class="fa fa-search"></i></asp:LinkButton>
                 </div>
-            </div>
-        </div>
 
-        <!-- Category Dropdown -->
-        <div class="col-12 col-xl-3 col-lg-4 col-md-5 col-sm-4">
-            <div class="float-xl-start float-lg-start float-md-start float-sm-end">
-                <div class="btn-group">
-                    <asp:UpdatePanel ID="UpdatePanel_Dropdown" runat="server">
-                        <ContentTemplate>
-                            <!-- Dropdown Button -->
-                            <asp:Button ID="dropdownMenuReference1" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Category &#x25BC;" />
-                            <!-- Dropdown List -->
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference1">
-                                <li>
-                                    <asp:Button ID="btnCategoryAll" runat="server" CssClass="dropdown-item" Text="All Products" OnClick="Category_Click" UseSubmitBehavior="false" /></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
+                <!-- Category Dropdown -->
+                <div class="col-12 col-xl-3 col-lg-4 col-md-5 col-sm-4">
+                    <div class="float-xl-start float-lg-start float-md-start float-sm-end">
+                        <div class="btn-group">
+                            <asp:UpdatePanel ID="UpdatePanel_Dropdown" runat="server">
+                                <ContentTemplate>
+                                    <!-- Dropdown Button -->
+                                    <asp:Button ID="dropdownMenuReference1" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Category &#x25BC;" />
+                                    <!-- Dropdown List -->
+                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference1">
+                                        <li>
+                                            <asp:Button ID="btnCategoryAll" runat="server" CssClass="dropdown-item" Text="All Products" OnClick="Category_Click" UseSubmitBehavior="false" /></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
 
-                                <asp:Repeater ID="CategoryRepeater" OnItemCreated="CategoryRepeater_ItemCreated" runat="server">
-                                    <ItemTemplate>
-                                        <a runat="server" class="dropdown-item" id="categorySelected">
-                                            <li>
-                                                <asp:Button ID="category" runat="server" CssClass="dropdown-item" Text='<%#Container.DataItem%>' OnClick="Category_Click" UseSubmitBehavior="false" /></li>
-                                        </a>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </ul>
-                        </ContentTemplate>
+                                        <asp:Repeater ID="CategoryRepeater" OnItemCreated="CategoryRepeater_ItemCreated" runat="server">
+                                            <ItemTemplate>
+                                                <a runat="server" class="dropdown-item" id="categorySelected">
+                                                    <li>
+                                                        <asp:Button ID="category" runat="server" CssClass="dropdown-item" Text='<%#Container.DataItem%>' OnClick="Category_Click" UseSubmitBehavior="false" /></li>
+                                                </a>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </ul>
+                                </ContentTemplate>
 
-                        <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="dropdownMenuReference1" EventName="Click" />
-                        </Triggers>
-                    </asp:UpdatePanel>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="dropdownMenuReference1" EventName="Click" />
+                                </Triggers>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <br>
 
     <!-- Search Repeater -->
     <div class="container-fluid" style="background-color: #44433C; border: 2px solid #000000;">
@@ -188,5 +198,5 @@
         </div>
     </div>
 
-   
+
 </asp:Content>
