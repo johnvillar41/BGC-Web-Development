@@ -12,6 +12,12 @@
             border-radius: .25rem;
         }
 
+        .card0 {
+            box-shadow: 0px 4px 8px 0px #757575;
+            border-radius: 5px
+        }
+
+
         .bd-callout-warning {
             border-left-color: #f0ad4e;
         }
@@ -29,80 +35,82 @@
         <div class="row">
             <div class="col-12" style="margin: 5px">
                 <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
-                    <div class="row">
-                        <h3 class="float-left">Notifications</h3>
-                    </div>
-                    <div class="row m-1">
-                        <div class="col-md-3 col-sm-12">
-                            <div class="row mb-1">
-                                <h5><b>Search by Date</b></h5>
-                            </div>
-                            <div class="row mb-1">
-                                <asp:TextBox class="form-control" ID="DateText" runat="server" type="date"></asp:TextBox>
-                            </div>
-                            <div class="row">
-                                <asp:Button ID="FindDate" runat="server" Text="Search" CssClass="btn btn-info form-control" OnClick="FindDate_Click" />
-                            </div>
+                    <div class="card card0 border-0 mb-2">
+                        <div class="row m-1">
+                            <h3 class="float-left">Notifications</h3>
                         </div>
-                        <%if (UserSession.SingleInstance.IsAdministrator()) %>
-                        <%{ %>
-                        <div class="col-md-3 col-sm-12">
-                            <div class="row mb-1">
-                                <h5><b>Search by Employees</b></h5>
-                            </div>                            
-                            <div class="row">
-                                <div class="btn-group">
-                                    <!-- Dropdown Button -->
-                                    <asp:Button ID="DropDownEmployee" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Employee &#x25BC;" />
-                                    <!-- Dropdown List -->
-                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference1">
-                                        <li>
-                                            <asp:Button ID="BtnEmployeeAll" runat="server" CssClass="dropdown-item" Text="All Employee" UseSubmitBehavior="false" OnClick="BtnEmployeeAll_Click"/></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
+                        <div class="row m-2">
+                            <div class="col-md-3 col-sm-12">
+                                <div class="row mb-1">
+                                    <h5><b>Search by Date</b></h5>
+                                </div>
+                                <div class="row mb-1">
+                                    <asp:TextBox class="form-control" ID="DateText" runat="server" type="date"></asp:TextBox>
+                                </div>
+                                <div class="row">
+                                    <asp:Button ID="FindDate" runat="server" Text="Search" CssClass="btn btn-info form-control" OnClick="FindDate_Click" />
+                                </div>
+                            </div>
+                            <%if (UserSession.SingleInstance.IsAdministrator()) %>
+                            <%{ %>
+                            <div class="col-md-3 col-sm-12">
+                                <div class="row mb-1">
+                                    <h5><b>Search by Employees</b></h5>
+                                </div>
+                                <div class="row">
+                                    <div class="btn-group">
+                                        <!-- Dropdown Button -->
+                                        <asp:Button ID="DropDownEmployee" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Employee &#x25BC;" />
+                                        <!-- Dropdown List -->
+                                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference1">
+                                            <li>
+                                                <asp:Button ID="BtnEmployeeAll" runat="server" CssClass="dropdown-item" Text="All Employee" UseSubmitBehavior="false" OnClick="BtnEmployeeAll_Click" /></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
 
-                                        <asp:Repeater ID="EmployeeFullnameRepeater" OnItemCreated="EmployeeFullnameRepeater_ItemCreated1" runat="server">
-                                            <ItemTemplate>
-                                                <a runat="server" class="dropdown-item" id="categorySelected">
-                                                    <li>
-                                                        <asp:Button ID="EmployeeFullnameCategory" runat="server" CssClass="dropdown-item" Text='<%#DataBinder.Eval(Container.DataItem,"Username")%>' UseSubmitBehavior="false" OnClick="EmployeeFullnameCategory_Click" />
-                                                    </li>
-                                                </a>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </ul>
+                                            <asp:Repeater ID="EmployeeFullnameRepeater" OnItemCreated="EmployeeFullnameRepeater_ItemCreated1" runat="server">
+                                                <ItemTemplate>
+                                                    <a runat="server" class="dropdown-item" id="categorySelected">
+                                                        <li>
+                                                            <asp:Button ID="EmployeeFullnameCategory" runat="server" CssClass="dropdown-item" Text='<%#DataBinder.Eval(Container.DataItem,"Username")%>' UseSubmitBehavior="false" OnClick="EmployeeFullnameCategory_Click" />
+                                                        </li>
+                                                    </a>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="col-md-3 col-sm-12">
-                            <div class="row mb-1">
-                                <h5><b>Search by Categories</b></h5>
-                            </div>
-                            <div class="row">
-                                <!--Input Categories here-->
-                                 <div class="row">
-                                <div class="btn-group">
-                                    <!-- Dropdown Button -->
-                                    <asp:Button ID="Button1" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Category &#x25BC;" />
-                                    <!-- Dropdown List -->
-                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference1">                                        
-                                        <asp:Repeater ID="CategoryRepeater" OnItemCreated="CategoryRepeater_ItemCreated" runat="server">
-                                            <ItemTemplate>
-                                                <a runat="server" class="dropdown-item" id="categorySelected">
-                                                    <li>
-                                                        <asp:Button ID="NotificationCategory" runat="server" CssClass="dropdown-item" Text='<%#Container.DataItem%>' UseSubmitBehavior="false" OnClick="NotificationCategory_Click" />
-                                                    </li>
-                                                </a>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </ul>
+
+                            <div class="col-md-3 col-sm-12">
+                                <div class="row mb-1">
+                                    <h5><b>Search by Categories</b></h5>
+                                </div>
+                                <div class="row">
+                                    <!--Input Categories here-->
+                                    <div class="row">
+                                        <div class="btn-group">
+                                            <!-- Dropdown Button -->
+                                            <asp:Button ID="Button1" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select Category &#x25BC;" />
+                                            <!-- Dropdown List -->
+                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuReference1">
+                                                <asp:Repeater ID="CategoryRepeater" OnItemCreated="CategoryRepeater_ItemCreated" runat="server">
+                                                    <ItemTemplate>
+                                                        <a runat="server" class="dropdown-item" id="categorySelected">
+                                                            <li>
+                                                                <asp:Button ID="NotificationCategory" runat="server" CssClass="dropdown-item" Text='<%#Container.DataItem%>' UseSubmitBehavior="false" OnClick="NotificationCategory_Click" />
+                                                            </li>
+                                                        </a>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
+                            <%} %>
                         </div>
-                        <%} %>
                     </div>
                     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                         <ProgressTemplate>
@@ -206,4 +214,5 @@
             </div>
         </div>
     </div>
+
 </asp:Content>
