@@ -23,8 +23,8 @@
     <hr />   
 
     <div class="container-fluid px-1 mx-auto">
-        <div class="card card0">
-            <p class="fs-5 ml-2">Product Details</p>
+        <div class="card card0 shadow rounded">
+            <p class="fs-5 ml-2 mt-2">Product Details</p>
             <div class="row d-flex">
                 <div class="col-xl-8 col-lg-8 col-md-6 col-12">
                     <div class="card1 px-2 py-2">
@@ -109,7 +109,7 @@
             </div>
 
             <div class="bg-dark py-4">                
-                <asp:Button ID="BtnUpdateProduct" CssClass="btn btn-warning ml-1" Text="Save Product" OnClick="BtnUpdateProduct_Click" runat="server" />
+                <asp:Button ID="BtnUpdateProduct" CssClass="btn btn-warning mr-3 float-end" Text="Save Product" OnClick="BtnUpdateProduct_Click" runat="server" />
             </div>
 
         </div>
