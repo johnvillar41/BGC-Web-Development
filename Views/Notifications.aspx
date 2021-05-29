@@ -34,7 +34,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12" style="margin: 5px">
-                <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
+                <div class="card bd-callout bd-callout-warning card0" style="border-radius: .25rem">
                     <div class="card card0 border-0 mb-2 bg-dark">
                         <div class="row m-1">
                             <h3 class="float-left text-warning">Notifications</h3>
