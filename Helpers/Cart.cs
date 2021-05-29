@@ -8,62 +8,108 @@ namespace SoftEngWebEmployee.Helpers
 {
     public class Cart
     {
-        private static readonly List<ProductModel> CartItems = new List<ProductModel>();       
+        private static readonly Dictionary<string, List<ProductModel>> CartItems = new Dictionary<string, List<ProductModel>>();
+
         public static void ClearCartItems()
         {
-            CartItems.Clear();
+            foreach (KeyValuePair<string, List<ProductModel>> keyValuePair in CartItems)
+            {
+                if (keyValuePair.Key.Equals(UserSession.SingleInstance.GetLoggedInUser()))
+                {
+                    keyValuePair.Value.Clear();
+                    return;
+                }
+            }
         }
         public static void AddCartItem(ProductModel cartProduct)
         {
-            foreach(var product in CartItems)
+            if (!CartItems.Keys.Contains(UserSession.SingleInstance.GetLoggedInUser()))
             {
-                if(product.Product_ID == cartProduct.Product_ID)
+                CartItems.Add(UserSession.SingleInstance.GetLoggedInUser(), new List<ProductModel>() { cartProduct });
+                return;
+            }
+
+            foreach (KeyValuePair<string, List<ProductModel>> keyValuePair in CartItems)
+            {
+                if (keyValuePair.Key.Equals(UserSession.SingleInstance.GetLoggedInUser()))
                 {
-                    product.TotalNumberOfProduct = cartProduct.TotalNumberOfProduct;                   
-                    return;
+                    for (int i = 0; i < keyValuePair.Value.Count; i++)
+                    {
+                        if (keyValuePair.Value[i].Product_ID == cartProduct.Product_ID)
+                        {
+                            keyValuePair.Value[i].TotalNumberOfProduct = cartProduct.TotalNumberOfProduct;
+                            return;
+                        }
+                        else
+                        {
+                            keyValuePair.Value.Add(cartProduct);
+                            return;
+                        }
+                    }
                 }
-            }         
-            CartItems.Add(cartProduct);
+            }
         }
         public static List<ProductModel> GetCartItems()
         {
-            return CartItems;
+            foreach (KeyValuePair<string, List<ProductModel>> keyValuePair in CartItems)
+            {
+                if (keyValuePair.Key.Equals(UserSession.SingleInstance.GetLoggedInUser()))
+                {
+                    return keyValuePair.Value;
+                }
+            }
+            return new List<ProductModel>();
         }
         public static int CalculateTotalSales()
         {
             int totalSale = 0;
-            foreach(var product in CartItems)
+            foreach (KeyValuePair<string, List<ProductModel>> keyValuePair in CartItems)
             {
-                totalSale += (product.ProductPrice * product.TotalNumberOfProduct);
+                if (keyValuePair.Key.Equals(UserSession.SingleInstance.GetLoggedInUser()))
+                {
+                    for (int i = 0; i < keyValuePair.Value.Count; i++)
+                    {
+                        totalSale += (keyValuePair.Value[i].ProductPrice * keyValuePair.Value[i].TotalNumberOfProduct);
+                    }
+                }
             }
             return totalSale;
         }
         public static void RemoveCartItem(int productID)
         {
-            foreach(var product in CartItems)
+            foreach (KeyValuePair<string, List<ProductModel>> keyValuePair in CartItems)
             {
-                if(product.Product_ID == productID)
+                if (keyValuePair.Key.Equals(UserSession.SingleInstance.GetLoggedInUser()))
                 {
-                    CartItems.Remove(product);
-                    break;
+                    for (int i = 0; i < keyValuePair.Value.Count; i++)
+                    {
+                        if (keyValuePair.Value[i].Product_ID == productID)
+                        {
+                            keyValuePair.Value.Remove(keyValuePair.Value[i]);
+                            break;
+                        }
+                    }
                 }
             }
         }
         public static List<OnsiteProductsTransactionModel> ListOfOnsiteProducts(int transactionID)
         {
             List<OnsiteProductsTransactionModel> OnSiteProducts = new List<OnsiteProductsTransactionModel>();
-            foreach(var product in CartItems)
+            foreach (KeyValuePair<string, List<ProductModel>> keyValuePair in CartItems)
             {
-                OnSiteProducts.Add(
-                        new OnsiteProductsTransactionModel
-                        {                            
-                            TransactionID = transactionID,                         
-                            Product = product,
-                            TotalProductsCount = product.TotalNumberOfProduct,
-                            Administrator = UserSession.SingleInstance.GetLoggedInUser(),
-                            SubTotalPrice = product.TotalNumberOfProduct * product.ProductPrice
-                        }
-                    );
+                for (int i = 0; i < keyValuePair.Value.Count; i++)
+                {
+                    OnSiteProducts.Add(
+                       new OnsiteProductsTransactionModel
+                       {
+                           TransactionID = transactionID,
+                           Product = keyValuePair.Value[i],
+                           TotalProductsCount = keyValuePair.Value[i].TotalNumberOfProduct,
+                           Administrator = UserSession.SingleInstance.GetLoggedInUser(),
+                           SubTotalPrice = keyValuePair.Value[i].TotalNumberOfProduct * keyValuePair.Value[i].ProductPrice
+                       }
+                   );
+                }
             }
             return OnSiteProducts;
         }
