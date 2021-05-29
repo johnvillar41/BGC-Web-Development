@@ -36,12 +36,12 @@
                     <p class="fs-2 text-warning"><b>Inventory</b></p>
                 </div>
                 <div class="col-6">
-                    <button runat="server" id="btnInventoryAdd" onserverclick="btnInventoryAdd_ServerClick" class="btn btn-primary float-end" title="Add Product">
+                    <button runat="server" id="btnInventoryAdd" onserverclick="btnInventoryAdd_ServerClick" class="btn btn-primary float-end mr-3" title="Add Product">
                         <i class="fa fa-plus-circle"></i> Add Product</button>
                 </div>
             </div>
 
-            <div class="row m-1 ">
+            <div class="row mb-3 ml-3">
                 <!-- Search Bar -->
                 <div class="col-12 col-xl-3 col-lg-4 col-md-5 col-sm-8">
                     <div class="float-left" style="margin-right: 5px">
