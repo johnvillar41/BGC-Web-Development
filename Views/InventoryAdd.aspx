@@ -21,12 +21,12 @@
     </style>
     
     <p class="fs-4"><b>Add Product</b></p>
-    <hr />
-    <br />
-    <p class="fs-5">Product Details</p>
+    <hr />    
     
     <div class="container-fluid px-1 mx-auto">
+        
         <div class="card card0">
+            <p class="fs-5 ml-2">Product Details</p>
             <div class="row d-flex">
                 <div class="col-xl-8 col-lg-8 col-md-6 col-12">
                     <div class="card1 px-2 py-2">
@@ -44,7 +44,7 @@
                                     <asp:UpdatePanel ID="UpdatePanel_AddCategory" runat="server">
                                         <ContentTemplate>
                                             <asp:TextBox ID="addProductCategory" runat="server" placeholder="Enter product category here" CssClass="form-control text-area col-12 my-0" maxlength="255" aria-describedby="addLabelCategory"></asp:TextBox>
-                                            <div class="btn-group dropend">
+                                            <div class="btn-group dropdown">
                                                 <asp:Button ID="addProductDropdown" CssClass="btn btn-warning dropdown-toggle dropdown-toggle-split col-12 my-0" data-bs-toggle="dropdown" aria-expanded="false" runat="server" Text="Select existing category &#x25BC;" />
                                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="addProductDropdown">
                                                     <asp:Repeater ID="AddCategoryRepeater" OnItemCreated="AddCategoryRepeater_ItemCreated" runat="server">

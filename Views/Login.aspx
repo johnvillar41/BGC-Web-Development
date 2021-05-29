@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../Content/LoginCss.css" />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body>
     <form runat="server">
@@ -27,7 +28,7 @@
                                 <img src="../Images/logo.png" class="logo">
                             </div>
                             <div class="row px-3 justify-content-center mt-4 mb-5 border-line">                                
-                                <img src="../Images/LoginImage.png" class="image">
+                                <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_wrrmnklf.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
                             </div>
                         </div>
                     </div>
@@ -50,7 +51,7 @@
 
                                     </div>
                                     <div class="row mt-5">
-                                        <asp:Button ID="btn_login" runat="server" Text="Login" Style="font-family: 'Arial Rounded MT'" CssClass="btn btn-success form-control" OnClick="btn_login_Click" />
+                                        <asp:Button ID="btn_login" runat="server" Text="Login" Style="font-family: 'Arial Rounded MT'" CssClass="btn btn-warning form-control" OnClick="btn_login_Click" />
                                     </div>
 
                                 </ContentTemplate>
@@ -59,16 +60,16 @@
                                 </Triggers>
                             </asp:UpdatePanel>
                             <div class="row">
-                                <button type="button" class="btn btn-danger form-control" style="font-family: 'Arial Rounded MT'" data-bs-toggle="modal" data-bs-target="#emailModal">
+                                <button type="button" class="btn btn-dark form-control" style="font-family: 'Arial Rounded MT'" data-bs-toggle="modal" data-bs-target="#emailModal">
                                     Forgot Password
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-orange py-4">
+                <div class="bg-dark py-4">
                     <div class="row px-3">
-                        <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2021. All rights reserved.</small>
+                        <small class="ml-4 ml-sm-5 mb-2 text-warning">Copyright &copy; 2021. All rights reserved.</small>
                         <div class="social-contact ml-4 ml-sm-auto"><span class="fa fa-facebook mr-4 text-sm"></span><span class="fa fa-google-plus mr-4 text-sm"></span><span class="fa fa-linkedin mr-4 text-sm"></span><span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span></div>
                     </div>
                 </div>

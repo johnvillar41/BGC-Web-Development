@@ -36,8 +36,8 @@
                     <p class="fs-2"><b>Inventory</b></p>
                 </div>
                 <div class="col-6">
-                    <button runat="server" id="btnInventoryAdd" onserverclick="btnInventoryAdd_ServerClick" class="btn btn-success float-end" title="Add Product">
-                        <i class="fa fa-plus-circle"></i>Add Product</button>
+                    <button runat="server" id="btnInventoryAdd" onserverclick="btnInventoryAdd_ServerClick" class="btn btn-primary float-end" title="Add Product">
+                        <i class="fa fa-plus-circle"></i> Add Product</button>
                 </div>
             </div>
 
@@ -117,8 +117,8 @@
                                     <asp:Label ID="StocksLabel" CssClass="card-text" runat="server" Text="" OnDataBinding="StocksLabel_DataBinding"></asp:Label>
                                 </div>
                                 <div class="card-footer">
-                                    <asp:Button ID="detailsButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-primary" Text="Details" data-bs-toggle="modal" href="#detailsModal" OnClick="RetrieveDetails" runat="server" />
-                                    <asp:Button ID="UpdateButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-danger float-right" Text="Update" data-bs-toggle="modal" OnClick="UpdateButton_Click" runat="server" />
+                                    <asp:Button ID="detailsButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-dark" Text="Details" data-bs-toggle="modal" href="#detailsModal" OnClick="RetrieveDetails" runat="server" />
+                                    <asp:Button ID="UpdateButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-warning float-right" Text="Update" data-bs-toggle="modal" OnClick="UpdateButton_Click" runat="server" />
                                 </div>
                             </div>
                         </ItemTemplate>
@@ -186,8 +186,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" onclick="$('#detailsModal').modal('hide');">Back</button>
-                                    <asp:Button ID="UpdateButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-primary float-right" Text="Update" OnClick="UpdateButton_Click" runat="server" />
+                                    <button type="button" class="btn btn-dark" onclick="$('#detailsModal').modal('hide');">Back</button>
+                                    <asp:Button ID="UpdateButton" CommandArgument='<%# Eval("Product_ID") %>' CssClass="btn btn-warning float-right" Text="Update" OnClick="UpdateButton_Click" runat="server" />
                                 </div>
                             </ItemTemplate>
                         </asp:Repeater>

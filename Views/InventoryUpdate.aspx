@@ -20,12 +20,11 @@
     </style>
 
     <p class="fs-4"><b>Update Product</b></p>
-    <hr />
-    <br />
-    <p class="fs-5">Product Details</p>
+    <hr />   
 
     <div class="container-fluid px-1 mx-auto">
         <div class="card card0">
+            <p class="fs-5 ml-2">Product Details</p>
             <div class="row d-flex">
                 <div class="col-xl-8 col-lg-8 col-md-6 col-12">
                     <div class="card1 px-2 py-2">
