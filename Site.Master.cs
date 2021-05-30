@@ -12,7 +12,7 @@ namespace SoftEngWebEmployee
         {
             if (UserSession.SingleInstance.GetLoginStatus() == false)
             {
-                Response.Redirect("~/Views/Login.aspx");
+                Response.Redirect("~/Views/Login.aspx",false);
                 return;
             }
             if (UserSession.SingleInstance.IsAdministrator())

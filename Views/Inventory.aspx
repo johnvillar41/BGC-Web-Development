@@ -116,7 +116,7 @@
                 <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 row-cols-sm-2 row-cols-lg-4 scrolling-wrapper p-1" style="height: 600px;">
                     <asp:Repeater ID="SearchRepeater" runat="server">
                         <ItemTemplate>
-                            <div class="card" style="height: 300px;">
+                            <div class="card" style="height: 400px;">
                                 <img class="card-img-top" src="data:image/jpeg;base64,<%# Eval("ProductPicture") %>" height="150px" width="75px" alt="Product picture here">
                                 <div class="card-body">
                                     <h5 class="card-title"><%# DataBinder.Eval(Container.DataItem,"ProductName") %></h5>
