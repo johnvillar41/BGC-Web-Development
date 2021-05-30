@@ -11,7 +11,7 @@
     
     <div class="row">
         
-        <div class="card card0 border-0 ">
+        <div class="card card0 border-0">
             <div class="col-6">
                     <p class="fs-2"><b>Inventory</b></p>
                 </div>
@@ -33,10 +33,9 @@
                             <%{ %>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
-                                    <div class="card">
+                                    <div class="card0 bg-dark">
                                         <div class="card-body">
-
-                                            <center><asp:Label ID="total_sales" runat="server" Text="Total Sales" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
+                                            <center><asp:Label ID="total_sales" runat="server" Text="Total Sales" CssClass="card-title text-warning" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
                                     <br />
 
                                     <h5 class="card-subtitle mb-2 text-muted">Total Sales</h5>
@@ -47,10 +46,10 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
-                                    <div class="card">
+                                    <div class="card0 bg-dark">
                                         <div class="card-body">
 
-                                            <center><asp:Label ID="total_inventory" runat="server" Text="Total Inventory" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
+                                            <center><asp:Label ID="total_inventory" runat="server" Text="Total Inventory" CssClass="text-warning card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
                                     <h5 class="card-subtitle mb-2 text-muted">Total Inventory</h5>
                                     <img src="/Images/invoice.PNG" height="150" width="150" class="img-thumbnail" alt="..."></center>
 
@@ -58,10 +57,10 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-12 col-sm-12 mb-1">
-                                    <div class="card" style="min-width: 16rem;">
+                                    <div class="card0 bg-dark" style="min-width: 16rem;">
                                         <div class="card-body">
 
-                                            <center><asp:Label ID="total_products" runat="server" Text="Total Products" CssClass="card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
+                                            <center><asp:Label ID="total_products" runat="server" Text="Total Products" CssClass="text-warning card-title" Font-Size="XX-Large" Font-Bold="true"></asp:Label>
                                     <h5 class="card-subtitle mb-2 text-muted">Total Products</h5>
                                     <img src="/Images/plant.PNG" height="150" width="150" class="img-thumbnail" alt="..."></center>
 
@@ -83,35 +82,36 @@
                                 <%foreach (var productSales in ProductSalesListDisplay) %>
                                 <%{ %>
                                 <div class="col">
-                                    <div class="card">
+                                    <div class="card0 bg-dark">
                                         <img src="data:image/jpeg;base64,<%=productSales.ProductReport.Product.ProductPicture%>" class="card-img-top img-thumbnail" style="min-width: 200px; height: 300px">
                                         <div class="card-body">
-                                            <h6 class="card-title">&emsp;Product ID: <%=productSales.ProductReport.Product.Product_ID%></h6>
-                                            <h5 class="card-text"><b>&emsp;<%=productSales.ProductReport.Product.ProductName %></b></h5>
+                                            <h6 class="card-title text-secondary">&emsp;Product ID: <%=productSales.ProductReport.Product.Product_ID%></h6>
+                                            <h5 class="card-text text-warning"><b>&emsp;<%=productSales.ProductReport.Product.ProductName %></b></h5>
+                                           
                                             <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">Selling Price:
+                                                <li class="list-group-item text-warning bg-dark">Selling Price:
                                         <label><%=String.Format("{0:n0}",productSales.ProductReport.Product.ProductPrice)%></label>
                                                 </li>
-                                                <li class="list-group-item">Product Revenue:
+                                                <li class="list-group-item text-warning bg-dark">Product Revenue:
                                          <label><%=String.Format("{0:n0}",productSales.ProductReport.ProductRevenue) %></label>
 
                                                 </li>
                                                 <!--See More-->
-                                                <li class="list-group-item">Total Quantity Sold:                                       
+                                                <li class="list-group-item text-warning bg-dark">Total Quantity Sold:                                       
                                        <label><%=String.Format("{0:n0}",productSales.ProductReport.QuantitySold) %></label>
                                                     <br />
-                                                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal<%=productSales.ProductReport.Product.Product_ID %>" role="button">See More
+                                                    <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal<%=productSales.ProductReport.Product.Product_ID %>" role="button">See More
                                                     </a>
                                                     <!-- Modals -->
                                                     <div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="modal<%=productSales.ProductReport.Product.Product_ID %>">
 
                                                         <div class="modal-dialog modal-xl">
 
-                                                            <div class="modal-content">
+                                                            <div class="modal-content bg-dark">
 
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="exampleModalLabel">List of product transactions</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    <button type="button" class="btn-warning" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <ul class="nav nav-tabs" id="trans" role="tablist">
                                                                     <li class="nav-item">
@@ -192,7 +192,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
                                                                 </div>
                                                             </div>
 
@@ -201,6 +201,7 @@
                                                     </div>
                                                 </li>
                                             </ul>
+                                               
                                         </div>
                                     </div>
                                 </div>
@@ -214,19 +215,19 @@
                             <div class="row">
                                 <!--1st card-->
                                 <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="card border-success mb-3" style="min-height: 16rem;">
-                                        <div class="card-header"><b>Date Today: <%=DateTime.Now.ToShortDateString() %></b></div>
-                                        <div class="card-body text-success">
+                                    <div class="card0 bg-dark mb-3" style="min-height: 16rem;">
+                                        <div class="card-header text-secondary"><b>Date Today: <%=DateTime.Now.ToShortDateString() %></b></div>
+                                        <div class="card-body text-warning">
                                             <h5 class="card-title"><b>Total Sales Today:</b></h5>
                                             <p>
                                                 <asp:Label ID="TotalSale" runat="server" Text="None" Font-Size="X-Large"></asp:Label>
                                             </p>
 
-                                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">See More
+                                            <a class="btn btn-warning" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">See More
                                             </a>
                                             <!--See More-->
                                             <div class="collapse mt-3" id="collapseExample">
-                                                <div class="card card-body">
+                                                <div class="card0 bg-dark card-body">
                                                     <asp:Label ID="Label1" runat="server" Text="Onsite Orders"></asp:Label>
                                                     <div class="row">
                                                         <p><%=String.Format("{0:n0}",TotalSaleOnsite) %></p>
@@ -245,31 +246,31 @@
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="card border-success mb-3" style="min-height: 16rem;">
+                                    <div class="card0 bg-dark mb-3" style="min-height: 16rem;">
                                         <div class="card-header">
-                                            <label for="date"><b>Select Date:</b></label>
+                                            <label for="date "><b class="text-secondary">Select Date:</b></label>
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <asp:TextBox ID="Date" type="date" CssClass="form-control" runat="server"></asp:TextBox>
                                                 </div>
                                                 <div class="col-lg-4">
-                                                    <asp:Button ID="FindDate" runat="server" Text="Find" CssClass="btn btn-info" OnClick="FindDate_Click" />
+                                                    <asp:Button ID="FindDate" runat="server" Text="Find" CssClass="btn btn-warning" OnClick="FindDate_Click" />
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="card-body text-success">
+                                        <div class="card-body text-warning">
                                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                                 <ContentTemplate>
                                                     <h5 class="card-title"><b>Total Sales:</b></h5>
                                                     <p>
                                                         <asp:Label ID="TotalSaleGivenDate" runat="server" Text="0" Font-Size="X-Large"></asp:Label>
                                                     </p>
-                                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">See More
+                                                    <a class="btn btn-warning" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">See More
                                                     </a>
                                                     <!--See More-->
                                                     <div class="collapse mt-3" id="collapseExample2">
-                                                        <div class="card card-body">
+                                                        <div class="card0 bg-dark card-body">
                                                             <asp:Label ID="Label5" runat="server" Text="Onsite Orders"></asp:Label>
                                                             <div class="row">
                                                                 <p><%=String.Format("{0:n0}",TotalSaleOnsite_GivenDate) %></p>
@@ -297,7 +298,7 @@
                                         <%foreach (var sales in SalesIncomeDisplay) %>
                                         <%{ %>
                                         <div class="col">
-                                            <div class="card mb-2">
+                                            <div class="card0 bg-dark text-warning mb-2">
                                                 <center><img src="data:image/jpeg;base64,<%=sales.Administrator.ProfilePicture %>" class="card-img-top" style="height:200px;"></center>
                                                 <hr />
                                                 <div class="card-body">
@@ -306,7 +307,7 @@
                                                     <p class="card-text">Total Sale: <%=String.Format("{0:n0}",sales.TotalSale) %></p>
                                                     <p class="card-text">Total Sale On Site: <%=String.Format("{0:n0}",sales.TotalSaleOnsite) %></p>
                                                     <p class="card-text">Total Sale Orders: <%=String.Format("{0:n0}",sales.TotalSaleOrders) %></p>
-                                                    <a href="#" class="btn btn-primary">See more</a>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
