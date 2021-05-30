@@ -78,7 +78,7 @@ namespace SoftEngWebEmployee.Views
         }
         protected async void RetrieveDetails(object sender, EventArgs e)
         {
-            UpdateProgress1.Visible = true;
+            UpdateProgress2.Visible = true;
             Button button = (Button)sender;
             var productID = button.CommandArgument.ToString();
             ProductModel Details = await ProductRepository.SingleInstance.FetchProductDetailsAsync(productID);
@@ -90,7 +90,7 @@ namespace SoftEngWebEmployee.Views
 
             DetailsRepeater.DataSource = ProductDetail;
             DetailsRepeater.DataBind();
-            UpdateProgress1.Visible = false;
+            UpdateProgress2.Visible = false;
         }        
         protected void UpdateButton_Click(object sender, EventArgs e)
         {

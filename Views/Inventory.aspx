@@ -143,7 +143,13 @@
     <div class="modal fade" id="detailsModal" aria-hidden="true" aria-labelledby="..." tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content">
-
+                <asp:UpdateProgress ID="UpdateProgress2" runat="server">
+                    <ProgressTemplate>
+                        <div id="overlayDiv">
+                            <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_LqA9yY.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
+                        </div>
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
                 <div class="modal-header">
                     <h5 class="modal-title">Product Details</h5>
                     <button type="button" class="close" onclick="$('#detailsModal').modal('hide');" aria-label="Close">
