@@ -1,11 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="UserProfile.aspx.cs" Inherits="SoftEngWebEmployee.Views.UserProfile" %>
-<%@ Import Namespace = "SoftEngWebEmployee.Helpers" %>
+
+<%@ Import Namespace="SoftEngWebEmployee.Helpers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-        body {
-            background: #fdfd96;
-        }
-
+        
         .profile-button {
             background: #eba800;
             color: black;
@@ -26,6 +24,11 @@
                 background: #876100;
                 box-shadow: none
             }
+
+        .card0 {
+            box-shadow: 0px 4px 8px 0px #757575;
+            border-radius: 5px
+        }
 
         .rounded-lg {
             background: #f5f5dc;
@@ -48,9 +51,9 @@
         </ProgressTemplate>
     </asp:UpdateProgress>
 
-    <div class="container rounded-lg mt-5" style="border: 5px solid orange">
+    <div class="container rounded-lg mt-5 card0">
         <div class="row">
-            <div class="col-md-4 border-right">
+            <div class="col-md-4 border-right card0 bg-dark">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
 
 
@@ -66,7 +69,7 @@
                     </div>
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
-                            <asp:Label ID="FullnameLabel" CssClass="font-weight-bold" runat="server" Text="Label"></asp:Label>
+                            <asp:Label ID="FullnameLabel" CssClass="font-weight-bold text-warning" runat="server" Text="Label"></asp:Label>
                         </ContentTemplate>
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="ButtonSaveProfile" EventName="Click" />
@@ -74,7 +77,7 @@
                     </asp:UpdatePanel>
                     <%if (UserSession.SingleInstance.IsAdministrator())%>
                     <%{%>
-                    <span class="badge bg-dark">Administrator</span>
+                    <span class="badge bg-warning text-dark">Administrator</span>
                     <%}%>
                     <%else %>
                     <%{ %>
@@ -137,5 +140,5 @@
 
         </div>
     </div>
-    
+
 </asp:Content>
