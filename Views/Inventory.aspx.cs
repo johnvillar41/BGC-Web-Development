@@ -49,6 +49,7 @@ namespace SoftEngWebEmployee.Views
         }
         protected async void Category_Click(object sender, EventArgs e)
         {
+            UpdateProgress1.Visible = true;            
             string category = (sender as Button).Text.ToString();
             char caret = Convert.ToChar(0x000025BC);
             dropdownMenuReference1.Text = category + " " + caret;
@@ -63,17 +64,21 @@ namespace SoftEngWebEmployee.Views
                 listSearchRepeater = newSearch;
                 SearchRepeater.DataBind();               
             }
+            UpdateProgress1.Visible = false;
         }
         protected async void SearchButton_Click(object sender, EventArgs e)
         {
+            UpdateProgress1.Visible = true;
             string search = searchBox.Text.ToString();
             var newSearch = await ProductRepository.SingleInstance.FetchOnSearchAsync(search);
             SearchRepeater.DataSource = newSearch;
             listSearchRepeater = newSearch;
-            SearchRepeater.DataBind();            
+            SearchRepeater.DataBind();
+            UpdateProgress1.Visible = false;
         }
         protected async void RetrieveDetails(object sender, EventArgs e)
         {
+            UpdateProgress1.Visible = true;
             Button button = (Button)sender;
             var productID = button.CommandArgument.ToString();
             ProductModel Details = await ProductRepository.SingleInstance.FetchProductDetailsAsync(productID);
@@ -84,7 +89,8 @@ namespace SoftEngWebEmployee.Views
             };
 
             DetailsRepeater.DataSource = ProductDetail;
-            DetailsRepeater.DataBind();                 
+            DetailsRepeater.DataBind();
+            UpdateProgress1.Visible = false;
         }        
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
