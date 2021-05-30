@@ -126,7 +126,9 @@ namespace SoftEngWebEmployee.Views
                 Constants.NotificationTypeDefinitions.UPDATED_USER,
                 Constants.NotificationTypeDefinitions.CANCELLED_ORDER,
                 Constants.NotificationTypeDefinitions.FINISHED_ORDER,
-                Constants.NotificationTypeDefinitions.SOLD_ITEM
+                Constants.NotificationTypeDefinitions.SOLD_ITEM,
+                Constants.NotificationTypeDefinitions.ADDED_PRODUCT,
+                Constants.NotificationTypeDefinitions.UPDATED_PRODUCT
             };
             CategoryRepeater.DataSource = NotificationTypes;
             CategoryRepeater.DataBind();

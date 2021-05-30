@@ -177,7 +177,7 @@ namespace SoftEngWebEmployee.Repository
                 case NotificationType.DeleteUser:
                     newNotification = new NotificationsModel()
                     {
-                        NotificationTitle = "Deleted User",
+                        NotificationTitle = Constants.NotificationTypeDefinitions.DELETE_USER,
                         NotificationContent = "Deleted User: " + itemAction,
                         NotificationDate = DateTime.Today,
                         TypeOfNotification = NotificationType.DeleteUser
@@ -188,7 +188,7 @@ namespace SoftEngWebEmployee.Repository
                 case NotificationType.CreateUser:
                     newNotification = new NotificationsModel()
                     {
-                        NotificationTitle = "Created New User",
+                        NotificationTitle = Constants.NotificationTypeDefinitions.CREATED_NEW_USER,
                         NotificationContent = "Created User: " + itemAction,
                         NotificationDate = DateTime.Now,
                         TypeOfNotification = NotificationType.CreateUser
@@ -198,7 +198,7 @@ namespace SoftEngWebEmployee.Repository
                 case NotificationType.UpdateUser:
                     newNotification = new NotificationsModel()
                     {
-                        NotificationTitle = "Updated User",
+                        NotificationTitle = Constants.NotificationTypeDefinitions.UPDATED_USER,
                         NotificationContent = "Updated User: " + itemAction,
                         NotificationDate = DateTime.Now,
                         TypeOfNotification = NotificationType.UpdateUser
@@ -208,7 +208,7 @@ namespace SoftEngWebEmployee.Repository
                 case NotificationType.CancelledOrder:
                     newNotification = new NotificationsModel()
                     {
-                        NotificationTitle = "Cancelled Order",
+                        NotificationTitle = Constants.NotificationTypeDefinitions.CANCELLED_ORDER,
                         NotificationContent = "Cancelled Order for OrderID: " + itemAction,
                         NotificationDate = DateTime.Now,
                         TypeOfNotification = NotificationType.CancelledOrder
@@ -218,7 +218,7 @@ namespace SoftEngWebEmployee.Repository
                 case NotificationType.FinishedOrder:
                     newNotification = new NotificationsModel()
                     {
-                        NotificationTitle = "Finished Order",
+                        NotificationTitle = Constants.NotificationTypeDefinitions.FINISHED_ORDER,
                         NotificationContent = "Finished Order for Order ID: " + itemAction,
                         NotificationDate = DateTime.Now,
                         TypeOfNotification = NotificationType.FinishedOrder
@@ -228,11 +228,30 @@ namespace SoftEngWebEmployee.Repository
                 case NotificationType.SoldItem:
                     newNotification = new NotificationsModel
                     {
-                        NotificationTitle = "Sold Item",
+                        NotificationTitle = Constants.NotificationTypeDefinitions.SOLD_ITEM,
                         NotificationContent = "Sold Item: " + itemAction,
                         NotificationDate = DateTime.Now,
-
                         TypeOfNotification = NotificationType.SoldItem
+                    };
+                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser().ToString());
+                    break;
+                case NotificationType.AddedProduct:
+                    newNotification = new NotificationsModel
+                    {
+                        NotificationTitle = Constants.NotificationTypeDefinitions.ADDED_PRODUCT,
+                        NotificationContent = "Added new Product: " + itemAction,
+                        NotificationDate = DateTime.Now,
+                        TypeOfNotification = NotificationType.AddedProduct
+                    };
+                    newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser().ToString());
+                    break;
+                case NotificationType.UpdatedProduct:
+                    newNotification = new NotificationsModel
+                    {
+                        NotificationTitle = Constants.NotificationTypeDefinitions.UPDATED_PRODUCT,
+                        NotificationContent = "Updated Product: " + itemAction,
+                        NotificationDate = DateTime.Now,
+                        TypeOfNotification = NotificationType.UpdatedProduct
                     };
                     newNotification.Administrator = await AdministratorRepository.SingleInstance.FindAdministratorAsync(UserSession.SingleInstance.GetLoggedInUser().ToString());
                     break;
@@ -335,18 +354,22 @@ namespace SoftEngWebEmployee.Repository
         {
             switch (notification)
             {
-                case "Created New User":
+                case Constants.NotificationTypeDefinitions.CREATED_NEW_USER:
                     return NotificationType.CreateUser;
-                case "Updated User":
+                case Constants.NotificationTypeDefinitions.UPDATED_USER:
                     return NotificationType.UpdateUser;
-                case "Deleted User":
+                case Constants.NotificationTypeDefinitions.DELETE_USER:
                     return NotificationType.DeleteUser;
-                case "Cancelled Order":
+                case Constants.NotificationTypeDefinitions.CANCELLED_ORDER:
                     return NotificationType.CancelledOrder;
-                case "Finished Order":
+                case Constants.NotificationTypeDefinitions.FINISHED_ORDER:
                     return NotificationType.FinishedOrder;
-                case "Sold Item":
+                case Constants.NotificationTypeDefinitions.SOLD_ITEM:
                     return NotificationType.SoldItem;
+                case Constants.NotificationTypeDefinitions.ADDED_PRODUCT:
+                    return NotificationType.AddedProduct;
+                case Constants.NotificationTypeDefinitions.UPDATED_PRODUCT:
+                    return NotificationType.UpdatedProduct;
             }
             return NotificationType.FinishedOrder;
         }

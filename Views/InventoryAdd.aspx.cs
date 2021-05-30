@@ -8,6 +8,7 @@ using SoftEngWebEmployee.Models;
 using SoftEngWebEmployee.Repository;
 using SoftEngWebEmployee.Helpers;
 using System.IO;
+using static SoftEngWebEmployee.Helpers.Constants;
 
 namespace SoftEngWebEmployee.Views
 {
@@ -46,7 +47,7 @@ namespace SoftEngWebEmployee.Views
         }
 
         protected async void btnAddProduct_Click(object sender, EventArgs e)
-        {          
+        {
             try
             {
                 var isValid = ValidateFields();
@@ -63,6 +64,11 @@ namespace SoftEngWebEmployee.Views
                         ProductPicture_Upload = fs
                     };
                     await ProductRepository.SingleInstance.AddNewProductAsync(addProductInfo);
+                    var generatedNotification = await NotificationRepository
+                        .SingleInstance
+                        .GenerateNotification(NotificationType.AddedProduct, addProductInfo.ProductName);
+                    await NotificationRepository.SingleInstance
+                       .InsertNewNotificationAsync(generatedNotification);
                     Response.Redirect("InventoryAdd.aspx", false);
                     BuildSweetAlert("Product Successfully Added!", $"Product {addProductInfo.ProductName} has been added!", Constants.AlertStatus.success);
 
@@ -77,7 +83,7 @@ namespace SoftEngWebEmployee.Views
             {
                 BuildSweetAlert("Same Product Name!", "Please Change Product Name!", Constants.AlertStatus.warning);
                 return;
-            }           
+            }
         }
         private bool ValidateFields()
         {
@@ -103,7 +109,7 @@ namespace SoftEngWebEmployee.Views
             }
             return true;
         }
-        private void BuildSweetAlert(string title,string message, Constants.AlertStatus alertStatus)
+        private void BuildSweetAlert(string title, string message, Constants.AlertStatus alertStatus)
         {
             var sweetAlert = new SweetAlertBuilder
             {

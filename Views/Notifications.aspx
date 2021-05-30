@@ -152,17 +152,21 @@
                                             <td><%=notification.Notifications_ID%></td>
                                             <%if (notification.TypeOfNotification == Constants.NotificationType.CancelledOrder)%>
                                             <%{ %>
-                                            <td><span class="badge bg-danger">
-                                                <center>Cancelled</center>
-                                                <img src="/Images/cancell.PNG" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
-                                            </span></td>
+                                            <td>
+                                                <span class="badge bg-danger">
+                                                    <center>Cancelled</center>
+                                                    <img src="/Images/cancell.PNG" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
+                                                </span>
+                                            </td>
                                             <%} %>
                                             <%else if (notification.TypeOfNotification == Constants.NotificationType.CreateUser)%>
                                             <%{ %>
-                                            <td><span class="badge bg-success">
-                                                <center>Created</center>
-                                                <img src="/Images/add_product.PNG" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
-                                            </span></td>
+                                            <td>
+                                                <span class="badge bg-success">
+                                                    <center>Created</center>
+                                                    <img src="/Images/add_product.PNG" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
+                                                </span>
+                                            </td>
                                             <%} %>
                                             <%else if (notification.TypeOfNotification == Constants.NotificationType.DeleteUser)%>
                                             <%{ %>
@@ -170,28 +174,53 @@
                                                 <span class="badge bg-danger">
                                                     <center>Deleted</center>
                                                     <img src="/Images/delete_logo.PNG" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
-                                                </span></td>
+                                                </span>
+                                            </td>
                                             <%} %>
                                             <%else if (notification.TypeOfNotification == Constants.NotificationType.FinishedOrder)%>
                                             <%{ %>
-                                            <td><span class="badge bg-success">
-                                                <center>Finished</center>
-                                                <img src="/Images/check.PNG" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
-                                            </span></td>
+                                            <td>
+                                                <span class="badge bg-success">
+                                                    <center>Finished</center>
+                                                    <img src="/Images/check.PNG" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
+                                                </span>
+                                            </td>
                                             <%} %>
                                             <%else if (notification.TypeOfNotification == Constants.NotificationType.UpdateUser)%>
                                             <%{ %>
-                                            <td><span class="badge bg-info">
-                                                <center>Updated</center>
-                                                <img src="/Images/update_icon_order.PNG" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
-                                            </span></td>
+                                            <td>
+                                                <span class="badge bg-info">
+                                                    <center>Updated</center>
+                                                    <img src="/Images/update_icon_order.PNG" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
+                                                </span>
+                                            </td>
                                             <%} %>
                                             <%else if (notification.TypeOfNotification == Constants.NotificationType.SoldItem) %>
                                             <%{ %>
-                                            <td><span class="badge bg-info">
-                                                <center>Sold</center>
-                                                <img src="/Images/sold.PNG" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
-                                            </span></td>
+                                            <td>
+                                                <span class="badge bg-info">
+                                                    <center>Sold</center>
+                                                    <img src="/Images/sold.PNG" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
+                                                </span>
+                                            </td>
+                                            <%} %>
+                                            <%else if (notification.TypeOfNotification == Constants.NotificationType.AddedProduct) %>
+                                            <%{ %>
+                                            <td>
+                                                <span class="badge bg-dark">
+                                                    <center>Added</center>
+                                                    <img src="../Images/add_product.png" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
+                                                </span>
+                                            </td>
+                                            <%} %>
+                                            <%else if (notification.TypeOfNotification == Constants.NotificationType.UpdatedProduct) %>
+                                            <%{ %>
+                                            <td>
+                                                <span class="badge bg-warning">
+                                                    <center>Updated</center>
+                                                    <img src="../Images/update_icon_order.png" style="border-radius: 50%" width="35" height="35" class="d-inline-block align-top" alt="" />
+                                                </span>
+                                            </td>
                                             <%} %>
                                             <td><%=notification.NotificationTitle %></td>
                                             <td><%=notification.NotificationContent %></td>

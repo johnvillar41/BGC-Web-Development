@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static SoftEngWebEmployee.Helpers.Constants;
 
 namespace SoftEngWebEmployee.Views
 {
@@ -59,6 +60,11 @@ namespace SoftEngWebEmployee.Views
                     ProductDescription = ProductDescription.Text,
                     ProductPicture_Upload = fs
                 };
+                var generatedNotification = await NotificationRepository
+                        .SingleInstance
+                        .GenerateNotification(NotificationType.UpdatedProduct, product.ProductName);
+                await NotificationRepository.SingleInstance
+                   .InsertNewNotificationAsync(generatedNotification);
                 await ProductRepository.SingleInstance.UpdateProductAsync(product, int.Parse(ProductID));
                 Response.Redirect("Inventory.aspx",false);
             }            
