@@ -5,24 +5,17 @@
 <%@ Import Namespace="SoftEngWebEmployee.Repository" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <style>
-        .rounded-lg {
-            background: #f8e7d1;
+    <style>     
+        .form-control {
+            width: 80%;
+            margin-right: 10%;
+            margin-left: 10%;
         }
 
-        .form-control{           
-           width:80%;
-           margin-right:10%;
-           margin-left:10%;           
-        }
-
-        .button {
-            background: #eba800;
-            color: black;
-            box-shadow: none;
-            border: initial;
-            width: 100%;
-        }
+        .card0 {
+            box-shadow: 0px 4px 8px 0px #757575;
+            border-radius: 5px
+        }        
     </style>
 
 
@@ -33,9 +26,9 @@
         <hr />
 
 
-        <div class="container rounded-lg" style="border: 5px solid orange">
+        <div class="container card0 card" >
             <div class="row">
-                <div class="col-lg-4 col-sm-12">
+                <div class="col-lg-4 col-sm-12 card0 bg-dark">
                     <div class="mb-5">
                         <!--
                     <label for="exampleFormControlInput1" class="form-label">Product ID</label>
@@ -51,7 +44,7 @@
 
                         <fieldset disabled>
                             <div class="mb-3">
-                                <center><label for="disabledTextInput" class="form-label"><b>Product Name</b></label></center>
+                                <center><label for="disabledTextInput" class="form-label text-warning"><b>Product Name</b></label></center>
                                 <%if (DisplayProduct() != null) %>
                                 <%{ %>
                                 <center><input type="text" id="disabledTextInput" class="form-control" placeholder="<%=DisplayProduct().ProductName %>"></center>
@@ -75,7 +68,7 @@
                             <br />
                         </div>
                         <div class="row">
-                            <center><asp:Button ID="BtnSubmitInformation" style="width:50%; background-color:darkorange;" CssClass="btn" OnClick="BtnSubmitInformation_Click" runat="server" Text="Save" /></center>
+                            <center><asp:Button ID="BtnSubmitInformation" style="width:50%;" CssClass="btn-warning" OnClick="BtnSubmitInformation_Click" runat="server" Text="Save" /></center>
                         </div>
 
                     </div>
