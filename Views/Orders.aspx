@@ -92,9 +92,9 @@
                         <%} %>
                         <%foreach (var orders in OrdersList) %>
                         <%{%>
-                        <div class="row" style="margin-bottom: 5px">
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="card text-white bg-secondary mb-3" style="max-width: 35rem; height: 298px">
+                        <div class="row my-4" style="margin-bottom: 5px">
+                            <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
+                                <div class="card0 card text-white bg-secondary mb-3" style="max-width: 35rem; height: 298px">
                                     <div class="card-header">
                                         <div class="row">
                                             <div class="col-4">
@@ -128,16 +128,16 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-8 col-md-6 col-sm-12">
-                                <div class="card bd-callout bd-callout-warning" style="border-radius: .25rem">
+                            <div class="col-lg-8 col-md-6 col-sm-12 mt-2">
+                                <div class="card0 bg-dark text-warning bd-callout bd-callout-warning" style="border-radius: .25rem">
                                     <div class="row">
                                         <div class="col-lg-9 col-md-6 col-sm-6">
                                             <h1>Orders</h1>
                                         </div>
                                     </div>
 
-                                    <div class="table-responsive table-hover" style="height: 200px">
-                                        <table class="table">
+                                    <div class="table-responsive" style="height: 200px">
+                                        <table class="table text-light">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Product ID</th>

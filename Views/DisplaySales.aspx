@@ -52,7 +52,7 @@
 
             <div class="col-lg-6 col-md-12">
                 <b>OnsiteID:</b> <%=product.OnsiteProductTransactionID%>
-                <div class="card mb-3" style="max-width: 540px;">
+                <div class="card0 bg-dark text-warning" style="max-width: 540px;">
                     <div class="row g-0">
                         <div class="col-md-4">
                             <center><img alt="" height="200px" width="200px" src="data:image/jpeg;base64,<%=product.Product.ProductPicture%>" /></td></center>
