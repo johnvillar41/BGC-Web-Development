@@ -12,7 +12,11 @@ namespace SoftEngWebEmployee.Views
         public bool IsCodeConfirmed { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(UserSession.SingleInstance.GetLoginStatus() == true)
+            {
+                Response.Redirect("~/Views/Inventory.aspx", false);
+                return;
+            }    
         }
         protected async void btn_login_Click(object sender, EventArgs e)
         {
