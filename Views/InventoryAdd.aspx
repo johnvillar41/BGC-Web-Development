@@ -94,10 +94,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                     <div class="card2 card border-0 px-2 py-2">
                         <!-- Product Picture -->
-                        <div class="justify-content-center">
-                            <div class="row my-3">
-                                <img alt="" class="rounded-circle" width="200" height="200" src="data:image/png;base64,<%=ImageString%>" />
-                            </div>            
+                        <div class="justify-content-center">                                       
                             <div class="row">
                                 <div class="input-group mb-3">
                                     <asp:FileUpload type="file" ID="addProductPicture" CssClass="form-control" runat="server" />
