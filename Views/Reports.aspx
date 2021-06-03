@@ -12,8 +12,7 @@
     <div class="row">
 
         <div class="card card0 border-0">
-            <div class="col-6">
-                <p class="fs-2"><b>Inventory</b></p>
+            <div class="col-6">                
             </div>
             <div class="row d-flex m-5">
 
