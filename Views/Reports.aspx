@@ -8,13 +8,13 @@
             border-radius: 5px
         }
     </style>
-    
+
     <div class="row">
-        
+
         <div class="card card0 border-0">
             <div class="col-6">
-                    <p class="fs-2"><b>Inventory</b></p>
-                </div>
+                <p class="fs-2"><b>Inventory</b></p>
+            </div>
             <div class="row d-flex m-5">
 
                 <div class="col-lg-2 col-md-12 col-sm-12 mb-3">
@@ -75,7 +75,10 @@
                             <center><h3><b>Sorry you are not allowed to view this.</b></h3></center>
                             <%} %>
                         </div>
+
                         <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">
+                            <%if (UserSession.SingleInstance.IsAdministrator()) %>
+                            <%{ %>
                             <!-- Inventory report -->
                             <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 g-4">
                                 <%if (ProductSalesListDisplay == null) return; %>
@@ -87,18 +90,18 @@
                                         <div class="card-body">
                                             <h6 class="card-title text-secondary">&emsp;Product ID: <%=productSales.ProductReport.Product.Product_ID%></h6>
                                             <h5 class="card-text text-warning"><b>&emsp;<%=productSales.ProductReport.Product.ProductName %></b></h5>
-                                           
+
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item text-warning bg-dark">Selling Price:
-                                        <label><%=String.Format("{0:n0}",productSales.ProductReport.Product.ProductPrice)%></label>
+                                        <label><%=String.Format("{0:n0}", productSales.ProductReport.Product.ProductPrice)%></label>
                                                 </li>
                                                 <li class="list-group-item text-warning bg-dark">Product Revenue:
-                                         <label><%=String.Format("{0:n0}",productSales.ProductReport.ProductRevenue) %></label>
+                                         <label><%=String.Format("{0:n0}", productSales.ProductReport.ProductRevenue) %></label>
 
                                                 </li>
                                                 <!--See More-->
                                                 <li class="list-group-item text-warning bg-dark">Total Quantity Sold:                                       
-                                       <label><%=String.Format("{0:n0}",productSales.ProductReport.QuantitySold) %></label>
+                                       <label><%=String.Format("{0:n0}", productSales.ProductReport.QuantitySold) %></label>
                                                     <br />
                                                     <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal<%=productSales.ProductReport.Product.Product_ID %>" role="button">See More
                                                     </a>
@@ -201,13 +204,20 @@
                                                     </div>
                                                 </li>
                                             </ul>
-                                               
+
                                         </div>
                                     </div>
                                 </div>
                                 <%} %>
                             </div>
+                            <%} %>
+                            <%else %>
+                            <%{ %>
+                            <center><lottie-player src="https://assets1.lottiefiles.com/packages/lf20_LlRvIg.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player></center>
+                            <center><h3><b>Sorry you are not allowed to view this.</b></h3></center>
+                            <%} %>
                         </div>
+
                         <div class="tab-pane fade" id="v-pills-sales" role="tabpanel" aria-labelledby="v-pills-sales-tab">
                             <!--Sales Report-->
                             <%if (UserSession.SingleInstance.IsAdministrator()) %>
@@ -290,7 +300,7 @@
                                             </asp:UpdatePanel>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="row">
                                     <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -307,7 +317,7 @@
                                                     <p class="card-text">Total Sale: <%=String.Format("{0:n0}",sales.TotalSale) %></p>
                                                     <p class="card-text">Total Sale On Site: <%=String.Format("{0:n0}",sales.TotalSaleOnsite) %></p>
                                                     <p class="card-text">Total Sale Orders: <%=String.Format("{0:n0}",sales.TotalSaleOrders) %></p>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
