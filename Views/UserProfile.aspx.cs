@@ -58,11 +58,12 @@ namespace SoftEngWebEmployee.Views
                 {
                     if (ex.Message.Equals($"Duplicate entry '{updatedUser.Username}' for key 'user_username'"))
                     {
-                        BuildSweetAlert( "Duplicate Name!", $"Duplicate name for:{updatedUser.Username}");
+                        BuildSweetAlert( "Duplicate Name!", $"Duplicate name for:{updatedUser.Username}", Constants.AlertStatus.warning);
                         return;
                     }
                 }
                 FullnameLabel.Text = updatedUser.Fullname;
+                BuildSweetAlert("Successfull!", "User profile has been updated!",Constants.AlertStatus.success);
             }                     
             UpdateProgress1.Visible = false;          
         }
@@ -70,34 +71,34 @@ namespace SoftEngWebEmployee.Views
         {
             if (string.IsNullOrWhiteSpace(Username.Text))
             {
-                BuildSweetAlert("Missing field on Username!", "Please enter missing field!");
+                BuildSweetAlert("Missing field on Username!", "Please enter missing field!", Constants.AlertStatus.warning);
                 return false;
             }
             if (string.IsNullOrWhiteSpace(Fullname.Text))
             {
-                BuildSweetAlert("Missing field on Fullname!", "Please enter missing field!");
+                BuildSweetAlert("Missing field on Fullname!", "Please enter missing field!", Constants.AlertStatus.warning);
                 return false;
             }
             if (string.IsNullOrWhiteSpace(Password.Text))
             {
-                BuildSweetAlert("Missing field on Password!", "Please enter missing field!");
+                BuildSweetAlert("Missing field on Password!", "Please enter missing field!", Constants.AlertStatus.warning);
                 return false;
             }
             if (string.IsNullOrWhiteSpace(Email.Text))
             {
-                BuildSweetAlert("Missing field on Email!", "Please enter missing field!");
+                BuildSweetAlert("Missing field on Email!", "Please enter missing field!", Constants.AlertStatus.warning);
                 return false;
             }
             return true;
         }
-        private void BuildSweetAlert(string title,string message)
+        private void BuildSweetAlert(string title,string message,Constants.AlertStatus status)
         {
             var alert = new SweetAlertBuilder
             {
                 HexaBackgroundColor = "#fff",
                 Title = title,
                 Message = message,
-                AlertIcons = Constants.AlertStatus.warning
+                AlertIcons = status
             };
             alert.BuildSweetAlert(this);
         }
