@@ -29,6 +29,18 @@ namespace SoftEngWebEmployee.Repository
         {
 
         }
+        public async Task UpdateAdministratorStatusOnSpecificOrders(int orderID)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                await connection.OpenAsync();
+                string queryString = "UPDATE specific_orders_table SET administrator_username=@username WHERE order_id=@orderID";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@username", UserSession.SingleInstance.GetLoggedInUser());
+                command.Parameters.AddWithValue("@orderID", orderID);
+                await command.ExecuteNonQueryAsync();
+            }
+        }
         public async Task<List<OrdersModel>> FetchCategorizedOrders(string orderStatus)
         {
             List<OrdersModel> orderList = new List<OrdersModel>();

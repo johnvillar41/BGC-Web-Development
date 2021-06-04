@@ -188,7 +188,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header btn btn-danger">
-                    <h5 class="modal-title">Update Order</h5>
+                    <h5 class="modal-title">Cancel Order</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -210,7 +210,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header btn btn-success">
-                    <h5 class="modal-title">Update Order</h5>
+                    <h5 class="modal-title">Finish Order</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

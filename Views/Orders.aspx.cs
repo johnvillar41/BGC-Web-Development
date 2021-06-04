@@ -112,7 +112,8 @@ namespace SoftEngWebEmployee.Views
             foreach (KeyValuePair<int, int> productId in productIds)
             {
                 await ProductRepository.SingleInstance.SubtractProductStocksAsync(productId.Value, productId.Key);
-            }            
+            }
+            await OrdersRepository.SingleInstance.UpdateAdministratorStatusOnSpecificOrders(int.Parse(OrderIDFinish.Text));
             await OrdersRepository.SingleInstance.ChangeStatusOfOrderToFinishedAsync(int.Parse(OrderIDFinish.Text));
             var generatedNotification = await NotificationRepository
                 .SingleInstance
