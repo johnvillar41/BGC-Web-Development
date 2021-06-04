@@ -116,23 +116,44 @@ namespace SoftEngWebEmployee.Repository
                 BinaryReader br = new BinaryReader(updatedProduct.ProductPicture_Upload);
                 byte[] bytes = br.ReadBytes((int)updatedProduct.ProductPicture_Upload.Length);
                 await connection.OpenAsync();
-                string queryString = "UPDATE products_table SET " +
-                    "product_name=@productName," +
-                    "product_description=@productDescription," +
-                    "product_price=@productPrice," +
-                    "product_picture=@productPicture," +
-                    "product_stocks=@productStocks," +
-                    "product_category=@productCategory " +
-                    "WHERE product_id=@productID";
-                MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@productName", updatedProduct.ProductName);
-                command.Parameters.AddWithValue("@productDescription", updatedProduct.ProductDescription);
-                command.Parameters.AddWithValue("@productPrice", updatedProduct.ProductPrice);
-                command.Parameters.AddWithValue("@productPicture", bytes);
-                command.Parameters.AddWithValue("@productStocks", updatedProduct.ProductStocks);
-                command.Parameters.AddWithValue("@productCategory", updatedProduct.ProductCategory);
-                command.Parameters.AddWithValue("@productID", productID);
-                await command.ExecuteNonQueryAsync();
+                if (updatedProduct.ProductPicture_Upload.Length != 0)
+                {
+                    string queryString = "UPDATE products_table SET " +
+                        "product_name=@productName," +
+                        "product_description=@productDescription," +
+                        "product_price=@productPrice," +
+                        "product_picture=@productPicture," +
+                        "product_stocks=@productStocks," +
+                        "product_category=@productCategory " +
+                        "WHERE product_id=@productID";
+                    MySqlCommand command = new MySqlCommand(queryString, connection);
+                    command.Parameters.AddWithValue("@productName", updatedProduct.ProductName);
+                    command.Parameters.AddWithValue("@productDescription", updatedProduct.ProductDescription);
+                    command.Parameters.AddWithValue("@productPrice", updatedProduct.ProductPrice);
+                    command.Parameters.AddWithValue("@productPicture", bytes);
+                    command.Parameters.AddWithValue("@productStocks", updatedProduct.ProductStocks);
+                    command.Parameters.AddWithValue("@productCategory", updatedProduct.ProductCategory);
+                    command.Parameters.AddWithValue("@productID", productID);
+                    await command.ExecuteNonQueryAsync();
+                }
+                else
+                {
+                    string queryString = "UPDATE products_table SET " +
+                        "product_name=@productName," +
+                        "product_description=@productDescription," +
+                        "product_price=@productPrice," +                        
+                        "product_stocks=@productStocks," +
+                        "product_category=@productCategory " +
+                        "WHERE product_id=@productID";
+                    MySqlCommand command = new MySqlCommand(queryString, connection);
+                    command.Parameters.AddWithValue("@productName", updatedProduct.ProductName);
+                    command.Parameters.AddWithValue("@productDescription", updatedProduct.ProductDescription);
+                    command.Parameters.AddWithValue("@productPrice", updatedProduct.ProductPrice);                    
+                    command.Parameters.AddWithValue("@productStocks", updatedProduct.ProductStocks);
+                    command.Parameters.AddWithValue("@productCategory", updatedProduct.ProductCategory);
+                    command.Parameters.AddWithValue("@productID", productID);
+                    await command.ExecuteNonQueryAsync();
+                }
             }
         }      
         /// <summary>
