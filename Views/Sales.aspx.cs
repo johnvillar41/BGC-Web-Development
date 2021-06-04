@@ -110,6 +110,11 @@ namespace SoftEngWebEmployee.Views
             ProductModel product = await ProductRepository.SingleInstance.GetProductsAsync(int.Parse(productID));
             try
             {
+                if(int.Parse(totalItem.Text) <= 0)
+                {
+                    BuildSweetAlert("#fff", AlertStatus.warning, "Error", "Error adding to cart item cannot have 0 value: " + product.ProductName);
+                    return;
+                }
                 product.TotalNumberOfProduct = int.Parse(totalItem.Text);
                 product.SubTotalPrice = product.TotalNumberOfProduct * product.ProductPrice;
                 if (await ProductRepository.SingleInstance.CheckIfProductIsEnough(product.TotalNumberOfProduct, int.Parse(productID)) == false || product.TotalNumberOfProduct == 0)
