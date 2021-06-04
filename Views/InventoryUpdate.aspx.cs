@@ -1,4 +1,5 @@
-﻿using SoftEngWebEmployee.Models;
+﻿using SoftEngWebEmployee.Helpers;
+using SoftEngWebEmployee.Models;
 using SoftEngWebEmployee.Repository;
 using System;
 using System.Collections.Generic;
@@ -48,26 +49,68 @@ namespace SoftEngWebEmployee.Views
 
         protected async void BtnUpdateProduct_Click(object sender, EventArgs e)
         {
-            if (ProductID != null)
+            try
             {
-                Stream fs = ProductPicture.PostedFile.InputStream;
-                var product = new ProductModel
+                var isValid = ValidateFields();
+                if (isValid)
                 {
-                    ProductName = ProductName.Text,
-                    ProductCategory = ProductCategory.Text,
-                    ProductPrice = int.Parse(ProductPrice.Text),
-                    ProductStocks = int.Parse(ProductStocks.Text),
-                    ProductDescription = ProductDescription.Text,
-                    ProductPicture_Upload = fs
-                };
-                var generatedNotification = await NotificationRepository
-                        .SingleInstance
-                        .GenerateNotification(NotificationType.UpdatedProduct, product.ProductName);
-                await NotificationRepository.SingleInstance
-                   .InsertNewNotificationAsync(generatedNotification);
-                await ProductRepository.SingleInstance.UpdateProductAsync(product, int.Parse(ProductID));
-                Response.Redirect("Inventory.aspx",false);
-            }            
+                    if (ProductID != null)
+                    {
+                        Stream fs = ProductPicture.PostedFile.InputStream;
+                        var product = new ProductModel
+                        {
+                            ProductName = ProductName.Text,
+                            ProductCategory = ProductCategory.Text,
+                            ProductPrice = int.Parse(ProductPrice.Text),
+                            ProductStocks = int.Parse(ProductStocks.Text),
+                            ProductDescription = ProductDescription.Text,
+                            ProductPicture_Upload = fs
+                        };
+                        var generatedNotification = await NotificationRepository
+                                .SingleInstance
+                                .GenerateNotification(NotificationType.UpdatedProduct, product.ProductName);
+                        await NotificationRepository.SingleInstance
+                           .InsertNewNotificationAsync(generatedNotification);
+                        await ProductRepository.SingleInstance.UpdateProductAsync(product, int.Parse(ProductID));
+                        Response.Redirect("Inventory.aspx", false);
+                    }
+                }
+            }
+            catch (System.FormatException)
+            {
+                BuildSweetAlert("Missing Fields!", "Some fields are missing, please fill them up!", Constants.AlertStatus.warning);
+                return;
+            }
+            catch (MySql.Data.MySqlClient.MySqlException)
+            {
+                BuildSweetAlert("Same Product Name!", "Please Change Product Name!", Constants.AlertStatus.warning);
+                return;
+            }
+
+        }
+        private bool ValidateFields()
+        {
+            if (int.Parse(ProductPrice.Text) <= 0)
+            {
+                BuildSweetAlert("Price Error!", "Price cannot be below zero!", Constants.AlertStatus.warning);
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(ProductName.Text))
+            {
+                BuildSweetAlert("Empty Field!", "Empty Product Name", Constants.AlertStatus.warning);
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(ProductCategory.Text))
+            {
+                BuildSweetAlert("Empty Field!", "Empty Product Category", Constants.AlertStatus.warning);
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(ProductDescription.Text))
+            {
+                BuildSweetAlert("Empty Field!", "Empty Product Description", Constants.AlertStatus.warning);
+                return false;
+            }
+            return true;
         }
         private async void LoadCategories()
         {
@@ -87,6 +130,18 @@ namespace SoftEngWebEmployee.Views
                 ProductDescription.Text = productModel.ProductDescription.ToString();
                 ImageString = productModel.ProductPicture;
             }            
+        }
+        private void BuildSweetAlert(string title, string message, Constants.AlertStatus alertStatus)
+        {
+            var sweetAlert = new SweetAlertBuilder
+            {
+                HexaBackgroundColor = "#fff",
+                Title = title,
+                Message = message,
+                AlertIcons = alertStatus,
+                AlertPositions = Constants.AlertPositions.CENTER
+            };
+            sweetAlert.BuildSweetAlert(this);
         }
     }
 }
