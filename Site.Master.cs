@@ -1,5 +1,6 @@
 ﻿using SoftEngWebEmployee.Helpers;
 using SoftEngWebEmployee.Repository;
+using SoftEngWebEmployee.Repository.LoginRepository;
 using System;
 using System.Web.UI;
 
@@ -7,7 +8,7 @@ namespace SoftEngWebEmployee
 {
     public partial class SiteMaster : MasterPage
     {
-        public Constants.EmployeeType EmployeeType { get; set; }        
+        public Constants.EmployeeType EmployeeType { get; set; }       
         protected void Page_Load(object sender, EventArgs e)
         {
             if (UserSession.SingleInstance.GetLoginStatus() == false)
@@ -15,6 +16,7 @@ namespace SoftEngWebEmployee
                 Response.Redirect("~/Views/Login.aspx",false);
                 return;
             }
+           
             if (UserSession.SingleInstance.IsAdministrator())
                 EmployeeType = Constants.EmployeeType.Administrator;
             else

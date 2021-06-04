@@ -30,6 +30,24 @@ namespace SoftEngWebEmployee.Repository.LoginRepository
         {
 
         }
+        public bool CheckIfUserExistInDB()
+        {
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            {
+                connection.Open();
+                string queryString = "SELECT * FROM login_table WHERE user_username=@username";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@username", UserSession.SingleInstance.GetLoggedInUser());
+                using (MySqlDataReader reader = (command.ExecuteReader()))
+                {
+                    if (reader.Read())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
         /// <summary>
         ///     This function checks if the administrator was able to log in successfully
         /// </summary>
@@ -62,23 +80,23 @@ namespace SoftEngWebEmployee.Repository.LoginRepository
             }
             return isLoginSuccessfull;
         }
-        public async Task UpdateCode(string email,string code)
+        public async Task UpdateCode(string email, string code)
         {
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
                 var isCodeEmpty = CheckIfCodeIsEmpty(email, connection);
-                string queryString = String.Empty;                
-                queryString = "UPDATE login_table SET user_code=@code WHERE email = @email";                 
+                string queryString = String.Empty;
+                queryString = "UPDATE login_table SET user_code=@code WHERE email = @email";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@code", code);
                 command.Parameters.AddWithValue("@email", email);
                 await command.ExecuteNonQueryAsync();
             }
         }
-        public async Task UpdateNewPassword(string email,string password)
+        public async Task UpdateNewPassword(string email, string password)
         {
-            using(MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
+            using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
                 string queryString = "UPDATE login_table SET user_password=@newPassword WHERE email=@email";
@@ -110,21 +128,21 @@ namespace SoftEngWebEmployee.Repository.LoginRepository
             }
             return isCodeEqual;
         }
-        private async Task<bool> CheckIfCodeIsEmpty(string email,MySqlConnection connection)
+        private async Task<bool> CheckIfCodeIsEmpty(string email, MySqlConnection connection)
         {
             string queryString = "SELECT user_code FROM login_table WHERE email=@email";
             MySqlCommand command = new MySqlCommand(queryString, connection);
-            command.Parameters.AddWithValue("@email", email);            
-            using(MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
+            command.Parameters.AddWithValue("@email", email);
+            using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
             {
-                if(await reader.ReadAsync())
+                if (await reader.ReadAsync())
                 {
                     var userCode = reader["user_code"].ToString();
                     if (String.IsNullOrWhiteSpace(userCode))
                     {
                         return true;
                     }
-                }                
+                }
             }
             return false;
         }
