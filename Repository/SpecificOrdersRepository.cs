@@ -24,7 +24,7 @@ namespace SoftEngWebEmployee.Repository
                 }
                 return instance;
             }            
-        }
+        }        
         /// <summary>
         ///     This function retrieves the total orders of a certain order ID
         /// </summary>

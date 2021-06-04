@@ -58,7 +58,7 @@ namespace SoftEngWebEmployee.Repository.ReportsRepository
             using (MySqlConnection connection = new MySqlConnection(DbConnString.DBCONN_STRING))
             {
                 await connection.OpenAsync();
-                string queryString = "SELECT SUM(customer_orders_table.order_total_price) as TotalSaleOrder FROM customer_orders_table";
+                string queryString = "SELECT SUM(customer_orders_table.order_total_price) as TotalSaleOrder FROM customer_orders_table WHERE order_status='Finished'";
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
                 if (await reader.ReadAsync())
