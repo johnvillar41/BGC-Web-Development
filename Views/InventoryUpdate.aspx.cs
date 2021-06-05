@@ -97,6 +97,11 @@ namespace SoftEngWebEmployee.Views
                     BuildSweetAlert("Price Error!", "Price cannot be below zero!", Constants.AlertStatus.warning);
                     return false;
                 }
+                if (int.Parse(ProductStocks.Text) <= 0)
+                {
+                    BuildSweetAlert("Stocks Error!", "Stocks cannot be below zero!", Constants.AlertStatus.warning);
+                    return false;
+                }
                 if (string.IsNullOrWhiteSpace(ProductName.Text))
                 {
                     BuildSweetAlert("Empty Field!", "Empty Product Name", Constants.AlertStatus.warning);
