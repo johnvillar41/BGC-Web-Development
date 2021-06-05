@@ -87,24 +87,32 @@ namespace SoftEngWebEmployee.Views
         }
         private bool ValidateFields()
         {
-            if (int.Parse(addProductPrice.Text) <= 0)
+            try
             {
-                BuildSweetAlert("Price Error!", "Price cannot be below zero!", Constants.AlertStatus.warning);
-                return false;
+                if (int.Parse(addProductPrice.Text) <= 0)
+                {
+                    BuildSweetAlert("Price Error!", "Price cannot be below zero!", Constants.AlertStatus.warning);
+                    return false;
+                }
+                if (string.IsNullOrWhiteSpace(addProductName.Text))
+                {
+                    BuildSweetAlert("Empty Field!", "Empty Product Name", Constants.AlertStatus.warning);
+                    return false;
+                }
+                if (string.IsNullOrWhiteSpace(addProductCategory.Text))
+                {
+                    BuildSweetAlert("Empty Field!", "Empty Product Category", Constants.AlertStatus.warning);
+                    return false;
+                }
+                if (string.IsNullOrWhiteSpace(addProductDescription.Text))
+                {
+                    BuildSweetAlert("Empty Field!", "Empty Product Description", Constants.AlertStatus.warning);
+                    return false;
+                }
             }
-            if (string.IsNullOrWhiteSpace(addProductName.Text))
+            catch (System.OverflowException)
             {
-                BuildSweetAlert("Empty Field!", "Empty Product Name", Constants.AlertStatus.warning);
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(addProductCategory.Text))
-            {
-                BuildSweetAlert("Empty Field!", "Empty Product Category", Constants.AlertStatus.warning);
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(addProductDescription.Text))
-            {
-                BuildSweetAlert("Empty Field!", "Empty Product Description", Constants.AlertStatus.warning);
+                BuildSweetAlert("Value is too high!", "Incorrect ammount input!", Constants.AlertStatus.warning);
                 return false;
             }
             return true;

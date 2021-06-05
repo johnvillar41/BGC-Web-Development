@@ -19,7 +19,7 @@ namespace SoftEngWebEmployee.Views
         protected void Page_Load(object sender, EventArgs e)
         {
             ProductID = Request.QueryString["id"];
-            if(ProductID == null)
+            if (ProductID == null)
             {
                 Response.Redirect("InventoryAdd", false);
                 return;
@@ -29,7 +29,7 @@ namespace SoftEngWebEmployee.Views
                 LoadCategories();
                 LoadProductData();
             }
-        }       
+        }
 
         protected void UpdateCategoryRepeater_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
@@ -90,26 +90,34 @@ namespace SoftEngWebEmployee.Views
         }
         private bool ValidateFields()
         {
-            if (int.Parse(ProductPrice.Text) <= 0)
+            try
             {
-                BuildSweetAlert("Price Error!", "Price cannot be below zero!", Constants.AlertStatus.warning);
-                return false;
+                if (int.Parse(ProductPrice.Text) <= 0)
+                {
+                    BuildSweetAlert("Price Error!", "Price cannot be below zero!", Constants.AlertStatus.warning);
+                    return false;
+                }
+                if (string.IsNullOrWhiteSpace(ProductName.Text))
+                {
+                    BuildSweetAlert("Empty Field!", "Empty Product Name", Constants.AlertStatus.warning);
+                    return false;
+                }
+                if (string.IsNullOrWhiteSpace(ProductCategory.Text))
+                {
+                    BuildSweetAlert("Empty Field!", "Empty Product Category", Constants.AlertStatus.warning);
+                    return false;
+                }
+                if (string.IsNullOrWhiteSpace(ProductDescription.Text))
+                {
+                    BuildSweetAlert("Empty Field!", "Empty Product Description", Constants.AlertStatus.warning);
+                    return false;
+                }
             }
-            if (string.IsNullOrWhiteSpace(ProductName.Text))
+            catch (System.OverflowException)
             {
-                BuildSweetAlert("Empty Field!", "Empty Product Name", Constants.AlertStatus.warning);
+                BuildSweetAlert("Value is too high!", "Incorrect ammount input!", Constants.AlertStatus.warning);
                 return false;
-            }
-            if (string.IsNullOrWhiteSpace(ProductCategory.Text))
-            {
-                BuildSweetAlert("Empty Field!", "Empty Product Category", Constants.AlertStatus.warning);
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(ProductDescription.Text))
-            {
-                BuildSweetAlert("Empty Field!", "Empty Product Description", Constants.AlertStatus.warning);
-                return false;
-            }
+            }            
             return true;
         }
         private async void LoadCategories()
@@ -129,7 +137,7 @@ namespace SoftEngWebEmployee.Views
                 ProductStocks.Text = productModel.ProductStocks.ToString();
                 ProductDescription.Text = productModel.ProductDescription.ToString();
                 ImageString = productModel.ProductPicture;
-            }            
+            }
         }
         private void BuildSweetAlert(string title, string message, Constants.AlertStatus alertStatus)
         {
