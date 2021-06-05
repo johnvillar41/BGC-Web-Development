@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Login 04</title>
+    <title>Login</title>
     <meta charset="utf-8">
     <link rel="icon" href="<%= ResolveUrl("~/Images/logo.png") %>" type="image/png" />
     <link rel="shortcut icon" href="<%= ResolveUrl("~/Images/logo.png") %>" type="image/png" />
