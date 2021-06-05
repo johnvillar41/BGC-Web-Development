@@ -136,10 +136,10 @@ namespace SoftEngWebEmployee.Views
                    .GenerateNotification(NotificationType.UpdateUser, username);
                 await NotificationRepository.SingleInstance
                    .InsertNewNotificationAsync(generatedNotification);
+                BuildSweetAlert("#fff", "Successfull", $"Successfully Updated User:{username}", AlertStatus.success);                
             }            
             LoadAdministrators();
-            UpdateProgress_Update.Visible = false;
-            BuildSweetAlert("#fff", "Successfull", $"Successfully Updated User:{username}", AlertStatus.success);
+            UpdateProgress_Update.Visible = false;            
         }
         private void BuildSweetAlert(string hexbgColor, string title, string message, Constants.AlertStatus alertStatus)
         {
