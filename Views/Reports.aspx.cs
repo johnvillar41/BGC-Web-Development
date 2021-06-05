@@ -46,6 +46,7 @@ namespace SoftEngWebEmployee.Views
             }
             DateTime date = DateTime.Parse(Date.Text.ToString());
             LoadTotalSalesAtGivenDate(date);
+            UpdatePanel1.Update();
         }
         private async void DisplayProductSalesReport()
         {

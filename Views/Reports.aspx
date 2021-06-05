@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" Async="true" CodeBehind="Reports.aspx.cs" Inherits="SoftEngWebEmployee.Views.Reports" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master"  AutoEventWireup="true" Async="true" EnableEventValidation="false"  CodeBehind="Reports.aspx.cs" Inherits="SoftEngWebEmployee.Views.Reports" %>
 
 <%@ Import Namespace="SoftEngWebEmployee.Helpers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
@@ -269,7 +269,7 @@
                                         </div>
 
                                         <div class="card-body text-warning">
-                                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                                                 <ContentTemplate>
                                                     <h5 class="card-title"><b>Total Sales:</b></h5>
                                                     <p>
