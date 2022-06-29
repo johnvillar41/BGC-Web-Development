@@ -34,29 +34,20 @@
 # Screenshots
 <table>
   <tr>
-   <img align="right" width="300" src="bgc_1.png">
-   <img align="right" width="300" src="bgc_2.png">   
-   <img align="right" width="300" src="bgc_3.png">  
- </tr>
- <tr>
-   <img align="right" width="300" src="bgc_4.png">
-   <img align="right" width="300" src="bgc_5.png">
-   <img align="right" width="300" src="bgc_6.png">   
- </tr>
-  <tr>
-   <img align="right" width="300" src="bgc_7.png">
-   <img align="right" width="300" src="bgc_8.png">
-   <img align="right" width="300" src="bgc_9.png">   
- </tr>
-   <tr>
-   <img align="right" width="300" src="bgc_10.png">
-   <img align="right" width="300" src="bgc_11.png">
-   <img align="right" width="300" src="bgc_12.png">   
- </tr>
-   <tr>
-   <img align="right" width="300" src="bgc_13.png">
-   <img align="right" width="300" src="bgc_14.png">
-   <img align="right" width="300" src="bgc_15.png">   
+   <img align="right" src="bgc_13.png">
+   <img align="right" src="bgc_2.png">   
+   <img align="right" src="bgc_3.png">  
+   <img align="right"  src="bgc_4.png">
+   <img align="right"  src="bgc_5.png">
+   <img align="right"  src="bgc_6.png">   
+   <img align="right"  src="bgc_7.png">
+   <img align="right"  src="bgc_8.png">
+   <img align="right"  src="bgc_9.png">   
+   <img align="right"  src="bgc_10.png">
+   <img align="right" src="bgc_11.png">
+   <img align="right"  src="bgc_12.png">   
+   <img align="right"  src="bgc_14.png">
+   <img align="right"  src="bgc_15.png">   
  </tr>
 </table>
   
