@@ -30,5 +30,35 @@
   - Orders 
     - View orders from customers  
     - Change the status of orders from pending to finished or from pending to canceled and vice-versa 
+  
+# Screenshots
+<table>
+  <tr>
+   <img align="right" width="300" src="bgc_1.jpg">
+   <img align="right" width="300" src="bgc_2.jpg">   
+   <img align="right" width="300" src="bgc_3.jpg">  
+ </tr>
+ <tr>
+   <img align="right" width="300" src="bgc_4.jpg">
+   <img align="right" width="300" src="bgc_5.jpg">
+   <img align="right" width="300" src="bgc_6.jpg">   
+ </tr>
+  <tr>
+   <img align="right" width="300" src="bgc_7.jpg">
+   <img align="right" width="300" src="bgc_8.jpg">
+   <img align="right" width="300" src="bgc_9.jpg">   
+ </tr>
+   <tr>
+   <img align="right" width="300" src="bgc_10.jpg">
+   <img align="right" width="300" src="bgc_11.jpg">
+   <img align="right" width="300" src="bgc_12.jpg">   
+ </tr>
+   <tr>
+   <img align="right" width="300" src="bgc_13.jpg">
+   <img align="right" width="300" src="bgc_14.jpg">
+   <img align="right" width="300" src="bgc_15.jpg">   
+ </tr>
+</table>
+  
 
    
